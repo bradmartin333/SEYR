@@ -1,11 +1,9 @@
 ﻿using MathNet.Numerics.Statistics;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Accord.Imaging;
-using Accord.Imaging.Filters;
 
 namespace SEYR
 {

@@ -13,7 +13,7 @@ namespace SEYR
         #region Temporary Image Loading
 
         private int ImageIdx = 0;
-        private int PatternFollowInterval = 400;
+        private int PatternFollowInterval = 40;
 
         public void NewImage(Bitmap bitmap, int idx)
         {
@@ -95,7 +95,6 @@ namespace SEYR
                         bool foundPattern = Imaging.FollowPattern();
                         if (foundPattern)
                         {
-                            Debug.WriteLine(string.Format("Pattern Offset: {0}", Picasso.Offset));
                             break;
                         }
                     }

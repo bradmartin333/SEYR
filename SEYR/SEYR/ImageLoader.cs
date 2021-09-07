@@ -48,6 +48,7 @@ namespace SEYR
         private void btnRunAll_Click(object sender, EventArgs e)
         {
             while (LoadNewImage()) { Application.DoEvents(); }
+            File.WriteAllText(DirectoryPath + "\\" + "report.txt", DataHandler.OutputString);
         }
 
         private bool LoadNewImage()
