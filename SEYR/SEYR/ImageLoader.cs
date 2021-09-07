@@ -38,6 +38,7 @@ namespace SEYR
 
             progressBar.Maximum = Images.Length;
             ImageIndex = -1;
+            DataHandler.OutputString = "";
         }
 
         private void btnNextImage_Click(object sender, EventArgs e)
