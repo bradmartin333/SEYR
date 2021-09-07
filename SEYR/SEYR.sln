@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEYR", "SEYR\SEYR.csproj", "{ADBCBD3F-335A-4ED5-A463-141AA22C8611}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEYRParser", "SEYRParser\SEYRParser.csproj", "{10DF1F74-3728-485D-BF0F-F4E5F3E5F122}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SEYRHelper", "SEYRHelper\SEYRHelper.fsproj", "{A3FDB072-385E-4514-931F-402BBA21B4B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{ADBCBD3F-335A-4ED5-A463-141AA22C8611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBCBD3F-335A-4ED5-A463-141AA22C8611}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBCBD3F-335A-4ED5-A463-141AA22C8611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10DF1F74-3728-485D-BF0F-F4E5F3E5F122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10DF1F74-3728-485D-BF0F-F4E5F3E5F122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10DF1F74-3728-485D-BF0F-F4E5F3E5F122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10DF1F74-3728-485D-BF0F-F4E5F3E5F122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3FDB072-385E-4514-931F-402BBA21B4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FDB072-385E-4514-931F-402BBA21B4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FDB072-385E-4514-931F-402BBA21B4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FDB072-385E-4514-931F-402BBA21B4B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
