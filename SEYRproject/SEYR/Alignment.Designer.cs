@@ -36,12 +36,12 @@ namespace SEYR
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.numRow = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numCol = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -125,6 +125,16 @@ namespace SEYR
             this.numRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numRow.ValueChanged += new System.EventHandler(this.num_ValueChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(81, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(22, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "     ";
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -175,16 +185,6 @@ namespace SEYR
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 26);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "     ";
             // 
             // Alignment
             // 

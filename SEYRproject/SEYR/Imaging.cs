@@ -1,9 +1,9 @@
 ﻿using MathNet.Numerics.Statistics;
 using System;
 using System.Collections.Generic;
+using Accord.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Accord.Imaging;
 
 namespace SEYR
 {

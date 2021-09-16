@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using SEYR;
 
-namespace SEYR
+namespace OutsideProgram
 {
     public partial class ImageLoader : Form
     {
@@ -101,7 +102,6 @@ namespace SEYR
             {
                 folderBrowserDialog.Description = description;
                 folderBrowserDialog.ShowNewFolderButton = false;
-                folderBrowserDialog.SelectedPath = DirectoryPath;
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                     return folderBrowserDialog.SelectedPath;
             }

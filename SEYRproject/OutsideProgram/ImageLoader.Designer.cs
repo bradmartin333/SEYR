@@ -1,5 +1,5 @@
 ﻿
-namespace SEYR
+namespace OutsideProgram
 {
     partial class ImageLoader
     {

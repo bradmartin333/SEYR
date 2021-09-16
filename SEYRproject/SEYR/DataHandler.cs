@@ -2,7 +2,7 @@
 {
     public static class DataHandler
     {
-        public static string OutputString { get; internal set; }
+        public static string OutputString { get; set; }
 
         public enum State
         {

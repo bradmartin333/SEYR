@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SEYR")]
+[assembly: AssemblyTitle("OutsideProgram")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SEYR")]
+[assembly: AssemblyProduct("OutsideProgram")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("adbcbd3f-335a-4ed5-a463-141aa22c8611")]
+[assembly: Guid("2599e8c6-5325-4ca2-94d3-f9acab56a3b3")]
 
 // Version information for an assembly consists of the following four values:
 //

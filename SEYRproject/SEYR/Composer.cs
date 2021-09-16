@@ -13,7 +13,7 @@ namespace SEYR
         #region Temporary Image Loading
 
         private int ImageIdx = 0;
-        private int PatternFollowInterval = 40;
+        private int PatternFollowInterval = 1;
 
         public void NewImage(Bitmap bitmap, int idx)
         {
@@ -37,8 +37,6 @@ namespace SEYR
         public Composer(Bitmap img)
         {
             InitializeComponent();
-
-            _ = new ImageLoader(this);
 
             // Scale incoming image and set blank foreground
             double heightRatio = Picasso.BaseHeight / img.Height;
@@ -337,6 +335,7 @@ namespace SEYR
 
         private void btnTrainPattern_Click(object sender, System.EventArgs e)
         {
+            if (comboBoxRects.SelectedIndex == -1 || FileHandler.FilePath == string.Empty) return;
             FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
             LoadFollowerPattern();
         }

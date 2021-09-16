@@ -31,13 +31,11 @@ namespace SEYR
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.numAlignTol = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnRemoveRect = new System.Windows.Forms.Button();
-            this.btnCopyRect = new System.Windows.Forms.Button();
-            this.btnTrainAlignment = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,7 +49,6 @@ namespace SEYR
             this.numFailScore = new System.Windows.Forms.NumericUpDown();
             this.numPassTol = new System.Windows.Forms.NumericUpDown();
             this.numFailTol = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.lblScoreText = new System.Windows.Forms.Label();
             this.flowLayoutPanelFile = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
@@ -75,13 +72,17 @@ namespace SEYR
             this.numAngle = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.flowLayoutPanelFollower = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonForgetPattern = new System.Windows.Forms.Button();
             this.btnTrainPattern = new System.Windows.Forms.Button();
             this.lblFollowerPattern = new System.Windows.Forms.Label();
             this.comboBoxRects = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.numAlignTol = new System.Windows.Forms.NumericUpDown();
+            this.btnRemoveRect = new System.Windows.Forms.Button();
+            this.btnCopyRect = new System.Windows.Forms.Button();
+            this.btnTrainAlignment = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.buttonForgetPattern = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCopyX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCopyPitchX)).BeginInit();
@@ -91,7 +92,6 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numFailScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPassTol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFailTol)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.flowLayoutPanelFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginY)).BeginInit();
@@ -99,7 +99,7 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).BeginInit();
             this.flowLayoutPanelFollower.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -198,6 +198,19 @@ namespace SEYR
             this.tableLayoutPanel.Size = new System.Drawing.Size(950, 633);
             this.tableLayoutPanel.TabIndex = 0;
             // 
+            // numAlignTol
+            // 
+            this.numAlignTol.Location = new System.Drawing.Point(121, 391);
+            this.numAlignTol.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numAlignTol.Name = "numAlignTol";
+            this.numAlignTol.Size = new System.Drawing.Size(58, 20);
+            this.numAlignTol.TabIndex = 40;
+            this.numAlignTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -243,54 +256,6 @@ namespace SEYR
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 27);
             this.flowLayoutPanel1.TabIndex = 18;
-            // 
-            // btnRemoveRect
-            // 
-            this.btnRemoveRect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveRect.BackColor = System.Drawing.Color.Transparent;
-            this.btnRemoveRect.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
-            this.btnRemoveRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRemoveRect.FlatAppearance.BorderSize = 0;
-            this.btnRemoveRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnRemoveRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveRect.Location = new System.Drawing.Point(3, 3);
-            this.btnRemoveRect.Name = "btnRemoveRect";
-            this.btnRemoveRect.Size = new System.Drawing.Size(23, 21);
-            this.btnRemoveRect.TabIndex = 1;
-            this.btnRemoveRect.UseVisualStyleBackColor = false;
-            this.btnRemoveRect.Click += new System.EventHandler(this.btnRemoveRect_Click);
-            // 
-            // btnCopyRect
-            // 
-            this.btnCopyRect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopyRect.BackColor = System.Drawing.Color.Transparent;
-            this.btnCopyRect.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_copy_11_24;
-            this.btnCopyRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCopyRect.FlatAppearance.BorderSize = 0;
-            this.btnCopyRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnCopyRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCopyRect.Location = new System.Drawing.Point(32, 3);
-            this.btnCopyRect.Name = "btnCopyRect";
-            this.btnCopyRect.Size = new System.Drawing.Size(23, 21);
-            this.btnCopyRect.TabIndex = 3;
-            this.btnCopyRect.UseVisualStyleBackColor = false;
-            this.btnCopyRect.Click += new System.EventHandler(this.btnCopyRect_Click);
-            // 
-            // btnTrainAlignment
-            // 
-            this.btnTrainAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTrainAlignment.BackColor = System.Drawing.Color.Transparent;
-            this.btnTrainAlignment.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_checkbox_18_24;
-            this.btnTrainAlignment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTrainAlignment.FlatAppearance.BorderSize = 0;
-            this.btnTrainAlignment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnTrainAlignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrainAlignment.Location = new System.Drawing.Point(61, 3);
-            this.btnTrainAlignment.Name = "btnTrainAlignment";
-            this.btnTrainAlignment.Size = new System.Drawing.Size(23, 21);
-            this.btnTrainAlignment.TabIndex = 4;
-            this.btnTrainAlignment.UseVisualStyleBackColor = false;
-            this.btnTrainAlignment.Click += new System.EventHandler(this.btnTrainAlignment_Click);
             // 
             // label4
             // 
@@ -464,18 +429,6 @@ namespace SEYR
             this.numFailTol.Size = new System.Drawing.Size(58, 20);
             this.numFailTol.TabIndex = 15;
             this.numFailTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(195, 13);
-            this.pictureBox.Name = "pictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.pictureBox, 34);
-            this.pictureBox.Size = new System.Drawing.Size(742, 607);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 16;
-            this.pictureBox.TabStop = false;
             // 
             // lblScoreText
             // 
@@ -765,22 +718,6 @@ namespace SEYR
             this.flowLayoutPanelFollower.Size = new System.Drawing.Size(58, 27);
             this.flowLayoutPanelFollower.TabIndex = 18;
             // 
-            // buttonForgetPattern
-            // 
-            this.buttonForgetPattern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonForgetPattern.BackColor = System.Drawing.Color.Transparent;
-            this.buttonForgetPattern.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
-            this.buttonForgetPattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonForgetPattern.FlatAppearance.BorderSize = 0;
-            this.buttonForgetPattern.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.buttonForgetPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonForgetPattern.Location = new System.Drawing.Point(3, 3);
-            this.buttonForgetPattern.Name = "buttonForgetPattern";
-            this.buttonForgetPattern.Size = new System.Drawing.Size(23, 21);
-            this.buttonForgetPattern.TabIndex = 1;
-            this.buttonForgetPattern.UseVisualStyleBackColor = false;
-            this.buttonForgetPattern.Click += new System.EventHandler(this.buttonForgetPattern_Click);
-            // 
             // btnTrainPattern
             // 
             this.btnTrainPattern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -832,18 +769,81 @@ namespace SEYR
             this.label19.Text = "Alignment";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numAlignTol
+            // btnRemoveRect
             // 
-            this.numAlignTol.Location = new System.Drawing.Point(121, 391);
-            this.numAlignTol.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numAlignTol.Name = "numAlignTol";
-            this.numAlignTol.Size = new System.Drawing.Size(58, 20);
-            this.numAlignTol.TabIndex = 40;
-            this.numAlignTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.btnRemoveRect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveRect.BackColor = System.Drawing.Color.Transparent;
+            this.btnRemoveRect.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
+            this.btnRemoveRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRemoveRect.FlatAppearance.BorderSize = 0;
+            this.btnRemoveRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnRemoveRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveRect.Location = new System.Drawing.Point(3, 3);
+            this.btnRemoveRect.Name = "btnRemoveRect";
+            this.btnRemoveRect.Size = new System.Drawing.Size(23, 21);
+            this.btnRemoveRect.TabIndex = 1;
+            this.btnRemoveRect.UseVisualStyleBackColor = false;
+            this.btnRemoveRect.Click += new System.EventHandler(this.btnRemoveRect_Click);
+            // 
+            // btnCopyRect
+            // 
+            this.btnCopyRect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyRect.BackColor = System.Drawing.Color.Transparent;
+            this.btnCopyRect.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_copy_11_24;
+            this.btnCopyRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCopyRect.FlatAppearance.BorderSize = 0;
+            this.btnCopyRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnCopyRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCopyRect.Location = new System.Drawing.Point(32, 3);
+            this.btnCopyRect.Name = "btnCopyRect";
+            this.btnCopyRect.Size = new System.Drawing.Size(23, 21);
+            this.btnCopyRect.TabIndex = 3;
+            this.btnCopyRect.UseVisualStyleBackColor = false;
+            this.btnCopyRect.Click += new System.EventHandler(this.btnCopyRect_Click);
+            // 
+            // btnTrainAlignment
+            // 
+            this.btnTrainAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTrainAlignment.BackColor = System.Drawing.Color.Transparent;
+            this.btnTrainAlignment.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_checkbox_18_24;
+            this.btnTrainAlignment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTrainAlignment.FlatAppearance.BorderSize = 0;
+            this.btnTrainAlignment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnTrainAlignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrainAlignment.Location = new System.Drawing.Point(61, 3);
+            this.btnTrainAlignment.Name = "btnTrainAlignment";
+            this.btnTrainAlignment.Size = new System.Drawing.Size(23, 21);
+            this.btnTrainAlignment.TabIndex = 4;
+            this.btnTrainAlignment.UseVisualStyleBackColor = false;
+            this.btnTrainAlignment.Click += new System.EventHandler(this.btnTrainAlignment_Click);
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(195, 13);
+            this.pictureBox.Name = "pictureBox";
+            this.tableLayoutPanel.SetRowSpan(this.pictureBox, 34);
+            this.pictureBox.Size = new System.Drawing.Size(742, 607);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 16;
+            this.pictureBox.TabStop = false;
+            // 
+            // buttonForgetPattern
+            // 
+            this.buttonForgetPattern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonForgetPattern.BackColor = System.Drawing.Color.Transparent;
+            this.buttonForgetPattern.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
+            this.buttonForgetPattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonForgetPattern.FlatAppearance.BorderSize = 0;
+            this.buttonForgetPattern.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.buttonForgetPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonForgetPattern.Location = new System.Drawing.Point(3, 3);
+            this.buttonForgetPattern.Name = "buttonForgetPattern";
+            this.buttonForgetPattern.Size = new System.Drawing.Size(23, 21);
+            this.buttonForgetPattern.TabIndex = 1;
+            this.buttonForgetPattern.UseVisualStyleBackColor = false;
+            this.buttonForgetPattern.Click += new System.EventHandler(this.buttonForgetPattern_Click);
             // 
             // Composer
             // 
@@ -857,6 +857,7 @@ namespace SEYR
             this.Text = "SEYR Composer";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numCopyX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCopyPitchX)).EndInit();
@@ -866,7 +867,6 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numFailScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPassTol)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFailTol)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.flowLayoutPanelFile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numOriginX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginY)).EndInit();
@@ -874,7 +874,7 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).EndInit();
             this.flowLayoutPanelFollower.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

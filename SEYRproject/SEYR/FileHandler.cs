@@ -7,7 +7,7 @@ namespace SEYR
     static class FileHandler
     {
         public static Grid Grid = new Grid();
-        public static string FilePath { get; set; }
+        public static string FilePath { get; set; } = string.Empty;
 
         public static string LoadFile()
         {

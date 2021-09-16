@@ -19,7 +19,7 @@ namespace SEYR.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -65,7 +65,7 @@ namespace SEYR.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap iconmonstr_checkbox_18_24 {
             get {
-                object obj = ResourceManager.GetObject("iconmonstr_checkbox_18_24", resourceCulture);
+                object obj = ResourceManager.GetObject("iconmonstr-checkbox-18-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace SEYR.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap iconmonstr_copy_11_24 {
             get {
-                object obj = ResourceManager.GetObject("iconmonstr_copy_11_24", resourceCulture);
+                object obj = ResourceManager.GetObject("iconmonstr-copy-11-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -85,7 +85,7 @@ namespace SEYR.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap iconmonstr_school_16_24 {
             get {
-                object obj = ResourceManager.GetObject("iconmonstr_school_16_24", resourceCulture);
+                object obj = ResourceManager.GetObject("iconmonstr-school-16-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace SEYR.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap iconmonstr_x_mark_4_24 {
             get {
-                object obj = ResourceManager.GetObject("iconmonstr_x_mark_4_24", resourceCulture);
+                object obj = ResourceManager.GetObject("iconmonstr-x-mark-4-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
