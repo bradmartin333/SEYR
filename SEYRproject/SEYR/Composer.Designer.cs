@@ -834,8 +834,8 @@ namespace SEYR
             // 
             // pictureBox
             // 
-            this.pictureBox.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
-            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(195, 13);
             this.pictureBox.Name = "pictureBox";
