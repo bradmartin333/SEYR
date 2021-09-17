@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SEYR;
 
@@ -9,14 +10,18 @@ namespace OutsideProgram
 {
     public partial class ImageLoader : Form
     {
-        private string DirectoryPath { get; set; }
+        private string DirectoryPath { get; set; } = @"S:\SEYR\SEYRproject\GenerateGridImages\bin\Debug\OutputImages";
         private string[] Images { get; set; }
-        private int ImageIndex { get; set; }
+        private int ImageIndex { get; set; } = -1;
         private Composer Composer { get; set; }
 
         public ImageLoader(Composer composer)
         {
             InitializeComponent();
+
+            Images = GetImagesFrom(DirectoryPath);
+            progressBar.Maximum = Images.Length;
+
             Composer = composer;
             Show();
         }
@@ -42,18 +47,23 @@ namespace OutsideProgram
             DataHandler.OutputString = "";
         }
 
-        private void btnNextImage_Click(object sender, EventArgs e)
+        private async void btnNextImage_Click(object sender, EventArgs e)
         {
-            LoadNewImage();
+            await LoadNewImage();
         }
 
-        private void btnRunAll_Click(object sender, EventArgs e)
+        private async void btnRunAll_Click(object sender, EventArgs e)
         {
-            while (LoadNewImage()) { Application.DoEvents(); }
+            while (true)
+            {
+                bool result = await LoadNewImage();
+                if (!result) break;
+            }
+
             File.WriteAllText(DirectoryPath + "\\" + "report.txt", DataHandler.OutputString);
         }
 
-        private bool LoadNewImage()
+        private async Task<bool> LoadNewImage()
         {
             ImageIndex++;
             if (ImageIndex > Images.Length - 1)
@@ -64,36 +74,10 @@ namespace OutsideProgram
             }
             else
             {
-                Composer.NewImage(new Bitmap(Images[ImageIndex]), ImageIndex);
+                await Composer.NewImage(new Bitmap(Images[ImageIndex]), ImageIndex);
                 progressBar.Value = ImageIndex;
                 return true;
             }
-        }
-
-        private string OpenFile(string title, string filter)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.Title = title;
-                openFileDialog.Filter = filter;
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    return openFileDialog.FileName;
-            }
-            return null;
-        }
-
-        private string SaveFile(string title, string filter)
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.RestoreDirectory = true;
-                saveFileDialog.Title = title;
-                saveFileDialog.Filter = filter;
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    return saveFileDialog.FileName;
-            }
-            return null;
         }
 
         private string OpenDirectory(string description)

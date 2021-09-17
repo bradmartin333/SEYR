@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Accord.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Threading.Tasks;
 
 namespace SEYR
 {
@@ -97,14 +98,14 @@ namespace SEYR
         /// <summary>
         /// Find the XY offset of the Current Image from the training image
         /// </summary>
-        public static bool FollowPattern()
+        public static async Task<bool> FollowPattern()
         {
             if (FileHandler.Grid.PatternFeature.Rectangle.IsEmpty) return false;
             ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.9f);
 
             Bitmap source = (Bitmap)CurrentImage.Clone();
 
-            TemplateMatch[] matchings = tm.ProcessImage(source, FileHandler.Grid.PatternBitmap);
+            TemplateMatch[] matchings = await Task.Run(() => tm.ProcessImage(source, FileHandler.Grid.PatternBitmap));
             if (matchings.Length == 0) return false;
 
             Point point = matchings[0].Rectangle.Location;

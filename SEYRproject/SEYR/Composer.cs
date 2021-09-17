@@ -4,23 +4,25 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYR
 {
     public partial class Composer : Form
     {
-        #region Temporary Image Loading
+        #region Image Loading
+
+        public int PatternFollowInterval { get; set; } = 1;
 
         private int ImageIdx = 0;
-        private int PatternFollowInterval = 1;
 
-        public void NewImage(Bitmap bitmap, int idx)
+        public async Task NewImage(Bitmap bitmap, int idx)
         {
             try
             {
                 BringToFront();
-                LoadNewImage(bitmap);
+                await LoadNewImage(bitmap);
                 ImageIdx = idx;
             }
             catch (Exception ex)
@@ -37,11 +39,8 @@ namespace SEYR
         public Composer(Bitmap img)
         {
             InitializeComponent();
-
-            // Scale incoming image and set blank foreground
-            double heightRatio = Picasso.BaseHeight / img.Height;
-            Bitmap resize = new Bitmap((int)(heightRatio * img.Width), (int)Picasso.BaseHeight);
-            pictureBox.Image = resize;
+            Picasso.IncomingSize = img.Size;
+            Picasso.ClearGraphics(this);
 
             // Init mouse and keyboard handlers
             pictureBox.MouseDown += PictureBox_MouseDown;
@@ -55,10 +54,11 @@ namespace SEYR
             LoadNewImage(img);
         }
 
-        public void LoadNewImage(Bitmap img)
+        public async Task LoadNewImage(Bitmap img)
         {
             using (var wc = new WaitCursor())
             {
+                Picasso.ClearGraphics(this);
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
                 // Resize incoming image
@@ -82,7 +82,7 @@ namespace SEYR
                 Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
                 working = filter.Apply(working);
 
-                Threshold threshold = new Threshold(170);
+                Threshold threshold = new Threshold(FileHandler.Grid.FilterThreshold);
                 threshold.ApplyInPlace(working);
 
                 Imaging.CurrentImage = working; // Save edited photo
@@ -90,7 +90,7 @@ namespace SEYR
                 if (ImageIdx % PatternFollowInterval == 0)
                     for (int i = 0; i < 3; i++)
                     {
-                        bool foundPattern = Imaging.FollowPattern();
+                        bool foundPattern = await Imaging.FollowPattern();
                         if (foundPattern)
                         {
                             break;
@@ -101,7 +101,7 @@ namespace SEYR
                 //double angle = skewChecker.GetSkewAngle(working);
                 //Debug.WriteLine(angle);
 
-                LoadComboBox();
+                await LoadComboBox();
             }
         }
 
@@ -172,6 +172,9 @@ namespace SEYR
             numAngle.DataBindings.Clear();
             numAngle.DataBindings.Add(new Binding("Value", FileHandler.Grid, "Angle", false, DataSourceUpdateMode.OnPropertyChanged));
 
+            numFilterThreshold.DataBindings.Clear();
+            numFilterThreshold.DataBindings.Add(new Binding("Value", FileHandler.Grid, "FilterThreshold", false, DataSourceUpdateMode.OnPropertyChanged));
+
             numCopyX.DataBindings.Clear();
             numCopyX.DataBindings.Add(new Binding("Value", FileHandler.Grid, "NumberX", false, DataSourceUpdateMode.OnPropertyChanged));
 
@@ -220,7 +223,7 @@ namespace SEYR
             LoadComboBox();
         }
 
-        public void LoadComboBox()
+        public async Task LoadComboBox()
         {
             ComboBoxOverride = true; // Not a user index change
             comboBoxRects.BeginUpdate(); // Makes GUI look cleaner
@@ -237,13 +240,13 @@ namespace SEYR
             int activeIdx = FileHandler.Grid.Features.FindIndex(x => x.Equals(FileHandler.Grid.ActiveFeature));
             if (activeIdx != -1) comboBoxRects.SelectedIndex = activeIdx;
 
-            MakeTiles();
+            await MakeTiles();
 
             comboBoxRects.EndUpdate();
             ComboBoxOverride = false;
         }
 
-        public void MakeTiles()
+        public async Task MakeTiles()
         {
             // Each tile contains one of each feature
             // The top-left tile is index 0,0
@@ -273,7 +276,7 @@ namespace SEYR
 
             foreach (Tile tile in FileHandler.Grid.Tiles)
                 tile.Score(ImageIdx);
-            Picasso.ReDraw(this);
+            await Picasso.ReDraw(this);
         }
 
         private void comboBoxRects_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -335,12 +338,12 @@ namespace SEYR
 
         private void btnTrainPattern_Click(object sender, System.EventArgs e)
         {
-            if (comboBoxRects.SelectedIndex == -1 || FileHandler.FilePath == string.Empty) return;
+            if (comboBoxRects.SelectedIndex == -1) return;
             FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
             LoadFollowerPattern();
         }
 
-        private void LoadFollowerPattern()
+        private async void LoadFollowerPattern()
         {
             Rectangle cropRect = FileHandler.Grid.PatternFeature.Rectangle;
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
@@ -352,17 +355,17 @@ namespace SEYR
             target = filter.Apply(target);
             FileHandler.Grid.PatternBitmap = target;
             lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
-            Imaging.FollowPattern();
-            Picasso.ReDraw(this);
+            await Imaging.FollowPattern();
+            await Picasso.ReDraw(this);
         }
 
-        private void buttonForgetPattern_Click(object sender, System.EventArgs e)
+        private async void buttonForgetPattern_Click(object sender, System.EventArgs e)
         {
             FileHandler.Grid.PatternFeature = new Feature(Rectangle.Empty);
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
             lblFollowerPattern.Text = "N/A";
             Picasso.Offset = Point.Empty;
-            Picasso.ReDraw(this);
+            await Picasso.ReDraw(this);
         }
 
         private void btnTrainAlignment_Click(object sender, System.EventArgs e)

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYR
 {
     static class Picasso
     {
+        public static Size IncomingSize = new Size(1, 1);
         public static double BaseHeight = 600; // Defines scaling dimension of incoming images
         public static Point Offset { get; set; } // XY Offset of Current Image
 
@@ -75,6 +77,18 @@ namespace SEYR
         }
 
         /// <summary>
+        /// Clear all drawn features
+        /// </summary>
+        /// <param name="composer"></param>
+        public static void ClearGraphics(Composer composer)
+        {
+            // Scale incoming image and set blank foreground
+            double heightRatio = BaseHeight / IncomingSize.Height;
+            Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)Picasso.BaseHeight);
+            composer.pictureBox.Image = resize;
+        }
+
+        /// <summary>
         /// Update on every cursor move
         /// and draw current rect
         /// </summary>
@@ -105,12 +119,12 @@ namespace SEYR
         /// ReDraw all rectangles with no relevant mouse position
         /// </summary>
         /// <param name="composer"></param>
-        public static void ReDraw(Composer composer)
+        public static async Task ReDraw(Composer composer)
         {
             Bitmap bitmap = new Bitmap(composer.pictureBox.BackgroundImage.Width, composer.pictureBox.BackgroundImage.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-                DrawTiles(g);
+                await Task.Run(() => DrawTiles(g));
             };
             composer.pictureBox.Image = bitmap;
         }

@@ -27,6 +27,7 @@ namespace SEYR
         protected Grid(SerializationInfo info, StreamingContext context)
         {
             _Angle = info.GetDouble("angle");
+            _FilterThreshold = info.GetInt32("filterThreshold");
             _NumberX = info.GetDouble("numX");
             _NumberY = info.GetDouble("numY");
             _PitchX = info.GetDouble("pitchX");
@@ -40,6 +41,7 @@ namespace SEYR
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("angle", _Angle);
+            info.AddValue("filterThreshold", _FilterThreshold);
             info.AddValue("numX", _NumberX);
             info.AddValue("numY", _NumberY);
             info.AddValue("pitchX", _PitchX);
@@ -54,6 +56,7 @@ namespace SEYR
         public Grid()
         {
             _Angle = 0.0;
+            _FilterThreshold = 170;
             _NumberX = 0;
             _NumberY = 0;
             _PitchX = 200;
@@ -62,6 +65,7 @@ namespace SEYR
         }
 
         private double _Angle;
+        private int _FilterThreshold;
         private double _NumberX;
         private double _NumberY;
         private double _PitchX;
@@ -90,6 +94,26 @@ namespace SEYR
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
+
+        public int FilterThreshold
+        {
+            get
+            {
+                return _FilterThreshold;
+            }
+            set
+            {
+                _FilterThreshold = value;
+                if (Application.OpenForms.OfType<Composer>().Any())
+                {
+                    Composer composer = Application.OpenForms.OfType<Composer>().First();
+                    composer.LoadNewImage(Imaging.OriginalImage);
+                    composer.MakeTiles();
+                }
+                if (PropertyChanged != null) NotifyPropertyChanged();
+            }
+        }
+
 
         public double NumberX
         {
