@@ -74,7 +74,7 @@ namespace OutsideProgram
             }
             else
             {
-                await Composer.NewImage(new Bitmap(Images[ImageIndex]), ImageIndex);
+                await Composer.LoadNewImage(new Bitmap(Images[ImageIndex]));
                 progressBar.Value = ImageIndex;
                 return true;
             }

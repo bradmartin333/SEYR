@@ -1,47 +1,24 @@
 ﻿using Accord.Imaging.Filters;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SEYR.DataBindings;
 
 namespace SEYR
 {
     public partial class Composer : Form
     {
-        #region Image Loading
-
-        public int PatternFollowInterval { get; set; } = 1;
-
-        private int ImageIdx = 0;
-
-        public async Task NewImage(Bitmap bitmap, int idx)
-        {
-            try
-            {
-                BringToFront();
-                await LoadNewImage(bitmap);
-                ImageIdx = idx;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw;
-            }
-        }
-
-        #endregion
-
+        public int PatternFollowInterval = 1;
+        private int ImageIdx = -1;
         private bool ComboBoxOverride = false; // Allows for ComboBox refresh without losing selection
 
-        public Composer(Bitmap img)
+        public Composer()
         {
             InitializeComponent();
-            Picasso.IncomingSize = img.Size;
-            Picasso.ClearGraphics(this);
-
+            
             // Init mouse and keyboard handlers
             pictureBox.MouseDown += PictureBox_MouseDown;
             pictureBox.MouseUp += PictureBox_MouseUp;
@@ -49,15 +26,16 @@ namespace SEYR
             comboBoxRects.KeyDown += ComboBoxRects_KeyDown;
 
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
-            LoadGrid();
+            LoadGrid(this);
             Show();
-            LoadNewImage(img);
         }
 
         public async Task LoadNewImage(Bitmap img)
         {
             using (var wc = new WaitCursor())
             {
+                ImageIdx++;
+                Picasso.IncomingSize = img.Size;
                 Picasso.ClearGraphics(this);
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
@@ -101,7 +79,7 @@ namespace SEYR
                 //double angle = skewChecker.GetSkewAngle(working);
                 //Debug.WriteLine(angle);
 
-                await LoadComboBox();
+                await MakeTiles();
             }
         }
 
@@ -120,7 +98,6 @@ namespace SEYR
                     break;
             }
         }
-
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
@@ -145,7 +122,7 @@ namespace SEYR
             Picasso.Paint(this, e.Location);
         }
 
-        private void btnLoad_Click(object sender, System.EventArgs e)
+        private async void btnLoad_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.LoadFile();
             if (pathBuffer == null)
@@ -153,11 +130,11 @@ namespace SEYR
             else
                 FileHandler.FilePath = pathBuffer;
             FileHandler.ReadParametersFromBinaryFile();
-            LoadGrid();
-            LoadNewImage(Imaging.OriginalImage);
+            LoadGrid(this);
+            await LoadNewImage(Imaging.OriginalImage);
         }
 
-        private void btnSave_Click(object sender, System.EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.SaveFile();
             if (pathBuffer == null)
@@ -165,62 +142,6 @@ namespace SEYR
             else
                 FileHandler.FilePath = pathBuffer;
             FileHandler.WriteParametersToBinaryFile();
-        }
-
-        private void LoadGrid()
-        {
-            numAngle.DataBindings.Clear();
-            numAngle.DataBindings.Add(new Binding("Value", FileHandler.Grid, "Angle", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numFilterThreshold.DataBindings.Clear();
-            numFilterThreshold.DataBindings.Add(new Binding("Value", FileHandler.Grid, "FilterThreshold", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numCopyX.DataBindings.Clear();
-            numCopyX.DataBindings.Add(new Binding("Value", FileHandler.Grid, "NumberX", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numCopyY.DataBindings.Clear();
-            numCopyY.DataBindings.Add(new Binding("Value", FileHandler.Grid, "NumberY", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numCopyPitchX.DataBindings.Clear();
-            numCopyPitchX.DataBindings.Add(new Binding("Value", FileHandler.Grid, "PitchX", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numCopyPitchY.DataBindings.Clear();
-            numCopyPitchY.DataBindings.Add(new Binding("Value", FileHandler.Grid, "PitchY", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            if (!FileHandler.Grid.PatternFeature.Rectangle.IsEmpty) 
-                lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
-        }
-
-        public void LoadFeature()
-        {
-            numOriginX.DataBindings.Clear();
-            numOriginX.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "OriginX", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numOriginY.DataBindings.Clear();
-            numOriginY.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "OriginY", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numSizeX.DataBindings.Clear();
-            numSizeX.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "SizeX", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numSizeY.DataBindings.Clear();
-            numSizeY.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "SizeY", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numPassScore.DataBindings.Clear();
-            numPassScore.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "PassScore", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numPassTol.DataBindings.Clear();
-            numPassTol.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "PassTol", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numFailScore.DataBindings.Clear();
-            numFailScore.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "FailScore", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numFailTol.DataBindings.Clear();
-            numFailTol.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "FailTol", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            numAlignTol.DataBindings.Clear();
-            numAlignTol.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "AlignTol", false, DataSourceUpdateMode.OnPropertyChanged));
-
-            LoadComboBox();
         }
 
         public async Task LoadComboBox()
@@ -279,7 +200,7 @@ namespace SEYR
             await Picasso.ReDraw(this);
         }
 
-        private void comboBoxRects_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void comboBoxRects_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!ComboBoxOverride)
             {
@@ -289,18 +210,17 @@ namespace SEYR
                         FileHandler.Grid.ActiveFeature = feature;
                 }
             }
-
             DisplayAlignmentStatus();
         }
 
-        private void btnRemoveRect_Click(object sender, System.EventArgs e)
+        private async void btnRemoveRect_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.Features.Remove(FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature)));
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
-            LoadComboBox();
+            await LoadComboBox();
         }
 
-        private void btnCopyRect_Click(object sender, System.EventArgs e)
+        private async void btnCopyRect_Click(object sender, EventArgs e)
         {
             Feature feature = FileHandler.Grid.ActiveFeature.Clone(userClone: true);
             while (FileHandler.Grid.Features.FindAll(x => x.Name == feature.Name).Count > 0)
@@ -309,10 +229,10 @@ namespace SEYR
             }
             FileHandler.Grid.Features.Add(feature);
             FileHandler.Grid.ActiveFeature = feature;
-            LoadComboBox();
+            await LoadComboBox();
         }
 
-        private void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
+        private async void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
         {
             if (FileHandler.Grid.Features.Count == 0) return;
 
@@ -332,11 +252,11 @@ namespace SEYR
                 Feature updateFeature = FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature));
                 updateFeature.Name = comboBoxRects.Text;
                 FileHandler.Grid.ActiveFeature = updateFeature;
-                LoadComboBox();
+                await LoadComboBox();
             }
         }
 
-        private void btnTrainPattern_Click(object sender, System.EventArgs e)
+        private void btnTrainPattern_Click(object sender, EventArgs e)
         {
             if (comboBoxRects.SelectedIndex == -1) return;
             FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
@@ -359,7 +279,7 @@ namespace SEYR
             await Picasso.ReDraw(this);
         }
 
-        private async void buttonForgetPattern_Click(object sender, System.EventArgs e)
+        private async void buttonForgetPattern_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.PatternFeature = new Feature(Rectangle.Empty);
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
@@ -368,7 +288,7 @@ namespace SEYR
             await Picasso.ReDraw(this);
         }
 
-        private void btnTrainAlignment_Click(object sender, System.EventArgs e)
+        private void btnTrainAlignment_Click(object sender, EventArgs e)
         {
             if (comboBoxRects.SelectedIndex == -1)
             {
@@ -380,7 +300,7 @@ namespace SEYR
                 Application.OpenForms.OfType<Alignment>().First().BringToFront();
             else
             {
-                Alignment alignment = new Alignment();
+                _ = new Alignment();
             }
         }
 

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using static SEYR.DataBindings;
 
 namespace SEYR
 {
@@ -89,7 +90,6 @@ namespace SEYR
                 {
                     Composer composer = Application.OpenForms.OfType<Composer>().First();
                     composer.LoadNewImage(Imaging.OriginalImage);
-                    composer.MakeTiles();
                 }
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
@@ -108,7 +108,6 @@ namespace SEYR
                 {
                     Composer composer = Application.OpenForms.OfType<Composer>().First();
                     composer.LoadNewImage(Imaging.OriginalImage);
-                    composer.MakeTiles();
                 }
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
@@ -217,7 +216,7 @@ namespace SEYR
             set
             {
                 _ActiveFeature = value;
-                if (Application.OpenForms.OfType<Composer>().Any()) Application.OpenForms.OfType<Composer>().First().LoadFeature();
+                if (Application.OpenForms.OfType<Composer>().Any()) LoadFeature(Application.OpenForms.OfType<Composer>().First());
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }

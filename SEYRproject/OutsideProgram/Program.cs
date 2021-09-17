@@ -16,7 +16,7 @@ namespace OutsideProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageLoader(new SEYR.Composer(new System.Drawing.Bitmap(200, 200))));
+            Application.Run(new ImageLoader(new SEYR.Composer()));
         }
     }
 }

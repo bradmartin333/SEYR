@@ -39,7 +39,7 @@ namespace SEYR
         /// <param name="composer"></param>
         /// <param name="location"></param>
         /// <param name="BeginOrCancel"></param>
-        public static void Click(Composer composer, Point location, bool BeginOrCancel)
+        public static async void Click(Composer composer, Point location, bool BeginOrCancel)
         {
             Point pos = ZoomMousePos(composer, location);
             if (BeginOrCancel)
@@ -63,7 +63,7 @@ namespace SEYR
                 {
                     FileHandler.Grid.Features.Add(feature);
                     FileHandler.Grid.ActiveFeature = feature;
-                    composer.LoadComboBox();
+                    await composer.MakeTiles();
                 }
                 else
                 {
