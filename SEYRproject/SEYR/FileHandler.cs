@@ -28,7 +28,7 @@ namespace SEYR
                     MessageBox.Show("Invalid Directory Contents");
                     return;
                 }
-                DataHandler.OutputString = "";
+                DataHandler.Output = new List<string>();
                 ImageIdx = 0;
                 Images = buffer;
             }
@@ -47,13 +47,13 @@ namespace SEYR
             return null;
         }
 
-        public static string SaveFile()
+        public static string SaveFile(string title, string filter)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.RestoreDirectory = true;
-                saveFileDialog.Title = "Save Simple Entropy Yield Routine";
-                saveFileDialog.Filter = "SEYR (*.seyr) | *.seyr";
+                saveFileDialog.Title = title;
+                saveFileDialog.Filter = filter;
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     return saveFileDialog.FileName;
             }

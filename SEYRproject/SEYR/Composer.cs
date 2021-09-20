@@ -2,7 +2,9 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SEYR.DataBindings;
@@ -11,6 +13,7 @@ namespace SEYR
 {
     public partial class Composer : Form
     {
+        public PictureBox pictureBox = Pipeline.PBX;
         private bool ComboBoxOverride = false; // Allows for ComboBox refresh without losing selection
         private bool RunningAllImages = false;
 
@@ -18,6 +21,8 @@ namespace SEYR
         {
             InitializeComponent();
             KeyDown += Composer_KeyDown;
+
+            panel.Controls.Add(pictureBox);
             
             // Init mouse and keyboard handlers
             pictureBox.MouseDown += PictureBox_MouseDown;
@@ -40,11 +45,6 @@ namespace SEYR
             Close();
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileHandler.Viewer.Show();
@@ -55,6 +55,13 @@ namespace SEYR
 
         public void MakeTiles()
         {
+            if (FileHandler.ImageIdx == 0) return;
+
+            if (FileHandler.ImageIdx > DataHandler.Output.Count)
+                DataHandler.Output.Add(string.Empty);
+            else
+                DataHandler.Output[FileHandler.ImageIdx - 1] = string.Empty;
+
             // Each tile contains one of each feature
             // The top-left tile is index 0,0
             // The bottom-right tile is index i,j
@@ -143,7 +150,7 @@ namespace SEYR
                 }
 
                 MakeTiles();
-                progressBar.Invoke((MethodInvoker)delegate () { progressBar.PerformStep(); });
+                progressBar.Invoke((MethodInvoker)delegate () { progressBar.Value = FileHandler.ImageIdx; });
                 FileHandler.Viewer.InsertNewImage(pictureBox);
             }
         }
@@ -366,7 +373,7 @@ namespace SEYR
         private async Task<bool> LoadNewImageFromDir()
         {
             if (Application.UseWaitCursor == true) return false;
-            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length - 1)
+            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length)
                 return false;
             Bitmap bitmap = new Bitmap(FileHandler.Images[FileHandler.ImageIdx]);
             await LoadNewImage((Bitmap)bitmap.Clone());
@@ -445,12 +452,28 @@ namespace SEYR
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pathBuffer = FileHandler.SaveFile();
+            string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine", "SEYR (*.seyr) | *.seyr");
             if (pathBuffer == null)
                 return;
             else
                 FileHandler.FilePath = pathBuffer;
             FileHandler.WriteParametersToBinaryFile();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine Report", "Text File (*.txt) | *.txt");
+            if (pathBuffer == null)
+                return;
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (string str in DataHandler.Output)
+                {
+                    sb.Append(str);
+                }
+                File.WriteAllText(pathBuffer, sb.ToString());
+            }
         }
 
         #endregion  
