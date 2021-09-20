@@ -31,9 +31,7 @@ namespace SEYR
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.label21 = new System.Windows.Forms.Label();
             this.numAlignTol = new System.Windows.Forms.NumericUpDown();
-            this.btnOpenImageDir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,9 +50,6 @@ namespace SEYR
             this.numPassTol = new System.Windows.Forms.NumericUpDown();
             this.numFailTol = new System.Windows.Forms.NumericUpDown();
             this.lblScoreText = new System.Windows.Forms.Label();
-            this.flowLayoutPanelFile = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.lblScore = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -72,24 +67,38 @@ namespace SEYR
             this.numSizeY = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.numAngle = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.flowLayoutPanelFollower = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblFollowerPattern = new System.Windows.Forms.Label();
             this.comboBoxRects = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.numFilterThreshold = new System.Windows.Forms.NumericUpDown();
-            this.btnNextImage = new System.Windows.Forms.Button();
-            this.btnRunAllImages = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnShowViewer = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.followerPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.followerPatternNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveRect = new System.Windows.Forms.Button();
             this.btnCopyRect = new System.Windows.Forms.Button();
             this.btnTrainAlignment = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.buttonForgetPattern = new System.Windows.Forms.Button();
-            this.btnTrainPattern = new System.Windows.Forms.Button();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openImageDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runAllImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startOverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -101,15 +110,13 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numFailScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPassTol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFailTol)).BeginInit();
-            this.flowLayoutPanelFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSizeX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).BeginInit();
-            this.flowLayoutPanelFollower.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFilterThreshold)).BeginInit();
-            this.flowLayoutPanel3.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,67 +130,57 @@ namespace SEYR
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel.Controls.Add(this.label21, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.numAlignTol, 3, 27);
-            this.tableLayoutPanel.Controls.Add(this.label1, 2, 11);
-            this.tableLayoutPanel.Controls.Add(this.label2, 3, 11);
-            this.tableLayoutPanel.Controls.Add(this.label3, 2, 24);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 18);
-            this.tableLayoutPanel.Controls.Add(this.label4, 1, 12);
-            this.tableLayoutPanel.Controls.Add(this.label5, 1, 13);
-            this.tableLayoutPanel.Controls.Add(this.label6, 1, 25);
-            this.tableLayoutPanel.Controls.Add(this.label7, 1, 26);
-            this.tableLayoutPanel.Controls.Add(this.label8, 3, 24);
-            this.tableLayoutPanel.Controls.Add(this.numCopyX, 2, 12);
-            this.tableLayoutPanel.Controls.Add(this.numCopyPitchX, 2, 13);
-            this.tableLayoutPanel.Controls.Add(this.numCopyY, 3, 12);
-            this.tableLayoutPanel.Controls.Add(this.numCopyPitchY, 3, 13);
-            this.tableLayoutPanel.Controls.Add(this.numPassScore, 2, 25);
-            this.tableLayoutPanel.Controls.Add(this.numFailScore, 2, 26);
-            this.tableLayoutPanel.Controls.Add(this.numPassTol, 3, 25);
-            this.tableLayoutPanel.Controls.Add(this.numFailTol, 3, 26);
+            this.tableLayoutPanel.Controls.Add(this.numAlignTol, 3, 23);
+            this.tableLayoutPanel.Controls.Add(this.label1, 2, 7);
+            this.tableLayoutPanel.Controls.Add(this.label2, 3, 7);
+            this.tableLayoutPanel.Controls.Add(this.label3, 2, 20);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 14);
+            this.tableLayoutPanel.Controls.Add(this.label4, 1, 8);
+            this.tableLayoutPanel.Controls.Add(this.label5, 1, 9);
+            this.tableLayoutPanel.Controls.Add(this.label6, 1, 21);
+            this.tableLayoutPanel.Controls.Add(this.label7, 1, 22);
+            this.tableLayoutPanel.Controls.Add(this.label8, 3, 20);
+            this.tableLayoutPanel.Controls.Add(this.numCopyX, 2, 8);
+            this.tableLayoutPanel.Controls.Add(this.numCopyPitchX, 2, 9);
+            this.tableLayoutPanel.Controls.Add(this.numCopyY, 3, 8);
+            this.tableLayoutPanel.Controls.Add(this.numCopyPitchY, 3, 9);
+            this.tableLayoutPanel.Controls.Add(this.numPassScore, 2, 21);
+            this.tableLayoutPanel.Controls.Add(this.numFailScore, 2, 22);
+            this.tableLayoutPanel.Controls.Add(this.numPassTol, 3, 21);
+            this.tableLayoutPanel.Controls.Add(this.numFailTol, 3, 22);
             this.tableLayoutPanel.Controls.Add(this.pictureBox, 5, 1);
-            this.tableLayoutPanel.Controls.Add(this.lblScoreText, 1, 31);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelFile, 1, 38);
-            this.tableLayoutPanel.Controls.Add(this.lblScore, 2, 31);
-            this.tableLayoutPanel.Controls.Add(this.label9, 1, 29);
-            this.tableLayoutPanel.Controls.Add(this.label10, 1, 30);
-            this.tableLayoutPanel.Controls.Add(this.lblName, 2, 29);
-            this.tableLayoutPanel.Controls.Add(this.lblIndex, 2, 30);
-            this.tableLayoutPanel.Controls.Add(this.label11, 1, 6);
-            this.tableLayoutPanel.Controls.Add(this.label12, 1, 15);
-            this.tableLayoutPanel.Controls.Add(this.label13, 1, 21);
-            this.tableLayoutPanel.Controls.Add(this.label14, 1, 22);
-            this.tableLayoutPanel.Controls.Add(this.label15, 2, 20);
-            this.tableLayoutPanel.Controls.Add(this.label16, 3, 20);
-            this.tableLayoutPanel.Controls.Add(this.numOriginX, 2, 21);
-            this.tableLayoutPanel.Controls.Add(this.numOriginY, 3, 21);
-            this.tableLayoutPanel.Controls.Add(this.numSizeX, 2, 22);
-            this.tableLayoutPanel.Controls.Add(this.numSizeY, 3, 22);
-            this.tableLayoutPanel.Controls.Add(this.label17, 1, 8);
-            this.tableLayoutPanel.Controls.Add(this.numAngle, 3, 8);
-            this.tableLayoutPanel.Controls.Add(this.label18, 1, 33);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelFollower, 1, 36);
-            this.tableLayoutPanel.Controls.Add(this.lblFollowerPattern, 1, 35);
-            this.tableLayoutPanel.Controls.Add(this.comboBoxRects, 1, 17);
-            this.tableLayoutPanel.Controls.Add(this.label19, 1, 27);
-            this.tableLayoutPanel.Controls.Add(this.label20, 1, 9);
-            this.tableLayoutPanel.Controls.Add(this.numFilterThreshold, 3, 9);
-            this.tableLayoutPanel.Controls.Add(this.progressBar, 0, 40);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel3, 1, 4);
+            this.tableLayoutPanel.Controls.Add(this.lblScoreText, 1, 27);
+            this.tableLayoutPanel.Controls.Add(this.lblScore, 2, 27);
+            this.tableLayoutPanel.Controls.Add(this.label9, 1, 25);
+            this.tableLayoutPanel.Controls.Add(this.label10, 1, 26);
+            this.tableLayoutPanel.Controls.Add(this.lblName, 2, 25);
+            this.tableLayoutPanel.Controls.Add(this.lblIndex, 2, 26);
+            this.tableLayoutPanel.Controls.Add(this.label11, 1, 2);
+            this.tableLayoutPanel.Controls.Add(this.label12, 1, 11);
+            this.tableLayoutPanel.Controls.Add(this.label13, 1, 17);
+            this.tableLayoutPanel.Controls.Add(this.label14, 1, 18);
+            this.tableLayoutPanel.Controls.Add(this.label15, 2, 16);
+            this.tableLayoutPanel.Controls.Add(this.label16, 3, 16);
+            this.tableLayoutPanel.Controls.Add(this.numOriginX, 2, 17);
+            this.tableLayoutPanel.Controls.Add(this.numOriginY, 3, 17);
+            this.tableLayoutPanel.Controls.Add(this.numSizeX, 2, 18);
+            this.tableLayoutPanel.Controls.Add(this.numSizeY, 3, 18);
+            this.tableLayoutPanel.Controls.Add(this.label17, 1, 4);
+            this.tableLayoutPanel.Controls.Add(this.numAngle, 3, 4);
+            this.tableLayoutPanel.Controls.Add(this.comboBoxRects, 1, 13);
+            this.tableLayoutPanel.Controls.Add(this.label19, 1, 23);
+            this.tableLayoutPanel.Controls.Add(this.label20, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.numFilterThreshold, 3, 5);
+            this.tableLayoutPanel.Controls.Add(this.progressBar, 0, 29);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 41;
+            this.tableLayoutPanel.RowCount = 30;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -206,36 +203,20 @@ namespace SEYR
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1081, 783);
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(740, 517);
             this.tableLayoutPanel.TabIndex = 0;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.tableLayoutPanel.SetColumnSpan(this.label21, 3);
-            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(13, 18);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(166, 15);
-            this.label21.TabIndex = 43;
-            this.label21.Text = "Image Loader";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numAlignTol
             // 
-            this.numAlignTol.Location = new System.Drawing.Point(121, 529);
+            this.numAlignTol.Location = new System.Drawing.Point(121, 422);
             this.numAlignTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -246,26 +227,11 @@ namespace SEYR
             this.numAlignTol.TabIndex = 40;
             this.numAlignTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnOpenImageDir
-            // 
-            this.btnOpenImageDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnOpenImageDir.AutoSize = true;
-            this.btnOpenImageDir.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnOpenImageDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenImageDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenImageDir.Location = new System.Drawing.Point(3, 3);
-            this.btnOpenImageDir.Name = "btnOpenImageDir";
-            this.btnOpenImageDir.Size = new System.Drawing.Size(79, 24);
-            this.btnOpenImageDir.TabIndex = 2;
-            this.btnOpenImageDir.Text = "Open Directory";
-            this.btnOpenImageDir.UseVisualStyleBackColor = false;
-            this.btnOpenImageDir.Click += new System.EventHandler(this.btnOpenImageDir_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(57, 206);
+            this.label1.Location = new System.Drawing.Point(57, 99);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -276,7 +242,7 @@ namespace SEYR
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(121, 206);
+            this.label2.Location = new System.Drawing.Point(121, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
@@ -287,7 +253,7 @@ namespace SEYR
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(57, 461);
+            this.label3.Location = new System.Drawing.Point(57, 354);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
@@ -302,7 +268,7 @@ namespace SEYR
             this.flowLayoutPanel1.Controls.Add(this.btnRemoveRect);
             this.flowLayoutPanel1.Controls.Add(this.btnCopyRect);
             this.flowLayoutPanel1.Controls.Add(this.btnTrainAlignment);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(52, 346);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(52, 239);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 27);
             this.flowLayoutPanel1.TabIndex = 18;
@@ -311,7 +277,7 @@ namespace SEYR
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(13, 219);
+            this.label4.Location = new System.Drawing.Point(13, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 26);
             this.label4.TabIndex = 3;
@@ -322,7 +288,7 @@ namespace SEYR
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(13, 245);
+            this.label5.Location = new System.Drawing.Point(13, 138);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 26);
             this.label5.TabIndex = 4;
@@ -333,7 +299,7 @@ namespace SEYR
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(13, 474);
+            this.label6.Location = new System.Drawing.Point(13, 367);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 26);
             this.label6.TabIndex = 5;
@@ -344,7 +310,7 @@ namespace SEYR
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(13, 500);
+            this.label7.Location = new System.Drawing.Point(13, 393);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 26);
             this.label7.TabIndex = 6;
@@ -355,7 +321,7 @@ namespace SEYR
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(121, 461);
+            this.label8.Location = new System.Drawing.Point(121, 354);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(58, 13);
             this.label8.TabIndex = 7;
@@ -364,7 +330,7 @@ namespace SEYR
             // 
             // numCopyX
             // 
-            this.numCopyX.Location = new System.Drawing.Point(57, 222);
+            this.numCopyX.Location = new System.Drawing.Point(57, 115);
             this.numCopyX.Name = "numCopyX";
             this.numCopyX.Size = new System.Drawing.Size(58, 20);
             this.numCopyX.TabIndex = 8;
@@ -372,7 +338,7 @@ namespace SEYR
             // 
             // numCopyPitchX
             // 
-            this.numCopyPitchX.Location = new System.Drawing.Point(57, 248);
+            this.numCopyPitchX.Location = new System.Drawing.Point(57, 141);
             this.numCopyPitchX.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -385,7 +351,7 @@ namespace SEYR
             // 
             // numCopyY
             // 
-            this.numCopyY.Location = new System.Drawing.Point(121, 222);
+            this.numCopyY.Location = new System.Drawing.Point(121, 115);
             this.numCopyY.Name = "numCopyY";
             this.numCopyY.Size = new System.Drawing.Size(58, 20);
             this.numCopyY.TabIndex = 10;
@@ -393,7 +359,7 @@ namespace SEYR
             // 
             // numCopyPitchY
             // 
-            this.numCopyPitchY.Location = new System.Drawing.Point(121, 248);
+            this.numCopyPitchY.Location = new System.Drawing.Point(121, 141);
             this.numCopyPitchY.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -412,7 +378,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassScore.Location = new System.Drawing.Point(57, 477);
+            this.numPassScore.Location = new System.Drawing.Point(57, 370);
             this.numPassScore.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -431,7 +397,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailScore.Location = new System.Drawing.Point(57, 503);
+            this.numFailScore.Location = new System.Drawing.Point(57, 396);
             this.numFailScore.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -450,7 +416,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassTol.Location = new System.Drawing.Point(121, 477);
+            this.numPassTol.Location = new System.Drawing.Point(121, 370);
             this.numPassTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -469,7 +435,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailTol.Location = new System.Drawing.Point(121, 503);
+            this.numFailTol.Location = new System.Drawing.Point(121, 396);
             this.numFailTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -484,56 +450,18 @@ namespace SEYR
             // 
             this.lblScoreText.AutoSize = true;
             this.lblScoreText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblScoreText.Location = new System.Drawing.Point(13, 598);
+            this.lblScoreText.Location = new System.Drawing.Point(13, 491);
             this.lblScoreText.Name = "lblScoreText";
             this.lblScoreText.Size = new System.Drawing.Size(38, 13);
             this.lblScoreText.TabIndex = 19;
             this.lblScoreText.Text = "Score:";
             this.lblScoreText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // flowLayoutPanelFile
-            // 
-            this.flowLayoutPanelFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanelFile.AutoSize = true;
-            this.tableLayoutPanel.SetColumnSpan(this.flowLayoutPanelFile, 3);
-            this.flowLayoutPanelFile.Controls.Add(this.btnSave);
-            this.flowLayoutPanelFile.Controls.Add(this.btnLoad);
-            this.flowLayoutPanelFile.Location = new System.Drawing.Point(22, 732);
-            this.flowLayoutPanelFile.Name = "flowLayoutPanelFile";
-            this.flowLayoutPanelFile.Size = new System.Drawing.Size(148, 29);
-            this.flowLayoutPanelFile.TabIndex = 20;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(68, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.Location = new System.Drawing.Point(77, 3);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(68, 23);
-            this.btnLoad.TabIndex = 1;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = false;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
             // lblScore
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblScore, 2);
             this.lblScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblScore.Location = new System.Drawing.Point(57, 598);
+            this.lblScore.Location = new System.Drawing.Point(57, 491);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(122, 13);
             this.lblScore.TabIndex = 21;
@@ -544,7 +472,7 @@ namespace SEYR
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(13, 572);
+            this.label9.Location = new System.Drawing.Point(13, 465);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
             this.label9.TabIndex = 22;
@@ -555,7 +483,7 @@ namespace SEYR
             // 
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(13, 585);
+            this.label10.Location = new System.Drawing.Point(13, 478);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 13);
             this.label10.TabIndex = 23;
@@ -566,7 +494,7 @@ namespace SEYR
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblName, 2);
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblName.Location = new System.Drawing.Point(57, 572);
+            this.lblName.Location = new System.Drawing.Point(57, 465);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(122, 13);
             this.lblName.TabIndex = 24;
@@ -577,7 +505,7 @@ namespace SEYR
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblIndex, 2);
             this.lblIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIndex.Location = new System.Drawing.Point(57, 585);
+            this.lblIndex.Location = new System.Drawing.Point(57, 478);
             this.lblIndex.Name = "lblIndex";
             this.lblIndex.Size = new System.Drawing.Size(122, 13);
             this.lblIndex.TabIndex = 25;
@@ -590,7 +518,7 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.label11, 3);
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(13, 119);
+            this.label11.Location = new System.Drawing.Point(13, 12);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(166, 15);
             this.label11.TabIndex = 26;
@@ -603,7 +531,7 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.label12, 3);
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 291);
+            this.label12.Location = new System.Drawing.Point(13, 184);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(166, 15);
             this.label12.TabIndex = 27;
@@ -614,7 +542,7 @@ namespace SEYR
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(13, 399);
+            this.label13.Location = new System.Drawing.Point(13, 292);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 26);
             this.label13.TabIndex = 28;
@@ -625,7 +553,7 @@ namespace SEYR
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(13, 425);
+            this.label14.Location = new System.Drawing.Point(13, 318);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(38, 26);
             this.label14.TabIndex = 29;
@@ -636,7 +564,7 @@ namespace SEYR
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(57, 386);
+            this.label15.Location = new System.Drawing.Point(57, 279);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 30;
@@ -647,7 +575,7 @@ namespace SEYR
             // 
             this.label16.AutoSize = true;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(121, 386);
+            this.label16.Location = new System.Drawing.Point(121, 279);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(58, 13);
             this.label16.TabIndex = 31;
@@ -656,7 +584,7 @@ namespace SEYR
             // 
             // numOriginX
             // 
-            this.numOriginX.Location = new System.Drawing.Point(57, 402);
+            this.numOriginX.Location = new System.Drawing.Point(57, 295);
             this.numOriginX.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -669,7 +597,7 @@ namespace SEYR
             // 
             // numOriginY
             // 
-            this.numOriginY.Location = new System.Drawing.Point(121, 402);
+            this.numOriginY.Location = new System.Drawing.Point(121, 295);
             this.numOriginY.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -682,7 +610,7 @@ namespace SEYR
             // 
             // numSizeX
             // 
-            this.numSizeX.Location = new System.Drawing.Point(57, 428);
+            this.numSizeX.Location = new System.Drawing.Point(57, 321);
             this.numSizeX.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -695,7 +623,7 @@ namespace SEYR
             // 
             // numSizeY
             // 
-            this.numSizeY.Location = new System.Drawing.Point(121, 428);
+            this.numSizeY.Location = new System.Drawing.Point(121, 321);
             this.numSizeY.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -711,7 +639,7 @@ namespace SEYR
             this.label17.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label17, 2);
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(13, 144);
+            this.label17.Location = new System.Drawing.Point(13, 37);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(102, 26);
             this.label17.TabIndex = 36;
@@ -727,7 +655,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numAngle.Location = new System.Drawing.Point(121, 147);
+            this.numAngle.Location = new System.Drawing.Point(121, 40);
             this.numAngle.Maximum = new decimal(new int[] {
             10,
             0,
@@ -743,49 +671,13 @@ namespace SEYR
             this.numAngle.TabIndex = 37;
             this.numAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.tableLayoutPanel.SetColumnSpan(this.label18, 3);
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(13, 631);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(166, 15);
-            this.label18.TabIndex = 38;
-            this.label18.Text = "Follower Pattern";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanelFollower
-            // 
-            this.flowLayoutPanelFollower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanelFollower.AutoSize = true;
-            this.tableLayoutPanel.SetColumnSpan(this.flowLayoutPanelFollower, 3);
-            this.flowLayoutPanelFollower.Controls.Add(this.buttonForgetPattern);
-            this.flowLayoutPanelFollower.Controls.Add(this.btnTrainPattern);
-            this.flowLayoutPanelFollower.Location = new System.Drawing.Point(67, 679);
-            this.flowLayoutPanelFollower.Name = "flowLayoutPanelFollower";
-            this.flowLayoutPanelFollower.Size = new System.Drawing.Size(58, 27);
-            this.flowLayoutPanelFollower.TabIndex = 18;
-            // 
-            // lblFollowerPattern
-            // 
-            this.tableLayoutPanel.SetColumnSpan(this.lblFollowerPattern, 3);
-            this.lblFollowerPattern.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFollowerPattern.Location = new System.Drawing.Point(13, 656);
-            this.lblFollowerPattern.Name = "lblFollowerPattern";
-            this.lblFollowerPattern.Size = new System.Drawing.Size(166, 20);
-            this.lblFollowerPattern.TabIndex = 4;
-            this.lblFollowerPattern.Text = "N/A";
-            this.lblFollowerPattern.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // comboBoxRects
             // 
             this.comboBoxRects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.SetColumnSpan(this.comboBoxRects, 3);
             this.comboBoxRects.DropDownWidth = 150;
             this.comboBoxRects.FormattingEnabled = true;
-            this.comboBoxRects.Location = new System.Drawing.Point(13, 319);
+            this.comboBoxRects.Location = new System.Drawing.Point(13, 212);
             this.comboBoxRects.Name = "comboBoxRects";
             this.comboBoxRects.Size = new System.Drawing.Size(166, 21);
             this.comboBoxRects.TabIndex = 2;
@@ -796,7 +688,7 @@ namespace SEYR
             this.label19.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label19, 2);
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(13, 526);
+            this.label19.Location = new System.Drawing.Point(13, 419);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(102, 26);
             this.label19.TabIndex = 39;
@@ -808,7 +700,7 @@ namespace SEYR
             this.label20.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label20, 2);
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(13, 170);
+            this.label20.Location = new System.Drawing.Point(13, 63);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(102, 26);
             this.label20.TabIndex = 41;
@@ -817,7 +709,7 @@ namespace SEYR
             // 
             // numFilterThreshold
             // 
-            this.numFilterThreshold.Location = new System.Drawing.Point(121, 173);
+            this.numFilterThreshold.Location = new System.Drawing.Point(121, 66);
             this.numFilterThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -828,74 +720,117 @@ namespace SEYR
             this.numFilterThreshold.TabIndex = 42;
             this.numFilterThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnNextImage
-            // 
-            this.btnNextImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextImage.AutoSize = true;
-            this.btnNextImage.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnNextImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNextImage.Location = new System.Drawing.Point(3, 33);
-            this.btnNextImage.Name = "btnNextImage";
-            this.btnNextImage.Size = new System.Drawing.Size(65, 24);
-            this.btnNextImage.TabIndex = 2;
-            this.btnNextImage.Text = "Next Image";
-            this.btnNextImage.UseVisualStyleBackColor = false;
-            this.btnNextImage.Click += new System.EventHandler(this.btnNextImage_Click);
-            // 
-            // btnRunAllImages
-            // 
-            this.btnRunAllImages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRunAllImages.AutoSize = true;
-            this.btnRunAllImages.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRunAllImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunAllImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunAllImages.Location = new System.Drawing.Point(88, 3);
-            this.btnRunAllImages.Name = "btnRunAllImages";
-            this.btnRunAllImages.Size = new System.Drawing.Size(58, 24);
-            this.btnRunAllImages.TabIndex = 2;
-            this.btnRunAllImages.Text = "Run All";
-            this.btnRunAllImages.UseVisualStyleBackColor = false;
-            this.btnRunAllImages.Click += new System.EventHandler(this.btnRunAllImages_Click);
-            // 
             // progressBar
             // 
             this.tableLayoutPanel.SetColumnSpan(this.progressBar, 7);
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(3, 775);
+            this.progressBar.Location = new System.Drawing.Point(3, 509);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(1075, 5);
+            this.progressBar.Size = new System.Drawing.Size(734, 5);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 45;
             // 
-            // flowLayoutPanel3
+            // menuStrip
             // 
-            this.flowLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel.SetColumnSpan(this.flowLayoutPanel3, 3);
-            this.flowLayoutPanel3.Controls.Add(this.btnOpenImageDir);
-            this.flowLayoutPanel3.Controls.Add(this.btnRunAllImages);
-            this.flowLayoutPanel3.Controls.Add(this.btnNextImage);
-            this.flowLayoutPanel3.Controls.Add(this.btnShowViewer);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(21, 46);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(150, 60);
-            this.flowLayoutPanel3.TabIndex = 46;
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.followerPatternToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(740, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip1";
             // 
-            // btnShowViewer
+            // fileToolStripMenuItem
             // 
-            this.btnShowViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowViewer.AutoSize = true;
-            this.btnShowViewer.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowViewer.Location = new System.Drawing.Point(74, 33);
-            this.btnShowViewer.Name = "btnShowViewer";
-            this.btnShowViewer.Size = new System.Drawing.Size(73, 24);
-            this.btnShowViewer.TabIndex = 2;
-            this.btnShowViewer.Text = "Show Viewer";
-            this.btnShowViewer.UseVisualStyleBackColor = false;
-            this.btnShowViewer.Click += new System.EventHandler(this.btnShowViewer_Click);
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.toolStripSeparator,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.printToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // followerPatternToolStripMenuItem
+            // 
+            this.followerPatternToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.followerPatternNameToolStripMenuItem,
+            this.trainToolStripMenuItem,
+            this.forgetToolStripMenuItem});
+            this.followerPatternToolStripMenuItem.Name = "followerPatternToolStripMenuItem";
+            this.followerPatternToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
+            this.followerPatternToolStripMenuItem.Text = "&Follower Pattern";
+            // 
+            // followerPatternNameToolStripMenuItem
+            // 
+            this.followerPatternNameToolStripMenuItem.Name = "followerPatternNameToolStripMenuItem";
+            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.followerPatternNameToolStripMenuItem.Text = "N/A";
+            this.followerPatternNameToolStripMenuItem.Click += new System.EventHandler(this.followerPatternNameToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openImageDirectoryToolStripMenuItem,
+            this.nextImageToolStripMenuItem,
+            this.goBackToolStripMenuItem,
+            this.runAllImagesToolStripMenuItem,
+            this.startOverToolStripMenuItem,
+            this.showViewerToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // showViewerToolStripMenuItem
+            // 
+            this.showViewerToolStripMenuItem.Name = "showViewerToolStripMenuItem";
+            this.showViewerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.showViewerToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.showViewerToolStripMenuItem.Text = "&Show Viewer";
+            this.showViewerToolStripMenuItem.Click += new System.EventHandler(this.showViewerToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
             // 
             // btnRemoveRect
             // 
@@ -953,53 +888,123 @@ namespace SEYR
             this.pictureBox.Image = global::SEYR.Properties.Resources.SEYR;
             this.pictureBox.Location = new System.Drawing.Point(195, 13);
             this.pictureBox.Name = "pictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.pictureBox, 39);
-            this.pictureBox.Size = new System.Drawing.Size(873, 756);
+            this.tableLayoutPanel.SetRowSpan(this.pictureBox, 28);
+            this.pictureBox.Size = new System.Drawing.Size(532, 490);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 16;
             this.pictureBox.TabStop = false;
             // 
-            // buttonForgetPattern
+            // newToolStripMenuItem
             // 
-            this.buttonForgetPattern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonForgetPattern.BackColor = System.Drawing.Color.Transparent;
-            this.buttonForgetPattern.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
-            this.buttonForgetPattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonForgetPattern.FlatAppearance.BorderSize = 0;
-            this.buttonForgetPattern.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.buttonForgetPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonForgetPattern.Location = new System.Drawing.Point(3, 3);
-            this.buttonForgetPattern.Name = "buttonForgetPattern";
-            this.buttonForgetPattern.Size = new System.Drawing.Size(23, 21);
-            this.buttonForgetPattern.TabIndex = 1;
-            this.buttonForgetPattern.UseVisualStyleBackColor = false;
-            this.buttonForgetPattern.Click += new System.EventHandler(this.buttonForgetPattern_Click);
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
-            // btnTrainPattern
+            // openToolStripMenuItem
             // 
-            this.btnTrainPattern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTrainPattern.BackColor = System.Drawing.Color.Transparent;
-            this.btnTrainPattern.BackgroundImage = global::SEYR.Properties.Resources.iconmonstr_school_16_24;
-            this.btnTrainPattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTrainPattern.FlatAppearance.BorderSize = 0;
-            this.btnTrainPattern.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnTrainPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrainPattern.Location = new System.Drawing.Point(32, 3);
-            this.btnTrainPattern.Name = "btnTrainPattern";
-            this.btnTrainPattern.Size = new System.Drawing.Size(23, 21);
-            this.btnTrainPattern.TabIndex = 3;
-            this.btnTrainPattern.UseVisualStyleBackColor = false;
-            this.btnTrainPattern.Click += new System.EventHandler(this.btnTrainPattern_Click);
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
+            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printToolStripMenuItem.Text = "&Print";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            // 
+            // trainToolStripMenuItem
+            // 
+            this.trainToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_school_16_24;
+            this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.trainToolStripMenuItem.Text = "Train";
+            this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
+            // 
+            // forgetToolStripMenuItem
+            // 
+            this.forgetToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
+            this.forgetToolStripMenuItem.Name = "forgetToolStripMenuItem";
+            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.forgetToolStripMenuItem.Text = "Forget";
+            this.forgetToolStripMenuItem.Click += new System.EventHandler(this.forgetToolStripMenuItem_Click);
+            // 
+            // openImageDirectoryToolStripMenuItem
+            // 
+            this.openImageDirectoryToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_shipping_box_7_241;
+            this.openImageDirectoryToolStripMenuItem.Name = "openImageDirectoryToolStripMenuItem";
+            this.openImageDirectoryToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.openImageDirectoryToolStripMenuItem.Text = "Open Image Directory";
+            this.openImageDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openImageDirectoryToolStripMenuItem_Click);
+            // 
+            // nextImageToolStripMenuItem
+            // 
+            this.nextImageToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_28_24;
+            this.nextImageToolStripMenuItem.Name = "nextImageToolStripMenuItem";
+            this.nextImageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.nextImageToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.nextImageToolStripMenuItem.Text = "&Next Image";
+            this.nextImageToolStripMenuItem.Click += new System.EventHandler(this.nextImageToolStripMenuItem_Click);
+            // 
+            // goBackToolStripMenuItem
+            // 
+            this.goBackToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_28_24_2;
+            this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
+            this.goBackToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.goBackToolStripMenuItem.Text = "&Go Back";
+            this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
+            // 
+            // runAllImagesToolStripMenuItem
+            // 
+            this.runAllImagesToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_17_24;
+            this.runAllImagesToolStripMenuItem.Name = "runAllImagesToolStripMenuItem";
+            this.runAllImagesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.runAllImagesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.runAllImagesToolStripMenuItem.Text = "&Run All Images";
+            this.runAllImagesToolStripMenuItem.Click += new System.EventHandler(this.runAllImagesToolStripMenuItem_Click);
+            // 
+            // startOverToolStripMenuItem
+            // 
+            this.startOverToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_17_24_2;
+            this.startOverToolStripMenuItem.Name = "startOverToolStripMenuItem";
+            this.startOverToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.startOverToolStripMenuItem.Text = "Start Over";
+            this.startOverToolStripMenuItem.Click += new System.EventHandler(this.startOverToolStripMenuItem_Click);
             // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1081, 783);
+            this.ClientSize = new System.Drawing.Size(740, 541);
             this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "Composer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SEYR Composer";
@@ -1015,18 +1020,17 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numFailScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPassTol)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFailTol)).EndInit();
-            this.flowLayoutPanelFile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numOriginX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOriginY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSizeX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).EndInit();
-            this.flowLayoutPanelFollower.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numFilterThreshold)).EndInit();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1041,9 +1045,6 @@ namespace SEYR
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFile;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnLoad;
         public System.Windows.Forms.PictureBox pictureBox;
         public System.Windows.Forms.ComboBox comboBoxRects;
         private System.Windows.Forms.Label lblScoreText;
@@ -1059,10 +1060,6 @@ namespace SEYR
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFollower;
-        private System.Windows.Forms.Button btnTrainPattern;
-        private System.Windows.Forms.Button buttonForgetPattern;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnRemoveRect;
         private System.Windows.Forms.Button btnCopyRect;
@@ -1084,13 +1081,29 @@ namespace SEYR
         public System.Windows.Forms.NumericUpDown numAngle;
         public System.Windows.Forms.NumericUpDown numAlignTol;
         public System.Windows.Forms.NumericUpDown numFilterThreshold;
-        public System.Windows.Forms.Label lblFollowerPattern;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button btnOpenImageDir;
-        private System.Windows.Forms.Button btnNextImage;
-        private System.Windows.Forms.Button btnRunAllImages;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Button btnShowViewer;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openImageDirectoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nextImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runAllImagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startOverToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showViewerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem followerPatternToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forgetToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem followerPatternNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem goBackToolStripMenuItem;
     }
 }

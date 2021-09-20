@@ -63,6 +63,46 @@ namespace SEYR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_arrow_17_24 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-arrow-17-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_arrow_17_24_2 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-arrow-17-24_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_arrow_28_24 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-arrow-28-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_arrow_28_24_2 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-arrow-28-24_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconmonstr_checkbox_18_24 {
             get {
                 object obj = ResourceManager.GetObject("iconmonstr-checkbox-18-24", resourceCulture);
@@ -86,6 +126,26 @@ namespace SEYR.Properties {
         internal static System.Drawing.Bitmap iconmonstr_school_16_24 {
             get {
                 object obj = ResourceManager.GetObject("iconmonstr-school-16-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_shipping_box_7_24 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-shipping-box-7-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconmonstr_shipping_box_7_241 {
+            get {
+                object obj = ResourceManager.GetObject("iconmonstr-shipping-box-7-241", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

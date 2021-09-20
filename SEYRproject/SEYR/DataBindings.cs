@@ -25,7 +25,9 @@ namespace SEYR
             composer.numCopyPitchY.DataBindings.Add(new Binding("Value", FileHandler.Grid, "PitchY", false, DataSourceUpdateMode.OnPropertyChanged));
 
             if (!FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
-                composer.lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
+                composer.followerPatternNameToolStripMenuItem.Text = FileHandler.Grid.PatternFeature.Name;
+            else
+                composer.followerPatternNameToolStripMenuItem.Text = @"N\A";
 
             composer.LoadComboBox();
         }

@@ -35,6 +35,57 @@ namespace SEYR
                 RunningAllImages = false;
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileHandler.Viewer.Show();
+            FileHandler.Viewer.BringToFront();
+        }
+
+        #region Core Functions
+
+        public void MakeTiles()
+        {
+            // Each tile contains one of each feature
+            // The top-left tile is index 0,0
+            // The bottom-right tile is index i,j
+            FileHandler.Grid.Tiles.Clear();
+            for (int i = 0; i < FileHandler.Grid.NumberX + 1; i++)
+            {
+                for (int j = 0; j < FileHandler.Grid.NumberY + 1; j++)
+                {
+                    Tile tile = new Tile(i, j);
+                    foreach (Feature feature in FileHandler.Grid.Features)
+                    {
+                        Feature copy = feature.Clone();
+
+                        copy.Rectangle = new Rectangle(
+                            (int)(feature.Rectangle.X + i * FileHandler.Grid.PitchX),
+                            (int)(feature.Rectangle.Y + j * FileHandler.Grid.PitchY),
+                            feature.Rectangle.Width, feature.Rectangle.Height);
+
+                        copy.Index = new Point(i, j);
+
+                        tile.Features.Add(copy);
+                    }
+                    FileHandler.Grid.Tiles.Add(tile);
+                }
+            }
+
+            foreach (Tile tile in FileHandler.Grid.Tiles)
+                tile.Score(FileHandler.ImageIdx);
+            Picasso.ReDraw(this);
+        }
+
         public async Task LoadNewImage(Bitmap img, bool setup = false)
         {
             if (FileHandler.ImageDirectoryPath == string.Empty || setup)
@@ -97,6 +148,10 @@ namespace SEYR
             }
         }
 
+        #endregion 
+
+        #region PictureBox Bindings
+
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -136,36 +191,18 @@ namespace SEYR
             Picasso.Paint(this, e.Location);
         }
 
-        private async void btnLoad_Click(object sender, EventArgs e)
-        {
-            string pathBuffer = FileHandler.LoadFile();
-            if (pathBuffer == null)
-                return;
-            else
-                FileHandler.FilePath = pathBuffer;
-            FileHandler.ReadParametersFromBinaryFile();
-            LoadGrid(this);
-            await LoadNewImage(Imaging.OriginalImage, true);
-        }
+        #endregion
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            string pathBuffer = FileHandler.SaveFile();
-            if (pathBuffer == null)
-                return;
-            else
-                FileHandler.FilePath = pathBuffer;
-            FileHandler.WriteParametersToBinaryFile();
-        }
+        #region Feature Management
 
         public void LoadComboBox()
         {
             ComboBoxOverride = true; // Not a user index change
             comboBoxRects.BeginUpdate(); // Makes GUI look cleaner
-            
+
             comboBoxRects.Text = "";
 
-             // Update data source
+            // Update data source
             BindingSource bindingSource = new BindingSource() { DataSource = FileHandler.Grid.Features };
             comboBoxRects.DataSource = bindingSource;
             comboBoxRects.DisplayMember = "Name";
@@ -177,39 +214,6 @@ namespace SEYR
 
             comboBoxRects.EndUpdate();
             ComboBoxOverride = false;
-        }
-
-        public void MakeTiles()
-        {
-            // Each tile contains one of each feature
-            // The top-left tile is index 0,0
-            // The bottom-right tile is index i,j
-            FileHandler.Grid.Tiles.Clear();
-            for (int i = 0; i < FileHandler.Grid.NumberX + 1; i++)
-            {
-                for (int j = 0; j < FileHandler.Grid.NumberY + 1; j++)
-                {
-                    Tile tile = new Tile(i ,j);
-                    foreach (Feature feature in FileHandler.Grid.Features)
-                    {
-                        Feature copy = feature.Clone();
-
-                        copy.Rectangle = new Rectangle(
-                            (int)(feature.Rectangle.X + i * FileHandler.Grid.PitchX),
-                            (int)(feature.Rectangle.Y + j * FileHandler.Grid.PitchY),
-                            feature.Rectangle.Width, feature.Rectangle.Height);
-
-                        copy.Index = new Point(i, j);
-
-                        tile.Features.Add(copy);
-                    }
-                    FileHandler.Grid.Tiles.Add(tile);
-                }
-            }
-
-            foreach (Tile tile in FileHandler.Grid.Tiles)
-                tile.Score(FileHandler.ImageIdx);
-            Picasso.ReDraw(this);
         }
 
         private void comboBoxRects_SelectedIndexChanged(object sender, EventArgs e)
@@ -270,12 +274,9 @@ namespace SEYR
             }
         }
 
-        private void btnTrainPattern_Click(object sender, EventArgs e)
-        {
-            if (comboBoxRects.SelectedIndex == -1) return;
-            FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
-            LoadFollowerPattern();
-        }
+        #endregion
+
+        #region Follower Pattern
 
         private void LoadFollowerPattern()
         {
@@ -288,18 +289,51 @@ namespace SEYR
             Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
             target = filter.Apply(target);
             FileHandler.Grid.PatternBitmap = target;
-            lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
+            followerPatternNameToolStripMenuItem.Text = FileHandler.Grid.PatternFeature.Name;
             Picasso.ReDraw(this);
         }
 
-        private void buttonForgetPattern_Click(object sender, EventArgs e)
+        private void trainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (comboBoxRects.SelectedIndex == -1) return;
+            FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
+            LoadFollowerPattern();
+        }
+
+        private void forgetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.PatternFeature = new Feature(Rectangle.Empty);
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
-            lblFollowerPattern.Text = "N/A";
+            followerPatternNameToolStripMenuItem.Text = "N/A";
             Picasso.Offset = Point.Empty;
             Picasso.ReDraw(this);
         }
+
+        private void followerPatternNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FileHandler.Grid.PatternFeature.Rectangle.IsEmpty) return;
+
+            Form form = new Form()
+            {
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                Text = FileHandler.Grid.PatternFeature.Name,
+                Icon = this.Icon
+            };
+
+            PictureBox pictureBox = new PictureBox()
+            {
+                Image = FileHandler.Grid.PatternBitmap,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Dock = DockStyle.Fill
+            };
+
+            form.Controls.Add(pictureBox);
+            form.Show();
+        }
+
+        #endregion
+
+        #region Alignment
 
         private void btnTrainAlignment_Click(object sender, EventArgs e)
         {
@@ -325,7 +359,21 @@ namespace SEYR
                 btnTrainAlignment.BackColor = Color.Transparent;
         }
 
-        private void btnOpenImageDir_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Image Loading
+
+        private async Task<bool> LoadNewImageFromDir()
+        {
+            if (Application.UseWaitCursor == true) return false;
+            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length - 1)
+                return false;
+            Bitmap bitmap = new Bitmap(FileHandler.Images[FileHandler.ImageIdx]);
+            await LoadNewImage((Bitmap)bitmap.Clone());
+            return true;
+        }
+
+        private void openImageDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.OpenDirectory("Select a directory containing target images");
             if (pathBuffer == null)
@@ -336,12 +384,12 @@ namespace SEYR
             progressBar.Maximum = FileHandler.Images.Length;
         }
 
-        private async void btnNextImage_Click(object sender, EventArgs e)
+        private async void nextImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await LoadNewImageFromDir();
         }
 
-        private async void btnRunAllImages_Click(object sender, EventArgs e)
+        private async void runAllImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RunningAllImages = true;
             Text = "SEYR Composer          Press ESC to cancel Run All";
@@ -354,19 +402,57 @@ namespace SEYR
             Text = "SEYR Composer";
         }
 
-        private async Task<bool> LoadNewImageFromDir()
+        private async void startOverToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length - 1)
-                return false;
-            Bitmap bitmap = new Bitmap(FileHandler.Images[FileHandler.ImageIdx]);
-            await LoadNewImage((Bitmap)bitmap.Clone());
-            return true;
+            FileHandler.ImageIdx = 0;
+            await LoadNewImageFromDir();
         }
 
-        private void btnShowViewer_Click(object sender, EventArgs e)
+        private async void goBackToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileHandler.Viewer.Show();
-            FileHandler.Viewer.BringToFront();
+            FileHandler.ImageIdx -= 2;
+            if (FileHandler.ImageIdx < 0) FileHandler.ImageIdx = 0;
+            await LoadNewImageFromDir();
         }
+
+        #endregion
+
+        #region File Management
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileHandler.FilePath = string.Empty;
+            FileHandler.Grid = new Grid();
+        }
+
+        private async void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathBuffer = FileHandler.LoadFile();
+            if (pathBuffer == null)
+                return;
+            else
+                FileHandler.FilePath = pathBuffer;
+            FileHandler.ReadParametersFromBinaryFile();
+            LoadGrid(this);
+            await LoadNewImage(Imaging.OriginalImage, true);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FileHandler.FilePath != string.Empty)
+                FileHandler.WriteParametersToBinaryFile();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathBuffer = FileHandler.SaveFile();
+            if (pathBuffer == null)
+                return;
+            else
+                FileHandler.FilePath = pathBuffer;
+            FileHandler.WriteParametersToBinaryFile();
+        }
+
+        #endregion  
     }
 }
