@@ -265,7 +265,12 @@ namespace SEYR
             if (Application.UseWaitCursor == true) return false;
             if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length)
                 return false;
-            Bitmap bitmap = new Bitmap(FileHandler.Images[FileHandler.ImageIdx]);
+            string path = FileHandler.Images[FileHandler.ImageIdx];
+            string[] sub = path.Split('\\').Last().Substring(1).Split('_');
+            int R = int.Parse(sub[0].Replace("R",""));
+            int C = int.Parse(sub[1].Replace("C", "").Replace(".png",""));
+            Bitmap bitmap = new Bitmap(path);
+            InformationString = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", R, C, 0, 0, -1, -1);
             await LoadNewImage((Bitmap)bitmap.Clone());
             return true;
         }
