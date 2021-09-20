@@ -9,6 +9,8 @@ namespace SEYR
 {
     public static class Pipeline
     {
+        public static string InformationString = string.Empty;
+
         public static PictureBox PBX = new PictureBox()
         {
             BackgroundImage = Resources.SEYR,
