@@ -18,6 +18,19 @@ namespace SEYR
             SizeMode = PictureBoxSizeMode.Zoom
         };
 
+        public static Composer Composer;
+
+        public static void Initialize()
+        {
+            Composer = new Composer();
+        }
+
+        public static void ShowViewer()
+        {
+            FileHandler.Viewer.Show();
+            FileHandler.Viewer.BringToFront();
+        }
+
         #region Core Functions
 
         public static void MakeTiles()
@@ -118,6 +131,7 @@ namespace SEYR
 
                 MakeTiles();
                 FileHandler.Viewer.InsertNewImage(PBX);
+                Composer.progressBar.Invoke((MethodInvoker)delegate () { Composer.progressBar.Value = FileHandler.ImageIdx; });
             }
         }
 

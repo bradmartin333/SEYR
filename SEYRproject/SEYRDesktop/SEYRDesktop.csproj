@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CFAE7C1D-DC99-473A-97AC-11FEA9D5236A}</ProjectGuid>
+    <ProjectGuid>{62273E82-68B7-41DB-9AF8-6BE8464C1D0B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>SEYRDesktop</RootNamespace>
     <AssemblyName>SEYRDesktop</AssemblyName>

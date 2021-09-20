@@ -19,17 +19,15 @@ namespace SEYR
         public Composer()
         {
             InitializeComponent();
-            KeyDown += Composer_KeyDown;
-
             panel.Controls.Add(PBX);
             
             // Init mouse and keyboard handlers
             PBX.MouseDown += PictureBox_MouseDown;
             PBX.MouseUp += PictureBox_MouseUp;
             PBX.MouseMove += PictureBox_MouseMove;
+            KeyDown += Composer_KeyDown;
             comboBoxRects.KeyDown += ComboBoxRects_KeyDown;
 
-            FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
             LoadGrid(this);
         }
 
@@ -46,8 +44,7 @@ namespace SEYR
 
         private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileHandler.Viewer.Show();
-            FileHandler.Viewer.BringToFront();
+            ShowViewer();
         }
 
         #region PictureBox Bindings
