@@ -8,6 +8,7 @@ namespace SEYR
     static class Picasso
     {
         public static Size IncomingSize = new Size(1, 1);
+        public static Size ThisSize = new Size(1, 1);
         public static double BaseHeight = 600; // Defines scaling dimension of incoming images
         public static Point Offset { get; set; } // XY Offset of Current Image
 
@@ -41,6 +42,7 @@ namespace SEYR
         /// <param name="BeginOrCancel"></param>
         public static async void Click(Composer composer, Point location, bool BeginOrCancel)
         {
+            if (FileHandler.ImageDirectoryPath == string.Empty) return;
             Point pos = ZoomMousePos(composer, location);
             if (BeginOrCancel)
             {
@@ -63,7 +65,8 @@ namespace SEYR
                 {
                     FileHandler.Grid.Features.Add(feature);
                     FileHandler.Grid.ActiveFeature = feature;
-                    await composer.MakeTiles();
+                    composer.LoadComboBox();
+                    composer.MakeTiles();
                 }
                 else
                 {
@@ -84,8 +87,9 @@ namespace SEYR
         {
             // Scale incoming image and set blank foreground
             double heightRatio = BaseHeight / IncomingSize.Height;
-            Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)Picasso.BaseHeight);
+            Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)BaseHeight);
             composer.pictureBox.Image = resize;
+            ThisSize = resize.Size;
         }
 
         /// <summary>
@@ -99,7 +103,7 @@ namespace SEYR
         {
             if (Clicked || force)
             {
-                Bitmap bitmap = new Bitmap(composer.pictureBox.BackgroundImage.Width, composer.pictureBox.BackgroundImage.Height);
+                Bitmap bitmap = new Bitmap(ThisSize.Width, ThisSize.Height);
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     DrawTiles(g);
@@ -119,14 +123,15 @@ namespace SEYR
         /// ReDraw all rectangles with no relevant mouse position
         /// </summary>
         /// <param name="composer"></param>
-        public static async Task ReDraw(Composer composer)
+        public static void ReDraw(Composer composer)
         {
-            Bitmap bitmap = new Bitmap(composer.pictureBox.BackgroundImage.Width, composer.pictureBox.BackgroundImage.Height);
+            Bitmap bitmap = new Bitmap(ThisSize.Width, ThisSize.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-                await Task.Run(() => DrawTiles(g));
+                DrawTiles(g);
             };
             composer.pictureBox.Image = bitmap;
+            Application.DoEvents();
         }
 
         private static void DrawTiles(Graphics g)

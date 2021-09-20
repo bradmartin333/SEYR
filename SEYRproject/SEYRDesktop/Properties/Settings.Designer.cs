@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OutsideProgram.Properties
+namespace SEYRDesktop.Properties
 {
 
 

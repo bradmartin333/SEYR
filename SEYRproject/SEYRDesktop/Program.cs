@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OutsideProgram
+namespace SEYRDesktop
 {
     internal static class Program
     {
@@ -16,7 +13,7 @@ namespace OutsideProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageLoader(new SEYR.Composer()));
+            Application.Run(new SEYR.Composer());
         }
     }
 }

@@ -11,13 +11,13 @@ namespace SEYR
 {
     public partial class Composer : Form
     {
-        public int PatternFollowInterval = 1;
-        private int ImageIdx = -1;
         private bool ComboBoxOverride = false; // Allows for ComboBox refresh without losing selection
+        private bool RunningAllImages = false;
 
         public Composer()
         {
             InitializeComponent();
+            KeyDown += Composer_KeyDown;
             
             // Init mouse and keyboard handlers
             pictureBox.MouseDown += PictureBox_MouseDown;
@@ -27,14 +27,27 @@ namespace SEYR
 
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
             LoadGrid(this);
-            Show();
         }
 
-        public async Task LoadNewImage(Bitmap img)
+        private void Composer_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape && RunningAllImages)
+                RunningAllImages = false;
+        }
+
+        public async Task LoadNewImage(Bitmap img, bool setup = false)
+        {
+            if (FileHandler.ImageDirectoryPath == string.Empty || setup)
+            {
+                Imaging.OriginalImage = (Bitmap)pictureBox.Image;
+                Imaging.DisplayedImage = (Bitmap)pictureBox.Image;
+                Imaging.CurrentImage = (Bitmap)pictureBox.Image;
+                return;
+            }
+
             using (var wc = new WaitCursor())
             {
-                ImageIdx++;
+                FileHandler.ImageIdx++;
                 Picasso.IncomingSize = img.Size;
                 Picasso.ClearGraphics(this);
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
@@ -65,21 +78,22 @@ namespace SEYR
 
                 Imaging.CurrentImage = working; // Save edited photo
 
-                if (ImageIdx % PatternFollowInterval == 0)
+                if (FileHandler.ImageIdx % FileHandler.PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
+                {
+                    Bitmap clone = (Bitmap)Imaging.CurrentImage.Clone();
                     for (int i = 0; i < 3; i++)
                     {
-                        bool foundPattern = await Imaging.FollowPattern();
+                        bool foundPattern = await Imaging.FollowPattern(clone);
                         if (foundPattern)
                         {
                             break;
                         }
                     }
+                }
 
-                //DocumentSkewChecker skewChecker = new DocumentSkewChecker();
-                //double angle = skewChecker.GetSkewAngle(working);
-                //Debug.WriteLine(angle);
-
-                await MakeTiles();
+                MakeTiles();
+                progressBar.Invoke((MethodInvoker)delegate () { progressBar.PerformStep(); });
+                FileHandler.Viewer.InsertNewImage(pictureBox);
             }
         }
 
@@ -131,7 +145,7 @@ namespace SEYR
                 FileHandler.FilePath = pathBuffer;
             FileHandler.ReadParametersFromBinaryFile();
             LoadGrid(this);
-            await LoadNewImage(Imaging.OriginalImage);
+            await LoadNewImage(Imaging.OriginalImage, true);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -144,7 +158,7 @@ namespace SEYR
             FileHandler.WriteParametersToBinaryFile();
         }
 
-        public async Task LoadComboBox()
+        public void LoadComboBox()
         {
             ComboBoxOverride = true; // Not a user index change
             comboBoxRects.BeginUpdate(); // Makes GUI look cleaner
@@ -161,13 +175,11 @@ namespace SEYR
             int activeIdx = FileHandler.Grid.Features.FindIndex(x => x.Equals(FileHandler.Grid.ActiveFeature));
             if (activeIdx != -1) comboBoxRects.SelectedIndex = activeIdx;
 
-            await MakeTiles();
-
             comboBoxRects.EndUpdate();
             ComboBoxOverride = false;
         }
 
-        public async Task MakeTiles()
+        public void MakeTiles()
         {
             // Each tile contains one of each feature
             // The top-left tile is index 0,0
@@ -196,8 +208,8 @@ namespace SEYR
             }
 
             foreach (Tile tile in FileHandler.Grid.Tiles)
-                tile.Score(ImageIdx);
-            await Picasso.ReDraw(this);
+                tile.Score(FileHandler.ImageIdx);
+            Picasso.ReDraw(this);
         }
 
         private void comboBoxRects_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,14 +225,15 @@ namespace SEYR
             DisplayAlignmentStatus();
         }
 
-        private async void btnRemoveRect_Click(object sender, EventArgs e)
+        private void btnRemoveRect_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.Features.Remove(FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature)));
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
-            await LoadComboBox();
+            LoadComboBox();
+            MakeTiles();
         }
 
-        private async void btnCopyRect_Click(object sender, EventArgs e)
+        private void btnCopyRect_Click(object sender, EventArgs e)
         {
             Feature feature = FileHandler.Grid.ActiveFeature.Clone(userClone: true);
             while (FileHandler.Grid.Features.FindAll(x => x.Name == feature.Name).Count > 0)
@@ -229,10 +242,11 @@ namespace SEYR
             }
             FileHandler.Grid.Features.Add(feature);
             FileHandler.Grid.ActiveFeature = feature;
-            await LoadComboBox();
+            LoadComboBox();
+            MakeTiles();
         }
 
-        private async void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
+        private void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
         {
             if (FileHandler.Grid.Features.Count == 0) return;
 
@@ -252,7 +266,7 @@ namespace SEYR
                 Feature updateFeature = FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature));
                 updateFeature.Name = comboBoxRects.Text;
                 FileHandler.Grid.ActiveFeature = updateFeature;
-                await LoadComboBox();
+                LoadComboBox();
             }
         }
 
@@ -263,7 +277,7 @@ namespace SEYR
             LoadFollowerPattern();
         }
 
-        private async void LoadFollowerPattern()
+        private void LoadFollowerPattern()
         {
             Rectangle cropRect = FileHandler.Grid.PatternFeature.Rectangle;
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
@@ -275,17 +289,16 @@ namespace SEYR
             target = filter.Apply(target);
             FileHandler.Grid.PatternBitmap = target;
             lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
-            await Imaging.FollowPattern();
-            await Picasso.ReDraw(this);
+            Picasso.ReDraw(this);
         }
 
-        private async void buttonForgetPattern_Click(object sender, EventArgs e)
+        private void buttonForgetPattern_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.PatternFeature = new Feature(Rectangle.Empty);
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
             lblFollowerPattern.Text = "N/A";
             Picasso.Offset = Point.Empty;
-            await Picasso.ReDraw(this);
+            Picasso.ReDraw(this);
         }
 
         private void btnTrainAlignment_Click(object sender, EventArgs e)
@@ -310,6 +323,50 @@ namespace SEYR
                 btnTrainAlignment.BackColor = Color.LawnGreen;
             else
                 btnTrainAlignment.BackColor = Color.Transparent;
+        }
+
+        private void btnOpenImageDir_Click(object sender, EventArgs e)
+        {
+            string pathBuffer = FileHandler.OpenDirectory("Select a directory containing target images");
+            if (pathBuffer == null)
+                return;
+            else
+                FileHandler.ImageDirectoryPath = pathBuffer;
+            progressBar.Value = 0;
+            progressBar.Maximum = FileHandler.Images.Length;
+        }
+
+        private async void btnNextImage_Click(object sender, EventArgs e)
+        {
+            await LoadNewImageFromDir();
+        }
+
+        private async void btnRunAllImages_Click(object sender, EventArgs e)
+        {
+            RunningAllImages = true;
+            Text = "SEYR Composer          Press ESC to cancel Run All";
+            while (true)
+            {
+                Application.DoEvents();
+                bool result = await LoadNewImageFromDir();
+                if (!result || !RunningAllImages) break;
+            }
+            Text = "SEYR Composer";
+        }
+
+        private async Task<bool> LoadNewImageFromDir()
+        {
+            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length - 1)
+                return false;
+            Bitmap bitmap = new Bitmap(FileHandler.Images[FileHandler.ImageIdx]);
+            await LoadNewImage((Bitmap)bitmap.Clone());
+            return true;
+        }
+
+        private void btnShowViewer_Click(object sender, EventArgs e)
+        {
+            FileHandler.Viewer.Show();
+            FileHandler.Viewer.BringToFront();
         }
     }
 }

@@ -24,8 +24,8 @@ namespace GridImages
                 for (int j = 0; j < 10; j++)
                 {
                     Bitmap bmp = new Bitmap(1100, 1100);
-                    int deltaX = random.Next(3);
-                    int deltaY = random.Next(3);
+                    int deltaX = random.Next(10);
+                    int deltaY = random.Next(10);
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
                         for (int k = 0; k < 10; k++)

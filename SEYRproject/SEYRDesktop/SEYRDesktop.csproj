@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2599E8C6-5325-4CA2-94D3-F9ACAB56A3B3}</ProjectGuid>
+    <ProjectGuid>{CFAE7C1D-DC99-473A-97AC-11FEA9D5236A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>OutsideProgram</RootNamespace>
-    <AssemblyName>OutsideProgram</AssemblyName>
+    <RootNamespace>SEYRDesktop</RootNamespace>
+    <AssemblyName>SEYRDesktop</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,36 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord">
-      <HintPath>..\SEYR\bin\Debug\net472\Accord.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Imaging">
-      <HintPath>..\SEYR\bin\Debug\net472\Accord.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math">
-      <HintPath>..\SEYR\bin\Debug\net472\Accord.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math.Core">
-      <HintPath>..\SEYR\bin\Debug\net472\Accord.Math.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Statistics">
-      <HintPath>..\SEYR\bin\Debug\net472\Accord.Statistics.dll</HintPath>
-    </Reference>
-    <Reference Include="Aerotech.Common">
-      <HintPath>C:\Program Files (x86)\Aerotech\A3200\Bin\Aerotech.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\SEYR\bin\Debug\net472\MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="NumericComparer">
-      <HintPath>..\SEYR\bin\Debug\net472\NumericComparer.dll</HintPath>
-    </Reference>
-    <Reference Include="SEYR">
-      <HintPath>..\SEYR\bin\Debug\net472\SEYR.dll</HintPath>
-    </Reference>
-    <Reference Include="System">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -75,17 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageLoader.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImageLoader.Designer.cs">
-      <DependentUpon>ImageLoader.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ImageLoader.resx">
-      <DependentUpon>ImageLoader.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -95,9 +57,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SEYR\SEYR.csproj">
+      <Project>{8f128031-e3e6-42cd-8a9e-33acfd4e8476}</Project>
+      <Name>SEYR</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

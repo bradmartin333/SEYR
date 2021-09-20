@@ -27,9 +27,7 @@ namespace SEYR
             if (!FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
                 composer.lblFollowerPattern.Text = FileHandler.Grid.PatternFeature.Name;
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             composer.LoadComboBox();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         public static void LoadFeature(Composer composer)
@@ -60,6 +58,8 @@ namespace SEYR
 
             composer.numAlignTol.DataBindings.Clear();
             composer.numAlignTol.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "AlignTol", false, DataSourceUpdateMode.OnPropertyChanged));
+
+            composer.MakeTiles();
         }
     }
 }
