@@ -61,7 +61,7 @@ namespace SEYR
             composer.numAlignTol.DataBindings.Clear();
             composer.numAlignTol.DataBindings.Add(new Binding("Value", FileHandler.Grid.ActiveFeature, "AlignTol", false, DataSourceUpdateMode.OnPropertyChanged));
 
-            composer.MakeTiles();
+            Pipeline.MakeTiles();
         }
     }
 }

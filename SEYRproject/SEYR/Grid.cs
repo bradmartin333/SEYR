@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using static SEYR.DataBindings;
+using static SEYR.Pipeline;
 
 namespace SEYR
 {
@@ -86,11 +87,7 @@ namespace SEYR
             set
             {
                 _Angle = value;
-                if (Application.OpenForms.OfType<Composer>().Any())
-                {
-                    Composer composer = Application.OpenForms.OfType<Composer>().First();
-                    composer.LoadNewImage(Imaging.OriginalImage);
-                }
+                LoadNewImage(Imaging.OriginalImage);
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -104,11 +101,7 @@ namespace SEYR
             set
             {
                 _FilterThreshold = value;
-                if (Application.OpenForms.OfType<Composer>().Any())
-                {
-                    Composer composer = Application.OpenForms.OfType<Composer>().First();
-                    composer.LoadNewImage(Imaging.OriginalImage);
-                }
+                LoadNewImage(Imaging.OriginalImage);
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -123,7 +116,7 @@ namespace SEYR
             set
             {
                 _NumberX = value;
-                if (Application.OpenForms.OfType<Composer>().Any()) Application.OpenForms.OfType<Composer>().First().MakeTiles();
+                MakeTiles();
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -137,7 +130,7 @@ namespace SEYR
             set
             {
                 _NumberY = value;
-                if (Application.OpenForms.OfType<Composer>().Any()) Application.OpenForms.OfType<Composer>().First().MakeTiles();
+                MakeTiles();
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -151,7 +144,7 @@ namespace SEYR
             set
             {
                 _PitchX = value;
-                if (Application.OpenForms.OfType<Composer>().Any()) Application.OpenForms.OfType<Composer>().First().MakeTiles();
+                MakeTiles();
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -165,7 +158,7 @@ namespace SEYR
             set
             {
                 _PitchY = value;
-                if (Application.OpenForms.OfType<Composer>().Any()) Application.OpenForms.OfType<Composer>().First().MakeTiles();
+                MakeTiles();
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }

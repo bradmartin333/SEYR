@@ -1,19 +1,18 @@
 ﻿using Accord.Imaging.Filters;
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SEYR.DataBindings;
+using static SEYR.Pipeline;
 
 namespace SEYR
 {
     public partial class Composer : Form
     {
-        public PictureBox pictureBox = Pipeline.PBX;
         private bool ComboBoxOverride = false; // Allows for ComboBox refresh without losing selection
         private bool RunningAllImages = false;
 
@@ -22,12 +21,12 @@ namespace SEYR
             InitializeComponent();
             KeyDown += Composer_KeyDown;
 
-            panel.Controls.Add(pictureBox);
+            panel.Controls.Add(PBX);
             
             // Init mouse and keyboard handlers
-            pictureBox.MouseDown += PictureBox_MouseDown;
-            pictureBox.MouseUp += PictureBox_MouseUp;
-            pictureBox.MouseMove += PictureBox_MouseMove;
+            PBX.MouseDown += PictureBox_MouseDown;
+            PBX.MouseUp += PictureBox_MouseUp;
+            PBX.MouseMove += PictureBox_MouseMove;
             comboBoxRects.KeyDown += ComboBoxRects_KeyDown;
 
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
@@ -51,112 +50,6 @@ namespace SEYR
             FileHandler.Viewer.BringToFront();
         }
 
-        #region Core Functions
-
-        public void MakeTiles()
-        {
-            if (FileHandler.ImageIdx == 0) return;
-
-            if (FileHandler.ImageIdx > DataHandler.Output.Count)
-                DataHandler.Output.Add(string.Empty);
-            else
-                DataHandler.Output[FileHandler.ImageIdx - 1] = string.Empty;
-
-            // Each tile contains one of each feature
-            // The top-left tile is index 0,0
-            // The bottom-right tile is index i,j
-            FileHandler.Grid.Tiles.Clear();
-            for (int i = 0; i < FileHandler.Grid.NumberX + 1; i++)
-            {
-                for (int j = 0; j < FileHandler.Grid.NumberY + 1; j++)
-                {
-                    Tile tile = new Tile(i, j);
-                    foreach (Feature feature in FileHandler.Grid.Features)
-                    {
-                        Feature copy = feature.Clone();
-
-                        copy.Rectangle = new Rectangle(
-                            (int)(feature.Rectangle.X + i * FileHandler.Grid.PitchX),
-                            (int)(feature.Rectangle.Y + j * FileHandler.Grid.PitchY),
-                            feature.Rectangle.Width, feature.Rectangle.Height);
-
-                        copy.Index = new Point(i, j);
-
-                        tile.Features.Add(copy);
-                    }
-                    FileHandler.Grid.Tiles.Add(tile);
-                }
-            }
-
-            foreach (Tile tile in FileHandler.Grid.Tiles)
-                tile.Score(FileHandler.ImageIdx);
-            Picasso.ReDraw(this);
-        }
-
-        public async Task LoadNewImage(Bitmap img, bool setup = false)
-        {
-            if (FileHandler.ImageDirectoryPath == string.Empty || setup)
-            {
-                Imaging.OriginalImage = (Bitmap)pictureBox.Image;
-                Imaging.DisplayedImage = (Bitmap)pictureBox.Image;
-                Imaging.CurrentImage = (Bitmap)pictureBox.Image;
-                return;
-            }
-
-            using (var wc = new WaitCursor())
-            {
-                FileHandler.ImageIdx++;
-                Picasso.IncomingSize = img.Size;
-                Picasso.ClearGraphics(this);
-                Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
-
-                // Resize incoming image
-                double heightRatio = Picasso.BaseHeight / img.Height;
-                Bitmap resize = new Bitmap((int)(heightRatio * img.Width), (int)Picasso.BaseHeight);
-                using (Graphics g = Graphics.FromImage(resize))
-                {
-                    g.DrawImage(img, 0, 0, resize.Width, resize.Height);
-                }
-                img.Dispose();
-
-                // Clone with necessary pixel format for image filtering
-                Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
-                resize.Dispose();
-
-                working = Imaging.RotateImage(working, (float)FileHandler.Grid.Angle);
-                Imaging.DisplayedImage = working;
-
-                pictureBox.BackgroundImage = working;
-
-                Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
-                working = filter.Apply(working);
-
-                Threshold threshold = new Threshold(FileHandler.Grid.FilterThreshold);
-                threshold.ApplyInPlace(working);
-
-                Imaging.CurrentImage = working; // Save edited photo
-
-                if (FileHandler.ImageIdx % FileHandler.PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
-                {
-                    Bitmap clone = (Bitmap)Imaging.CurrentImage.Clone();
-                    for (int i = 0; i < 3; i++)
-                    {
-                        bool foundPattern = await Imaging.FollowPattern(clone);
-                        if (foundPattern)
-                        {
-                            break;
-                        }
-                    }
-                }
-
-                MakeTiles();
-                progressBar.Invoke((MethodInvoker)delegate () { progressBar.Value = FileHandler.ImageIdx; });
-                FileHandler.Viewer.InsertNewImage(pictureBox);
-            }
-        }
-
-        #endregion 
-
         #region PictureBox Bindings
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -168,7 +61,7 @@ namespace SEYR
                 case MouseButtons.Right:
                     break;
                 case MouseButtons.Middle:
-                    pictureBox.BackgroundImage = Imaging.CurrentImage;
+                    PBX.BackgroundImage = Imaging.CurrentImage;
                     break;
                 default:
                     break;
@@ -186,7 +79,7 @@ namespace SEYR
                     Picasso.Click(this, e.Location, true);
                     break;
                 case MouseButtons.Middle:
-                    pictureBox.BackgroundImage = Imaging.DisplayedImage;
+                    PBX.BackgroundImage = Imaging.DisplayedImage;
                     break;
                 default:
                     break;
@@ -195,7 +88,7 @@ namespace SEYR
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            Picasso.Paint(this, e.Location);
+            Picasso.Paint(e.Location);
         }
 
         #endregion
@@ -297,7 +190,7 @@ namespace SEYR
             target = filter.Apply(target);
             FileHandler.Grid.PatternBitmap = target;
             followerPatternNameToolStripMenuItem.Text = FileHandler.Grid.PatternFeature.Name;
-            Picasso.ReDraw(this);
+            Picasso.ReDraw(PBX);
         }
 
         private void trainToolStripMenuItem_Click(object sender, EventArgs e)
@@ -313,7 +206,7 @@ namespace SEYR
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
             followerPatternNameToolStripMenuItem.Text = "N/A";
             Picasso.Offset = Point.Empty;
-            Picasso.ReDraw(this);
+            Picasso.ReDraw(PBX);
         }
 
         private void followerPatternNameToolStripMenuItem_Click(object sender, EventArgs e)

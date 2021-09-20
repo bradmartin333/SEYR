@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SEYR.Pipeline;
 
 namespace SEYR
 {
@@ -40,37 +40,37 @@ namespace SEYR
         /// <param name="composer"></param>
         /// <param name="location"></param>
         /// <param name="BeginOrCancel"></param>
-        public static async void Click(Composer composer, Point location, bool BeginOrCancel)
+        public static void Click(Composer composer, Point location, bool BeginOrCancel)
         {
             if (FileHandler.ImageDirectoryPath == string.Empty) return;
-            Point pos = ZoomMousePos(composer, location);
+            Point pos = ZoomMousePos(location);
             if (BeginOrCancel)
             {
                 if (Clicked)
                 {
                     Clicked = false;
-                    Paint(composer, Point.Empty, force: true);
+                    Paint(Point.Empty, force: true);
                 }
                 else
                 {
                     StartPoint = pos;
                     Clicked = true;
-                }   
+                }
             }
             else if (Clicked)
             {
                 Feature feature = new Feature(CurrentRect);
                 Clicked = false;
-                if (feature.Valid(composer.pictureBox.Size))
+                if (feature.Valid(PBX.Size))
                 {
                     FileHandler.Grid.Features.Add(feature);
                     FileHandler.Grid.ActiveFeature = feature;
                     composer.LoadComboBox();
-                    composer.MakeTiles();
+                    MakeTiles();
                 }
                 else
                 {
-                    Paint(composer, Point.Empty, force: true);
+                    Paint(Point.Empty, force: true);
                 }
             }
             else
@@ -83,12 +83,12 @@ namespace SEYR
         /// Clear all drawn features
         /// </summary>
         /// <param name="composer"></param>
-        public static void ClearGraphics(Composer composer)
+        public static void ClearGraphics(PictureBox pictureBox)
         {
             // Scale incoming image and set blank foreground
             double heightRatio = BaseHeight / IncomingSize.Height;
             Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)BaseHeight);
-            composer.pictureBox.Image = resize;
+            pictureBox.Image = resize;
             ThisSize = resize.Size;
         }
 
@@ -96,10 +96,9 @@ namespace SEYR
         /// Update on every cursor move
         /// and draw current rect
         /// </summary>
-        /// <param name="composer"></param>
         /// <param name="location"></param>
         /// <param name="force"></param>
-        public static void Paint(Composer composer, Point location, bool force = false)
+        public static void Paint(Point location, bool force = false)
         {
             if (Clicked || force)
             {
@@ -110,11 +109,11 @@ namespace SEYR
 
                     if (!force)
                     {
-                        CurrentRect = RectFromPoints(StartPoint, ZoomMousePos(composer, location));
+                        CurrentRect = RectFromPoints(StartPoint, ZoomMousePos(location));
                         g.DrawRectangle(new Pen(Brushes.HotPink, 2), CurrentRect);
                     }
                 }
-                composer.pictureBox.Image = bitmap;
+                PBX.Image = bitmap;
                 GC.Collect();
             };
         }
@@ -122,15 +121,14 @@ namespace SEYR
         /// <summary>
         /// ReDraw all rectangles with no relevant mouse position
         /// </summary>
-        /// <param name="composer"></param>
-        public static void ReDraw(Composer composer)
+        public static void ReDraw(PictureBox pictureBox)
         {
             Bitmap bitmap = new Bitmap(ThisSize.Width, ThisSize.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 DrawTiles(g);
             };
-            composer.pictureBox.Image = bitmap;
+            pictureBox.Image = bitmap;
             Application.DoEvents();
         }
 
@@ -197,33 +195,31 @@ namespace SEYR
         /// <summary>
         /// Copy paste method for adjusting mouse pos to pictureBox set to Zoom
         /// </summary>
-        /// <param name="composer"></param>
         /// <param name="click"></param>
         /// <returns></returns>
-        private static Point ZoomMousePos(Composer composer, Point click)
+        private static Point ZoomMousePos(Point click)
         {
-            PictureBox pbx = composer.pictureBox;
-            float ImageAspect = pbx.Image.Width / (float)pbx.Image.Height;
-            float controlAspect = pbx.Width / (float)pbx.Height;
+            float ImageAspect = PBX.Image.Width / (float)PBX.Image.Height;
+            float controlAspect = PBX.Width / (float)PBX.Height;
             PointF pos = new PointF(click.X + Offset.X, click.Y + Offset.Y);
             if (ImageAspect > controlAspect)
             {
-                float ratioWidth = pbx.Image.Width / (float)pbx.Width;
+                float ratioWidth = PBX.Image.Width / (float)PBX.Width;
                 pos.X *= ratioWidth;
-                float scale = pbx.Width / (float)pbx.Image.Width;
-                float displayHeight = scale * pbx.Image.Height;
-                float diffHeight = pbx.Height - displayHeight;
+                float scale = PBX.Width / (float)PBX.Image.Width;
+                float displayHeight = scale * PBX.Image.Height;
+                float diffHeight = PBX.Height - displayHeight;
                 diffHeight /= 2;
                 pos.Y -= diffHeight;
                 pos.Y /= scale;
             }
             else
             {
-                float ratioHeight = pbx.Image.Height / (float)pbx.Height;
+                float ratioHeight = PBX.Image.Height / (float)PBX.Height;
                 pos.Y *= ratioHeight;
-                float scale = pbx.Height / (float)pbx.Image.Height;
-                float displayWidth = scale * pbx.Image.Width;
-                float diffWidth = pbx.Width - displayWidth;
+                float scale = PBX.Height / (float)PBX.Image.Height;
+                float displayWidth = scale * PBX.Image.Width;
+                float diffWidth = PBX.Width - displayWidth;
                 diffWidth /= 2;
                 pos.X -= diffWidth;
                 pos.X /= scale;
