@@ -9,7 +9,7 @@ namespace GridImages
         static void Main(string[] args)
         {
             OutputImagesRaw();
-            OutputImagesRC();
+            //OutputImagesRC();
         }
 
         public static void OutputImagesRaw()
@@ -42,11 +42,12 @@ namespace GridImages
                             }
                         }
                     }
-                    ImageConverter converter = new ImageConverter();
-                    ImageMagick.MagickImage magickImage = new ImageMagick.MagickImage((byte[])converter.ConvertTo(bmp, typeof(byte[])));
-                    magickImage.Rotate(2);
+                    bmp.Save(string.Format(@"{0}\raw{1}.png", dir, idx));
+                    //ImageConverter converter = new ImageConverter();
+                    //ImageMagick.MagickImage magickImage = new ImageMagick.MagickImage((byte[])converter.ConvertTo(bmp, typeof(byte[])));
+                    //magickImage.Rotate(2);
                     Console.WriteLine(string.Format("raw{0}\tdX: {1} dY: {2}", idx, deltaX, deltaY));
-                    magickImage.Write(new FileInfo(string.Format(@"{0}\raw{1}.png", dir, idx)));
+                    //magickImage.Write(new FileInfo(string.Format(@"{0}\raw{1}.png", dir, idx)));
                     idx++;
                 }
             }
