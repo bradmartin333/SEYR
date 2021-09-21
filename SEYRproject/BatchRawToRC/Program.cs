@@ -7,7 +7,8 @@ namespace BatchRawToRC
 {
     public class Program
     {
-        
+        public static double BaseHeight = 600; // Defines scaling dimension of incoming images
+
         static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -65,9 +66,21 @@ namespace BatchRawToRC
                     row++;
                     col = 0;
                 }
-                Bitmap bitmap = new Bitmap(images[i]);
-                bitmap.Save(string.Format(@"Output\{0}\_R{1}_C{2}.png", batchNum, row, col));
+                Bitmap img = new Bitmap(images[i]);
+
+                // Resize incoming image
+                double heightRatio = BaseHeight / img.Height;
+                Bitmap resize = new Bitmap((int)(heightRatio * img.Width), (int)BaseHeight);
+                using (Graphics g = Graphics.FromImage(resize))
+                {
+                    g.DrawImage(img, 0, 0, resize.Width, resize.Height);
+                }
+                img.Dispose();
+
+                resize.Save(string.Format(@"Output\{0}\_R{1}_C{2}.png", batchNum, row, col));
                 col++;
+
+                File.Delete(images[i]);
             }
 
             Console.WriteLine("\nConversion Complete\n");
