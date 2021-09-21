@@ -270,7 +270,7 @@ namespace SEYR
             int R = int.Parse(sub[0].Replace("R",""));
             int C = int.Parse(sub[1].Replace("C", "").Replace(".png",""));
             Bitmap bitmap = new Bitmap(path);
-            InformationString = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", R, C, 0, 0, -1, -1);
+            InformationString = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", 0, 0, R, C, -1, -1);
             await LoadNewImage((Bitmap)bitmap.Clone());
             return true;
         }
@@ -358,6 +358,8 @@ namespace SEYR
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine Report", "Text File (*.txt) | *.txt");
+            string pitchEnding = string.Format("_{0}_{1}.txt", 1 / FileHandler.Grid.NumberX, 1 / FileHandler.Grid.NumberY);
+            pathBuffer = pathBuffer.Replace(".txt", pitchEnding);
             if (pathBuffer == null)
                 return;
             else
