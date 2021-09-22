@@ -72,7 +72,7 @@ namespace SEYR
 
             foreach (Tile tile in FileHandler.Grid.Tiles)
                 tile.Score(FileHandler.ImageIdx);
-            Picasso.ReDraw(PBX);
+            Picasso.ReDraw();
         }
 
         public static async Task LoadNewImage(Bitmap img, bool setup = false)
@@ -89,7 +89,7 @@ namespace SEYR
             {
                 FileHandler.ImageIdx++;
                 Picasso.IncomingSize = img.Size;
-                Picasso.ClearGraphics(PBX);
+                Picasso.ClearGraphics();
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
                 // Resize incoming image

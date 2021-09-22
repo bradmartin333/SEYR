@@ -83,12 +83,12 @@ namespace SEYR
         /// Clear all drawn features
         /// </summary>
         /// <param name="composer"></param>
-        public static void ClearGraphics(PictureBox pictureBox)
+        public static void ClearGraphics()
         {
             // Scale incoming image and set blank foreground
             double heightRatio = BaseHeight / IncomingSize.Height;
             Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)BaseHeight);
-            pictureBox.Image = resize;
+            PBX.Image = resize;
             ThisSize = resize.Size;
         }
 
@@ -121,14 +121,14 @@ namespace SEYR
         /// <summary>
         /// ReDraw all rectangles with no relevant mouse position
         /// </summary>
-        public static void ReDraw(PictureBox pictureBox)
+        public static void ReDraw()
         {
             Bitmap bitmap = new Bitmap(ThisSize.Width, ThisSize.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 DrawTiles(g);
             };
-            pictureBox.Image = bitmap;
+            PBX.Image = bitmap;
             Application.DoEvents();
         }
 

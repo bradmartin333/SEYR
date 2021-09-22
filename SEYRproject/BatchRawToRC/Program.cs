@@ -58,6 +58,8 @@ namespace BatchRawToRC
                 if (i % numPerBatch == 0)
                 {
                     batchNum++;
+                    row = 0;
+                    col = 0;
                     Directory.CreateDirectory(string.Format(@"Output\{0}", batchNum));
                     Console.WriteLine(string.Format("Converting Batch {0}", batchNum));
                 }

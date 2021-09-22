@@ -47,6 +47,11 @@ namespace SEYR
             ShowViewer();
         }
 
+        private void deselectFeatureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
+        }
+
         #region PictureBox Bindings
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -187,7 +192,7 @@ namespace SEYR
             target = filter.Apply(target);
             FileHandler.Grid.PatternBitmap = target;
             followerPatternNameToolStripMenuItem.Text = FileHandler.Grid.PatternFeature.Name;
-            Picasso.ReDraw(PBX);
+            Picasso.ReDraw();
         }
 
         private void trainToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,7 +208,7 @@ namespace SEYR
             FileHandler.Grid.PatternBitmap = new Bitmap(1, 1);
             followerPatternNameToolStripMenuItem.Text = "N/A";
             Picasso.Offset = Point.Empty;
-            Picasso.ReDraw(PBX);
+            Picasso.ReDraw();
         }
 
         private void followerPatternNameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -358,7 +363,7 @@ namespace SEYR
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine Report", "Text File (*.txt) | *.txt");
-            string pitchEnding = string.Format("_{0}_{1}.txt", 1 / FileHandler.Grid.NumberX, 1 / FileHandler.Grid.NumberY);
+            string pitchEnding = string.Format("_{0}_{1}.txt", Math.Round(1 / FileHandler.Grid.NumberX, 3), Math.Round(1 / FileHandler.Grid.NumberY, 3));
             pathBuffer = pathBuffer.Replace(".txt", pitchEnding);
             if (pathBuffer == null)
                 return;
@@ -373,6 +378,6 @@ namespace SEYR
             }
         }
 
-        #endregion  
+        #endregion
     }
 }

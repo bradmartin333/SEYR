@@ -17,18 +17,28 @@ namespace SEYR
             }
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
+
         public void InsertNewImage(PictureBox pictureBox)
         {
-            Bitmap bitmap = (Bitmap)pictureBox.BackgroundImage;
-            using (Graphics g = Graphics.FromImage(bitmap))
+            Bitmap background = (Bitmap)pictureBox.BackgroundImage.Clone();
+            Bitmap foreground = (Bitmap)pictureBox.Image.Clone();
+            using (Graphics g = Graphics.FromImage(background))
             {
-                g.DrawImage(pictureBox.Image, 0, 0);
+                g.DrawImage(foreground, 0, 0);
             }
             for (int i = 5; i > 0; i--)
             {
                 PictureBoxes[i].Image = PictureBoxes[i - 1].Image;
             }
-            PictureBoxes[0].Image = bitmap;
+            PictureBoxes[0].Image = background;
         }
     }
 }
