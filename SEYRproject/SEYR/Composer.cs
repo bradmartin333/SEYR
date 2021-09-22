@@ -52,6 +52,11 @@ namespace SEYR
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
         }
 
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(text: "Coming Soon", caption: "SEYR Help");
+        }
+
         #region PictureBox Bindings
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
