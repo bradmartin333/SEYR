@@ -70,7 +70,7 @@ namespace SEYR
                 _FailTol.Equals(feature._FailTol);
         }
 
-        public bool Valid(Size size)
+        public bool Valid()
         {
             Point[] corners = new Point[]
             {
@@ -80,7 +80,7 @@ namespace SEYR
                 new Point(_Rectangle.Right, _Rectangle.Bottom)
             };
 
-            Rectangle pbxRect = new Rectangle(0, 0, size.Width, size.Height);
+            Rectangle pbxRect = new Rectangle(0, 0, Picasso.ThisSize.Width, Picasso.ThisSize.Height);
 
             foreach (Point corner in corners)
             {

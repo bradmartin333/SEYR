@@ -61,7 +61,7 @@ namespace SEYR
             {
                 Feature feature = new Feature(CurrentRect);
                 Clicked = false;
-                if (feature.Valid(PBX.Size))
+                if (feature.Valid())
                 {
                     FileHandler.Grid.Features.Add(feature);
                     FileHandler.Grid.ActiveFeature = feature;

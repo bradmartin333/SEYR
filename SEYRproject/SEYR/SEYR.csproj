@@ -4,10 +4,25 @@
     <TargetFramework>net472</TargetFramework>
 	<UseWindowsForms>true</UseWindowsForms>
 	<ApplicationIcon>SEYR.ico</ApplicationIcon>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Authors>bradmartin333</Authors>
+	<Company>bradmartin333</Company>
+	<Description>Simple Entropy Yield Routine</Description>
+	<PackageProjectUrl></PackageProjectUrl>
+	<PackageIcon>SEYR.png</PackageIcon>
+	<RepositoryUrl>https://github.com/bradmartin333/SEYR</RepositoryUrl>
+	<PackageTags>vision; AOI</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="SEYR.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\SEYR.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
