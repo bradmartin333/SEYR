@@ -2,16 +2,11 @@
 using System.Drawing;
 using System.IO;
 
-namespace GridImages
+namespace GenerateImages
 {
     public class Program
     {
         static void Main(string[] args)
-        {
-            OutputImagesRaw();
-        }
-
-        public static void OutputImagesRaw()
         {
             string dir = "OutputImagesRaw";
             if (Directory.Exists(dir))
