@@ -77,14 +77,6 @@ namespace SEYR
 
         public static async Task LoadNewImage(Bitmap img, bool setup = false)
         {
-            if (FileHandler.ImageDirectoryPath == string.Empty || setup)
-            {
-                Imaging.OriginalImage = (Bitmap)PBX.Image;
-                Imaging.DisplayedImage = (Bitmap)PBX.Image;
-                Imaging.CurrentImage = (Bitmap)PBX.Image;
-                return;
-            }
-
             using (var wc = new WaitCursor())
             {
                 FileHandler.ImageIdx++;

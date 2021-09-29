@@ -92,11 +92,6 @@ namespace SEYR
             this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openImageDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nextImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.goBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runAllImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startOverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deselectFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -917,68 +912,17 @@ namespace SEYR
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openImageDirectoryToolStripMenuItem,
-            this.nextImageToolStripMenuItem,
-            this.goBackToolStripMenuItem,
-            this.runAllImagesToolStripMenuItem,
-            this.startOverToolStripMenuItem,
             this.showViewerToolStripMenuItem,
             this.deselectFeatureToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
-            // openImageDirectoryToolStripMenuItem
-            // 
-            this.openImageDirectoryToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_shipping_box_7_241;
-            this.openImageDirectoryToolStripMenuItem.Name = "openImageDirectoryToolStripMenuItem";
-            this.openImageDirectoryToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.openImageDirectoryToolStripMenuItem.Text = "Open Image Directory";
-            this.openImageDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openImageDirectoryToolStripMenuItem_Click);
-            // 
-            // nextImageToolStripMenuItem
-            // 
-            this.nextImageToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_28_24;
-            this.nextImageToolStripMenuItem.Name = "nextImageToolStripMenuItem";
-            this.nextImageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.nextImageToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.nextImageToolStripMenuItem.Text = "&Next Image";
-            this.nextImageToolStripMenuItem.Click += new System.EventHandler(this.nextImageToolStripMenuItem_Click);
-            // 
-            // goBackToolStripMenuItem
-            // 
-            this.goBackToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_28_24_2;
-            this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
-            this.goBackToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.goBackToolStripMenuItem.Text = "&Go Back";
-            this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
-            // 
-            // runAllImagesToolStripMenuItem
-            // 
-            this.runAllImagesToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_17_24;
-            this.runAllImagesToolStripMenuItem.Name = "runAllImagesToolStripMenuItem";
-            this.runAllImagesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.R)));
-            this.runAllImagesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.runAllImagesToolStripMenuItem.Text = "&Run All Images";
-            this.runAllImagesToolStripMenuItem.Click += new System.EventHandler(this.runAllImagesToolStripMenuItem_Click);
-            // 
-            // startOverToolStripMenuItem
-            // 
-            this.startOverToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_arrow_17_24_2;
-            this.startOverToolStripMenuItem.Name = "startOverToolStripMenuItem";
-            this.startOverToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.E)));
-            this.startOverToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.startOverToolStripMenuItem.Text = "Start Over";
-            this.startOverToolStripMenuItem.Click += new System.EventHandler(this.startOverToolStripMenuItem_Click);
-            // 
             // showViewerToolStripMenuItem
             // 
             this.showViewerToolStripMenuItem.Name = "showViewerToolStripMenuItem";
             this.showViewerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.showViewerToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.showViewerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.showViewerToolStripMenuItem.Text = "&Show Viewer";
             this.showViewerToolStripMenuItem.Click += new System.EventHandler(this.showViewerToolStripMenuItem_Click);
             // 
@@ -986,7 +930,7 @@ namespace SEYR
             // 
             this.deselectFeatureToolStripMenuItem.Name = "deselectFeatureToolStripMenuItem";
             this.deselectFeatureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deselectFeatureToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.deselectFeatureToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.deselectFeatureToolStripMenuItem.Text = "&Deselect Feature";
             this.deselectFeatureToolStripMenuItem.Click += new System.EventHandler(this.deselectFeatureToolStripMenuItem_Click);
             // 
@@ -1094,17 +1038,12 @@ namespace SEYR
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openImageDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nextImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runAllImagesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startOverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem followerPatternToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem forgetToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem followerPatternNameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem goBackToolStripMenuItem;
         private System.Windows.Forms.Panel panel;
         public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ToolStripMenuItem deselectFeatureToolStripMenuItem;

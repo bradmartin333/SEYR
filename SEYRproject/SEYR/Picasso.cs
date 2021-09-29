@@ -42,7 +42,6 @@ namespace SEYR
         /// <param name="BeginOrCancel"></param>
         public static void Click(Composer composer, Point location, bool BeginOrCancel)
         {
-            if (FileHandler.ImageDirectoryPath == string.Empty) return;
             Point pos = ZoomMousePos(location);
             if (BeginOrCancel)
             {

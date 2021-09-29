@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYRDesktop
 {
-    public static class Program
+    internal static class Program
     {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
-            SEYR.Pipeline.Initialize();
-            Application.Run(SEYR.Pipeline.Composer);
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FormMain());
         }
     }
 }

@@ -12,6 +12,7 @@
 	<PackageIcon>SEYR.png</PackageIcon>
 	<RepositoryUrl>https://github.com/bradmartin333/SEYR</RepositoryUrl>
 	<PackageTags>vision; AOI</PackageTags>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,9 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="NumericComparer">
-      <HintPath>bin\Debug\net472\NumericComparer.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>bin\Debug\net472\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -68,6 +66,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\delta\.nuget\packages\accord\3.8.0\build\Accord.dll.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\delta\.nuget\packages\accord\3.8.0\build\Accord.dll.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\delta\.nuget\packages\accord\3.8.0\build\Accord.dll.config" />
   </ItemGroup>
 
 </Project>

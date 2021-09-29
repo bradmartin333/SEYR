@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SEYR.DataBindings;
 using static SEYR.Pipeline;
@@ -29,6 +28,15 @@ namespace SEYR
             comboBoxRects.KeyDown += ComboBoxRects_KeyDown;
 
             LoadGrid(this);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
 
         private void Composer_KeyDown(object sender, KeyEventArgs e)
@@ -264,67 +272,6 @@ namespace SEYR
                 btnTrainAlignment.BackColor = Color.LawnGreen;
             else
                 btnTrainAlignment.BackColor = Color.Transparent;
-        }
-
-        #endregion
-
-        #region Image Loading
-
-        private async Task<bool> LoadNewImageFromDir()
-        {
-            if (Application.UseWaitCursor == true) return false;
-            if (FileHandler.ImageDirectoryPath == string.Empty || FileHandler.ImageIdx == FileHandler.Images.Length)
-                return false;
-            string path = FileHandler.Images[FileHandler.ImageIdx];
-            string[] sub = path.Split('\\').Last().Substring(1).Split('_');
-            int R = int.Parse(sub[0].Replace("R",""));
-            int C = int.Parse(sub[1].Replace("C", "").Replace(".png",""));
-            Bitmap bitmap = new Bitmap(path);
-            InformationString = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", 0, 0, R, C, -1, -1);
-            await LoadNewImage((Bitmap)bitmap.Clone());
-            return true;
-        }
-
-        private void openImageDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string pathBuffer = FileHandler.OpenDirectory("Select a directory containing target images");
-            if (pathBuffer == null)
-                return;
-            else
-                FileHandler.ImageDirectoryPath = pathBuffer;
-            progressBar.Value = 0;
-            progressBar.Maximum = FileHandler.Images.Length;
-        }
-
-        private async void nextImageToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            await LoadNewImageFromDir();
-        }
-
-        private async void runAllImagesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RunningAllImages = true;
-            Text = "SEYR Composer          Press ESC to cancel Run All";
-            while (true)
-            {
-                Application.DoEvents();
-                bool result = await LoadNewImageFromDir();
-                if (!result || !RunningAllImages) break;
-            }
-            Text = "SEYR Composer";
-        }
-
-        private async void startOverToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FileHandler.ImageIdx = 0;
-            await LoadNewImageFromDir();
-        }
-
-        private async void goBackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FileHandler.ImageIdx -= 2;
-            if (FileHandler.ImageIdx < 0) FileHandler.ImageIdx = 0;
-            await LoadNewImageFromDir();
         }
 
         #endregion

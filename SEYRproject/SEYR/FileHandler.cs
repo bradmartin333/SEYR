@@ -15,25 +15,6 @@ namespace SEYR
         public static string[] Images { get; set; }
         public static int PatternFollowInterval { get; set; } = 1;
 
-        private static string _ImageDirectoryPath = string.Empty;
-        public static string ImageDirectoryPath
-        {
-            get { return _ImageDirectoryPath; }
-            set
-            {
-                _ImageDirectoryPath = value;
-                string[] buffer = GetImagesFrom(_ImageDirectoryPath);
-                if (buffer.Length == 0)
-                {
-                    MessageBox.Show("Invalid Directory Contents");
-                    return;
-                }
-                DataHandler.Output = new List<string>();
-                ImageIdx = 0;
-                Images = buffer;
-            }
-        }
-
         public static string LoadFile()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -88,21 +69,6 @@ namespace SEYR
                     return folderBrowserDialog.SelectedPath;
             }
             return null;
-        }
-
-        private static string[] GetImagesFrom(string searchFolder)
-        {
-            List<string> filesFound = new List<string>();
-            SearchOption searchOption = SearchOption.AllDirectories;
-            string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
-            foreach (var filter in filters)
-            {
-                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), searchOption));
-            }
-            string[] fileArr = filesFound.ToArray();
-            NumericComparer ns = new NumericComparer();
-            Array.Sort(fileArr, ns);
-            return fileArr;
         }
     }
 }
