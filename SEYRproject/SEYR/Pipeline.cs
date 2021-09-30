@@ -75,7 +75,7 @@ namespace SEYR
             Picasso.ReDraw();
         }
 
-        public static async Task LoadNewImage(Bitmap img, bool setup = false)
+        public static async Task<bool> LoadNewImage(Bitmap img, bool setup = false)
         {
             using (var wc = new WaitCursor())
             {
@@ -127,6 +127,7 @@ namespace SEYR
                 FileHandler.Viewer.InsertNewImage(PBX);
                 Composer.progressBar.Invoke((MethodInvoker)delegate () { Composer.progressBar.Value = FileHandler.ImageIdx; });
             }
+            return true; // Need a return type for non-awaited situations
         }
 
         #endregion 
