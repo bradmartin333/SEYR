@@ -316,8 +316,13 @@ namespace SEYR
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine Report", "Text File (*.txt) | *.txt");
-            string pitchEnding = string.Format("_{0}_{1}.txt", Math.Round(1 / FileHandler.Grid.NumberX, 3), Math.Round(1 / FileHandler.Grid.NumberY, 3));
-            pathBuffer = pathBuffer.Replace(".txt", pitchEnding);
+
+            if (PitchX != -1 && PitchY != -1)
+            {
+                string pitchEnding = string.Format("_{0}_{1}.txt", PitchX, PitchY);
+                pathBuffer = pathBuffer.Replace(".txt", pitchEnding);
+            }
+
             if (pathBuffer == null)
                 return;
             else

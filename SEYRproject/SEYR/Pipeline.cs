@@ -24,6 +24,16 @@ namespace SEYR
         /// </summary>
         public static int PatternFollowInterval { get; set; } = 1;
 
+        /// <summary>
+        /// Device X Pitch
+        /// </summary>
+        public static double PitchX { get; set; } = -1;
+
+        /// <summary>
+        /// Device Y Pitch
+        /// </summary>
+        public static double PitchY { get; set; } = -1;
+
         public static PictureBox PBX = new PictureBox()
         {
             BackgroundImage = Resources.SEYR,
@@ -121,14 +131,7 @@ namespace SEYR
                 if (ImageIdx % PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
                 {
                     Bitmap clone = (Bitmap)Imaging.CurrentImage.Clone();
-                    for (int i = 0; i < 3; i++)
-                    {
-                        bool foundPattern = await Imaging.FollowPattern(clone);
-                        if (foundPattern)
-                        {
-                            break;
-                        }
-                    }
+                    bool foundPattern = await Imaging.FollowPattern(clone);
                 }
 
                 MakeTiles();

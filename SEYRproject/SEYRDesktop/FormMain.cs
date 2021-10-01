@@ -34,15 +34,23 @@ namespace SEYRDesktop
 
             numFrame.Maximum = FRAMECOUNT;
             numFrame.Value = 1;
+            NextImage();
         }
 
         private void numFrame_ValueChanged(object sender, System.EventArgs e)
+        {
+            NextImage();
+        }
+
+        private void NextImage()
         {
             IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
             Image image = (Image)IMG.Clone();
             Bitmap bitmap = new Bitmap(image);
             pictureBox.BackgroundImage = image;
-            SEYR.Pipeline.LoadNewImage(bitmap);
+            SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
+            SEYR.Pipeline.InformationString = "0\t0\t0\t0\t0\t0";
+            _ = SEYR.Pipeline.LoadNewImage(bitmap).Result;
         }
 
         private string OpenFile(string title, string filter)
@@ -56,6 +64,19 @@ namespace SEYRDesktop
                     return openFileDialog.FileName;
             }
             return null;
-        }      
+        }
+
+        private void btnRunAll_Click(object sender, System.EventArgs e)
+        {
+            for (int i = (int)numFrame.Value; i < FRAMECOUNT; i++)
+            {
+                numFrame.Value++;
+            }
+        }
+
+        private void numPatternFollowInterval_ValueChanged(object sender, System.EventArgs e)
+        {
+            SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
+        }
     }
 }
