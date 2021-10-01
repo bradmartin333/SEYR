@@ -52,7 +52,8 @@ namespace SEYR
 
         private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowViewer();
+            Pipeline.Viewer.Show();
+            Pipeline.Viewer.BringToFront();
         }
 
         private void deselectFeatureToolStripMenuItem_Click(object sender, EventArgs e)

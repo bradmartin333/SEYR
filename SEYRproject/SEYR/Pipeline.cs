@@ -9,7 +9,20 @@ namespace SEYR
 {
     public static class Pipeline
     {
-        public static string InformationString = string.Empty;
+        /// <summary>
+        /// RR, RC, R, C, X, Y
+        /// </summary>
+        public static string InformationString { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Default is -1 (null)
+        /// </summary>
+        public static int ImageIdx { get; set; } = -1;
+
+        /// <summary>
+        /// Default is 1 (Every Image)
+        /// </summary>
+        public static int PatternFollowInterval { get; set; } = 1;
 
         public static PictureBox PBX = new PictureBox()
         {
@@ -21,28 +34,24 @@ namespace SEYR
         };
 
         public static Composer Composer;
+        public static Viewer Viewer;
 
         public static void Initialize()
         {
             Composer = new Composer();
-        }
-
-        public static void ShowViewer()
-        {
-            FileHandler.Viewer.Show();
-            FileHandler.Viewer.BringToFront();
+            Viewer = new Viewer();
         }
 
         #region Core Functions
 
         public static void MakeTiles()
         {
-            if (FileHandler.ImageIdx == 0) return;
+            if (ImageIdx == -1) return;
 
-            if (FileHandler.ImageIdx > DataHandler.Output.Count)
+            if (ImageIdx > DataHandler.Output.Count)
                 DataHandler.Output.Add(string.Empty);
             else
-                DataHandler.Output[FileHandler.ImageIdx - 1] = string.Empty;
+                DataHandler.Output[ImageIdx - 1] = string.Empty;
 
             // Each tile contains one of each feature
             // The top-left tile is index 0,0
@@ -71,7 +80,7 @@ namespace SEYR
             }
 
             foreach (Tile tile in FileHandler.Grid.Tiles)
-                tile.Score(FileHandler.ImageIdx);
+                tile.Score(ImageIdx);
             Picasso.ReDraw();
         }
 
@@ -79,7 +88,6 @@ namespace SEYR
         {
             using (var wc = new WaitCursor())
             {
-                FileHandler.ImageIdx++;
                 Picasso.IncomingSize = img.Size;
                 Picasso.ClearGraphics();
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
@@ -110,7 +118,7 @@ namespace SEYR
 
                 Imaging.CurrentImage = working; // Save edited photo
 
-                if (FileHandler.ImageIdx % FileHandler.PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
+                if (ImageIdx % PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
                 {
                     Bitmap clone = (Bitmap)Imaging.CurrentImage.Clone();
                     for (int i = 0; i < 3; i++)
@@ -124,8 +132,7 @@ namespace SEYR
                 }
 
                 MakeTiles();
-                FileHandler.Viewer.InsertNewImage(PBX);
-                Composer.progressBar.Invoke((MethodInvoker)delegate () { Composer.progressBar.Value = FileHandler.ImageIdx; });
+                Viewer.InsertNewImage(PBX);
             }
             return true; // Need a return type for non-awaited situations
         }

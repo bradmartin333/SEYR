@@ -87,7 +87,7 @@ namespace SEYR
             set
             {
                 _Angle = value;
-                LoadNewImage(Imaging.OriginalImage);
+                _ = LoadNewImage(Imaging.OriginalImage).Result;
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
@@ -101,7 +101,7 @@ namespace SEYR
             set
             {
                 _FilterThreshold = value;
-                LoadNewImage(Imaging.OriginalImage);
+                _ = LoadNewImage(Imaging.OriginalImage).Result;
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }

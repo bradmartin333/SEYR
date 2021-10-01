@@ -8,12 +8,8 @@ namespace SEYR
 {
     public static class FileHandler
     {
-        public static Viewer Viewer = new Viewer();
         public static Grid Grid = new Grid();
         public static string FilePath { get; set; } = string.Empty;
-        public static int ImageIdx { get; set; }
-        public static string[] Images { get; set; }
-        public static int PatternFollowInterval { get; set; } = 1;
 
         public static string LoadFile()
         {
@@ -57,18 +53,6 @@ namespace SEYR
                 var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 Grid = (Grid)binaryFormatter.Deserialize(stream);
             }
-        }
-
-        public static string OpenDirectory(string description)
-        {
-            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
-            {
-                folderBrowserDialog.Description = description;
-                folderBrowserDialog.ShowNewFolderButton = false;
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                    return folderBrowserDialog.SelectedPath;
-            }
-            return null;
         }
     }
 }

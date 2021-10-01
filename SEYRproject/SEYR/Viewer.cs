@@ -40,5 +40,13 @@ namespace SEYR
             }
             PictureBoxes[0].Image = background;
         }
+
+        private void btnClearViewer_Click(object sender, System.EventArgs e)
+        {
+            foreach (PictureBox pictureBox in PictureBoxes)
+            {
+                pictureBox.Image = new Bitmap(1, 1);
+            }
+        }
     }
 }

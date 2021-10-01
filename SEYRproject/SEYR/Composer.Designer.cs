@@ -74,7 +74,6 @@ namespace SEYR
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.numFilterThreshold = new System.Windows.Forms.NumericUpDown();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panel = new System.Windows.Forms.Panel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,53 +124,51 @@ namespace SEYR
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel.Controls.Add(this.numAlignTol, 3, 23);
-            this.tableLayoutPanel.Controls.Add(this.label1, 2, 7);
-            this.tableLayoutPanel.Controls.Add(this.label2, 3, 7);
-            this.tableLayoutPanel.Controls.Add(this.label3, 2, 20);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 14);
-            this.tableLayoutPanel.Controls.Add(this.label4, 1, 8);
-            this.tableLayoutPanel.Controls.Add(this.label5, 1, 9);
-            this.tableLayoutPanel.Controls.Add(this.label6, 1, 21);
-            this.tableLayoutPanel.Controls.Add(this.label7, 1, 22);
-            this.tableLayoutPanel.Controls.Add(this.label8, 3, 20);
-            this.tableLayoutPanel.Controls.Add(this.numCopyX, 2, 8);
-            this.tableLayoutPanel.Controls.Add(this.numCopyPitchX, 2, 9);
-            this.tableLayoutPanel.Controls.Add(this.numCopyY, 3, 8);
-            this.tableLayoutPanel.Controls.Add(this.numCopyPitchY, 3, 9);
-            this.tableLayoutPanel.Controls.Add(this.numPassScore, 2, 21);
-            this.tableLayoutPanel.Controls.Add(this.numFailScore, 2, 22);
-            this.tableLayoutPanel.Controls.Add(this.numPassTol, 3, 21);
-            this.tableLayoutPanel.Controls.Add(this.numFailTol, 3, 22);
-            this.tableLayoutPanel.Controls.Add(this.lblScoreText, 1, 27);
-            this.tableLayoutPanel.Controls.Add(this.lblScore, 2, 27);
-            this.tableLayoutPanel.Controls.Add(this.label9, 1, 25);
-            this.tableLayoutPanel.Controls.Add(this.label10, 1, 26);
-            this.tableLayoutPanel.Controls.Add(this.lblName, 2, 25);
-            this.tableLayoutPanel.Controls.Add(this.lblIndex, 2, 26);
-            this.tableLayoutPanel.Controls.Add(this.label11, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.label12, 1, 11);
-            this.tableLayoutPanel.Controls.Add(this.label13, 1, 17);
-            this.tableLayoutPanel.Controls.Add(this.label14, 1, 18);
-            this.tableLayoutPanel.Controls.Add(this.label15, 2, 16);
-            this.tableLayoutPanel.Controls.Add(this.label16, 3, 16);
-            this.tableLayoutPanel.Controls.Add(this.numOriginX, 2, 17);
-            this.tableLayoutPanel.Controls.Add(this.numOriginY, 3, 17);
-            this.tableLayoutPanel.Controls.Add(this.numSizeX, 2, 18);
-            this.tableLayoutPanel.Controls.Add(this.numSizeY, 3, 18);
-            this.tableLayoutPanel.Controls.Add(this.label17, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.numAngle, 3, 4);
-            this.tableLayoutPanel.Controls.Add(this.comboBoxRects, 1, 13);
-            this.tableLayoutPanel.Controls.Add(this.label19, 1, 23);
-            this.tableLayoutPanel.Controls.Add(this.label20, 1, 5);
-            this.tableLayoutPanel.Controls.Add(this.numFilterThreshold, 3, 5);
-            this.tableLayoutPanel.Controls.Add(this.progressBar, 0, 29);
-            this.tableLayoutPanel.Controls.Add(this.panel, 5, 2);
+            this.tableLayoutPanel.Controls.Add(this.numAlignTol, 3, 22);
+            this.tableLayoutPanel.Controls.Add(this.label1, 2, 6);
+            this.tableLayoutPanel.Controls.Add(this.label2, 3, 6);
+            this.tableLayoutPanel.Controls.Add(this.label3, 2, 19);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 13);
+            this.tableLayoutPanel.Controls.Add(this.label4, 1, 7);
+            this.tableLayoutPanel.Controls.Add(this.label5, 1, 8);
+            this.tableLayoutPanel.Controls.Add(this.label6, 1, 20);
+            this.tableLayoutPanel.Controls.Add(this.label7, 1, 21);
+            this.tableLayoutPanel.Controls.Add(this.label8, 3, 19);
+            this.tableLayoutPanel.Controls.Add(this.numCopyX, 2, 7);
+            this.tableLayoutPanel.Controls.Add(this.numCopyPitchX, 2, 8);
+            this.tableLayoutPanel.Controls.Add(this.numCopyY, 3, 7);
+            this.tableLayoutPanel.Controls.Add(this.numCopyPitchY, 3, 8);
+            this.tableLayoutPanel.Controls.Add(this.numPassScore, 2, 20);
+            this.tableLayoutPanel.Controls.Add(this.numFailScore, 2, 21);
+            this.tableLayoutPanel.Controls.Add(this.numPassTol, 3, 20);
+            this.tableLayoutPanel.Controls.Add(this.numFailTol, 3, 21);
+            this.tableLayoutPanel.Controls.Add(this.lblScoreText, 1, 26);
+            this.tableLayoutPanel.Controls.Add(this.lblScore, 2, 26);
+            this.tableLayoutPanel.Controls.Add(this.label9, 1, 24);
+            this.tableLayoutPanel.Controls.Add(this.label10, 1, 25);
+            this.tableLayoutPanel.Controls.Add(this.lblName, 2, 24);
+            this.tableLayoutPanel.Controls.Add(this.lblIndex, 2, 25);
+            this.tableLayoutPanel.Controls.Add(this.label11, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.label12, 1, 10);
+            this.tableLayoutPanel.Controls.Add(this.label13, 1, 16);
+            this.tableLayoutPanel.Controls.Add(this.label14, 1, 17);
+            this.tableLayoutPanel.Controls.Add(this.label15, 2, 15);
+            this.tableLayoutPanel.Controls.Add(this.label16, 3, 15);
+            this.tableLayoutPanel.Controls.Add(this.numOriginX, 2, 16);
+            this.tableLayoutPanel.Controls.Add(this.numOriginY, 3, 16);
+            this.tableLayoutPanel.Controls.Add(this.numSizeX, 2, 17);
+            this.tableLayoutPanel.Controls.Add(this.numSizeY, 3, 17);
+            this.tableLayoutPanel.Controls.Add(this.label17, 1, 3);
+            this.tableLayoutPanel.Controls.Add(this.numAngle, 3, 3);
+            this.tableLayoutPanel.Controls.Add(this.comboBoxRects, 1, 12);
+            this.tableLayoutPanel.Controls.Add(this.label19, 1, 22);
+            this.tableLayoutPanel.Controls.Add(this.label20, 1, 4);
+            this.tableLayoutPanel.Controls.Add(this.numFilterThreshold, 3, 4);
+            this.tableLayoutPanel.Controls.Add(this.panel, 5, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 30;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel.RowCount = 28;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
@@ -200,14 +197,13 @@ namespace SEYR
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(751, 540);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(751, 511);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // numAlignTol
             // 
-            this.numAlignTol.Location = new System.Drawing.Point(121, 432);
+            this.numAlignTol.Location = new System.Drawing.Point(121, 418);
             this.numAlignTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -222,7 +218,7 @@ namespace SEYR
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(57, 109);
+            this.label1.Location = new System.Drawing.Point(57, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -233,7 +229,7 @@ namespace SEYR
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(121, 109);
+            this.label2.Location = new System.Drawing.Point(121, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
@@ -244,7 +240,7 @@ namespace SEYR
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(57, 364);
+            this.label3.Location = new System.Drawing.Point(57, 350);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
@@ -259,7 +255,7 @@ namespace SEYR
             this.flowLayoutPanel1.Controls.Add(this.btnRemoveRect);
             this.flowLayoutPanel1.Controls.Add(this.btnCopyRect);
             this.flowLayoutPanel1.Controls.Add(this.btnTrainAlignment);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(52, 249);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(52, 235);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 27);
             this.flowLayoutPanel1.TabIndex = 18;
@@ -316,7 +312,7 @@ namespace SEYR
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(13, 122);
+            this.label4.Location = new System.Drawing.Point(13, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 26);
             this.label4.TabIndex = 3;
@@ -327,7 +323,7 @@ namespace SEYR
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(13, 148);
+            this.label5.Location = new System.Drawing.Point(13, 134);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 26);
             this.label5.TabIndex = 4;
@@ -338,7 +334,7 @@ namespace SEYR
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(13, 377);
+            this.label6.Location = new System.Drawing.Point(13, 363);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 26);
             this.label6.TabIndex = 5;
@@ -349,7 +345,7 @@ namespace SEYR
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(13, 403);
+            this.label7.Location = new System.Drawing.Point(13, 389);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 26);
             this.label7.TabIndex = 6;
@@ -360,7 +356,7 @@ namespace SEYR
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(121, 364);
+            this.label8.Location = new System.Drawing.Point(121, 350);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(58, 13);
             this.label8.TabIndex = 7;
@@ -369,7 +365,7 @@ namespace SEYR
             // 
             // numCopyX
             // 
-            this.numCopyX.Location = new System.Drawing.Point(57, 125);
+            this.numCopyX.Location = new System.Drawing.Point(57, 111);
             this.numCopyX.Name = "numCopyX";
             this.numCopyX.Size = new System.Drawing.Size(58, 20);
             this.numCopyX.TabIndex = 8;
@@ -377,7 +373,7 @@ namespace SEYR
             // 
             // numCopyPitchX
             // 
-            this.numCopyPitchX.Location = new System.Drawing.Point(57, 151);
+            this.numCopyPitchX.Location = new System.Drawing.Point(57, 137);
             this.numCopyPitchX.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -390,7 +386,7 @@ namespace SEYR
             // 
             // numCopyY
             // 
-            this.numCopyY.Location = new System.Drawing.Point(121, 125);
+            this.numCopyY.Location = new System.Drawing.Point(121, 111);
             this.numCopyY.Name = "numCopyY";
             this.numCopyY.Size = new System.Drawing.Size(58, 20);
             this.numCopyY.TabIndex = 10;
@@ -398,7 +394,7 @@ namespace SEYR
             // 
             // numCopyPitchY
             // 
-            this.numCopyPitchY.Location = new System.Drawing.Point(121, 151);
+            this.numCopyPitchY.Location = new System.Drawing.Point(121, 137);
             this.numCopyPitchY.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -417,7 +413,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassScore.Location = new System.Drawing.Point(57, 380);
+            this.numPassScore.Location = new System.Drawing.Point(57, 366);
             this.numPassScore.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -436,7 +432,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailScore.Location = new System.Drawing.Point(57, 406);
+            this.numFailScore.Location = new System.Drawing.Point(57, 392);
             this.numFailScore.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -455,7 +451,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassTol.Location = new System.Drawing.Point(121, 380);
+            this.numPassTol.Location = new System.Drawing.Point(121, 366);
             this.numPassTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -474,7 +470,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailTol.Location = new System.Drawing.Point(121, 406);
+            this.numFailTol.Location = new System.Drawing.Point(121, 392);
             this.numFailTol.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -489,7 +485,7 @@ namespace SEYR
             // 
             this.lblScoreText.AutoSize = true;
             this.lblScoreText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblScoreText.Location = new System.Drawing.Point(13, 501);
+            this.lblScoreText.Location = new System.Drawing.Point(13, 487);
             this.lblScoreText.Name = "lblScoreText";
             this.lblScoreText.Size = new System.Drawing.Size(38, 16);
             this.lblScoreText.TabIndex = 19;
@@ -500,7 +496,7 @@ namespace SEYR
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblScore, 2);
             this.lblScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblScore.Location = new System.Drawing.Point(57, 501);
+            this.lblScore.Location = new System.Drawing.Point(57, 487);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(122, 16);
             this.lblScore.TabIndex = 21;
@@ -511,7 +507,7 @@ namespace SEYR
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(13, 475);
+            this.label9.Location = new System.Drawing.Point(13, 461);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
             this.label9.TabIndex = 22;
@@ -522,7 +518,7 @@ namespace SEYR
             // 
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(13, 488);
+            this.label10.Location = new System.Drawing.Point(13, 474);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 13);
             this.label10.TabIndex = 23;
@@ -533,7 +529,7 @@ namespace SEYR
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblName, 2);
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblName.Location = new System.Drawing.Point(57, 475);
+            this.lblName.Location = new System.Drawing.Point(57, 461);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(122, 13);
             this.lblName.TabIndex = 24;
@@ -544,7 +540,7 @@ namespace SEYR
             // 
             this.tableLayoutPanel.SetColumnSpan(this.lblIndex, 2);
             this.lblIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIndex.Location = new System.Drawing.Point(57, 488);
+            this.lblIndex.Location = new System.Drawing.Point(57, 474);
             this.lblIndex.Name = "lblIndex";
             this.lblIndex.Size = new System.Drawing.Size(122, 13);
             this.lblIndex.TabIndex = 25;
@@ -557,7 +553,7 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.label11, 3);
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(13, 22);
+            this.label11.Location = new System.Drawing.Point(13, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(166, 15);
             this.label11.TabIndex = 26;
@@ -570,7 +566,7 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.label12, 3);
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 194);
+            this.label12.Location = new System.Drawing.Point(13, 180);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(166, 15);
             this.label12.TabIndex = 27;
@@ -581,7 +577,7 @@ namespace SEYR
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(13, 302);
+            this.label13.Location = new System.Drawing.Point(13, 288);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 26);
             this.label13.TabIndex = 28;
@@ -592,7 +588,7 @@ namespace SEYR
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(13, 328);
+            this.label14.Location = new System.Drawing.Point(13, 314);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(38, 26);
             this.label14.TabIndex = 29;
@@ -603,7 +599,7 @@ namespace SEYR
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(57, 289);
+            this.label15.Location = new System.Drawing.Point(57, 275);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 30;
@@ -614,7 +610,7 @@ namespace SEYR
             // 
             this.label16.AutoSize = true;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(121, 289);
+            this.label16.Location = new System.Drawing.Point(121, 275);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(58, 13);
             this.label16.TabIndex = 31;
@@ -623,7 +619,7 @@ namespace SEYR
             // 
             // numOriginX
             // 
-            this.numOriginX.Location = new System.Drawing.Point(57, 305);
+            this.numOriginX.Location = new System.Drawing.Point(57, 291);
             this.numOriginX.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -636,7 +632,7 @@ namespace SEYR
             // 
             // numOriginY
             // 
-            this.numOriginY.Location = new System.Drawing.Point(121, 305);
+            this.numOriginY.Location = new System.Drawing.Point(121, 291);
             this.numOriginY.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -649,7 +645,7 @@ namespace SEYR
             // 
             // numSizeX
             // 
-            this.numSizeX.Location = new System.Drawing.Point(57, 331);
+            this.numSizeX.Location = new System.Drawing.Point(57, 317);
             this.numSizeX.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -662,7 +658,7 @@ namespace SEYR
             // 
             // numSizeY
             // 
-            this.numSizeY.Location = new System.Drawing.Point(121, 331);
+            this.numSizeY.Location = new System.Drawing.Point(121, 317);
             this.numSizeY.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -678,7 +674,7 @@ namespace SEYR
             this.label17.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label17, 2);
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(13, 47);
+            this.label17.Location = new System.Drawing.Point(13, 33);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(102, 26);
             this.label17.TabIndex = 36;
@@ -694,7 +690,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numAngle.Location = new System.Drawing.Point(121, 50);
+            this.numAngle.Location = new System.Drawing.Point(121, 36);
             this.numAngle.Maximum = new decimal(new int[] {
             10,
             0,
@@ -716,7 +712,7 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.comboBoxRects, 3);
             this.comboBoxRects.DropDownWidth = 150;
             this.comboBoxRects.FormattingEnabled = true;
-            this.comboBoxRects.Location = new System.Drawing.Point(13, 222);
+            this.comboBoxRects.Location = new System.Drawing.Point(13, 208);
             this.comboBoxRects.Name = "comboBoxRects";
             this.comboBoxRects.Size = new System.Drawing.Size(166, 21);
             this.comboBoxRects.TabIndex = 2;
@@ -727,7 +723,7 @@ namespace SEYR
             this.label19.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label19, 2);
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(13, 429);
+            this.label19.Location = new System.Drawing.Point(13, 415);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(102, 26);
             this.label19.TabIndex = 39;
@@ -739,7 +735,7 @@ namespace SEYR
             this.label20.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label20, 2);
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(13, 73);
+            this.label20.Location = new System.Drawing.Point(13, 59);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(102, 26);
             this.label20.TabIndex = 41;
@@ -748,7 +744,7 @@ namespace SEYR
             // 
             // numFilterThreshold
             // 
-            this.numFilterThreshold.Location = new System.Drawing.Point(121, 76);
+            this.numFilterThreshold.Location = new System.Drawing.Point(121, 62);
             this.numFilterThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -759,20 +755,10 @@ namespace SEYR
             this.numFilterThreshold.TabIndex = 42;
             this.numFilterThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // progressBar
-            // 
-            this.tableLayoutPanel.SetColumnSpan(this.progressBar, 7);
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(3, 532);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(745, 5);
-            this.progressBar.Step = 1;
-            this.progressBar.TabIndex = 45;
-            // 
             // panel
             // 
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel.Location = new System.Drawing.Point(195, 25);
+            this.panel.Location = new System.Drawing.Point(195, 11);
             this.panel.Name = "panel";
             this.tableLayoutPanel.SetRowSpan(this.panel, 26);
             this.panel.Size = new System.Drawing.Size(543, 489);
@@ -945,13 +931,14 @@ namespace SEYR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 564);
+            this.ClientSize = new System.Drawing.Size(751, 535);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(767, 574);
             this.Name = "Composer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SEYR Composer";
@@ -1045,7 +1032,6 @@ namespace SEYR
         private System.Windows.Forms.ToolStripMenuItem forgetToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem followerPatternNameToolStripMenuItem;
         private System.Windows.Forms.Panel panel;
-        public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ToolStripMenuItem deselectFeatureToolStripMenuItem;
     }
 }
