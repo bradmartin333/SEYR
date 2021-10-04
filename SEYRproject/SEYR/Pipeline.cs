@@ -2,17 +2,20 @@
 using SEYR.Properties;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SEYR
 {
     public static class Pipeline
     {
-        /// <summary>
-        /// RR, RC, R, C, X, Y
-        /// </summary>
-        public static string InformationString { get; set; } = string.Empty;
+        // Information String Variables
+        public static string RR = "0";
+        public static string RC = "0";
+        public static string R = "0";
+        public static string C = "0";
+        public static string X = "0";
+        public static string Y = "0";
 
         /// <summary>
         /// Default is -1 (null)
@@ -34,6 +37,26 @@ namespace SEYR
         /// </summary>
         public static double PitchY { get; set; } = -1;
 
+        /// <summary>
+        /// Number of seconds allowed for patten follow processing
+        /// </summary>
+        public static int PatternFollowDelay = 100;
+
+        /// <summary>
+        /// Scale of incoming image
+        /// </summary>
+        public static double ImageScale = 0.25;
+
+        /// <summary>
+        /// Image is processing
+        /// </summary>
+        public static bool Working = false;
+
+        /// <summary>
+        /// Has been given at least 1 image
+        /// </summary>
+        public static bool HasImage = false;
+
         public static PictureBox PBX = new PictureBox()
         {
             BackgroundImage = Resources.SEYR,
@@ -45,6 +68,7 @@ namespace SEYR
 
         public static Composer Composer;
         public static Viewer Viewer;
+        private static Thread PatternFollowThread;
 
         public static void Initialize()
         {
@@ -59,7 +83,10 @@ namespace SEYR
             if (ImageIdx == -1) return;
 
             if (ImageIdx > DataHandler.Output.Count)
-                DataHandler.Output.Add(string.Empty);
+                for (int i = DataHandler.Output.Count; i < ImageIdx; i++)
+                {
+                    DataHandler.Output.Add(string.Empty);
+                }
             else
                 DataHandler.Output[ImageIdx - 1] = string.Empty;
 
@@ -94,8 +121,9 @@ namespace SEYR
             Picasso.ReDraw();
         }
 
-        public static async Task<bool> LoadNewImage(Bitmap img, bool setup = false)
+        public static void LoadNewImage(Bitmap img)
         {
+            if (Application.UseWaitCursor) return;
             using (var wc = new WaitCursor())
             {
                 Picasso.IncomingSize = img.Size;
@@ -103,8 +131,7 @@ namespace SEYR
                 Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
                 // Resize incoming image
-                double heightRatio = Picasso.BaseHeight / img.Height;
-                Bitmap resize = new Bitmap((int)(heightRatio * img.Width), (int)Picasso.BaseHeight);
+                Bitmap resize = new Bitmap((int)(ImageScale * img.Width), (int)(ImageScale * img.Height));
                 using (Graphics g = Graphics.FromImage(resize))
                 {
                     g.DrawImage(img, 0, 0, resize.Width, resize.Height);
@@ -130,16 +157,39 @@ namespace SEYR
 
                 if (ImageIdx % PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
                 {
-                    Bitmap clone = (Bitmap)Imaging.CurrentImage.Clone();
-                    bool foundPattern = await Imaging.FollowPattern(clone);
+                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
+                    {
+                        Interval = (int)(PatternFollowDelay * 1e3),
+                        Enabled = true
+                    };
+                    timer.Tick += Timer_Tick;
+                    timer.Start();
+
+                    bool foundPattern = false;
+                    PatternFollowThread = new Thread(delegate () { foundPattern = Imaging.FollowPattern(); });
+                    PatternFollowThread.Start();
+
+                    while (PatternFollowThread.IsAlive)
+                        Application.DoEvents();
+                    timer.Dispose();
+
+                    if (foundPattern)
+                        Composer.followerPatternToolStripMenuItem.BackColor = SystemColors.Control;
+                    else
+                        Composer.followerPatternToolStripMenuItem.BackColor = Color.MistyRose;
                 }
 
                 MakeTiles();
                 Viewer.InsertNewImage(PBX);
             }
-            return true; // Need a return type for non-awaited situations
+            HasImage = true;
         }
 
-        #endregion 
+        private static void Timer_Tick(object sender, System.EventArgs e)
+        {
+            PatternFollowThread.Abort();
+        }
+
+        #endregion
     }
 }

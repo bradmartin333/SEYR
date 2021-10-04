@@ -214,6 +214,7 @@ namespace SEYR
             if (comboBoxRects.SelectedIndex == -1) return;
             FileHandler.Grid.PatternFeature = FileHandler.Grid.ActiveFeature;
             LoadFollowerPattern();
+            followerPatternToolStripMenuItem.BackColor = SystemColors.Control;
         }
 
         private void forgetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,6 +224,7 @@ namespace SEYR
             followerPatternNameToolStripMenuItem.Text = "N/A";
             Picasso.Offset = Point.Empty;
             Picasso.ReDraw();
+            followerPatternToolStripMenuItem.BackColor = SystemColors.Control;
         }
 
         private void followerPatternNameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,7 +287,7 @@ namespace SEYR
             FileHandler.Grid = new Grid();
         }
 
-        private async void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.LoadFile();
             if (pathBuffer == null)
@@ -294,7 +296,7 @@ namespace SEYR
                 FileHandler.FilePath = pathBuffer;
             FileHandler.ReadParametersFromBinaryFile();
             LoadGrid(this);
-            await LoadNewImage(Imaging.OriginalImage, true);
+            LoadNewImage(Imaging.OriginalImage);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

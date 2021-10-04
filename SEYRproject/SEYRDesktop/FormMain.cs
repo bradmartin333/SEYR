@@ -49,8 +49,7 @@ namespace SEYRDesktop
             Bitmap bitmap = new Bitmap(image);
             pictureBox.BackgroundImage = image;
             SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-            SEYR.Pipeline.InformationString = "0\t0\t0\t0\t0\t0";
-            _ = SEYR.Pipeline.LoadNewImage(bitmap).Result;
+            SEYR.Pipeline.LoadNewImage(bitmap);
         }
 
         private string OpenFile(string title, string filter)
@@ -77,6 +76,16 @@ namespace SEYRDesktop
         private void numPatternFollowInterval_ValueChanged(object sender, System.EventArgs e)
         {
             SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
+        }
+
+        private void numImageScale_ValueChanged(object sender, System.EventArgs e)
+        {
+            SEYR.Pipeline.ImageScale = (double)numImageScale.Value;
+        }
+
+        private void numPatternFollowDelay_ValueChanged(object sender, System.EventArgs e)
+        {
+            SEYR.Pipeline.PatternFollowDelay = (int)numPatternFollowDelay.Value;
         }
     }
 }

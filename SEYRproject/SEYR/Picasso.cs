@@ -9,7 +9,7 @@ namespace SEYR
     {
         public static Size IncomingSize = new Size(1, 1);
         public static Size ThisSize = new Size(1, 1);
-        public static double BaseHeight = 600; // Defines scaling dimension of incoming images
+
         public static Point Offset { get; set; } // XY Offset of Current Image
 
         private static Rectangle CurrentRect;
@@ -85,8 +85,7 @@ namespace SEYR
         public static void ClearGraphics()
         {
             // Scale incoming image and set blank foreground
-            double heightRatio = BaseHeight / IncomingSize.Height;
-            Bitmap resize = new Bitmap((int)(heightRatio * IncomingSize.Width), (int)BaseHeight);
+            Bitmap resize = new Bitmap((int)(ImageScale * IncomingSize.Width), (int)(ImageScale * IncomingSize.Height));
             PBX.Image = resize;
             ThisSize = resize.Size;
         }

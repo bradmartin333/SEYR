@@ -103,6 +103,7 @@ namespace SEYR
                 PassScore = _PassScore,
                 PassTol = _PassTol,
                 FailScore = _FailScore,
+                FailTol = _FailTol,
                 WeightedCenter = _WeightedCenter,
                 AlignTol = AlignTol
             };

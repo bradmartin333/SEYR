@@ -5,7 +5,7 @@ namespace SEYR
 {
     public partial class Viewer : Form
     {
-        private PictureBox[] PictureBoxes;
+        private readonly PictureBox[] PictureBoxes;
 
         public Viewer()
         {

@@ -20,13 +20,18 @@ namespace SEYR
             {
                 Imaging.Score(feature);
                 DataHandler.Output[ImageIdx - 1] += 
-                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\n", 
+                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\n", 
                     ImageIdx, 
                     Index.X, 
                     Index.Y, 
                     feature.Name, 
                     feature.State.ToString(),
-                    Pipeline.InformationString);
+                    Pipeline.RR,
+                    Pipeline.RC,
+                    Pipeline.R,
+                    Pipeline.C,
+                    Pipeline.X,
+                    Pipeline.Y);
             }
         }
     }

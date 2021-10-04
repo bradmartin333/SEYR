@@ -875,7 +875,7 @@ namespace SEYR
             // followerPatternNameToolStripMenuItem
             // 
             this.followerPatternNameToolStripMenuItem.Name = "followerPatternNameToolStripMenuItem";
-            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.followerPatternNameToolStripMenuItem.Text = "N/A";
             this.followerPatternNameToolStripMenuItem.Click += new System.EventHandler(this.followerPatternNameToolStripMenuItem_Click);
             // 
@@ -883,7 +883,7 @@ namespace SEYR
             // 
             this.trainToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_school_16_24;
             this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
-            this.trainToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.trainToolStripMenuItem.Text = "Train";
             this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
             // 
@@ -891,7 +891,7 @@ namespace SEYR
             // 
             this.forgetToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
             this.forgetToolStripMenuItem.Name = "forgetToolStripMenuItem";
-            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.forgetToolStripMenuItem.Text = "Forget";
             this.forgetToolStripMenuItem.Click += new System.EventHandler(this.forgetToolStripMenuItem_Click);
             // 
@@ -1027,11 +1027,11 @@ namespace SEYR
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem followerPatternToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem forgetToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem followerPatternNameToolStripMenuItem;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ToolStripMenuItem deselectFeatureToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem followerPatternToolStripMenuItem;
     }
 }
