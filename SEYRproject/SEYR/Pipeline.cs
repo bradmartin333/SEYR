@@ -3,6 +3,7 @@ using SEYR.Properties;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYR
@@ -121,9 +122,11 @@ namespace SEYR
             Picasso.ReDraw();
         }
 
-        public static void LoadNewImage(Bitmap img)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public static async Task<bool> LoadNewImage(Bitmap img)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (Application.UseWaitCursor) return;
+            if (Application.UseWaitCursor) return false;
             using (var wc = new WaitCursor())
             {
                 Picasso.IncomingSize = img.Size;
@@ -174,15 +177,16 @@ namespace SEYR
                     timer.Dispose();
 
                     if (foundPattern)
-                        Composer.followerPatternToolStripMenuItem.BackColor = SystemColors.Control;
+                        Composer.Invoke((MethodInvoker)delegate { Composer.followerPatternToolStripMenuItem.BackColor = SystemColors.Control; });
                     else
-                        Composer.followerPatternToolStripMenuItem.BackColor = Color.MistyRose;
+                        Composer.Invoke((MethodInvoker)delegate { Composer.followerPatternToolStripMenuItem.BackColor = Color.MistyRose; });
                 }
 
                 MakeTiles();
                 Viewer.InsertNewImage(PBX);
             }
             HasImage = true;
+            return true;
         }
 
         private static void Timer_Tick(object sender, System.EventArgs e)
