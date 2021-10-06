@@ -296,7 +296,7 @@ namespace SEYR
                 FileHandler.FilePath = pathBuffer;
             FileHandler.ReadParametersFromBinaryFile();
             LoadGrid(this);
-            LoadNewImage(Imaging.OriginalImage);
+            _ = LoadNewImage(Imaging.OriginalImage).Result;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
