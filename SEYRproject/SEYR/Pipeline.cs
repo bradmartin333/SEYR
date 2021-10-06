@@ -11,12 +11,12 @@ namespace SEYR
     public static class Pipeline
     {
         // Information String Variables
-        public static string RR = "0";
-        public static string RC = "0";
-        public static string R = "0";
-        public static string C = "0";
-        public static string X = "0";
-        public static string Y = "0";
+        public static string RR { get; set; } = "0";
+        public static string RC { get; set; } = "0";
+        public static string R { get; set; } = "0";
+        public static string C { get; set; } = "0";
+        public static string X { get; set; } = "0";
+        public static string Y { get; set; } = "0";
 
         /// <summary>
         /// Default is -1 (null)
@@ -41,22 +41,27 @@ namespace SEYR
         /// <summary>
         /// Number of seconds allowed for patten follow processing
         /// </summary>
-        public static int PatternFollowDelay = 100;
+        public static int PatternFollowDelay { get; set; } = 100;
 
         /// <summary>
         /// Scale of incoming image
         /// </summary>
-        public static double ImageScale = 0.25;
+        public static double ImageScale { get; set; } = 0.25;
 
         /// <summary>
         /// Image is processing
         /// </summary>
-        public static bool Working = false;
+        public static bool Working { get; set; } = false;
 
         /// <summary>
         /// Has been given at least 1 image
         /// </summary>
-        public static bool HasImage = false;
+        public static bool HasImage { get; set; } = false;
+
+        /// <summary>
+        /// Gets updated each pattern search
+        /// </summary>
+        public static bool FoundPattern { get; set; } = false;
 
         public static PictureBox PBX = new PictureBox()
         {
@@ -168,18 +173,12 @@ namespace SEYR
                     timer.Tick += Timer_Tick;
                     timer.Start();
 
-                    bool foundPattern = false;
-                    PatternFollowThread = new Thread(delegate () { foundPattern = Imaging.FollowPattern(); });
+                    PatternFollowThread = new Thread(delegate () { FoundPattern = Imaging.FollowPattern(); });
                     PatternFollowThread.Start();
 
                     while (PatternFollowThread.IsAlive)
                         Application.DoEvents();
                     timer.Dispose();
-
-                    if (foundPattern)
-                        Composer.Invoke((MethodInvoker)delegate { Composer.followerPatternToolStripMenuItem.BackColor = SystemColors.Control; });
-                    else
-                        Composer.Invoke((MethodInvoker)delegate { Composer.followerPatternToolStripMenuItem.BackColor = Color.MistyRose; });
                 }
 
                 MakeTiles();
@@ -192,6 +191,7 @@ namespace SEYR
         private static void Timer_Tick(object sender, System.EventArgs e)
         {
             PatternFollowThread.Abort();
+            FoundPattern = false;
         }
 
         #endregion
