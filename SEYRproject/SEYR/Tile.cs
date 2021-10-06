@@ -19,20 +19,22 @@ namespace SEYR
             foreach (Feature feature in Features)
             {
                 Imaging.Score(feature);
-                DataHandler.Output[ImageIdx - 1] += 
-                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\n", 
-                    ImageIdx, 
-                    Index.X, 
-                    Index.Y, 
-                    feature.Name, 
+                DataHandler.Append(
+                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\n",
+                    ImageIdx,
+                    Index.X,
+                    Index.Y,
+                    feature.Name,
                     feature.State.ToString(),
                     Pipeline.RR,
                     Pipeline.RC,
                     Pipeline.R,
                     Pipeline.C,
                     Pipeline.X,
-                    Pipeline.Y);
+                    Pipeline.Y)
+                );
             }
+            DataHandler.NextImage();
         }
     }
 }

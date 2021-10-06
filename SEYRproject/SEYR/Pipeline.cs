@@ -1,7 +1,5 @@
-﻿using Accord.Imaging.Filters;
-using SEYR.Properties;
+﻿using SEYR.Properties;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +27,11 @@ namespace SEYR
         public static int PatternFollowInterval { get; set; } = 1;
 
         /// <summary>
+        /// Number of seconds allowed for patten follow processing
+        /// </summary>
+        public static int PatternFollowDelay { get; set; } = 100;
+
+        /// <summary>
         /// Device X Pitch
         /// </summary>
         public static double PitchX { get; set; } = -1;
@@ -39,14 +42,9 @@ namespace SEYR
         public static double PitchY { get; set; } = -1;
 
         /// <summary>
-        /// Number of seconds allowed for patten follow processing
-        /// </summary>
-        public static int PatternFollowDelay { get; set; } = 100;
-
-        /// <summary>
         /// Scale of incoming image
         /// </summary>
-        public static double ImageScale { get; set; } = 0.25;
+        public static double ImageScale { get; set; } = 1.00;
 
         /// <summary>
         /// Image is processing
@@ -76,10 +74,16 @@ namespace SEYR
         public static Viewer Viewer;
         private static Thread PatternFollowThread;
 
-        public static void Initialize()
-        {
+        public static void Initialize(int patternFollowInterval = 1, double pitchX = -1, double pitchY = -1, int patternFollowDelay = 100, double imageScale = 1.00)
+        { 
             Composer = new Composer();
             Viewer = new Viewer();
+
+            PatternFollowInterval = patternFollowInterval;
+            PitchX = pitchX;
+            PitchY = pitchY;
+            PatternFollowDelay = patternFollowDelay;
+            ImageScale = imageScale;
         }
 
         #region Core Functions
@@ -127,43 +131,20 @@ namespace SEYR
             Picasso.ReDraw();
         }
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public static async Task<bool> LoadNewImage(Bitmap img)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (Application.UseWaitCursor) return false;
             using (var wc = new WaitCursor())
             {
-                Picasso.IncomingSize = img.Size;
-                Picasso.ClearGraphics();
-                Imaging.OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
+                Bitmap clone = (Bitmap)img.Clone();
+                Imaging.ApplyFilters(clone);
+                clone.Dispose();
 
-                // Resize incoming image
-                Bitmap resize = new Bitmap((int)(ImageScale * img.Width), (int)(ImageScale * img.Height));
-                using (Graphics g = Graphics.FromImage(resize))
-                {
-                    g.DrawImage(img, 0, 0, resize.Width, resize.Height);
-                }
-                img.Dispose();
-
-                // Clone with necessary pixel format for image filtering
-                Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
-                resize.Dispose();
-
-                working = Imaging.RotateImage(working, (float)FileHandler.Grid.Angle);
-                Imaging.DisplayedImage = working;
-
-                PBX.BackgroundImage = working;
-
-                Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
-                working = filter.Apply(working);
-
-                Threshold threshold = new Threshold(FileHandler.Grid.FilterThreshold);
-                threshold.ApplyInPlace(working);
-
-                Imaging.CurrentImage = working; // Save edited photo
-
-                if (ImageIdx % PatternFollowInterval == 0 && !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty)
+                // If it is time to look for pattern,
+                // make sure the pattern is valid for the current image and SEYR file
+                if (ImageIdx % PatternFollowInterval == 0 && 
+                    !FileHandler.Grid.PatternFeature.Rectangle.IsEmpty && 
+                    FileHandler.Grid.PatternFeature.Rectangle.Width < Picasso.IncomingSize.Width && 
+                    FileHandler.Grid.PatternFeature.Rectangle.Height < Picasso.IncomingSize.Height)
                 {
                     System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
                     {
@@ -175,15 +156,18 @@ namespace SEYR
 
                     PatternFollowThread = new Thread(delegate () { FoundPattern = Imaging.FollowPattern(); });
                     PatternFollowThread.Start();
-
                     while (PatternFollowThread.IsAlive)
                         Application.DoEvents();
                     timer.Dispose();
                 }
 
                 MakeTiles();
-                Viewer.InsertNewImage(PBX);
+
+                Bitmap background = (Bitmap)PBX.BackgroundImage.Clone();
+                Bitmap foreground = (Bitmap)PBX.Image.Clone();
+                Viewer.InsertNewImage(background, foreground);
             }
+
             HasImage = true;
             return true;
         }

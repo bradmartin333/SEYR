@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Accord.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Threading.Tasks;
+using static SEYR.Pipeline;
+using System.Drawing.Imaging;
+using Accord.Imaging.Filters;
 
 namespace SEYR
 {
@@ -18,14 +20,48 @@ namespace SEYR
         {
             Rectangle cropRect = feature.OffsetRectangle;
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
+            Bitmap current = (Bitmap)CurrentImage.Clone();
+            Bitmap displayed = (Bitmap)DisplayedImage.Clone();
             using (Graphics g = Graphics.FromImage(target))
             {
                 if (filtered)
-                    g.DrawImage(CurrentImage, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+                    g.DrawImage(current, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
                 else
-                    g.DrawImage(DisplayedImage, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+                    g.DrawImage(displayed, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
             return target;
+        }
+
+        public static void ApplyFilters(Bitmap img)
+        {
+            Picasso.IncomingSize = img.Size;
+            Picasso.ClearGraphics();
+            OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
+
+            // Resize incoming image
+            Bitmap resize = new Bitmap((int)(ImageScale * img.Width), (int)(ImageScale * img.Height));
+            using (Graphics g = Graphics.FromImage(resize))
+            {
+                g.DrawImage(img, 0, 0, resize.Width, resize.Height);
+            }
+            img.Dispose();
+
+            // Clone with necessary pixel format for image filtering
+            Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
+            resize.Dispose();
+
+            working = RotateImage(working, (float)FileHandler.Grid.Angle);
+            DisplayedImage = working;
+
+            PBX.BackgroundImage = working;
+
+            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+            working = filter.Apply(working);
+
+            Threshold threshold = new Threshold(FileHandler.Grid.FilterThreshold);
+            threshold.ApplyInPlace(working);
+
+            CurrentImage = working; // Save edited photo
         }
 
         private static double Scan(Feature feature)

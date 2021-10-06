@@ -30,23 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
             this.btnRunAll = new System.Windows.Forms.Button();
             this.btnOpenGIF = new System.Windows.Forms.Button();
             this.btnOpenComposer = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.numFrame = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label2 = new System.Windows.Forms.Label();
+            this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
             this.numPatternFollowDelay = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.numImageScale = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numImageScale)).BeginInit();
             this.SuspendLayout();
@@ -83,31 +83,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(454, 433);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // numPatternFollowInterval
-            // 
-            this.numPatternFollowInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numPatternFollowInterval.Location = new System.Drawing.Point(395, 32);
-            this.numPatternFollowInterval.Maximum = new decimal(new int[] {
-            276447232,
-            23283,
-            0,
-            0});
-            this.numPatternFollowInterval.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPatternFollowInterval.Name = "numPatternFollowInterval";
-            this.numPatternFollowInterval.Size = new System.Drawing.Size(56, 20);
-            this.numPatternFollowInterval.TabIndex = 5;
-            this.numPatternFollowInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numPatternFollowInterval.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPatternFollowInterval.ValueChanged += new System.EventHandler(this.numPatternFollowInterval_ValueChanged);
             // 
             // btnRunAll
             // 
@@ -191,10 +166,6 @@
             this.label1.Text = "Follow Interval";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -206,6 +177,31 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Follow Delay";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numPatternFollowInterval
+            // 
+            this.numPatternFollowInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numPatternFollowInterval.Location = new System.Drawing.Point(395, 32);
+            this.numPatternFollowInterval.Maximum = new decimal(new int[] {
+            276447232,
+            23283,
+            0,
+            0});
+            this.numPatternFollowInterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPatternFollowInterval.Name = "numPatternFollowInterval";
+            this.numPatternFollowInterval.Size = new System.Drawing.Size(56, 20);
+            this.numPatternFollowInterval.TabIndex = 5;
+            this.numPatternFollowInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numPatternFollowInterval.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPatternFollowInterval.ValueChanged += new System.EventHandler(this.numPatternFollowInterval_ValueChanged);
             // 
             // numPatternFollowDelay
             // 
@@ -263,10 +259,10 @@
             this.numImageScale.TabIndex = 10;
             this.numImageScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numImageScale.Value = new decimal(new int[] {
-            25,
+            1,
             0,
             0,
-            131072});
+            0});
             this.numImageScale.ValueChanged += new System.EventHandler(this.numImageScale_ValueChanged);
             // 
             // label4
@@ -280,6 +276,10 @@
             this.label4.Text = "Frame #";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,9 +291,9 @@
             this.Text = "SEYR Desktop";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numImageScale)).EndInit();
             this.ResumeLayout(false);

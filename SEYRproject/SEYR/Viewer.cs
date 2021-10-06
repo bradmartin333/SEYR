@@ -26,10 +26,8 @@ namespace SEYR
             }
         }
 
-        public void InsertNewImage(PictureBox pictureBox)
+        public void InsertNewImage(Bitmap background, Bitmap foreground)
         {
-            Bitmap background = (Bitmap)pictureBox.BackgroundImage.Clone();
-            Bitmap foreground = (Bitmap)pictureBox.Image.Clone();
             using (Graphics g = Graphics.FromImage(background))
             {
                 g.DrawImage(foreground, 0, 0);
