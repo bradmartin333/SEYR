@@ -16,6 +16,8 @@ namespace SEYR
         public static Bitmap OriginalImage;
         public static Bitmap DisplayedImage;
         public static Bitmap CurrentImage;
+        public static Bitmap DisplayedImageCopy;
+        public static Bitmap CurrentImageCopy;
 
         public static void ApplyFilters(Bitmap img)
         {
@@ -37,6 +39,7 @@ namespace SEYR
 
             working = RotateImage(working, (float)FileHandler.Grid.Angle);
             DisplayedImage = working;
+            DisplayedImageCopy = working;
 
             PBX.BackgroundImage = working;
 
@@ -47,6 +50,7 @@ namespace SEYR
             threshold.ApplyInPlace(working);
 
             CurrentImage = working; // Save edited photo
+            CurrentImageCopy = working;
         }
 
         private static double Scan(Bitmap colorImg, Bitmap filteredImg)
@@ -82,8 +86,8 @@ namespace SEYR
         {
             if (feature.Rectangle.IsEmpty) return;
             Crop crop = new Crop(feature.OffsetRectangle);
-            Bitmap colorImg = crop.Apply(DisplayedImage);
-            Bitmap filteredImg = crop.Apply(CurrentImage);
+            Bitmap colorImg = crop.Apply(DisplayedImageCopy);
+            Bitmap filteredImg = crop.Apply(CurrentImageCopy);
             feature.Score = Scan(colorImg, filteredImg);
             if (Math.Abs(feature.Score - feature.PassScore) <= feature.PassTol)
             {
