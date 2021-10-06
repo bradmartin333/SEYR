@@ -12,7 +12,7 @@
 	<PackageIcon>SEYR.png</PackageIcon>
 	<RepositoryUrl>https://github.com/bradmartin333/SEYR</RepositoryUrl>
 	<PackageTags>vision; AOI</PackageTags>
-	<Version>1.0.6</Version>
+	<Version>1.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
