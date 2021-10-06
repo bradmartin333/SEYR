@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using static SEYR.Pipeline;
 using System.Drawing.Imaging;
 using Accord.Imaging.Filters;
+using Accord.Imaging.Moments;
 
 namespace SEYR
 {
@@ -15,22 +16,6 @@ namespace SEYR
         public static Bitmap OriginalImage;
         public static Bitmap DisplayedImage;
         public static Bitmap CurrentImage;
-
-        public static Bitmap Crop(Feature feature, bool filtered)
-        {
-            Rectangle cropRect = feature.OffsetRectangle;
-            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
-            Bitmap current = (Bitmap)CurrentImage.Clone();
-            Bitmap displayed = (Bitmap)DisplayedImage.Clone();
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                if (filtered)
-                    g.DrawImage(current, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
-                else
-                    g.DrawImage(displayed, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
-            }
-            return target;
-        }
 
         public static void ApplyFilters(Bitmap img)
         {
@@ -64,11 +49,8 @@ namespace SEYR
             CurrentImage = working; // Save edited photo
         }
 
-        private static double Scan(Feature feature)
+        private static double Scan(Bitmap colorImg, Bitmap filteredImg)
         {
-            Bitmap colorImg = Crop(feature, false);
-            Bitmap filteredImg = Crop(feature, true);
-
             List<double> pixelVals = new List<double>();
             int whitePixels = 0;
             int blackPixels = 0;
@@ -99,18 +81,19 @@ namespace SEYR
         public static void Score(Feature feature)
         {
             if (feature.Rectangle.IsEmpty) return;
-            feature.Score = Scan(feature);
+            Crop crop = new Crop(feature.OffsetRectangle);
+            Bitmap colorImg = crop.Apply(DisplayedImage);
+            Bitmap filteredImg = crop.Apply(CurrentImage);
+            feature.Score = Scan(colorImg, filteredImg);
             if (Math.Abs(feature.Score - feature.PassScore) <= feature.PassTol)
             {
                 if (feature.CheckAlign)
                 {
                     try
                     {
-                        Bitmap blob = Crop(feature, true);
-                        HorizontalIntensityStatistics his = new HorizontalIntensityStatistics(blob);
-                        VerticalIntensityStatistics vis = new VerticalIntensityStatistics(blob);
+                        RawMoments rawMoments = new RawMoments(filteredImg);
                         int diff = (int)Math.Abs(MathNet.Numerics.Distance.Euclidean(
-                            new double[] { his.Red.Median, vis.Red.Median }, 
+                            new double[] { rawMoments.CenterY, rawMoments.CenterY },
                             new double[] { feature.WeightedCenter.X, feature.WeightedCenter.Y }));
                         if (diff > feature.AlignTol)
                             feature.State = DataHandler.State.Misaligned;

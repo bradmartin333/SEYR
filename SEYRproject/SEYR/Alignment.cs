@@ -1,4 +1,6 @@
 ﻿using Accord.Imaging;
+using Accord.Imaging.Filters;
+using Accord.Imaging.Moments;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -29,18 +31,22 @@ namespace SEYR
             lblFeatureName.Text = displayFeature.Name;
             _Feature = FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature));
 
-            Bitmap blob = Imaging.Crop(displayFeature, true);
-            HorizontalIntensityStatistics his = new HorizontalIntensityStatistics(blob);
-            VerticalIntensityStatistics vis = new VerticalIntensityStatistics(blob);
-            _Center = new Point(his.Red.Median, vis.Red.Median);
+            Crop crop = new Crop(displayFeature.OffsetRectangle);
+            Bitmap filteredImg = crop.Apply(Imaging.CurrentImage);
+            RawMoments rawMoments = new RawMoments(filteredImg);
+            int diff = (int)Math.Abs(MathNet.Numerics.Distance.Euclidean(
+                new double[] { rawMoments.CenterY, rawMoments.CenterY },
+                new double[] { displayFeature.WeightedCenter.X, displayFeature.WeightedCenter.Y }));
+            _Center = new Point((int)rawMoments.CenterY, (int)rawMoments.CenterY);
 
-            using (Graphics g = Graphics.FromImage(blob))
+            pictureBox.BackgroundImage = filteredImg;
+            Bitmap bitmap = new Bitmap(filteredImg.Width, filteredImg.Height);
+            using (Graphics g = Graphics.FromImage(bitmap))
             {
-                int p = (int)(Math.Min(blob.Width, blob.Height) * 0.1);
+                int p = (int)(Math.Min(filteredImg.Width, filteredImg.Height) * 0.1);
                 g.FillEllipse(Brushes.LawnGreen, new Rectangle(_Center.X - p, _Center.Y - p, 2 * p, 2 * p));
             }
-
-            pictureBox.BackgroundImage = blob;
+            pictureBox.Image = bitmap;
         }
 
         private void btnTrain_Click(object sender, EventArgs e)
