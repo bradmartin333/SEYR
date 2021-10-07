@@ -49,7 +49,9 @@ namespace SEYRDesktop
             Bitmap bitmap = new Bitmap(image);
             pictureBox.BackgroundImage = image;
             SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-            _ = SEYR.Pipeline.LoadNewImage(bitmap).Result;
+            SEYR.Pipeline.LoadNewImage(bitmap);
+            while (SEYR.Pipeline.Working)
+                Application.DoEvents();
         }
 
         private string OpenFile(string title, string filter)

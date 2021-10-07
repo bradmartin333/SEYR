@@ -131,8 +131,9 @@ namespace SEYR
             Picasso.ReDraw();
         }
 
-        public static async Task<bool> LoadNewImage(Bitmap img)
+        public static void LoadNewImage(Bitmap img)
         {
+            Working = true;
             using (var wc = new WaitCursor())
             {
                 Bitmap clone = (Bitmap)img.Clone();
@@ -167,9 +168,8 @@ namespace SEYR
                 Bitmap foreground = (Bitmap)PBX.Image.Clone();
                 Viewer.InsertNewImage(background, foreground);
             }
-
             HasImage = true;
-            return true;
+            Working = false;
         }
 
         private static void Timer_Tick(object sender, System.EventArgs e)
