@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using static SEYR.Pipeline;
 
 namespace SEYR
 {
     static class Picasso
     {
-        public static Size IncomingSize = new Size(1, 1);
         public static Size ThisSize = new Size(1, 1);
-
         public static Point Offset { get; set; } // XY Offset of Current Image
+
+        private static Bitmap _Painting = new Bitmap(1, 1);
+        public static Bitmap Painting
+        {
+            get
+            {
+                return _Painting;
+            }
+            set
+            {
+                _Painting = value;
+                UpdateFrames();
+            }
+        }
 
         private static Rectangle CurrentRect;
         private static Point StartPoint;
@@ -65,7 +76,7 @@ namespace SEYR
                     FileHandler.Grid.Features.Add(feature);
                     FileHandler.Grid.ActiveFeature = feature;
                     composer.LoadComboBox();
-                    MakeTiles();
+                    FileHandler.Grid.MakeTiles();
                 }
                 else
                 {
@@ -76,18 +87,6 @@ namespace SEYR
             {
                 DisplayFeatureInfo(composer, pos);
             }
-        }
-
-        /// <summary>
-        /// Clear all drawn features
-        /// </summary>
-        /// <param name="composer"></param>
-        public static void ClearGraphics()
-        {
-            // Scale incoming image and set blank foreground
-            Bitmap resize = new Bitmap((int)(ImageScale * IncomingSize.Width), (int)(ImageScale * IncomingSize.Height));
-            PBX.Image = resize;
-            ThisSize = resize.Size;
         }
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace SEYR
                         g.DrawRectangle(new Pen(Brushes.HotPink, 2), CurrentRect);
                     }
                 }
-                PBX.Image = bitmap;
+                Painting = bitmap;
                 GC.Collect();
             };
         }
@@ -126,8 +125,7 @@ namespace SEYR
             {
                 DrawTiles(g);
             };
-            PBX.Image = bitmap;
-            Application.DoEvents();
+            Painting = bitmap;
         }
 
         private static void DrawTiles(Graphics g)
@@ -197,27 +195,28 @@ namespace SEYR
         /// <returns></returns>
         private static Point ZoomMousePos(Point click)
         {
-            float ImageAspect = PBX.Image.Width / (float)PBX.Image.Height;
-            float controlAspect = PBX.Width / (float)PBX.Height;
+            Size PBXSize = Pipeline.Composer.GetPBXSize();
+            float ImageAspect = ThisSize.Width / (float)ThisSize.Height;
+            float controlAspect = PBXSize.Width / (float)PBXSize.Height;
             PointF pos = new PointF(click.X + Offset.X, click.Y + Offset.Y);
             if (ImageAspect > controlAspect)
             {
-                float ratioWidth = PBX.Image.Width / (float)PBX.Width;
+                float ratioWidth = ThisSize.Width / (float)PBXSize.Width;
                 pos.X *= ratioWidth;
-                float scale = PBX.Width / (float)PBX.Image.Width;
-                float displayHeight = scale * PBX.Image.Height;
-                float diffHeight = PBX.Height - displayHeight;
+                float scale = PBXSize.Width / (float)ThisSize.Width;
+                float displayHeight = scale * ThisSize.Height;
+                float diffHeight = PBXSize.Height - displayHeight;
                 diffHeight /= 2;
                 pos.Y -= diffHeight;
                 pos.Y /= scale;
             }
             else
             {
-                float ratioHeight = PBX.Image.Height / (float)PBX.Height;
+                float ratioHeight = ThisSize.Height / (float)PBXSize.Height;
                 pos.Y *= ratioHeight;
-                float scale = PBX.Height / (float)PBX.Image.Height;
-                float displayWidth = scale * PBX.Image.Width;
-                float diffWidth = PBX.Width - displayWidth;
+                float scale = PBXSize.Height / (float)ThisSize.Height;
+                float displayWidth = scale * ThisSize.Width;
+                float diffWidth = PBXSize.Width - displayWidth;
                 diffWidth /= 2;
                 pos.X -= diffWidth;
                 pos.X /= scale;

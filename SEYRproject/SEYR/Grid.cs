@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -36,7 +37,7 @@ namespace SEYR
             _PitchY = info.GetDouble("pitchY");
             _Features = (List<Feature>)info.GetValue("features", _Features.GetType());
             _PatternFeature = (Feature)info.GetValue("pattern", _PatternFeature.GetType());
-            _PatternBitmap = (System.Drawing.Bitmap)info.GetValue("bmp", _PatternBitmap.GetType());
+            _PatternBitmap = (Bitmap)info.GetValue("bmp", _PatternBitmap.GetType());
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
@@ -73,11 +74,53 @@ namespace SEYR
         private double _PitchX;
         private double _PitchY;
         private List<Feature> _Features = new List<Feature>();
-        private Feature _PatternFeature = new Feature(System.Drawing.Rectangle.Empty);
-        private System.Drawing.Bitmap _PatternBitmap = new System.Drawing.Bitmap(1, 1);
-        private Feature _ActiveFeature = new Feature(System.Drawing.Rectangle.Empty);
+        private Feature _PatternFeature = new Feature(Rectangle.Empty);
+        private Bitmap _PatternBitmap = new Bitmap(1, 1);
+        private Feature _ActiveFeature = new Feature(Rectangle.Empty);
         private List<Tile> _Tiles = new List<Tile>();
-        
+
+        public void MakeTiles()
+        {
+            if (ImageIdx == -1) return;
+            if (ImageIdx > DataHandler.Output.Count)
+                for (int i = DataHandler.Output.Count; i < ImageIdx; i++)
+                {
+                    DataHandler.Output.Add(string.Empty);
+                }
+            else
+                DataHandler.Output[ImageIdx - 1] = string.Empty;
+
+            // Each tile contains one of each feature
+            // The top-left tile is index 0,0
+            // The bottom-right tile is index i,j
+            Tiles.Clear();
+            for (int i = 0; i < NumberX + 1; i++)
+            {
+                for (int j = 0; j < NumberY + 1; j++)
+                {
+                    Tile tile = new Tile(i, j);
+                    foreach (Feature feature in Features)
+                    {
+                        Feature copy = feature.Clone();
+
+                        copy.Rectangle = new Rectangle(
+                            (int)(feature.Rectangle.X + i * PitchX),
+                            (int)(feature.Rectangle.Y + j * PitchY),
+                            feature.Rectangle.Width, feature.Rectangle.Height);
+
+                        copy.Index = new Point(i, j);
+
+                        tile.Features.Add(copy);
+                    }
+                    Tiles.Add(tile);
+                }
+            }
+
+            foreach (Tile tile in Tiles)
+                tile.Score(ImageIdx);
+            Picasso.ReDraw();
+        }
+
         public double Angle
         {
             get
@@ -188,7 +231,7 @@ namespace SEYR
             }
         }
 
-        public System.Drawing.Bitmap PatternBitmap
+        public Bitmap PatternBitmap
         {
             get
             {

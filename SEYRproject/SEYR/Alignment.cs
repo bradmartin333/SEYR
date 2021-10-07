@@ -1,5 +1,4 @@
-﻿using Accord.Imaging;
-using Accord.Imaging.Filters;
+﻿using Accord.Imaging.Filters;
 using Accord.Imaging.Moments;
 using System;
 using System.Drawing;

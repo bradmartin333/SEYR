@@ -13,16 +13,13 @@ namespace SEYR
 {
     static class Imaging
     {
-        public static Bitmap OriginalImage;
-        public static Bitmap DisplayedImage;
-        public static Bitmap CurrentImage;
-        public static Bitmap DisplayedImageCopy;
-        public static Bitmap CurrentImageCopy;
+        public static Bitmap OriginalImage = new Bitmap(1, 1);
+        public static Bitmap DisplayedImage = new Bitmap(1, 1);
+        public static Bitmap CurrentImage = new Bitmap(1, 1);
 
         public static void ApplyFilters(Bitmap img)
         {
-            Picasso.IncomingSize = img.Size;
-            Picasso.ClearGraphics();
+            Picasso.ThisSize = img.Size;
             OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
             // Resize incoming image
@@ -31,17 +28,11 @@ namespace SEYR
             {
                 g.DrawImage(img, 0, 0, resize.Width, resize.Height);
             }
-            img.Dispose();
 
             // Clone with necessary pixel format for image filtering
             Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
-            resize.Dispose();
-
             working = RotateImage(working, (float)FileHandler.Grid.Angle);
             DisplayedImage = working;
-            DisplayedImageCopy = working;
-
-            PBX.BackgroundImage = working;
 
             Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
             working = filter.Apply(working);
@@ -50,7 +41,6 @@ namespace SEYR
             threshold.ApplyInPlace(working);
 
             CurrentImage = working; // Save edited photo
-            CurrentImageCopy = working;
         }
 
         private static double Scan(Bitmap colorImg, Bitmap filteredImg)
@@ -86,8 +76,8 @@ namespace SEYR
         {
             if (feature.Rectangle.IsEmpty) return;
             Crop crop = new Crop(feature.OffsetRectangle);
-            Bitmap colorImg = crop.Apply(DisplayedImageCopy);
-            Bitmap filteredImg = crop.Apply(CurrentImageCopy);
+            Bitmap colorImg = crop.Apply(DisplayedImage);
+            Bitmap filteredImg = crop.Apply(CurrentImage);
             feature.Score = Scan(colorImg, filteredImg);
             if (Math.Abs(feature.Score - feature.PassScore) <= feature.PassTol)
             {

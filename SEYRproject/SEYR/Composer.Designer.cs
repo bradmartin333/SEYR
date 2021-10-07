@@ -74,7 +74,7 @@ namespace SEYR
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.numFilterThreshold = new System.Windows.Forms.NumericUpDown();
-            this.panel = new System.Windows.Forms.Panel();
+            this.PBX = new System.Windows.Forms.PictureBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +111,7 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFilterThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,7 +165,7 @@ namespace SEYR
             this.tableLayoutPanel.Controls.Add(this.label19, 1, 22);
             this.tableLayoutPanel.Controls.Add(this.label20, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.numFilterThreshold, 3, 4);
-            this.tableLayoutPanel.Controls.Add(this.panel, 5, 1);
+            this.tableLayoutPanel.Controls.Add(this.PBX, 5, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -755,14 +756,19 @@ namespace SEYR
             this.numFilterThreshold.TabIndex = 42;
             this.numFilterThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // panel
+            // PBX
             // 
-            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel.Location = new System.Drawing.Point(195, 11);
-            this.panel.Name = "panel";
-            this.tableLayoutPanel.SetRowSpan(this.panel, 26);
-            this.panel.Size = new System.Drawing.Size(543, 489);
-            this.panel.TabIndex = 46;
+            this.PBX.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
+            this.PBX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PBX.Image = global::SEYR.Properties.Resources.SEYR;
+            this.PBX.Location = new System.Drawing.Point(195, 11);
+            this.PBX.Name = "PBX";
+            this.tableLayoutPanel.SetRowSpan(this.PBX, 26);
+            this.PBX.Size = new System.Drawing.Size(543, 489);
+            this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PBX.TabIndex = 43;
+            this.PBX.TabStop = false;
             // 
             // menuStrip
             // 
@@ -875,7 +881,7 @@ namespace SEYR
             // followerPatternNameToolStripMenuItem
             // 
             this.followerPatternNameToolStripMenuItem.Name = "followerPatternNameToolStripMenuItem";
-            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.followerPatternNameToolStripMenuItem.Text = "N/A";
             this.followerPatternNameToolStripMenuItem.Click += new System.EventHandler(this.followerPatternNameToolStripMenuItem_Click);
             // 
@@ -883,7 +889,7 @@ namespace SEYR
             // 
             this.trainToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_school_16_24;
             this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
-            this.trainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.trainToolStripMenuItem.Text = "Train";
             this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
             // 
@@ -891,7 +897,7 @@ namespace SEYR
             // 
             this.forgetToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
             this.forgetToolStripMenuItem.Name = "forgetToolStripMenuItem";
-            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.forgetToolStripMenuItem.Text = "Forget";
             this.forgetToolStripMenuItem.Click += new System.EventHandler(this.forgetToolStripMenuItem_Click);
             // 
@@ -960,6 +966,7 @@ namespace SEYR
             ((System.ComponentModel.ISupportInitialize)(this.numSizeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFilterThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -1030,8 +1037,8 @@ namespace SEYR
         private System.Windows.Forms.ToolStripMenuItem trainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem forgetToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem followerPatternNameToolStripMenuItem;
-        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ToolStripMenuItem deselectFeatureToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem followerPatternToolStripMenuItem;
+        private System.Windows.Forms.PictureBox PBX;
     }
 }

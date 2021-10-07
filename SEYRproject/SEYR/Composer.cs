@@ -18,8 +18,7 @@ namespace SEYR
         public Composer()
         {
             InitializeComponent();
-            panel.Controls.Add(PBX);
-            
+
             // Init mouse and keyboard handlers
             PBX.MouseDown += PictureBox_MouseDown;
             PBX.MouseUp += PictureBox_MouseUp;
@@ -107,6 +106,17 @@ namespace SEYR
             Picasso.Paint(e.Location);
         }
 
+        public Size GetPBXSize()
+        {
+            return PBX.Size;
+        }
+
+        public void InsertNewImage(Bitmap background, Bitmap foreground)
+        {
+            PBX.BackgroundImage = background;
+            PBX.Image = foreground;
+        }
+
         #endregion
 
         #region Feature Management
@@ -150,7 +160,7 @@ namespace SEYR
             FileHandler.Grid.Features.Remove(FileHandler.Grid.Features.Find(x => x.Equals(FileHandler.Grid.ActiveFeature)));
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
             LoadComboBox();
-            MakeTiles();
+            FileHandler.Grid.MakeTiles();
         }
 
         private void btnCopyRect_Click(object sender, EventArgs e)
@@ -163,7 +173,7 @@ namespace SEYR
             FileHandler.Grid.Features.Add(feature);
             FileHandler.Grid.ActiveFeature = feature;
             LoadComboBox();
-            MakeTiles();
+            FileHandler.Grid.MakeTiles();
         }
 
         private void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
