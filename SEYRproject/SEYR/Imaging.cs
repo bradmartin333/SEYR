@@ -19,7 +19,6 @@ namespace SEYR
 
         public static void ApplyFilters(Bitmap img)
         {
-            Picasso.ThisSize = img.Size;
             OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
             // Resize incoming image
@@ -28,6 +27,7 @@ namespace SEYR
             {
                 g.DrawImage(img, 0, 0, resize.Width, resize.Height);
             }
+            Picasso.ThisSize = resize.Size;
 
             // Clone with necessary pixel format for image filtering
             Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
