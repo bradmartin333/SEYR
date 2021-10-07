@@ -111,8 +111,15 @@ namespace SEYR
             return PBX.Size;
         }
 
+        public void ClearGraphics()
+        {
+            PBX.BackgroundImage = new Bitmap(Picasso.ThisSize.Width, Picasso.ThisSize.Height);
+            PBX.Image = new Bitmap(Picasso.ThisSize.Width, Picasso.ThisSize.Height);
+        }
+
         public void InsertNewImage(Bitmap background, Bitmap foreground)
         {
+            ClearGraphics();
             PBX.BackgroundImage = background;
             PBX.Image = foreground;
         }

@@ -117,6 +117,7 @@ namespace SEYR
             ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.9f);
 
             Bitmap source = (Bitmap)CurrentImage.Clone();
+            if (FileHandler.Grid.PatternBitmap.Size.Width > source.Width || FileHandler.Grid.PatternBitmap.Size.Height > source.Height) return false;
             TemplateMatch[] matchings = tm.ProcessImage(source, FileHandler.Grid.PatternBitmap);
             if (matchings.Length == 0) return false;
 

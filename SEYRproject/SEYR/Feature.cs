@@ -80,11 +80,11 @@ namespace SEYR
                 new Point(_Rectangle.Right, _Rectangle.Bottom)
             };
 
-            Rectangle pbxRect = new Rectangle(0, 0, Picasso.ThisSize.Width, Picasso.ThisSize.Height);
+            Rectangle rect = new Rectangle(0, 0, Picasso.ThisSize.Width, Picasso.ThisSize.Height);
 
             foreach (Point corner in corners)
             {
-                if (!pbxRect.Contains(corner)) return false;
+                if (!rect.Contains(corner)) return false;
             }
             return true;
         }

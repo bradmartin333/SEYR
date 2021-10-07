@@ -102,7 +102,6 @@ namespace SEYR
 
                 FileHandler.Grid.MakeTiles();
             }
-            Working = false;
         }
 
         public static void UpdateFrames()
@@ -110,7 +109,10 @@ namespace SEYR
             Bitmap background = (Bitmap)Imaging.DisplayedImage.Clone();
             Bitmap foreground = (Bitmap)Picasso.Painting.Clone();
             Composer.InsertNewImage(background, foreground);
+            background = (Bitmap)Imaging.DisplayedImage.Clone();
+            foreground = (Bitmap)Picasso.Painting.Clone();
             Viewer.InsertNewImage(background, foreground);
+            Working = false;
         }
 
         private static void Timer_Tick(object sender, System.EventArgs e)
