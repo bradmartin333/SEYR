@@ -18,6 +18,7 @@
 	<DocumentationFile>S:\SEYR\SEYRproject\SEYR\bin\Release\net472\SEYR.xml</DocumentationFile>
 	<SignAssembly>False</SignAssembly>
 	<EnableNETAnalyzers>False</EnableNETAnalyzers>
+	<PackageLicenseFile>S:\SEYR\LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
