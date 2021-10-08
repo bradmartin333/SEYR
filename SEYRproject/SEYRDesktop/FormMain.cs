@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
@@ -9,6 +10,7 @@ namespace SEYRDesktop
         Image IMG = null;
         FrameDimension DIM = null;
         int FRAMECOUNT = 0;
+        bool STOP = false;
 
         public FormMain()
         {
@@ -27,6 +29,8 @@ namespace SEYRDesktop
             string path = OpenFile("Open a GIF", "GIF file (*.gif)|*.gif");
             if (path == null)
                 return;
+
+            btnOpenGIF.BackColor = Color.LawnGreen;
 
             IMG = Image.FromFile(path);
             DIM = new FrameDimension(IMG.FrameDimensionsList[0]);
@@ -47,8 +51,9 @@ namespace SEYRDesktop
             IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
             Image image = (Image)IMG.Clone();
             Bitmap bitmap = new Bitmap(image);
-            pictureBox.BackgroundImage = image;
             SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
+            SEYR.Pipeline.R = (int)(((double)numFrame.Value + 1) / Math.Sqrt(FRAMECOUNT + 1));
+            SEYR.Pipeline.C = (int)(((double)numFrame.Value + 1) % Math.Sqrt(FRAMECOUNT + 1));
             SEYR.Pipeline.LoadNewImage(bitmap);
             while (SEYR.Pipeline.Working)
                 Application.DoEvents();
@@ -71,6 +76,11 @@ namespace SEYRDesktop
         {
             for (int i = (int)numFrame.Value; i < FRAMECOUNT; i++)
             {
+                if (STOP)
+                {
+                    STOP = false;
+                    return;
+                }
                 numFrame.Value++;
             }
         }
@@ -80,14 +90,19 @@ namespace SEYRDesktop
             SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
         }
 
-        private void numImageScale_ValueChanged(object sender, System.EventArgs e)
-        {
-            SEYR.Pipeline.ImageScale = (double)numImageScale.Value;
-        }
-
         private void numPatternFollowDelay_ValueChanged(object sender, System.EventArgs e)
         {
             SEYR.Pipeline.PatternFollowDelay = (int)numPatternFollowDelay.Value;
+        }
+
+        private void btnClearData_Click(object sender, EventArgs e)
+        {
+            SEYR.Pipeline.ClearOutput();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            STOP = true;
         }
     }
 }

@@ -60,6 +60,12 @@ namespace SEYR
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
         }
 
+        private void pixelPitchCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pipeline.PixelPitch.Show();
+            Pipeline.PixelPitch.BringToFront();
+        }
+
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(text: "Coming Soon", caption: "SEYR Help");
@@ -145,6 +151,8 @@ namespace SEYR
             int activeIdx = FileHandler.Grid.Features.FindIndex(x => x.Equals(FileHandler.Grid.ActiveFeature));
             if (activeIdx != -1) comboBoxRects.SelectedIndex = activeIdx;
 
+            comboBoxRects.BackColor = SystemColors.Window;
+
             comboBoxRects.EndUpdate();
             ComboBoxOverride = false;
         }
@@ -160,6 +168,7 @@ namespace SEYR
                 }
             }
             DisplayAlignmentStatus();
+            comboBoxRects.BackColor = SystemColors.Window;
         }
 
         private void btnRemoveRect_Click(object sender, EventArgs e)
@@ -185,10 +194,16 @@ namespace SEYR
 
         private void ComboBoxRects_KeyDown(object sender, KeyEventArgs e)
         {
-            if (FileHandler.Grid.Features.Count == 0) return;
+            if (FileHandler.Grid.Features.Count == 0 || FileHandler.Grid.ActiveFeature.Equals(new Feature(Rectangle.Empty))) return;
 
             if (e.KeyCode == Keys.Enter)
             {
+                if (string.IsNullOrWhiteSpace(comboBoxRects.Text))
+                {
+                    comboBoxRects.Text = FileHandler.Grid.ActiveFeature.Name;
+                    return;
+                }
+
                 // Make sure it is an unique name
                 foreach (Feature feature in FileHandler.Grid.Features)
                 {
@@ -204,6 +219,10 @@ namespace SEYR
                 updateFeature.Name = comboBoxRects.Text;
                 FileHandler.Grid.ActiveFeature = updateFeature;
                 LoadComboBox();
+            }
+            else
+            {
+                comboBoxRects.BackColor = Color.PaleGoldenrod; // Indicate that there are unsaved changes
             }
         }
 
@@ -302,6 +321,9 @@ namespace SEYR
         {
             FileHandler.FilePath = string.Empty;
             FileHandler.Grid = new Grid();
+            LoadGrid(this);
+            LoadFeature(this);
+            LoadNewImage(Imaging.OriginalImage);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -335,13 +357,6 @@ namespace SEYR
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathBuffer = FileHandler.SaveFile("Save Simple Entropy Yield Routine Report", "Text File (*.txt) | *.txt");
-
-            if (PitchX != -1 && PitchY != -1)
-            {
-                string pitchEnding = string.Format("_{0}_{1}.txt", PitchX, PitchY);
-                pathBuffer = pathBuffer.Replace(".txt", pitchEnding);
-            }
-
             if (pathBuffer == null)
                 return;
             else

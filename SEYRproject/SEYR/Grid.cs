@@ -29,6 +29,7 @@ namespace SEYR
 
         protected Grid(SerializationInfo info, StreamingContext context)
         {
+            _Scale = info.GetDouble("scale");
             _Angle = info.GetDouble("angle");
             _FilterThreshold = info.GetInt32("filterThreshold");
             _NumberX = info.GetDouble("numX");
@@ -43,6 +44,7 @@ namespace SEYR
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            info.AddValue("scale", _Scale);
             info.AddValue("angle", _Angle);
             info.AddValue("filterThreshold", _FilterThreshold);
             info.AddValue("numX", _NumberX);
@@ -58,6 +60,7 @@ namespace SEYR
 
         public Grid()
         {
+            _Scale = 0.25;
             _Angle = 0.0;
             _FilterThreshold = 170;
             _NumberX = 0;
@@ -67,6 +70,7 @@ namespace SEYR
             _Features = new List<Feature>();
         }
 
+        private double _Scale;
         private double _Angle;
         private int _FilterThreshold;
         private double _NumberX;
@@ -119,6 +123,20 @@ namespace SEYR
             foreach (Tile tile in Tiles)
                 tile.Score(ImageIdx);
             Picasso.ReDraw();
+        }
+
+        public double Scale
+        {
+            get
+            {
+                return _Scale;
+            }
+            set
+            {
+                _Scale = value;
+                LoadNewImage(Imaging.OriginalImage);
+                if (PropertyChanged != null) NotifyPropertyChanged();
+            }
         }
 
         public double Angle

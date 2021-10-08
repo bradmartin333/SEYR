@@ -45,10 +45,19 @@ namespace SEYR
 
         public static void ReadParametersFromBinaryFile()
         {
-            using (Stream stream = File.Open(FilePath, FileMode.Open))
+            try
             {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                Grid = (Grid)binaryFormatter.Deserialize(stream);
+                using (Stream stream = File.Open(FilePath, FileMode.Open))
+                {
+                    var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    Grid = (Grid)binaryFormatter.Deserialize(stream);
+                }
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Invalid SEYR File");
+                Grid = new Grid();
+                return;
             }
         }
     }

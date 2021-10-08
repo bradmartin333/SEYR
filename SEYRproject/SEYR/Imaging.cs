@@ -16,13 +16,14 @@ namespace SEYR
         public static Bitmap OriginalImage = new Bitmap(1, 1);
         public static Bitmap DisplayedImage = new Bitmap(1, 1);
         public static Bitmap CurrentImage = new Bitmap(1, 1);
+        public static Bitmap PatternSearchImage = new Bitmap(1, 1);
 
         public static void ApplyFilters(Bitmap img)
         {
             OriginalImage = (Bitmap)img.Clone(); // Save unedited photo
 
             // Resize incoming image
-            Bitmap resize = new Bitmap((int)(ImageScale * img.Width), (int)(ImageScale * img.Height));
+            Bitmap resize = new Bitmap((int)(FileHandler.Grid.Scale * img.Width), (int)(FileHandler.Grid.Scale * img.Height));
             using (Graphics g = Graphics.FromImage(resize))
             {
                 g.DrawImage(img, 0, 0, resize.Width, resize.Height);
@@ -41,6 +42,7 @@ namespace SEYR
             threshold.ApplyInPlace(working);
 
             CurrentImage = working; // Save edited photo
+            PatternSearchImage = working;
         }
 
         private static double Scan(Bitmap colorImg, Bitmap filteredImg)
@@ -116,9 +118,9 @@ namespace SEYR
             if (FileHandler.Grid.PatternFeature.Rectangle.IsEmpty) return false;
             ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.9f);
 
-            Bitmap source = (Bitmap)CurrentImage.Clone();
-            if (FileHandler.Grid.PatternBitmap.Size.Width > source.Width || FileHandler.Grid.PatternBitmap.Size.Height > source.Height) return false;
-            TemplateMatch[] matchings = tm.ProcessImage(source, FileHandler.Grid.PatternBitmap);
+            if (FileHandler.Grid.PatternBitmap.Size.Width > PatternSearchImage.Width || 
+                FileHandler.Grid.PatternBitmap.Size.Height > PatternSearchImage.Height) return false;
+            TemplateMatch[] matchings = tm.ProcessImage(PatternSearchImage, FileHandler.Grid.PatternBitmap);
             if (matchings.Length == 0) return false;
 
             Point point = matchings[0].Rectangle.Location;

@@ -6,6 +6,9 @@ namespace SEYR
     {
         public static void LoadGrid(Composer composer)
         {
+            composer.numScale.DataBindings.Clear();
+            composer.numScale.DataBindings.Add(new Binding("Value", FileHandler.Grid, "Scale", false, DataSourceUpdateMode.OnPropertyChanged));
+
             composer.numAngle.DataBindings.Clear();
             composer.numAngle.DataBindings.Add(new Binding("Value", FileHandler.Grid, "Angle", false, DataSourceUpdateMode.OnPropertyChanged));
 

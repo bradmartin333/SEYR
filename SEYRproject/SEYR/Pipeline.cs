@@ -6,18 +6,23 @@ namespace SEYR
 {
     public static class Pipeline
     {
-        // Information String Variables
-        public static string RR { get; set; } = "0";
-        public static string RC { get; set; } = "0";
-        public static string R { get; set; } = "0";
-        public static string C { get; set; } = "0";
-        public static string X { get; set; } = "0";
-        public static string Y { get; set; } = "0";
+        /// <summary>
+        /// Image is processing
+        /// </summary>
+        public static bool Working { get; set; } = false;
 
         /// <summary>
         /// Default is -1 (null)
         /// </summary>
         public static int ImageIdx { get; set; } = -1;
+
+        // Information String Variables
+        public static int RR { get; set; } = 0;
+        public static int RC { get; set; } = 0;
+        public static int R { get; set; } = 0;
+        public static int C { get; set; } = 0;
+        public static double X { get; set; } = -1;
+        public static double Y { get; set; } = -1;
 
         /// <summary>
         /// Default is 1 (Every Image)
@@ -30,44 +35,23 @@ namespace SEYR
         public static int PatternFollowDelay { get; set; } = 100;
 
         /// <summary>
-        /// Device X Pitch
-        /// </summary>
-        public static double PitchX { get; set; } = -1;
-
-        /// <summary>
-        /// Device Y Pitch
-        /// </summary>
-        public static double PitchY { get; set; } = -1;
-
-        /// <summary>
-        /// Scale of incoming image
-        /// </summary>
-        public static double ImageScale { get; set; } = 1.00;
-
-        /// <summary>
-        /// Image is processing
-        /// </summary>
-        public static bool Working { get; set; } = false;
-
-        /// <summary>
         /// Gets updated each pattern search
         /// </summary>
         public static bool FoundPattern { get; set; } = false;
 
         public static Composer Composer;
         public static Viewer Viewer;
+        public static PixelPitch PixelPitch;
         private static Thread PatternFollowThread;
 
-        public static void Initialize(int patternFollowInterval = 1, double pitchX = -1, double pitchY = -1, int patternFollowDelay = 100, double imageScale = 1.00)
+        public static void Initialize(int patternFollowInterval = 1, int patternFollowDelay = 100)
         { 
             Composer = new Composer();
             Viewer = new Viewer();
+            PixelPitch = new PixelPitch();
 
             PatternFollowInterval = patternFollowInterval;
-            PitchX = pitchX;
-            PitchY = pitchY;
             PatternFollowDelay = patternFollowDelay;
-            ImageScale = imageScale;
         }
 
         public static void LoadNewImage(Bitmap img)
@@ -102,6 +86,12 @@ namespace SEYR
 
                 FileHandler.Grid.MakeTiles();
             }
+        }
+
+        public static void ClearOutput()
+        {
+            SEYR.DataHandler.Output.Clear();
+            LoadNewImage(Imaging.OriginalImage);
         }
 
         public static void UpdateFrames()
