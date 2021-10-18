@@ -90,7 +90,8 @@ namespace SEYR
 
         public static void ClearOutput()
         {
-            SEYR.DataHandler.Output.Clear();
+            DataHandler.Output.Clear();
+            Viewer.Clear();
             LoadNewImage(Imaging.OriginalImage);
         }
 
