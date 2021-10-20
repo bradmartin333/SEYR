@@ -34,7 +34,7 @@ namespace GenerateImages
                             {
                                 if (k % 2 == 1 && l % 2 == 1)
                                 {
-                                    g.DrawImage(random.Next(2) == 1 ? cell : back, new Rectangle(k * 100 + deltaX, l * 100 + deltaY, 100, 100));
+                                    g.DrawImage(random.Next(2) == 1 ? cell : back, new Rectangle((k * 100) + deltaX, (l * 100) + deltaY, 100, 100));
                                 }
                             }
                         }

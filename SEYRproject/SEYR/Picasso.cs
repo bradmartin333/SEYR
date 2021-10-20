@@ -112,7 +112,7 @@ namespace SEYR
                 }
                 Painting = bitmap;
                 GC.Collect();
-            };
+            }
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace SEYR
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 DrawTiles(g);
-            };
+            }
             Painting = bitmap;
         }
 

@@ -108,8 +108,8 @@ namespace SEYR
                         Feature copy = feature.Clone();
 
                         copy.Rectangle = new Rectangle(
-                            (int)(feature.Rectangle.X + i * PitchX),
-                            (int)(feature.Rectangle.Y + j * PitchY),
+                            (int)(feature.Rectangle.X + (i * PitchX)),
+                            (int)(feature.Rectangle.Y + (j * PitchY)),
                             feature.Rectangle.Width, feature.Rectangle.Height);
 
                         copy.Index = new Point(i, j);
@@ -166,7 +166,6 @@ namespace SEYR
                 if (PropertyChanged != null) NotifyPropertyChanged();
             }
         }
-
 
         public double NumberX
         {

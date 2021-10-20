@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Accord.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static SEYR.Pipeline;
 using System.Drawing.Imaging;
 using Accord.Imaging.Filters;
 using Accord.Imaging.Moments;
@@ -66,7 +65,7 @@ namespace SEYR
             if (whitePixels < 10 || blackPixels < 10)
                 return 0.0;
             else
-                return Math.Round(Statistics.Entropy(pixelVals.ToArray()), 1) + whitePixels / 2;
+                return Math.Round(Statistics.Entropy(pixelVals.ToArray()), 1) + (whitePixels / 2);
             // Add a fraction of the number of white pixels to simulate a rotation filter
         }
 
