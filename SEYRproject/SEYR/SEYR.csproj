@@ -15,7 +15,7 @@
 	<Version>1.1.1</Version>
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-	<DocumentationFile>S:\SEYR\SEYRproject\SEYR\bin\Release\net472\SEYR.xml</DocumentationFile>
+	<DocumentationFile>\bin\Release\net472\SEYR.xml</DocumentationFile>
 	<SignAssembly>False</SignAssembly>
 	<EnableNETAnalyzers>False</EnableNETAnalyzers>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
