@@ -85,7 +85,7 @@ namespace SEYR
 
         public void MakeTiles()
         {
-            if (ImageIdx == -1) return;
+            if (!Initialized) return;
             if (ImageIdx > DataHandler.Output.Count)
                 for (int i = DataHandler.Output.Count; i < ImageIdx; i++)
                 {

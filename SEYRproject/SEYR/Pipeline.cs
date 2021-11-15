@@ -6,6 +6,8 @@ namespace SEYR
 {
     public static class Pipeline
     {
+        public static bool Initialized { get; set; } = false;
+
         /// <summary>
         /// Image is processing
         /// </summary>
@@ -14,7 +16,7 @@ namespace SEYR
         /// <summary>
         /// Default is -1 (null)
         /// </summary>
-        public static int ImageIdx { get; set; } = -1;
+        public static int ImageIdx { get; set; } = 1;
 
         // Information String Variables
         public static int RR { get; set; } = 0;
@@ -52,10 +54,13 @@ namespace SEYR
 
             PatternFollowInterval = patternFollowInterval;
             PatternFollowDelay = patternFollowDelay;
+
+            Initialized = true;
         }
 
         public static void LoadNewImage(Bitmap img)
         {
+            if (!Initialized) return;
             Working = true;
             using (var wc = new WaitCursor())
             {
@@ -88,15 +93,18 @@ namespace SEYR
             }
         }
 
-        public static void ClearOutput()
+        public static void ClearOutput(bool reloadImage = false)
         {
+            if (!Initialized) return;
             DataHandler.Output.Clear();
             Viewer.Clear();
-            LoadNewImage(Imaging.OriginalImage);
+            ImageIdx = 1;
+            if (reloadImage) LoadNewImage(Imaging.OriginalImage);
         }
 
         public static void UpdateFrames()
         {
+            if (!Initialized) return;
             Bitmap background = (Bitmap)Imaging.DisplayedImage.Clone();
             Bitmap foreground = (Bitmap)Picasso.Painting.Clone();
             Composer.InsertNewImage(background, foreground);
@@ -104,6 +112,17 @@ namespace SEYR
             foreground = (Bitmap)Picasso.Painting.Clone();
             Viewer.InsertNewImage(background, foreground);
             Working = false;
+        }
+
+        /// <summary>
+        /// Show and Bring to Front.
+        /// Initialize if needed.
+        /// </summary>
+        public static void Appear()
+        {
+            if (!Initialized) Initialize();
+            Composer.Show();
+            Composer.BringToFront();
         }
 
         private static void Timer_Tick(object sender, System.EventArgs e)

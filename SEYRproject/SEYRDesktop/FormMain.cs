@@ -15,13 +15,11 @@ namespace SEYRDesktop
         public FormMain()
         {
             InitializeComponent();
-            SEYR.Pipeline.Initialize();
         }
 
         private void btnOpenComposer_Click(object sender, System.EventArgs e)
         {
-            SEYR.Pipeline.Composer.Show();
-            SEYR.Pipeline.Composer.BringToFront();
+            SEYR.Pipeline.Appear();
         }
 
         private void btnOpenGIF_Click(object sender, System.EventArgs e)
@@ -82,6 +80,7 @@ namespace SEYRDesktop
                     return;
                 }
                 numFrame.Value++;
+                Application.DoEvents();
             }
         }
 
@@ -97,7 +96,7 @@ namespace SEYRDesktop
 
         private void btnClearData_Click(object sender, EventArgs e)
         {
-            SEYR.Pipeline.ClearOutput();
+            SEYR.Pipeline.ClearOutput(reloadImage: true);
         }
 
         private void btnStop_Click(object sender, EventArgs e)
