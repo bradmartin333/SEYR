@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnStop = new System.Windows.Forms.Button();
             this.btnOpenComposer = new System.Windows.Forms.Button();
             this.btnClearData = new System.Windows.Forms.Button();
             this.btnOpenGIF = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@
             this.btnRunAll = new System.Windows.Forms.Button();
             this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnStop = new System.Windows.Forms.Button();
+            this.btnOpenDir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).BeginInit();
@@ -57,6 +58,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnOpenDir, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnStop, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnOpenComposer, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnClearData, 1, 3);
@@ -78,17 +80,34 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 139);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 149);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnStop
+            // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.btnStop, 2);
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Location = new System.Drawing.Point(158, 80);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(148, 25);
+            this.btnStop.TabIndex = 13;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnOpenComposer
             // 
+            this.btnOpenComposer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnOpenComposer, 2);
-            this.btnOpenComposer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenComposer.Location = new System.Drawing.Point(168, 14);
+            this.btnOpenComposer.Location = new System.Drawing.Point(158, 18);
             this.btnOpenComposer.Name = "btnOpenComposer";
-            this.btnOpenComposer.Size = new System.Drawing.Size(148, 23);
+            this.btnOpenComposer.Size = new System.Drawing.Size(148, 25);
             this.btnOpenComposer.TabIndex = 1;
             this.btnOpenComposer.Text = "Open Composer";
             this.btnOpenComposer.UseVisualStyleBackColor = true;
@@ -96,13 +115,15 @@
             // 
             // btnClearData
             // 
+            this.btnClearData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClearData.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.btnClearData, 2);
-            this.btnClearData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearData.Location = new System.Drawing.Point(14, 74);
+            this.btnClearData.Location = new System.Drawing.Point(18, 80);
             this.btnClearData.Name = "btnClearData";
-            this.btnClearData.Size = new System.Drawing.Size(148, 25);
+            this.btnClearData.Size = new System.Drawing.Size(134, 25);
             this.btnClearData.TabIndex = 12;
             this.btnClearData.Text = "Clear Data";
             this.btnClearData.UseVisualStyleBackColor = true;
@@ -110,12 +131,14 @@
             // 
             // btnOpenGIF
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.btnOpenGIF, 2);
-            this.btnOpenGIF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOpenGIF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenGIF.AutoSize = true;
             this.btnOpenGIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenGIF.Location = new System.Drawing.Point(14, 14);
+            this.btnOpenGIF.Location = new System.Drawing.Point(18, 18);
             this.btnOpenGIF.Name = "btnOpenGIF";
-            this.btnOpenGIF.Size = new System.Drawing.Size(148, 23);
+            this.btnOpenGIF.Size = new System.Drawing.Size(67, 25);
             this.btnOpenGIF.TabIndex = 0;
             this.btnOpenGIF.Text = "Open GIF";
             this.btnOpenGIF.UseVisualStyleBackColor = true;
@@ -125,7 +148,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(14, 102);
+            this.label2.Location = new System.Drawing.Point(18, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 26);
             this.label2.TabIndex = 7;
@@ -134,15 +157,14 @@
             // 
             // numPatternFollowDelay
             // 
-            this.numPatternFollowDelay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPatternFollowDelay.Location = new System.Drawing.Point(87, 105);
+            this.numPatternFollowDelay.Location = new System.Drawing.Point(91, 111);
             this.numPatternFollowDelay.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numPatternFollowDelay.Name = "numPatternFollowDelay";
-            this.numPatternFollowDelay.Size = new System.Drawing.Size(75, 20);
+            this.numPatternFollowDelay.Size = new System.Drawing.Size(61, 20);
             this.numPatternFollowDelay.TabIndex = 8;
             this.numPatternFollowDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numPatternFollowDelay.Value = new decimal(new int[] {
@@ -156,7 +178,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(168, 102);
+            this.label1.Location = new System.Drawing.Point(158, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 26);
             this.label1.TabIndex = 6;
@@ -167,7 +189,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(14, 40);
+            this.label4.Location = new System.Drawing.Point(18, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 31);
             this.label4.TabIndex = 11;
@@ -176,15 +198,17 @@
             // 
             // numFrame
             // 
-            this.numFrame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numFrame.Location = new System.Drawing.Point(87, 43);
+            this.numFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numFrame.Location = new System.Drawing.Point(91, 49);
             this.numFrame.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numFrame.Name = "numFrame";
-            this.numFrame.Size = new System.Drawing.Size(75, 20);
+            this.numFrame.Size = new System.Drawing.Size(61, 20);
             this.numFrame.TabIndex = 3;
             this.numFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numFrame.Value = new decimal(new int[] {
@@ -196,10 +220,12 @@
             // 
             // btnRunAll
             // 
+            this.btnRunAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnRunAll, 2);
-            this.btnRunAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRunAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunAll.Location = new System.Drawing.Point(168, 43);
+            this.btnRunAll.Location = new System.Drawing.Point(158, 49);
             this.btnRunAll.Name = "btnRunAll";
             this.btnRunAll.Size = new System.Drawing.Size(148, 25);
             this.btnRunAll.TabIndex = 4;
@@ -210,7 +236,7 @@
             // numPatternFollowInterval
             // 
             this.numPatternFollowInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPatternFollowInterval.Location = new System.Drawing.Point(249, 105);
+            this.numPatternFollowInterval.Location = new System.Drawing.Point(239, 111);
             this.numPatternFollowInterval.Maximum = new decimal(new int[] {
             276447232,
             23283,
@@ -236,28 +262,30 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // btnStop
+            // btnOpenDir
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.btnStop, 2);
-            this.btnStop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStop.Location = new System.Drawing.Point(168, 74);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(148, 25);
-            this.btnStop.TabIndex = 13;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenDir.AutoSize = true;
+            this.btnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenDir.Location = new System.Drawing.Point(91, 18);
+            this.btnOpenDir.Name = "btnOpenDir";
+            this.btnOpenDir.Size = new System.Drawing.Size(61, 25);
+            this.btnOpenDir.TabIndex = 14;
+            this.btnOpenDir.Text = "Open Dir";
+            this.btnOpenDir.UseVisualStyleBackColor = true;
+            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 139);
+            this.ClientSize = new System.Drawing.Size(325, 149);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.Text = "SEYR Desktop";
+            this.Text = "SEYR Desktop   v2.0";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).EndInit();
@@ -282,6 +310,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClearData;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnOpenDir;
     }
 }
 

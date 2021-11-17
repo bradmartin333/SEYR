@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SEYRDesktop
@@ -9,12 +13,14 @@ namespace SEYRDesktop
     {
         Image IMG = null;
         FrameDimension DIM = null;
+        string[] IMGS = null;
         int FRAMECOUNT = 0;
         bool STOP = false;
 
         public FormMain()
         {
             InitializeComponent();
+            SEYR.Pipeline.Appear();
         }
 
         private void btnOpenComposer_Click(object sender, System.EventArgs e)
@@ -28,11 +34,33 @@ namespace SEYRDesktop
             if (path == null)
                 return;
 
+            btnOpenDir.Enabled = false;
+
             btnOpenGIF.BackColor = Color.LawnGreen;
 
             IMG = Image.FromFile(path);
             DIM = new FrameDimension(IMG.FrameDimensionsList[0]);
             FRAMECOUNT = IMG.GetFrameCount(DIM);
+
+            if (FRAMECOUNT > 100) MessageBox.Show("This is a large GIF, consider using a Dir of images instead.");
+
+            numFrame.Maximum = FRAMECOUNT;
+            numFrame.Value = 1;
+            NextImage();
+        }
+
+        private void btnOpenDir_Click(object sender, EventArgs e)
+        {
+            string path = OpenFolder();
+            if (path == null)
+                return;
+
+            btnOpenGIF.Enabled = false;
+
+            btnOpenDir.BackColor = Color.LawnGreen;
+
+            IMGS = GetSortedPicturesFrom(path).ToArray();
+            FRAMECOUNT = IMGS.Count();
 
             numFrame.Maximum = FRAMECOUNT;
             numFrame.Value = 1;
@@ -46,15 +74,27 @@ namespace SEYRDesktop
 
         private void NextImage()
         {
-            IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
-            Image image = (Image)IMG.Clone();
-            Bitmap bitmap = new Bitmap(image);
-            SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-            SEYR.Pipeline.R = (int)(((double)numFrame.Value + 1) / Math.Sqrt(FRAMECOUNT + 1));
-            SEYR.Pipeline.C = (int)(((double)numFrame.Value + 1) % Math.Sqrt(FRAMECOUNT + 1));
-            SEYR.Pipeline.LoadNewImage(bitmap);
-            while (SEYR.Pipeline.Working)
-                Application.DoEvents();
+            if (btnOpenGIF.Enabled)
+            {
+                IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
+                Image image = (Image)IMG.Clone();
+                Bitmap bitmap = new Bitmap(image);
+                SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
+                SEYR.Pipeline.X = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT));
+                SEYR.Pipeline.Y = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT));
+                SEYR.Pipeline.LoadNewImage(bitmap);
+                while (SEYR.Pipeline.Working)
+                    Application.DoEvents();
+            }
+            else if (btnOpenDir.Enabled)
+            {
+                SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
+                SEYR.Pipeline.X = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT));
+                SEYR.Pipeline.Y = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT));
+                SEYR.Pipeline.LoadNewImage(new Bitmap(IMGS[(int)(numFrame.Value - 1)]));
+                while (SEYR.Pipeline.Working)
+                    Application.DoEvents();
+            }
         }
 
         private string OpenFile(string title, string filter)
@@ -66,6 +106,17 @@ namespace SEYRDesktop
                 openFileDialog.Filter = filter;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                     return openFileDialog.FileName;
+            }
+            return null;
+        }
+
+        private string OpenFolder()
+        {
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                openFileDialog.Title = "Open a directory containing photos";
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                    return folderBrowserDialog.SelectedPath;
             }
             return null;
         }
@@ -102,6 +153,15 @@ namespace SEYRDesktop
         private void btnStop_Click(object sender, EventArgs e)
         {
             STOP = true;
+        }
+
+        public static IEnumerable<string> GetSortedPicturesFrom(string searchFolder)
+        {
+            string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
+            List<string> filesFound = new List<string>();
+            foreach (var filter in filters)
+                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.TopDirectoryOnly));
+            return filesFound.AlphanumericSort();
         }
     }
 }
