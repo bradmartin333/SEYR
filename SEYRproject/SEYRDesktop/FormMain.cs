@@ -74,23 +74,20 @@ namespace SEYRDesktop
 
         private void NextImage()
         {
+            SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
+            SEYR.Pipeline.X = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT)) + 1;
+            SEYR.Pipeline.Y = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT)) + (((int)SEYR.Pipeline.X > 1) ? 1 : 0);
             if (btnOpenGIF.Enabled)
             {
                 IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
                 Image image = (Image)IMG.Clone();
                 Bitmap bitmap = new Bitmap(image);
-                SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-                SEYR.Pipeline.X = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT));
-                SEYR.Pipeline.Y = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT));
                 SEYR.Pipeline.LoadNewImage(bitmap);
                 while (SEYR.Pipeline.Working)
                     Application.DoEvents();
             }
             else if (btnOpenDir.Enabled)
             {
-                SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-                SEYR.Pipeline.X = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT));
-                SEYR.Pipeline.Y = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT));
                 SEYR.Pipeline.LoadNewImage(new Bitmap(IMGS[(int)(numFrame.Value - 1)]));
                 while (SEYR.Pipeline.Working)
                     Application.DoEvents();

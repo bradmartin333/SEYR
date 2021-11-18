@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnOpenComposer = new System.Windows.Forms.Button();
             this.btnClearData = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.btnRunAll = new System.Windows.Forms.Button();
             this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnOpenDir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).BeginInit();
@@ -82,6 +82,21 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 149);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnOpenDir
+            // 
+            this.btnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenDir.AutoSize = true;
+            this.btnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenDir.Location = new System.Drawing.Point(91, 18);
+            this.btnOpenDir.Name = "btnOpenDir";
+            this.btnOpenDir.Size = new System.Drawing.Size(61, 25);
+            this.btnOpenDir.TabIndex = 14;
+            this.btnOpenDir.Text = "Open Dir";
+            this.btnOpenDir.UseVisualStyleBackColor = true;
+            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
             // btnStop
             // 
@@ -261,21 +276,6 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // btnOpenDir
-            // 
-            this.btnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenDir.AutoSize = true;
-            this.btnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenDir.Location = new System.Drawing.Point(91, 18);
-            this.btnOpenDir.Name = "btnOpenDir";
-            this.btnOpenDir.Size = new System.Drawing.Size(61, 25);
-            this.btnOpenDir.TabIndex = 14;
-            this.btnOpenDir.Text = "Open Dir";
-            this.btnOpenDir.UseVisualStyleBackColor = true;
-            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
             // FormMain
             // 
