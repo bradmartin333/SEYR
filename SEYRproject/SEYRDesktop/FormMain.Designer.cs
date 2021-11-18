@@ -283,9 +283,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 149);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.Text = "SEYR Desktop   v1.0";
+            this.Text = "SEYR Desktop   v1.1";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).EndInit();
