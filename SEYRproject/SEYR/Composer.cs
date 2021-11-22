@@ -71,6 +71,14 @@ namespace SEYR
             MessageBox.Show(text: "Coming Soon", caption: "SEYR Help");
         }
 
+        private void copyToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var wc = new WaitCursor())
+            {
+                FileHandler.CopyCurrentGridForExcel();
+            }
+        }
+
         #region PictureBox Bindings
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)

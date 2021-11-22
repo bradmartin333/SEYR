@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SEYR
@@ -59,6 +62,29 @@ namespace SEYR
                 Grid = new Grid();
                 return;
             }
+        }
+
+        public static void CopyCurrentGridForExcel()
+        {
+            if (Grid.Features.Count > 1 || Grid.NumberX < 1 || Grid.NumberY < 1)
+            {
+                MessageBox.Show(
+                    text: "This option is only available for grids with a single feature.",
+                    caption: "Copy Plot For Excel");
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < Grid.NumberX + 1; i++)
+            {
+                for (int j = 0; j < Grid.NumberY + 1; j++)
+                {
+                    int state = (int)Grid.Tiles.Where(x => x.Index == new Point(i, j)).First().Features.First().State;
+                    sb.Append($"{state}\t");
+                }
+                sb.Append('\n');
+            }
+            Clipboard.SetText(sb.ToString());
         }
     }
 }

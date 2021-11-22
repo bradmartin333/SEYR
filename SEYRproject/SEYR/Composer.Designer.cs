@@ -97,6 +97,7 @@ namespace SEYR
             this.deselectFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pixelPitchCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -953,7 +954,8 @@ namespace SEYR
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showViewerToolStripMenuItem,
             this.deselectFeatureToolStripMenuItem,
-            this.pixelPitchCalculatorToolStripMenuItem});
+            this.pixelPitchCalculatorToolStripMenuItem,
+            this.copyToExcelToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -987,6 +989,13 @@ namespace SEYR
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // copyToExcelToolStripMenuItem
+            // 
+            this.copyToExcelToolStripMenuItem.Name = "copyToExcelToolStripMenuItem";
+            this.copyToExcelToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.copyToExcelToolStripMenuItem.Text = "Copy Plot For Excel";
+            this.copyToExcelToolStripMenuItem.Click += new System.EventHandler(this.copyToExcelToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1099,5 +1108,6 @@ namespace SEYR
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.NumericUpDown numScale;
         private System.Windows.Forms.ToolStripMenuItem pixelPitchCalculatorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToExcelToolStripMenuItem;
     }
 }
