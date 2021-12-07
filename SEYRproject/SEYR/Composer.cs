@@ -49,15 +49,6 @@ namespace SEYR
             Close();
         }
 
-        private void toggleFilterViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Imaging.ShowFilteredImage = !Imaging.ShowFilteredImage;
-            if (Imaging.ShowFilteredImage)
-                PBX.BackgroundImage = Imaging.CurrentImage;
-            else
-                PBX.BackgroundImage = Imaging.DisplayedImage;
-        }
-
         private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Pipeline.Viewer.Show();
@@ -95,6 +86,8 @@ namespace SEYR
             switch (e.Button)
             {
                 case MouseButtons.Left:
+                    if ((ModifierKeys & Keys.Shift) == Keys.Shift)
+                        PBX.BackgroundImage = Imaging.CurrentImage;
                     break;
                 case MouseButtons.Right:
                     break;
@@ -111,7 +104,10 @@ namespace SEYR
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    Picasso.Click(this, e.Location, false);
+                    if ((ModifierKeys & Keys.Shift) == Keys.Shift)
+                        PBX.BackgroundImage = Imaging.DisplayedImage;
+                    else
+                        Picasso.Click(this, e.Location, false);
                     break;
                 case MouseButtons.Right:
                     Picasso.Click(this, e.Location, true);
@@ -145,11 +141,6 @@ namespace SEYR
             ClearGraphics();
             PBX.BackgroundImage = background;
             PBX.Image = foreground;
-        }
-
-        public void UpdateBackground(Bitmap background)
-        {
-            PBX.BackgroundImage = background;
         }
 
         #endregion

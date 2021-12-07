@@ -174,18 +174,15 @@ namespace SEYR
                     if (feature.Rectangle.Contains(point))
                     {
                         match = true;
-                        composer.lblName.Text = feature.Name;
-                        composer.lblIndex.Text = string.Format("{0}, {1}", feature.Index.X, feature.Index.Y);
-                        composer.lblScore.Text = feature.Score.ToString();
+                        composer.lblSelectedFeatureInfo.Text = 
+                            $"Name: {feature.Name}\n" +
+                            $"Index: {feature.Index.X}, {feature.Index.Y}\n" +
+                            $"Score: {feature.Score}";
                     }
                 }
             }
             if (!match)
-            {
-                composer.lblName.Text = "N/A";
-                composer.lblIndex.Text = "N/A";
-                composer.lblScore.Text = "N/A";
-            }
+                composer.lblSelectedFeatureInfo.Text = "";
         }
 
         /// <summary>

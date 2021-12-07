@@ -93,11 +93,6 @@ namespace SEYR
                 FileHandler.Grid.MakeTiles();
             }
 
-            if (Imaging.ShowFilteredImage)
-                Composer.UpdateBackground(Imaging.CurrentImage);
-            else
-                Composer.UpdateBackground(Imaging.DisplayedImage);
-
             ImageReady = true;
         }
 

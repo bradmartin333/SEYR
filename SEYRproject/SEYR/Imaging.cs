@@ -16,7 +16,6 @@ namespace SEYR
         public static Bitmap DisplayedImage = new Bitmap(1, 1);
         public static Bitmap CurrentImage = new Bitmap(1, 1);
         public static Bitmap PatternSearchImage = new Bitmap(1, 1);
-        public static bool ShowFilteredImage = false;
 
         public static void ApplyFilters(Bitmap img)
         {
