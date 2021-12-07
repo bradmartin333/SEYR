@@ -56,6 +56,10 @@
     <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="SEYR, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SEYR\bin\Debug\net472\SEYR.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
@@ -110,12 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SEYR\SEYR.csproj">
-      <Project>{8f128031-e3e6-42cd-8a9e-33acfd4e8476}</Project>
-      <Name>SEYR</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="SEYR.ico" />

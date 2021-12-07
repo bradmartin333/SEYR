@@ -49,6 +49,15 @@ namespace SEYR
             Close();
         }
 
+        private void toggleFilterViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Imaging.ShowFilteredImage = !Imaging.ShowFilteredImage;
+            if (Imaging.ShowFilteredImage)
+                PBX.BackgroundImage = Imaging.CurrentImage;
+            else
+                PBX.BackgroundImage = Imaging.DisplayedImage;
+        }
+
         private void showViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Pipeline.Viewer.Show();
@@ -136,6 +145,11 @@ namespace SEYR
             ClearGraphics();
             PBX.BackgroundImage = background;
             PBX.Image = foreground;
+        }
+
+        public void UpdateBackground(Bitmap background)
+        {
+            PBX.BackgroundImage = background;
         }
 
         #endregion
@@ -376,6 +390,15 @@ namespace SEYR
                 }
                 File.WriteAllText(pathBuffer, sb.ToString());
             }
+        }
+
+        #endregion
+
+        #region Advanced Tools
+
+        private void detectFilterThresholdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(AdvancedTools.Filtering.DetectThreshold().ToString());
         }
 
         #endregion
