@@ -398,7 +398,22 @@ namespace SEYR
 
         private void detectFilterThresholdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(AdvancedTools.Filtering.DetectThreshold().ToString());
+            if (!ImageReady) return;
+            int detectedVal = 170;
+
+            using (var wc = new WaitCursor())
+            {
+                try
+                {
+                    detectedVal = AdvancedTools.Filtering.DetectThreshold();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Advanced Tools");
+                }
+            }
+
+            numFilterThreshold.Value = detectedVal;
         }
 
         #endregion

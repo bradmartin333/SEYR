@@ -7,6 +7,7 @@ namespace SEYR
     public static class Pipeline
     {
         public static bool Initialized { get; set; } = false;
+        public static bool ImageReady { get; set; } = false;
 
         /// <summary>
         /// Image is processing
@@ -96,6 +97,8 @@ namespace SEYR
                 Composer.UpdateBackground(Imaging.CurrentImage);
             else
                 Composer.UpdateBackground(Imaging.DisplayedImage);
+
+            ImageReady = true;
         }
 
         public static void ClearOutput(bool reloadImage = false)
