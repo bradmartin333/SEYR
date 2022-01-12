@@ -109,6 +109,15 @@ namespace SEYR
             };
         }
 
+        public void CopyActiveScoreAndTolerance()
+        {
+            Feature active = FileHandler.Grid.ActiveFeature;
+            _PassScore = active.PassScore;
+            _PassTol = active.PassTol;
+            _FailScore = active.FailScore;
+            _FailTol = active.FailTol;
+        }
+
         #region NonSerialized Members
 
         public Point Index { get; set; }
