@@ -75,9 +75,9 @@ namespace SEYR
             }
 
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < Grid.NumberX + 1; i++)
+            for (int j = 0; j < Grid.NumberY + 1; j++)
             {
-                for (int j = 0; j < Grid.NumberY + 1; j++)
+                for (int i = 0; i < Grid.NumberX + 1; i++)
                 {
                     int state = (int)Grid.Tiles.Where(x => x.Index == new Point(i, j)).First().Features.First().State;
                     sb.Append($"{state}\t");

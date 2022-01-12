@@ -1,4 +1,3 @@
-﻿
 namespace SEYR
 {
     partial class Composer
@@ -94,6 +93,7 @@ namespace SEYR
             this.detectFilterThresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -939,7 +939,8 @@ namespace SEYR
             this.deselectFeatureToolStripMenuItem,
             this.pixelPitchCalculatorToolStripMenuItem,
             this.detectFilterThresholdToolStripMenuItem,
-            this.copyToExcelToolStripMenuItem});
+            this.copyToExcelToolStripMenuItem,
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -948,7 +949,7 @@ namespace SEYR
             // 
             this.showViewerToolStripMenuItem.Name = "showViewerToolStripMenuItem";
             this.showViewerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.showViewerToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
+            this.showViewerToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.showViewerToolStripMenuItem.Text = "&Show Viewer";
             this.showViewerToolStripMenuItem.Click += new System.EventHandler(this.showViewerToolStripMenuItem_Click);
             // 
@@ -956,30 +957,37 @@ namespace SEYR
             // 
             this.deselectFeatureToolStripMenuItem.Name = "deselectFeatureToolStripMenuItem";
             this.deselectFeatureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deselectFeatureToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
+            this.deselectFeatureToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.deselectFeatureToolStripMenuItem.Text = "&Deselect Feature";
             this.deselectFeatureToolStripMenuItem.Click += new System.EventHandler(this.deselectFeatureToolStripMenuItem_Click);
             // 
             // pixelPitchCalculatorToolStripMenuItem
             // 
             this.pixelPitchCalculatorToolStripMenuItem.Name = "pixelPitchCalculatorToolStripMenuItem";
-            this.pixelPitchCalculatorToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
+            this.pixelPitchCalculatorToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.pixelPitchCalculatorToolStripMenuItem.Text = "Pixel Pitch Calculator";
             this.pixelPitchCalculatorToolStripMenuItem.Click += new System.EventHandler(this.pixelPitchCalculatorToolStripMenuItem_Click);
             // 
-            // detectFilterThresholdToolStripMenuItem
+            // copyToExcelToolStripMenuItem
+            // 
+            this.copyToExcelToolStripMenuItem.Name = "copyToExcelToolStripMenuItem";
+            this.copyToExcelToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.copyToExcelToolStripMenuItem.Text = "Copy Plot for Excel";
+            this.copyToExcelToolStripMenuItem.Click += new System.EventHandler(this.copyToExcelToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
             // 
             this.detectFilterThresholdToolStripMenuItem.Name = "detectFilterThresholdToolStripMenuItem";
             this.detectFilterThresholdToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
             this.detectFilterThresholdToolStripMenuItem.Text = "Detect Filter Threshold";
             this.detectFilterThresholdToolStripMenuItem.Click += new System.EventHandler(this.detectFilterThresholdToolStripMenuItem_Click);
             // 
-            // copyToExcelToolStripMenuItem
+            // copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem
             // 
-            this.copyToExcelToolStripMenuItem.Name = "copyToExcelToolStripMenuItem";
-            this.copyToExcelToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
-            this.copyToExcelToolStripMenuItem.Text = "Copy Plot For Excel";
-            this.copyToExcelToolStripMenuItem.Click += new System.EventHandler(this.copyToExcelToolStripMenuItem_Click);
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem.Name = "copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem";
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem.Text = "Copy Current Score and Tolerance for All Features";
+            this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem.Click += new System.EventHandler(this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -999,8 +1007,7 @@ namespace SEYR
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1017, 822);
+            this.MinimumSize = new System.Drawing.Size(767, 607);
             this.Name = "Composer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SEYR Composer";
@@ -1097,5 +1104,6 @@ namespace SEYR
         private System.Windows.Forms.ToolStripMenuItem copyToExcelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detectFilterThresholdToolStripMenuItem;
         public System.Windows.Forms.Label lblSelectedFeatureInfo;
+        private System.Windows.Forms.ToolStripMenuItem copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem;
     }
 }

@@ -239,6 +239,20 @@ namespace SEYR
             }
         }
 
+        private void copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FileHandler.Grid.ActiveFeature.Rectangle == Rectangle.Empty)
+            {
+                MessageBox.Show("No feature selected", "Copy Parameters");
+                return;
+            }
+            foreach (Feature feature in FileHandler.Grid.Features)
+            {
+                feature.CopyActiveScoreAndTolerance();
+            }
+            FileHandler.Grid.MakeTiles();
+        }
+
         #endregion
 
         #region Follower Pattern
