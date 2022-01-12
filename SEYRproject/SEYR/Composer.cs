@@ -58,6 +58,7 @@ namespace SEYR
         private void deselectFeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
+            LoadComboBox();
         }
 
         private void pixelPitchCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +84,7 @@ namespace SEYR
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            if (!ImageReady) return;
             switch (e.Button)
             {
                 case MouseButtons.Left:
@@ -101,6 +103,7 @@ namespace SEYR
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!ImageReady) return;
             switch (e.Button)
             {
                 case MouseButtons.Left:

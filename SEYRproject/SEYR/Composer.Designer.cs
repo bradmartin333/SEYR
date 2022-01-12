@@ -92,8 +92,8 @@ namespace SEYR
             this.pixelPitchCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detectFilterThresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAlignTol)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -119,13 +119,13 @@ namespace SEYR
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.ColumnCount = 7;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.Controls.Add(this.numAlignTol, 3, 23);
             this.tableLayoutPanel.Controls.Add(this.label1, 2, 7);
             this.tableLayoutPanel.Controls.Add(this.label2, 3, 7);
@@ -165,51 +165,49 @@ namespace SEYR
             this.tableLayoutPanel.Controls.Add(this.numScale, 3, 3);
             this.tableLayoutPanel.Controls.Add(this.lblSelectedFeatureInfo, 1, 25);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 28);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 26;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(999, 747);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(749, 606);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // numAlignTol
             // 
-            this.numAlignTol.Location = new System.Drawing.Point(152, 600);
-            this.numAlignTol.Margin = new System.Windows.Forms.Padding(4);
+            this.numAlignTol.Location = new System.Drawing.Point(117, 493);
             this.numAlignTol.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numAlignTol.Name = "numAlignTol";
-            this.numAlignTol.Size = new System.Drawing.Size(77, 22);
+            this.numAlignTol.Size = new System.Drawing.Size(58, 20);
             this.numAlignTol.TabIndex = 40;
             this.numAlignTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -217,10 +215,9 @@ namespace SEYR
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(67, 213);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(53, 170);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 16);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "X";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -229,10 +226,9 @@ namespace SEYR
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(152, 213);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(117, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 16);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Y";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -241,10 +237,9 @@ namespace SEYR
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(67, 520);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(53, 425);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 16);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Score";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -257,10 +252,9 @@ namespace SEYR
             this.flowLayoutPanel1.Controls.Add(this.btnRemoveRect);
             this.flowLayoutPanel1.Controls.Add(this.btnCopyRect);
             this.flowLayoutPanel1.Controls.Add(this.btnTrainAlignment);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(78, 382);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(60, 310);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(117, 34);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 27);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // btnRemoveRect
@@ -272,10 +266,9 @@ namespace SEYR
             this.btnRemoveRect.FlatAppearance.BorderSize = 0;
             this.btnRemoveRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnRemoveRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveRect.Location = new System.Drawing.Point(4, 4);
-            this.btnRemoveRect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRemoveRect.Location = new System.Drawing.Point(3, 3);
             this.btnRemoveRect.Name = "btnRemoveRect";
-            this.btnRemoveRect.Size = new System.Drawing.Size(31, 26);
+            this.btnRemoveRect.Size = new System.Drawing.Size(23, 21);
             this.btnRemoveRect.TabIndex = 1;
             this.btnRemoveRect.UseVisualStyleBackColor = false;
             this.btnRemoveRect.Click += new System.EventHandler(this.btnRemoveRect_Click);
@@ -289,10 +282,9 @@ namespace SEYR
             this.btnCopyRect.FlatAppearance.BorderSize = 0;
             this.btnCopyRect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnCopyRect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCopyRect.Location = new System.Drawing.Point(43, 4);
-            this.btnCopyRect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCopyRect.Location = new System.Drawing.Point(32, 3);
             this.btnCopyRect.Name = "btnCopyRect";
-            this.btnCopyRect.Size = new System.Drawing.Size(31, 26);
+            this.btnCopyRect.Size = new System.Drawing.Size(23, 21);
             this.btnCopyRect.TabIndex = 3;
             this.btnCopyRect.UseVisualStyleBackColor = false;
             this.btnCopyRect.Click += new System.EventHandler(this.btnCopyRect_Click);
@@ -306,10 +298,9 @@ namespace SEYR
             this.btnTrainAlignment.FlatAppearance.BorderSize = 0;
             this.btnTrainAlignment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnTrainAlignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrainAlignment.Location = new System.Drawing.Point(82, 4);
-            this.btnTrainAlignment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTrainAlignment.Location = new System.Drawing.Point(61, 3);
             this.btnTrainAlignment.Name = "btnTrainAlignment";
-            this.btnTrainAlignment.Size = new System.Drawing.Size(31, 26);
+            this.btnTrainAlignment.Size = new System.Drawing.Size(23, 21);
             this.btnTrainAlignment.TabIndex = 4;
             this.btnTrainAlignment.UseVisualStyleBackColor = false;
             this.btnTrainAlignment.Click += new System.EventHandler(this.btnTrainAlignment_Click);
@@ -318,10 +309,9 @@ namespace SEYR
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(17, 229);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(13, 183);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 30);
+            this.label4.Size = new System.Drawing.Size(34, 26);
             this.label4.TabIndex = 3;
             this.label4.Text = "Copy";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -330,10 +320,9 @@ namespace SEYR
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(17, 259);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(13, 209);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 30);
+            this.label5.Size = new System.Drawing.Size(34, 26);
             this.label5.TabIndex = 4;
             this.label5.Text = "Pitch";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -342,10 +331,9 @@ namespace SEYR
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(17, 536);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(13, 438);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 30);
+            this.label6.Size = new System.Drawing.Size(34, 26);
             this.label6.TabIndex = 5;
             this.label6.Text = "Pass";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -354,10 +342,9 @@ namespace SEYR
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(17, 566);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(13, 464);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 30);
+            this.label7.Size = new System.Drawing.Size(34, 26);
             this.label7.TabIndex = 6;
             this.label7.Text = "Fail";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,57 +353,52 @@ namespace SEYR
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(152, 520);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(117, 425);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 16);
+            this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 7;
             this.label8.Text = "Tolerance";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numCopyX
             // 
-            this.numCopyX.Location = new System.Drawing.Point(67, 233);
-            this.numCopyX.Margin = new System.Windows.Forms.Padding(4);
+            this.numCopyX.Location = new System.Drawing.Point(53, 186);
             this.numCopyX.Name = "numCopyX";
-            this.numCopyX.Size = new System.Drawing.Size(77, 22);
+            this.numCopyX.Size = new System.Drawing.Size(58, 20);
             this.numCopyX.TabIndex = 8;
             this.numCopyX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numCopyPitchX
             // 
-            this.numCopyPitchX.Location = new System.Drawing.Point(67, 263);
-            this.numCopyPitchX.Margin = new System.Windows.Forms.Padding(4);
+            this.numCopyPitchX.Location = new System.Drawing.Point(53, 212);
             this.numCopyPitchX.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numCopyPitchX.Name = "numCopyPitchX";
-            this.numCopyPitchX.Size = new System.Drawing.Size(77, 22);
+            this.numCopyPitchX.Size = new System.Drawing.Size(58, 20);
             this.numCopyPitchX.TabIndex = 9;
             this.numCopyPitchX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numCopyY
             // 
-            this.numCopyY.Location = new System.Drawing.Point(152, 233);
-            this.numCopyY.Margin = new System.Windows.Forms.Padding(4);
+            this.numCopyY.Location = new System.Drawing.Point(117, 186);
             this.numCopyY.Name = "numCopyY";
-            this.numCopyY.Size = new System.Drawing.Size(77, 22);
+            this.numCopyY.Size = new System.Drawing.Size(58, 20);
             this.numCopyY.TabIndex = 10;
             this.numCopyY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numCopyPitchY
             // 
-            this.numCopyPitchY.Location = new System.Drawing.Point(152, 263);
-            this.numCopyPitchY.Margin = new System.Windows.Forms.Padding(4);
+            this.numCopyPitchY.Location = new System.Drawing.Point(117, 212);
             this.numCopyPitchY.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numCopyPitchY.Name = "numCopyPitchY";
-            this.numCopyPitchY.Size = new System.Drawing.Size(77, 22);
+            this.numCopyPitchY.Size = new System.Drawing.Size(58, 20);
             this.numCopyPitchY.TabIndex = 11;
             this.numCopyPitchY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -428,15 +410,14 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassScore.Location = new System.Drawing.Point(67, 540);
-            this.numPassScore.Margin = new System.Windows.Forms.Padding(4);
+            this.numPassScore.Location = new System.Drawing.Point(53, 441);
             this.numPassScore.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numPassScore.Name = "numPassScore";
-            this.numPassScore.Size = new System.Drawing.Size(77, 22);
+            this.numPassScore.Size = new System.Drawing.Size(58, 20);
             this.numPassScore.TabIndex = 12;
             this.numPassScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -448,15 +429,14 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailScore.Location = new System.Drawing.Point(67, 570);
-            this.numFailScore.Margin = new System.Windows.Forms.Padding(4);
+            this.numFailScore.Location = new System.Drawing.Point(53, 467);
             this.numFailScore.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numFailScore.Name = "numFailScore";
-            this.numFailScore.Size = new System.Drawing.Size(77, 22);
+            this.numFailScore.Size = new System.Drawing.Size(58, 20);
             this.numFailScore.TabIndex = 13;
             this.numFailScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -468,15 +448,14 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numPassTol.Location = new System.Drawing.Point(152, 540);
-            this.numPassTol.Margin = new System.Windows.Forms.Padding(4);
+            this.numPassTol.Location = new System.Drawing.Point(117, 441);
             this.numPassTol.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numPassTol.Name = "numPassTol";
-            this.numPassTol.Size = new System.Drawing.Size(77, 22);
+            this.numPassTol.Size = new System.Drawing.Size(58, 20);
             this.numPassTol.TabIndex = 14;
             this.numPassTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -488,15 +467,14 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numFailTol.Location = new System.Drawing.Point(152, 570);
-            this.numFailTol.Margin = new System.Windows.Forms.Padding(4);
+            this.numFailTol.Location = new System.Drawing.Point(117, 467);
             this.numFailTol.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numFailTol.Name = "numFailTol";
-            this.numFailTol.Size = new System.Drawing.Size(77, 22);
+            this.numFailTol.Size = new System.Drawing.Size(58, 20);
             this.numFailTol.TabIndex = 15;
             this.numFailTol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -508,10 +486,9 @@ namespace SEYR
             this.label11.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label11, 3);
             this.label11.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(17, 79);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(13, 57);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(240, 20);
+            this.label11.Size = new System.Drawing.Size(181, 15);
             this.label11.TabIndex = 26;
             this.label11.Text = "Grid Parameters";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -524,10 +501,9 @@ namespace SEYR
             this.label12.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label12, 3);
             this.label12.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(17, 314);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(13, 255);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(240, 20);
+            this.label12.Size = new System.Drawing.Size(181, 15);
             this.label12.TabIndex = 27;
             this.label12.Text = "Feature Parameters";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -536,10 +512,9 @@ namespace SEYR
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(17, 448);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(13, 363);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 30);
+            this.label13.Size = new System.Drawing.Size(34, 26);
             this.label13.TabIndex = 28;
             this.label13.Text = "Origin";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -548,10 +523,9 @@ namespace SEYR
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(17, 478);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(13, 389);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(42, 30);
+            this.label14.Size = new System.Drawing.Size(34, 26);
             this.label14.TabIndex = 29;
             this.label14.Text = "Size";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -560,10 +534,9 @@ namespace SEYR
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(67, 432);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(53, 350);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(77, 16);
+            this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 30;
             this.label15.Text = "X";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -572,67 +545,62 @@ namespace SEYR
             // 
             this.label16.AutoSize = true;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(152, 432);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Location = new System.Drawing.Point(117, 350);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(105, 16);
+            this.label16.Size = new System.Drawing.Size(77, 13);
             this.label16.TabIndex = 31;
             this.label16.Text = "Y";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numOriginX
             // 
-            this.numOriginX.Location = new System.Drawing.Point(67, 452);
-            this.numOriginX.Margin = new System.Windows.Forms.Padding(4);
+            this.numOriginX.Location = new System.Drawing.Point(53, 366);
             this.numOriginX.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numOriginX.Name = "numOriginX";
-            this.numOriginX.Size = new System.Drawing.Size(77, 22);
+            this.numOriginX.Size = new System.Drawing.Size(58, 20);
             this.numOriginX.TabIndex = 32;
             this.numOriginX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numOriginY
             // 
-            this.numOriginY.Location = new System.Drawing.Point(152, 452);
-            this.numOriginY.Margin = new System.Windows.Forms.Padding(4);
+            this.numOriginY.Location = new System.Drawing.Point(117, 366);
             this.numOriginY.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numOriginY.Name = "numOriginY";
-            this.numOriginY.Size = new System.Drawing.Size(77, 22);
+            this.numOriginY.Size = new System.Drawing.Size(58, 20);
             this.numOriginY.TabIndex = 33;
             this.numOriginY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numSizeX
             // 
-            this.numSizeX.Location = new System.Drawing.Point(67, 482);
-            this.numSizeX.Margin = new System.Windows.Forms.Padding(4);
+            this.numSizeX.Location = new System.Drawing.Point(53, 392);
             this.numSizeX.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numSizeX.Name = "numSizeX";
-            this.numSizeX.Size = new System.Drawing.Size(77, 22);
+            this.numSizeX.Size = new System.Drawing.Size(58, 20);
             this.numSizeX.TabIndex = 34;
             this.numSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numSizeY
             // 
-            this.numSizeY.Location = new System.Drawing.Point(152, 482);
-            this.numSizeY.Margin = new System.Windows.Forms.Padding(4);
+            this.numSizeY.Location = new System.Drawing.Point(117, 392);
             this.numSizeY.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numSizeY.Name = "numSizeY";
-            this.numSizeY.Size = new System.Drawing.Size(77, 22);
+            this.numSizeY.Size = new System.Drawing.Size(58, 20);
             this.numSizeY.TabIndex = 35;
             this.numSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -641,10 +609,9 @@ namespace SEYR
             this.label17.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label17, 2);
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(17, 141);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Location = new System.Drawing.Point(13, 108);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(127, 30);
+            this.label17.Size = new System.Drawing.Size(98, 26);
             this.label17.TabIndex = 36;
             this.label17.Text = "Angle";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -657,8 +624,7 @@ namespace SEYR
             0,
             0,
             65536});
-            this.numAngle.Location = new System.Drawing.Point(152, 145);
-            this.numAngle.Margin = new System.Windows.Forms.Padding(4);
+            this.numAngle.Location = new System.Drawing.Point(117, 111);
             this.numAngle.Maximum = new decimal(new int[] {
             10,
             0,
@@ -670,7 +636,7 @@ namespace SEYR
             0,
             -2147483648});
             this.numAngle.Name = "numAngle";
-            this.numAngle.Size = new System.Drawing.Size(77, 22);
+            this.numAngle.Size = new System.Drawing.Size(58, 20);
             this.numAngle.TabIndex = 37;
             this.numAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -680,10 +646,9 @@ namespace SEYR
             this.tableLayoutPanel.SetColumnSpan(this.comboBoxRects, 3);
             this.comboBoxRects.DropDownWidth = 150;
             this.comboBoxRects.FormattingEnabled = true;
-            this.comboBoxRects.Location = new System.Drawing.Point(17, 350);
-            this.comboBoxRects.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxRects.Location = new System.Drawing.Point(13, 283);
             this.comboBoxRects.Name = "comboBoxRects";
-            this.comboBoxRects.Size = new System.Drawing.Size(240, 24);
+            this.comboBoxRects.Size = new System.Drawing.Size(181, 21);
             this.comboBoxRects.TabIndex = 2;
             this.comboBoxRects.SelectedIndexChanged += new System.EventHandler(this.comboBoxRects_SelectedIndexChanged);
             // 
@@ -692,10 +657,9 @@ namespace SEYR
             this.label19.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label19, 2);
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(17, 596);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Location = new System.Drawing.Point(13, 490);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(127, 30);
+            this.label19.Size = new System.Drawing.Size(98, 26);
             this.label19.TabIndex = 39;
             this.label19.Text = "Alignment";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -705,25 +669,23 @@ namespace SEYR
             this.label20.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label20, 2);
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(17, 171);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Location = new System.Drawing.Point(13, 134);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(127, 30);
+            this.label20.Size = new System.Drawing.Size(98, 26);
             this.label20.TabIndex = 41;
             this.label20.Text = "Filter Threshold";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numFilterThreshold
             // 
-            this.numFilterThreshold.Location = new System.Drawing.Point(152, 175);
-            this.numFilterThreshold.Margin = new System.Windows.Forms.Padding(4);
+            this.numFilterThreshold.Location = new System.Drawing.Point(117, 137);
             this.numFilterThreshold.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numFilterThreshold.Name = "numFilterThreshold";
-            this.numFilterThreshold.Size = new System.Drawing.Size(77, 22);
+            this.numFilterThreshold.Size = new System.Drawing.Size(58, 20);
             this.numFilterThreshold.TabIndex = 42;
             this.numFilterThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -733,11 +695,10 @@ namespace SEYR
             this.PBX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PBX.Image = global::SEYR.Properties.Resources.SEYR;
-            this.PBX.Location = new System.Drawing.Point(278, 4);
-            this.PBX.Margin = new System.Windows.Forms.Padding(4);
+            this.PBX.Location = new System.Drawing.Point(210, 3);
             this.PBX.Name = "PBX";
             this.tableLayoutPanel.SetRowSpan(this.PBX, 27);
-            this.PBX.Size = new System.Drawing.Size(704, 739);
+            this.PBX.Size = new System.Drawing.Size(526, 600);
             this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBX.TabIndex = 43;
             this.PBX.TabStop = false;
@@ -747,10 +708,9 @@ namespace SEYR
             this.label18.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.label18, 2);
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(17, 111);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Location = new System.Drawing.Point(13, 82);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(127, 30);
+            this.label18.Size = new System.Drawing.Size(98, 26);
             this.label18.TabIndex = 44;
             this.label18.Text = "Scale";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -763,8 +723,7 @@ namespace SEYR
             0,
             0,
             131072});
-            this.numScale.Location = new System.Drawing.Point(152, 115);
-            this.numScale.Margin = new System.Windows.Forms.Padding(4);
+            this.numScale.Location = new System.Drawing.Point(117, 85);
             this.numScale.Maximum = new decimal(new int[] {
             1,
             0,
@@ -776,7 +735,7 @@ namespace SEYR
             0,
             65536});
             this.numScale.Name = "numScale";
-            this.numScale.Size = new System.Drawing.Size(77, 22);
+            this.numScale.Size = new System.Drawing.Size(58, 20);
             this.numScale.TabIndex = 45;
             this.numScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numScale.Value = new decimal(new int[] {
@@ -792,10 +751,9 @@ namespace SEYR
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSelectedFeatureInfo.AutoSize = true;
             this.tableLayoutPanel.SetColumnSpan(this.lblSelectedFeatureInfo, 3);
-            this.lblSelectedFeatureInfo.Location = new System.Drawing.Point(17, 651);
-            this.lblSelectedFeatureInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSelectedFeatureInfo.Location = new System.Drawing.Point(13, 536);
             this.lblSelectedFeatureInfo.Name = "lblSelectedFeatureInfo";
-            this.lblSelectedFeatureInfo.Size = new System.Drawing.Size(240, 16);
+            this.lblSelectedFeatureInfo.Size = new System.Drawing.Size(181, 13);
             this.lblSelectedFeatureInfo.TabIndex = 46;
             this.lblSelectedFeatureInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -809,8 +767,8 @@ namespace SEYR
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(999, 28);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(749, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -827,7 +785,7 @@ namespace SEYR
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -836,7 +794,7 @@ namespace SEYR
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -846,14 +804,14 @@ namespace SEYR
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -861,21 +819,21 @@ namespace SEYR
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -883,19 +841,19 @@ namespace SEYR
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printToolStripMenuItem.Text = "&Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -906,13 +864,13 @@ namespace SEYR
             this.trainToolStripMenuItem,
             this.forgetToolStripMenuItem});
             this.followerPatternToolStripMenuItem.Name = "followerPatternToolStripMenuItem";
-            this.followerPatternToolStripMenuItem.Size = new System.Drawing.Size(130, 24);
+            this.followerPatternToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
             this.followerPatternToolStripMenuItem.Text = "&Follower Pattern";
             // 
             // followerPatternNameToolStripMenuItem
             // 
             this.followerPatternNameToolStripMenuItem.Name = "followerPatternNameToolStripMenuItem";
-            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.followerPatternNameToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.followerPatternNameToolStripMenuItem.Text = "N/A";
             this.followerPatternNameToolStripMenuItem.Click += new System.EventHandler(this.followerPatternNameToolStripMenuItem_Click);
             // 
@@ -920,7 +878,7 @@ namespace SEYR
             // 
             this.trainToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_school_16_24;
             this.trainToolStripMenuItem.Name = "trainToolStripMenuItem";
-            this.trainToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.trainToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.trainToolStripMenuItem.Text = "Train";
             this.trainToolStripMenuItem.Click += new System.EventHandler(this.trainToolStripMenuItem_Click);
             // 
@@ -928,7 +886,7 @@ namespace SEYR
             // 
             this.forgetToolStripMenuItem.Image = global::SEYR.Properties.Resources.iconmonstr_x_mark_4_24;
             this.forgetToolStripMenuItem.Name = "forgetToolStripMenuItem";
-            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.forgetToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.forgetToolStripMenuItem.Text = "Forget";
             this.forgetToolStripMenuItem.Click += new System.EventHandler(this.forgetToolStripMenuItem_Click);
             // 
@@ -942,7 +900,7 @@ namespace SEYR
             this.copyToExcelToolStripMenuItem,
             this.copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // showViewerToolStripMenuItem
@@ -968,19 +926,19 @@ namespace SEYR
             this.pixelPitchCalculatorToolStripMenuItem.Text = "Pixel Pitch Calculator";
             this.pixelPitchCalculatorToolStripMenuItem.Click += new System.EventHandler(this.pixelPitchCalculatorToolStripMenuItem_Click);
             // 
+            // detectFilterThresholdToolStripMenuItem
+            // 
+            this.detectFilterThresholdToolStripMenuItem.Name = "detectFilterThresholdToolStripMenuItem";
+            this.detectFilterThresholdToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.detectFilterThresholdToolStripMenuItem.Text = "Detect Filter Threshold";
+            this.detectFilterThresholdToolStripMenuItem.Click += new System.EventHandler(this.detectFilterThresholdToolStripMenuItem_Click);
+            // 
             // copyToExcelToolStripMenuItem
             // 
             this.copyToExcelToolStripMenuItem.Name = "copyToExcelToolStripMenuItem";
             this.copyToExcelToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.copyToExcelToolStripMenuItem.Text = "Copy Plot for Excel";
             this.copyToExcelToolStripMenuItem.Click += new System.EventHandler(this.copyToExcelToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.detectFilterThresholdToolStripMenuItem.Name = "detectFilterThresholdToolStripMenuItem";
-            this.detectFilterThresholdToolStripMenuItem.Size = new System.Drawing.Size(255, 26);
-            this.detectFilterThresholdToolStripMenuItem.Text = "Detect Filter Threshold";
-            this.detectFilterThresholdToolStripMenuItem.Click += new System.EventHandler(this.detectFilterThresholdToolStripMenuItem_Click);
             // 
             // copyCurrentScoreAndToleranceForAllFeaturesToolStripMenuItem
             // 
@@ -992,22 +950,23 @@ namespace SEYR
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // Composer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 775);
+            this.ClientSize = new System.Drawing.Size(749, 630);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(767, 607);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(765, 669);
             this.Name = "Composer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SEYR Composer";
