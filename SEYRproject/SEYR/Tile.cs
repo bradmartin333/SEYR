@@ -20,7 +20,7 @@ namespace SEYR
             {
                 Imaging.Score(feature);
                 DataHandler.Append(
-                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\n",
+                    string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\t{11}\n",
                     ImageIdx,
                     Index.X,
                     Index.Y,
@@ -31,7 +31,8 @@ namespace SEYR
                     Pipeline.R,
                     Pipeline.C,
                     Pipeline.X,
-                    Pipeline.Y)
+                    Pipeline.Y,
+                    feature.Score)
                 );
             }
             DataHandler.NextImage();

@@ -80,7 +80,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 149);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 149);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnOpenDir
@@ -90,9 +90,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenDir.AutoSize = true;
             this.btnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenDir.Location = new System.Drawing.Point(91, 18);
+            this.btnOpenDir.Location = new System.Drawing.Point(97, 15);
             this.btnOpenDir.Name = "btnOpenDir";
-            this.btnOpenDir.Size = new System.Drawing.Size(61, 25);
+            this.btnOpenDir.Size = new System.Drawing.Size(72, 28);
             this.btnOpenDir.TabIndex = 14;
             this.btnOpenDir.Text = "Open Dir";
             this.btnOpenDir.UseVisualStyleBackColor = true;
@@ -105,9 +105,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnStop, 2);
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStop.Location = new System.Drawing.Point(158, 80);
+            this.btnStop.Location = new System.Drawing.Point(175, 80);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(148, 25);
+            this.btnStop.Size = new System.Drawing.Size(184, 28);
             this.btnStop.TabIndex = 13;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -120,9 +120,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnOpenComposer, 2);
             this.btnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenComposer.Location = new System.Drawing.Point(158, 18);
+            this.btnOpenComposer.Location = new System.Drawing.Point(175, 15);
             this.btnOpenComposer.Name = "btnOpenComposer";
-            this.btnOpenComposer.Size = new System.Drawing.Size(148, 25);
+            this.btnOpenComposer.Size = new System.Drawing.Size(184, 28);
             this.btnOpenComposer.TabIndex = 1;
             this.btnOpenComposer.Text = "Open Composer";
             this.btnOpenComposer.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@
             this.btnClearData.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.btnClearData, 2);
             this.btnClearData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearData.Location = new System.Drawing.Point(18, 80);
+            this.btnClearData.Location = new System.Drawing.Point(6, 80);
             this.btnClearData.Name = "btnClearData";
-            this.btnClearData.Size = new System.Drawing.Size(134, 25);
+            this.btnClearData.Size = new System.Drawing.Size(163, 28);
             this.btnClearData.TabIndex = 12;
             this.btnClearData.Text = "Clear Data";
             this.btnClearData.UseVisualStyleBackColor = true;
@@ -151,9 +151,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenGIF.AutoSize = true;
             this.btnOpenGIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenGIF.Location = new System.Drawing.Point(18, 18);
+            this.btnOpenGIF.Location = new System.Drawing.Point(6, 15);
             this.btnOpenGIF.Name = "btnOpenGIF";
-            this.btnOpenGIF.Size = new System.Drawing.Size(67, 25);
+            this.btnOpenGIF.Size = new System.Drawing.Size(85, 28);
             this.btnOpenGIF.TabIndex = 0;
             this.btnOpenGIF.Text = "Open GIF";
             this.btnOpenGIF.UseVisualStyleBackColor = true;
@@ -163,16 +163,16 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(18, 108);
+            this.label2.Location = new System.Drawing.Point(6, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 26);
+            this.label2.Size = new System.Drawing.Size(85, 26);
             this.label2.TabIndex = 7;
             this.label2.Text = "Follow Delay";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numPatternFollowDelay
             // 
-            this.numPatternFollowDelay.Location = new System.Drawing.Point(91, 111);
+            this.numPatternFollowDelay.Location = new System.Drawing.Point(97, 114);
             this.numPatternFollowDelay.Minimum = new decimal(new int[] {
             1,
             0,
@@ -193,7 +193,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(158, 108);
+            this.label1.Location = new System.Drawing.Point(175, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 26);
             this.label1.TabIndex = 6;
@@ -204,9 +204,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(18, 46);
+            this.label4.Location = new System.Drawing.Point(6, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 31);
+            this.label4.Size = new System.Drawing.Size(85, 31);
             this.label4.TabIndex = 11;
             this.label4.Text = "Frame #";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -216,14 +216,14 @@
             this.numFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numFrame.Location = new System.Drawing.Point(91, 49);
+            this.numFrame.Location = new System.Drawing.Point(97, 49);
             this.numFrame.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numFrame.Name = "numFrame";
-            this.numFrame.Size = new System.Drawing.Size(61, 20);
+            this.numFrame.Size = new System.Drawing.Size(72, 20);
             this.numFrame.TabIndex = 3;
             this.numFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numFrame.Value = new decimal(new int[] {
@@ -240,9 +240,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnRunAll, 2);
             this.btnRunAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunAll.Location = new System.Drawing.Point(158, 49);
+            this.btnRunAll.Location = new System.Drawing.Point(175, 49);
             this.btnRunAll.Name = "btnRunAll";
-            this.btnRunAll.Size = new System.Drawing.Size(148, 25);
+            this.btnRunAll.Size = new System.Drawing.Size(184, 25);
             this.btnRunAll.TabIndex = 4;
             this.btnRunAll.Text = "Run All";
             this.btnRunAll.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             // numPatternFollowInterval
             // 
             this.numPatternFollowInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPatternFollowInterval.Location = new System.Drawing.Point(239, 111);
+            this.numPatternFollowInterval.Location = new System.Drawing.Point(256, 114);
             this.numPatternFollowInterval.Maximum = new decimal(new int[] {
             276447232,
             23283,
@@ -263,7 +263,7 @@
             0,
             0});
             this.numPatternFollowInterval.Name = "numPatternFollowInterval";
-            this.numPatternFollowInterval.Size = new System.Drawing.Size(67, 20);
+            this.numPatternFollowInterval.Size = new System.Drawing.Size(103, 20);
             this.numPatternFollowInterval.TabIndex = 5;
             this.numPatternFollowInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numPatternFollowInterval.Value = new decimal(new int[] {
@@ -281,7 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 149);
+            this.ClientSize = new System.Drawing.Size(365, 149);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

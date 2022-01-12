@@ -58,6 +58,7 @@ namespace SEYR
         private void deselectFeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileHandler.Grid.ActiveFeature = new Feature(Rectangle.Empty);
+            LoadComboBox();
         }
 
         private void pixelPitchCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,9 +84,12 @@ namespace SEYR
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            if (!ImageReady) return;
             switch (e.Button)
             {
                 case MouseButtons.Left:
+                    if ((ModifierKeys & Keys.Shift) == Keys.Shift)
+                        PBX.BackgroundImage = Imaging.CurrentImage;
                     break;
                 case MouseButtons.Right:
                     break;
@@ -99,10 +103,14 @@ namespace SEYR
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!ImageReady) return;
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    Picasso.Click(this, e.Location, false);
+                    if ((ModifierKeys & Keys.Shift) == Keys.Shift)
+                        PBX.BackgroundImage = Imaging.DisplayedImage;
+                    else
+                        Picasso.Click(this, e.Location, false);
                     break;
                 case MouseButtons.Right:
                     Picasso.Click(this, e.Location, true);
@@ -390,6 +398,30 @@ namespace SEYR
                 }
                 File.WriteAllText(pathBuffer, sb.ToString());
             }
+        }
+
+        #endregion
+
+        #region Advanced Tools
+
+        private void detectFilterThresholdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ImageReady) return;
+            int detectedVal = 170;
+
+            using (var wc = new WaitCursor())
+            {
+                try
+                {
+                    detectedVal = AdvancedTools.Filtering.DetectThreshold();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Advanced Tools");
+                }
+            }
+
+            numFilterThreshold.Value = detectedVal;
         }
 
         #endregion
