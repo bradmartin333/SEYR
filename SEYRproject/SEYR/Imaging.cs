@@ -133,7 +133,7 @@ namespace SEYR
                         new double[] { feature.OriginX, feature.OriginY });
 
                     // Restrict matching radius to a fraction of the tile pitch
-                    if (distance < Math.Min(FileHandler.Grid.PitchX, FileHandler.Grid.PitchY) * 0.75)
+                    if (distance < Math.Min(FileHandler.Grid.PitchX, FileHandler.Grid.PitchY) * 0.25)
                     {
                         matchFeature = feature;
                         break;
