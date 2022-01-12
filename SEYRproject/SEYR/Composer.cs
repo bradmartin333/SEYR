@@ -165,7 +165,10 @@ namespace SEYR
             // Find active feature and set as selected item
             comboBoxRects.SelectedIndex = -1;
             int activeIdx = FileHandler.Grid.Features.FindIndex(x => x.Equals(FileHandler.Grid.ActiveFeature));
-            if (activeIdx != -1) comboBoxRects.SelectedIndex = activeIdx;
+            if (activeIdx != -1) 
+                comboBoxRects.SelectedIndex = activeIdx;
+            else
+                lblSelectedFeatureInfo.Text = "";
 
             comboBoxRects.BackColor = SystemColors.Window;
 
