@@ -47,7 +47,21 @@ namespace SEYR
         public static PixelPitch PixelPitch;
         private static Thread PatternFollowThread;
 
-        public static void Initialize(int patternFollowInterval = 1, int patternFollowDelay = 100)
+        /// <summary>
+        /// Create the forms necessary for SEYR
+        /// </summary>
+        /// <param name="patternFollowInterval">
+        /// How many images until the next pattern alignment
+        /// </param>
+        /// <param name="patternFollowDelay">
+        /// How many seconds to allow for pattern alignment
+        /// </param>
+        /// <param name="logStreamerPath">
+        /// If provided a valid directory, output will be streamed
+        /// to a SEYR_report_ddMMMyyyy_secondsOfDay.txt file
+        /// instead of requiring export at the end of a job
+        /// </param>
+        public static void Initialize(int patternFollowInterval = 1, int patternFollowDelay = 100, string logStreamerPath = null)
         { 
             Composer = new Composer();
             Viewer = new Viewer();
@@ -56,6 +70,12 @@ namespace SEYR
             PatternFollowInterval = patternFollowInterval;
             PatternFollowDelay = patternFollowDelay;
 
+            if (!string.IsNullOrEmpty(logStreamerPath))
+            {
+                System.IO.DirectoryInfo directory = new System.IO.DirectoryInfo(logStreamerPath);
+                if (directory.Exists) DataHandler.StreamPath = directory.FullName + $@"\SEYR_report_{System.DateTime.Today.ToString("ddMMMyyyy",System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))}_{System.Math.Round(System.DateTime.Now.Subtract(System.DateTime.Today).TotalSeconds)}.txt";
+            }
+                
             Initialized = true;
         }
 
@@ -102,6 +122,7 @@ namespace SEYR
             DataHandler.Output.Clear();
             Viewer.Clear();
             ImageIdx = 1;
+            if (DataHandler.StreamPath != null) System.IO.File.Delete(DataHandler.StreamPath);
             if (reloadImage) LoadNewImage(Imaging.OriginalImage);
         }
 

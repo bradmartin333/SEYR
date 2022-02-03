@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SEYR
@@ -9,6 +10,8 @@ namespace SEYR
 
         public static StringBuilder StringBuilder = new StringBuilder();
 
+        public static string StreamPath = null;
+
         public static void Append(string s)
         {
             StringBuilder.Append(s);
@@ -17,6 +20,13 @@ namespace SEYR
         public static void NextImage()
         {
             Output[Pipeline.ImageIdx - 1] += StringBuilder.ToString();
+            if (StreamPath != null)
+            {
+                using (StreamWriter sw = File.AppendText(StreamPath))
+                {
+                    sw.Write(StringBuilder.ToString());
+                }
+            }
             StringBuilder.Clear();
         }
 
