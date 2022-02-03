@@ -116,6 +116,17 @@ namespace SEYR
             ImageReady = true;
         }
 
+        /// <summary>
+        /// Returns lines containing all the data from the last image
+        /// </summary>
+        /// <returns>
+        /// ImageNum, CopyX, CopyY, FeatureName, State, RR, RC, R, C, X, Y, Score
+        /// </returns>
+        public static string GetData()
+        {
+            return DataHandler.LastData;
+        }
+
         public static void ClearOutput(bool reloadImage = false)
         {
             if (!Initialized) return;

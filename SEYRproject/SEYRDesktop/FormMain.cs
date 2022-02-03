@@ -92,6 +92,14 @@ namespace SEYRDesktop
                 while (SEYR.Pipeline.Working)
                     Application.DoEvents();
             }
+
+            string lastData = SEYR.Pipeline.GetData();
+            if (!string.IsNullOrEmpty(lastData))
+            {
+                string[] dataLines = lastData.Split('\n');
+                int pass = dataLines.Where(x => !string.IsNullOrEmpty(x) && x.Split('\t')[4] == "Pass").Count();
+                System.Diagnostics.Debug.WriteLine($"Pass: {pass}\tYield: {Math.Round(pass / (double)dataLines.Length * 100, 1)}%");
+            }
         }
 
         private string OpenFile(string title, string filter)

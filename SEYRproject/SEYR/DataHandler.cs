@@ -12,6 +12,8 @@ namespace SEYR
 
         public static string StreamPath = null;
 
+        public static string LastData = null;
+
         public static void Append(string s)
         {
             StringBuilder.Append(s);
@@ -27,6 +29,7 @@ namespace SEYR
                     sw.Write(StringBuilder.ToString());
                 }
             }
+            LastData = Output[Pipeline.ImageIdx - 1];
             StringBuilder.Clear();
         }
 
