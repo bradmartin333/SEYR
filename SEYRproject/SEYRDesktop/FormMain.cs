@@ -135,6 +135,10 @@ namespace SEYRDesktop
                     STOP = false;
                     return;
                 }
+                while (SEYR.Pipeline.Working)
+                {
+                    Application.DoEvents();
+                }
                 numFrame.Value++;
                 Application.DoEvents();
             }

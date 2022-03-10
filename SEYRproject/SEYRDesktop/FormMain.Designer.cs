@@ -173,6 +173,11 @@
             // numPatternFollowDelay
             // 
             this.numPatternFollowDelay.Location = new System.Drawing.Point(97, 114);
+            this.numPatternFollowDelay.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numPatternFollowDelay.Minimum = new decimal(new int[] {
             1,
             0,
