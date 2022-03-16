@@ -24,7 +24,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Host Application (please complete the following information):**
- - App Name (Xfer..., SEYR Desktop)
+ - App Name (XP, SEYR Desktop)
  - Version [e.g. 22]
 
 **Additional context**
