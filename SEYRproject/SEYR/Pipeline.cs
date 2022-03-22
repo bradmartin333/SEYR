@@ -95,19 +95,10 @@ namespace SEYR
                     FileHandler.Grid.PatternFeature.Rectangle.Width < Picasso.ThisSize.Width && 
                     FileHandler.Grid.PatternFeature.Rectangle.Height < Picasso.ThisSize.Height)
                 {
-                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
-                    {
-                        Interval = (int)(PatternFollowDelay * 1e3),
-                        Enabled = true
-                    };
-                    timer.Tick += Timer_Tick;
-                    timer.Start();
-
                     PatternFollowThread = new Thread(delegate () { FoundPattern = Imaging.FollowPattern(); });
                     PatternFollowThread.Start();
                     while (PatternFollowThread.IsAlive)
                         Application.DoEvents();
-                    timer.Dispose();
                 }
 
                 FileHandler.Grid.MakeTiles();

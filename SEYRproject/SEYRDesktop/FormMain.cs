@@ -169,7 +169,7 @@ namespace SEYRDesktop
             string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
             List<string> filesFound = new List<string>();
             foreach (var filter in filters)
-                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.TopDirectoryOnly));
+                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
             return filesFound.AlphanumericSort();
         }
     }
