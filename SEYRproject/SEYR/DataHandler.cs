@@ -21,16 +21,19 @@ namespace SEYR
 
         public static void NextImage()
         {
-            Output[Pipeline.ImageIdx - 1] += StringBuilder.ToString();
             if (StreamPath != null)
             {
-                using (StreamWriter sw = File.AppendText(StreamPath))
-                {
-                    sw.Write(StringBuilder.ToString());
-                }
+                Output[0] += StringBuilder.ToString();
+                File.AppendAllText(StreamPath, StringBuilder.ToString());
+                LastData = Output[0];
+                Output = new List<string>();
             }
-            LastData = Output[Pipeline.ImageIdx - 1];
-            StringBuilder.Clear();
+            else
+            {
+                Output[Pipeline.ImageIdx - 1] += StringBuilder.ToString();
+                LastData = Output[Pipeline.ImageIdx - 1];
+                StringBuilder.Clear();
+            }
         }
 
         public enum State

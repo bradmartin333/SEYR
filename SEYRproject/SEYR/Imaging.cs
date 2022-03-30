@@ -135,7 +135,7 @@ namespace SEYR
             System.Diagnostics.Debug.WriteLine($"Pattern Found with patSimilarity = {patSimilarity}");
 
             if (matchings == null || matchings.Length == 0)
-                System.Diagnostics.Debug.WriteLine($"Just kidding");
+                return false;
 
             Point point = matchings[0].Rectangle.Location;
             Feature matchFeature = null;

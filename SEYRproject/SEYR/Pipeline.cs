@@ -37,9 +37,9 @@ namespace SEYR
         /// </summary>
         public static bool FoundPattern { get; set; } = false;
 
-        public static Composer Composer;
-        public static Viewer Viewer;
-        public static PixelPitch PixelPitch;
+        public static Composer Composer = null;
+        public static Viewer Viewer = null;
+        public static PixelPitch PixelPitch = null;
         private static Thread PatternFollowThread;
 
         /// <summary>
@@ -54,7 +54,10 @@ namespace SEYR
         /// instead of requiring export at the end of a job
         /// </param>
         public static void Initialize(int patternFollowInterval = 1, string logStreamerPath = null)
-        { 
+        {
+            if (Composer != null) Composer.Close();
+            if (Viewer != null) Viewer.Close();
+            if (PixelPitch != null) PixelPitch.Close();
             Composer = new Composer();
             Viewer = new Viewer();
             PixelPitch = new PixelPitch();
@@ -105,7 +108,7 @@ namespace SEYR
         /// </returns>
         public static string GetData()
         {
-            return DataHandler.LastData;
+            return DataHandler.LastData ?? "";
         }
 
         public static void ClearOutput(bool reloadImage = false)
