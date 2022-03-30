@@ -149,11 +149,6 @@ namespace SEYRDesktop
             SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
         }
 
-        private void numPatternFollowDelay_ValueChanged(object sender, System.EventArgs e)
-        {
-            SEYR.Pipeline.PatternFollowDelay = (int)numPatternFollowDelay.Value;
-        }
-
         private void btnClearData_Click(object sender, EventArgs e)
         {
             SEYR.Pipeline.ClearOutput(reloadImage: true);

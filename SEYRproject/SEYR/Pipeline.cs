@@ -33,11 +33,6 @@ namespace SEYR
         public static int PatternFollowInterval { get; set; } = 1;
 
         /// <summary>
-        /// Number of seconds allowed for patten follow processing
-        /// </summary>
-        public static int PatternFollowDelay { get; set; } = 100;
-
-        /// <summary>
         /// Gets updated each pattern search
         /// </summary>
         public static bool FoundPattern { get; set; } = false;
@@ -53,22 +48,17 @@ namespace SEYR
         /// <param name="patternFollowInterval">
         /// How many images until the next pattern alignment
         /// </param>
-        /// <param name="patternFollowDelay">
-        /// How many seconds to allow for pattern alignment
-        /// </param>
         /// <param name="logStreamerPath">
         /// If provided a valid directory, output will be streamed
         /// to a SEYR_report_ddMMMyyyy_secondsOfDay.txt file
         /// instead of requiring export at the end of a job
         /// </param>
-        public static void Initialize(int patternFollowInterval = 1, int patternFollowDelay = 100, string logStreamerPath = null)
+        public static void Initialize(int patternFollowInterval = 1, string logStreamerPath = null)
         { 
             Composer = new Composer();
             Viewer = new Viewer();
             PixelPitch = new PixelPitch();
-
             PatternFollowInterval = patternFollowInterval;
-            PatternFollowDelay = patternFollowDelay;
 
             if (!string.IsNullOrEmpty(logStreamerPath))
             {
