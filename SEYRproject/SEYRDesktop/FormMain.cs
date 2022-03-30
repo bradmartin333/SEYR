@@ -149,11 +149,6 @@ namespace SEYRDesktop
             SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
         }
 
-        private void numPatternFollowDelay_ValueChanged(object sender, System.EventArgs e)
-        {
-            SEYR.Pipeline.PatternFollowDelay = (int)numPatternFollowDelay.Value;
-        }
-
         private void btnClearData_Click(object sender, EventArgs e)
         {
             SEYR.Pipeline.ClearOutput(reloadImage: true);
@@ -169,7 +164,7 @@ namespace SEYRDesktop
             string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
             List<string> filesFound = new List<string>();
             foreach (var filter in filters)
-                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.TopDirectoryOnly));
+                filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
             return filesFound.AlphanumericSort();
         }
     }

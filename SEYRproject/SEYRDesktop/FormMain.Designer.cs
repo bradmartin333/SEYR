@@ -35,8 +35,6 @@
             this.btnOpenComposer = new System.Windows.Forms.Button();
             this.btnClearData = new System.Windows.Forms.Button();
             this.btnOpenGIF = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numPatternFollowDelay = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.numFrame = new System.Windows.Forms.NumericUpDown();
@@ -44,7 +42,6 @@
             this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).BeginInit();
             this.SuspendLayout();
@@ -63,8 +60,6 @@
             this.tableLayoutPanel1.Controls.Add(this.btnOpenComposer, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnClearData, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnOpenGIF, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.numPatternFollowDelay, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.numFrame, 2, 2);
@@ -158,41 +153,6 @@
             this.btnOpenGIF.Text = "Open GIF";
             this.btnOpenGIF.UseVisualStyleBackColor = true;
             this.btnOpenGIF.Click += new System.EventHandler(this.btnOpenGIF_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(6, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 26);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Follow Delay";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numPatternFollowDelay
-            // 
-            this.numPatternFollowDelay.Location = new System.Drawing.Point(97, 114);
-            this.numPatternFollowDelay.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numPatternFollowDelay.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPatternFollowDelay.Name = "numPatternFollowDelay";
-            this.numPatternFollowDelay.Size = new System.Drawing.Size(61, 20);
-            this.numPatternFollowDelay.TabIndex = 8;
-            this.numPatternFollowDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numPatternFollowDelay.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numPatternFollowDelay.ValueChanged += new System.EventHandler(this.numPatternFollowDelay_ValueChanged);
             // 
             // label1
             // 
@@ -291,10 +251,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.Text = "SEYR Desktop   v1.2";
+            this.Text = "SEYR Desktop   v1.2.2";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrame)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).EndInit();
             this.ResumeLayout(false);
@@ -311,8 +270,6 @@
         private System.Windows.Forms.Button btnRunAll;
         private System.Windows.Forms.NumericUpDown numPatternFollowInterval;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numPatternFollowDelay;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClearData;
         private System.Windows.Forms.Button btnStop;

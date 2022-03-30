@@ -115,12 +115,27 @@ namespace SEYR
         public static bool FollowPattern()
         {
             if (FileHandler.Grid.PatternFeature.Rectangle.IsEmpty) return false;
-            ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.9f);
+            float patSimilarity = 0.9f;
+            TemplateMatch[] matchings = new TemplateMatch[] { };
 
-            if (FileHandler.Grid.PatternBitmap.Size.Width > PatternSearchImage.Width || 
-                FileHandler.Grid.PatternBitmap.Size.Height > PatternSearchImage.Height) return false;
-            TemplateMatch[] matchings = tm.ProcessImage(PatternSearchImage, FileHandler.Grid.PatternBitmap);
-            if (matchings.Length == 0) return false;
+            for (int i = 0; i < 8; i++)
+            {
+                System.Diagnostics.Debug.WriteLine($"Looking for pattern with patSimilarity = {patSimilarity}");
+                ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(patSimilarity);
+                if (FileHandler.Grid.PatternBitmap.Size.Width > PatternSearchImage.Width ||
+                    FileHandler.Grid.PatternBitmap.Size.Height > PatternSearchImage.Height) return false;
+                matchings = tm.ProcessImage(PatternSearchImage, FileHandler.Grid.PatternBitmap);
+                System.Diagnostics.Debug.WriteLine($"Found {matchings.Length} matches");
+                if (matchings.Length == 0)
+                    patSimilarity -= (float)(i * 0.05);
+                else
+                    break;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"Pattern Found with patSimilarity = {patSimilarity}");
+
+            if (matchings == null || matchings.Length == 0)
+                System.Diagnostics.Debug.WriteLine($"Just kidding");
 
             Point point = matchings[0].Rectangle.Location;
             Feature matchFeature = null;
@@ -136,6 +151,7 @@ namespace SEYR
                     if (distance < Math.Min(FileHandler.Grid.PitchX, FileHandler.Grid.PitchY) * 0.25)
                     {
                         matchFeature = feature;
+                        System.Diagnostics.Debug.WriteLine($"Pattern at index {feature.Index}");
                         break;
                     }
                 }
@@ -144,6 +160,7 @@ namespace SEYR
             if (matchFeature != null)
             {
                 Picasso.Offset = new Point(matchFeature.OriginX - point.X, matchFeature.OriginY - point.Y);
+                System.Diagnostics.Debug.WriteLine($"Applied offset now = {Picasso.Offset}");
                 return true;
             }
             return false;
