@@ -1,40 +1,36 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace SEYR.Session
 {
     internal class DataStream
     {
-        private readonly FileStream Stream;
+        private readonly StreamWriter Stream = null;
 
-        public DataStream(string path)
+        public DataStream(string path, bool isDebug = false)
         {
-            if (File.Exists(path)) File.Delete(path);
-            Stream = File.Create(path);
-            WriteLine("Stream Created");
+            Stream = new StreamWriter(path, false);
+            if (isDebug) WriteDTLine("Stream Opened");
         }
 
         public void Write(string value)
         {
-            byte[] info = new UTF8Encoding(true).GetBytes(value);
-            WriteToFile(info);
+            Stream.Write(value);
         }
 
         public void WriteLine(string value)
         {
-            byte[] info = new UTF8Encoding(true).GetBytes(value + '\n');
-            WriteToFile(info);
+            Stream.WriteLine(value);
         }
 
-        public void CloseStream()
+        public void WriteDTLine(string value)
+        {
+            Stream.WriteLine($"{System.DateTime.Now}\t{value}");
+        }
+
+        public void Close()
         {
             Stream.Close();
-        }
-
-        private void WriteToFile(byte[] info)
-        {
-            Stream.Write(info, 0, info.Length);
-            Stream.Flush();
+            Stream.Dispose();
         }
     }
 }

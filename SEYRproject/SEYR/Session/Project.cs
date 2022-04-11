@@ -1,14 +1,11 @@
-﻿namespace SEYR.Session
+﻿using System;
+
+namespace SEYR.Session
 {
+    [Serializable()]
     public class Project
     {
-        public double PixelsPerMM;
-
-        public Project() {}
-
-        public Project(double pixelsPerMM)
-        {
-            PixelsPerMM = pixelsPerMM;
-        }
+        [System.Xml.Serialization.XmlElement("PixelsPerMM")]
+        public double PixelsPerMM { get; set; }
     }
 }

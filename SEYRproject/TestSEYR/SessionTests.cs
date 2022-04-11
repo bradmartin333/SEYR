@@ -1,29 +1,25 @@
 ﻿using NUnit.Framework;
+using System.IO;
 
 namespace TestSEYR
 {
     [TestFixture]
     public class SessionTests
     {
-        private readonly string DesktopStr = @"C:\Users\brad.martin\Desktop\";
-        private SEYR.Session.Channel Channel;
-
-        [SetUp]
-        public void Setup()
+        [Test, Order(1)]
+        public void VerifyProjectCreation()
         {
-            Channel = new SEYR.Session.Channel($"{DesktopStr}proj.seyr", $"{DesktopStr}log.txt", 5.2e-3);
+            SEYR.Session.Channel ch = new SEYR.Session.Channel($"{Path.GetTempPath()}proj.seyr", $"{Path.GetTempPath()}log.txt", 5.2e-3);
+            Assert.AreEqual("0.0052", ch.GetProjectInfo());
+            ch.Close();
         }
 
-        [Test]
-        public void Test1()
+        [Test, Order(2)]
+        public void LoadProject()
         {
-            Assert.AreEqual("0.0052", Channel.GetProjectInfo());
-        }
-
-        [TearDown]
-        public void Finish()
-        {
-            Channel.Close();
+            SEYR.Session.Channel ch = new SEYR.Session.Channel($"{Path.GetTempPath()}proj.seyr", $"{Path.GetTempPath()}log.txt");
+            Assert.AreEqual("0.0052", ch.GetProjectInfo());
+            ch.Close();
         }
     }
 }

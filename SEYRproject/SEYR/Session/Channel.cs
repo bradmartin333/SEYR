@@ -1,12 +1,14 @@
 ﻿using System.IO;
+using System.Xml.Serialization;
 
 namespace SEYR.Session
 {
     public class Channel
     {
-        private static DataStream DataStream;
-        private Project Project;
-        private readonly string ProjectPath;
+        private static DataStream DataStream = null;
+        private static DataStream DebugStream = null;
+        private Project Project = null;
+        private readonly string ProjectPath = null;
 
         /// <summary>
         /// Create a new SEYR Channel
@@ -14,11 +16,15 @@ namespace SEYR.Session
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
         /// <param name="pixelsPerMM"></param>
-        public Channel(string projectPath, string streamPath, double pixelsPerMM)
+        /// <param name="debugPath">
+        /// If null, logs to temp directory
+        /// </param>
+        public Channel(string projectPath, string streamPath, double pixelsPerMM, string debugPath = null)
         {
             DataStream = new DataStream(streamPath);
+            DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
-            Project = new Project(pixelsPerMM);
+            Project = new Project() { PixelsPerMM = pixelsPerMM };
             SaveProject();
         }
 
@@ -27,9 +33,13 @@ namespace SEYR.Session
         /// </summary>
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
-        public Channel(string projectPath, string streamPath)
+        /// <param name="debugPath">
+        /// If null, logs to temp directory
+        /// </param>
+        public Channel(string projectPath, string streamPath, string debugPath = null)
         {
             DataStream = new DataStream(streamPath);
+            DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
             LoadProject();
         }
@@ -41,27 +51,30 @@ namespace SEYR.Session
 
         public void SaveProject()
         {
-            using (Stream stream = File.Open(ProjectPath, false ? FileMode.Append : FileMode.Create))
+            using (StreamWriter stream = new StreamWriter(ProjectPath))
             {
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Project.GetType());
+                XmlSerializer x = new XmlSerializer(typeof(Project));
                 x.Serialize(stream, Project);
             }
-            DataStream.WriteLine("Project Saved");
+            DebugStream.WriteDTLine("Project Saved");
         }
 
         public void LoadProject()
         {
-            using (Stream stream = File.Open(ProjectPath, FileMode.Open))
+            DebugStream.Write("Loading Project");
+            using (StreamReader stream = new StreamReader(ProjectPath))
             {
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Project.GetType());
+                DebugStream.WriteLine($"\t{ProjectPath}");
+                XmlSerializer x = new XmlSerializer(typeof(Project));
                 Project = (Project)x.Deserialize(stream);
             }
-            DataStream.WriteLine("Project Loaded");
+            DebugStream.WriteDTLine("Project Loaded");
         }
 
         public void Close()
         {
-            DataStream.CloseStream();
+            DataStream.Close();
+            DebugStream.Close();
         }
     }
 }
