@@ -1,6 +1,5 @@
 ﻿using Accord.Imaging.Filters;
 using SEYR.Session;
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -28,7 +27,6 @@ namespace SEYR.ImageProcessing
             Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
             using (Graphics g = Graphics.FromImage(resize))
                 g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
-            Picasso.ThisSize = resize.Size;
 
             // Clone with necessary pixel format for image filtering
             Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
@@ -63,6 +61,31 @@ namespace SEYR.ImageProcessing
             }
             return working;
         }
+
+        //private static double Scan(Bitmap colorImg, Bitmap filteredImg)
+        //{
+        //    List<double> pixelVals = new List<double>();
+        //    int whitePixels = 0;
+        //    int blackPixels = 0;
+        //    for (int i = 0; i < filteredImg.Width; i++)
+        //    {
+        //        for (int j = 0; j < filteredImg.Height; j++)
+        //        {
+        //            Color color = colorImg.GetPixel(i, j);
+        //            pixelVals.Add(color.R);
+
+        //            Color binary = filteredImg.GetPixel(i, j);
+        //            if (binary.R == 255) whitePixels++;
+        //            if (binary.R == 0) blackPixels++;
+        //        }
+        //    }
+
+        //    if (whitePixels < 10 || blackPixels < 10)
+        //        return 0.0;
+        //    else
+        //        return Math.Round(Statistics.Entropy(pixelVals.ToArray()), 1) + (whitePixels / 2);
+        //    // Add a fraction of the number of white pixels to simulate a rotation filter
+        //}
 
         /// <summary>
         /// Method to rotate an image either clockwise or counter-clockwise

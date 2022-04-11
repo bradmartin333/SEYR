@@ -19,12 +19,10 @@ namespace SEYRDesktop
         public FormMain()
         {
             InitializeComponent();
-            SEYR.Pipeline.Appear();
         }
 
         private void btnOpenComposer_Click(object sender, System.EventArgs e)
         {
-            SEYR.Pipeline.Appear();
         }
 
         private void btnOpenGIF_Click(object sender, System.EventArgs e)
@@ -73,32 +71,7 @@ namespace SEYRDesktop
 
         private void NextImage()
         {
-            SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-            SEYR.Pipeline.X = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT)) + 1;
-            SEYR.Pipeline.Y = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT)) + (((int)SEYR.Pipeline.X > 1) ? 1 : 0);
-            if (btnOpenGIF.Enabled)
-            {
-                IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
-                Image image = (Image)IMG.Clone();
-                Bitmap bitmap = new Bitmap(image);
-                SEYR.Pipeline.LoadNewImage(bitmap);
-                while (SEYR.Pipeline.Working)
-                    Application.DoEvents();
-            }
-            else if (btnOpenDir.Enabled)
-            {
-                SEYR.Pipeline.LoadNewImage(new Bitmap(IMGS[(int)(numFrame.Value - 1)]));
-                while (SEYR.Pipeline.Working)
-                    Application.DoEvents();
-            }
 
-            string lastData = SEYR.Pipeline.GetData();
-            if (!string.IsNullOrEmpty(lastData))
-            {
-                string[] dataLines = lastData.Split('\n');
-                int pass = dataLines.Where(x => !string.IsNullOrEmpty(x) && x.Split('\t')[4] == "Pass").Count();
-                System.Diagnostics.Debug.WriteLine($"Pass: {pass}\tYield: {Math.Round(pass / (double)dataLines.Length * 100, 1)}%");
-            }
         }
 
         private string OpenFile(string title, string filter)
@@ -127,30 +100,17 @@ namespace SEYRDesktop
 
         private void btnRunAll_Click(object sender, System.EventArgs e)
         {
-            for (int i = (int)numFrame.Value; i < FRAMECOUNT; i++)
-            {
-                if (STOP)
-                {
-                    STOP = false;
-                    return;
-                }
-                while (SEYR.Pipeline.Working)
-                {
-                    Application.DoEvents();
-                }
-                numFrame.Value++;
-                Application.DoEvents();
-            }
+
         }
 
         private void numPatternFollowInterval_ValueChanged(object sender, System.EventArgs e)
         {
-            SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
+
         }
 
         private void btnClearData_Click(object sender, EventArgs e)
         {
-            SEYR.Pipeline.ClearOutput(reloadImage: true);
+
         }
 
         private void btnStop_Click(object sender, EventArgs e)
