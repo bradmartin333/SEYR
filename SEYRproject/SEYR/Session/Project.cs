@@ -8,9 +8,9 @@ namespace SEYR.Session
     public class Project : IFilters, IGrid
     {
         [XmlElement("PixelsPerMicron")]
-        public double PixelsPerMicron { get; set; } = 5.212;
+        public double PixelsPerMicron { get; set; } = 2.606;
         [XmlElement("ScaledPixelsPerMicron")]
-        public double ScaledPixelsPerMicron { get; set; } = 5.212;
+        public double ScaledPixelsPerMicron { get; set; } = 0.6515;
         [XmlElement("Scaling")]
         public double Scaling { get; set; } = 0.25;
         [XmlElement("Threshold")]
