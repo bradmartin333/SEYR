@@ -57,9 +57,6 @@
     <Compile Update="Wizard\GridWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Wizard\Template.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
