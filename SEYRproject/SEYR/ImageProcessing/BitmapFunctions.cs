@@ -46,15 +46,16 @@ namespace SEYR.ImageProcessing
         internal static Bitmap DrawGrid(Bitmap bmp)
         {
             Bitmap working = ApplyFilters(bmp, true);
-            PointF offset = new PointF((float)(Channel.Project.PixelsPerMicron * Channel.Project.OriginX), (float)(working.Height - (Channel.Project.PixelsPerMicron * Channel.Project.OriginY)));
+            PointF offset = new PointF((float)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX), 
+                (float)(working.Height - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
             using (Graphics g = Graphics.FromImage(working))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
                     for (int j = 0; j < Channel.Project.Rows; j++)
                     {
-                        int thisX = (int)(offset.X + (i * Channel.Project.PixelsPerMicron * Channel.Project.PitchX));
-                        int thisY = (int)(offset.Y - (j * Channel.Project.PixelsPerMicron * Channel.Project.PitchY));
+                        int thisX = (int)(offset.X + (i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX));
+                        int thisY = (int)(offset.Y - (j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY));
                         g.DrawLine(new Pen(Brushes.HotPink, (float)(working.Height * 0.01)), new Point(thisX, 0), new Point(thisX, bmp.Height));
                         g.DrawLine(new Pen(Brushes.HotPink, (float)(working.Width * 0.01)), new Point(0, thisY), new Point(bmp.Width, thisY));
                     }

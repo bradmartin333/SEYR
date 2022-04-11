@@ -9,6 +9,8 @@ namespace SEYR.Session
     {
         [XmlElement("PixelsPerMicron")]
         public double PixelsPerMicron { get; set; } = 5.212;
+        [XmlElement("ScaledPixelsPerMicron")]
+        public double ScaledPixelsPerMicron { get; set; } = 5.212;
         [XmlElement("Scaling")]
         public double Scaling { get; set; } = 0.25;
         [XmlElement("Threshold")]

@@ -17,6 +17,7 @@ namespace SEYR.Wizard
             set
             {
                 Channel.Project.Scaling = value;
+                Channel.Project.ScaledPixelsPerMicron = Channel.Project.PixelsPerMicron * Channel.Project.Scaling;
                 UpdateImage();
             }
         }
