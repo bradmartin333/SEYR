@@ -53,7 +53,7 @@ namespace SEYR.Session
 
         #region Opening and Closing
 
-        public void SaveProject()
+        private void SaveProject()
         {
             using (StreamWriter stream = new StreamWriter(ProjectPath))
             {
@@ -63,7 +63,7 @@ namespace SEYR.Session
             DebugStream.WriteDTLine("Project Saved");
         }
 
-        public void LoadProject()
+        private void LoadProject()
         {
             DebugStream.Write("Loading Project");
             using (StreamReader stream = new StreamReader(ProjectPath))

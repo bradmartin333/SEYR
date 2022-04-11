@@ -88,10 +88,10 @@
             // 
             this.flowLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel3.AutoSize = true;
-            this.flowLayoutPanel3.Controls.Add(this.label3);
-            this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
             this.flowLayoutPanel3.Controls.Add(this.label4);
             this.flowLayoutPanel3.Controls.Add(this.NumPitchY);
+            this.flowLayoutPanel3.Controls.Add(this.label3);
+            this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(90, 365);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(304, 26);
@@ -100,7 +100,7 @@
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(3, 6);
+            this.label3.Location = new System.Drawing.Point(155, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 2;
@@ -110,7 +110,7 @@
             // NumPitchX
             // 
             this.NumPitchX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchX.Location = new System.Drawing.Point(79, 3);
+            this.NumPitchX.Location = new System.Drawing.Point(231, 3);
             this.NumPitchX.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -125,7 +125,7 @@
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(155, 6);
+            this.label4.Location = new System.Drawing.Point(3, 6);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 0;
@@ -135,7 +135,7 @@
             // NumPitchY
             // 
             this.NumPitchY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchY.Location = new System.Drawing.Point(231, 3);
+            this.NumPitchY.Location = new System.Drawing.Point(79, 3);
             this.NumPitchY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -151,10 +151,10 @@
             // 
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.Controls.Add(this.label1);
-            this.flowLayoutPanel2.Controls.Add(this.NumOriginX);
             this.flowLayoutPanel2.Controls.Add(this.label2);
             this.flowLayoutPanel2.Controls.Add(this.NumOriginY);
+            this.flowLayoutPanel2.Controls.Add(this.label1);
+            this.flowLayoutPanel2.Controls.Add(this.NumOriginX);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(90, 333);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(304, 26);
@@ -163,7 +163,7 @@
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Location = new System.Drawing.Point(155, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
@@ -173,7 +173,7 @@
             // NumOriginX
             // 
             this.NumOriginX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumOriginX.Location = new System.Drawing.Point(79, 3);
+            this.NumOriginX.Location = new System.Drawing.Point(231, 3);
             this.NumOriginX.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -188,7 +188,7 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Location = new System.Drawing.Point(155, 6);
+            this.label2.Location = new System.Drawing.Point(3, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 0;
@@ -198,7 +198,7 @@
             // NumOriginY
             // 
             this.NumOriginY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumOriginY.Location = new System.Drawing.Point(231, 3);
+            this.NumOriginY.Location = new System.Drawing.Point(79, 3);
             this.NumOriginY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -348,7 +348,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "GridWizard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Set Filters";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

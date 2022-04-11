@@ -9,6 +9,7 @@ namespace SEYRDesktop
 {
     public partial class FormMain : Form
     {
+        private SEYR.Session.Channel Channel;
         private string[] IMGS = null;
         private bool STOP;
 
@@ -25,13 +26,13 @@ namespace SEYRDesktop
         private void NextImage()
         {
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            // TODO Process the image
+            // TODO
             GC.Collect();
         }
 
         private void BtnLaunchWizard_Click(object sender, EventArgs e)
         {
-            // TODO Launch wizard
+            Channel.RunWizard(new Bitmap(IMGS[(int)NumFrame.Value]));
             BtnLaunchWizard.Enabled = false;
             BtnRunAll.Enabled = true;
             NumPxPerMicron.Enabled = false;
@@ -64,6 +65,11 @@ namespace SEYRDesktop
             if (path == null) return;
             BtnOpenDir.Enabled = false;
             BtnLaunchWizard.Enabled = true;
+            string[] files = Directory.GetFiles(path, "*.seyr");
+            if (files.Length > 0)
+                Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", $@"{path}\debug.txt");
+            else
+                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value, $@"{path}\debug.txt");
             BtnOpenDir.BackColor = Color.LawnGreen;
             IMGS = GetSortedPicturesFrom(path).ToArray();
             NumFrame.Maximum = IMGS.Length;
