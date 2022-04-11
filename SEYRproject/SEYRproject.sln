@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEYRDesktop", "SEYRDesktop\SEYRDesktop.csproj", "{A0A80A70-F03A-4B5B-A12A-78F49467A152}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSEYR", "TestSEYR\TestSEYR.csproj", "{7A5FEB3D-0DAB-44A7-AB6E-6702A9EBC2C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{A0A80A70-F03A-4B5B-A12A-78F49467A152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0A80A70-F03A-4B5B-A12A-78F49467A152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0A80A70-F03A-4B5B-A12A-78F49467A152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5FEB3D-0DAB-44A7-AB6E-6702A9EBC2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5FEB3D-0DAB-44A7-AB6E-6702A9EBC2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5FEB3D-0DAB-44A7-AB6E-6702A9EBC2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5FEB3D-0DAB-44A7-AB6E-6702A9EBC2C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
