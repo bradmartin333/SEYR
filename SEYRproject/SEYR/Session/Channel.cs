@@ -1,17 +1,23 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
+using System.Threading.Tasks;
+using System.Drawing;
+using System;
 
 namespace SEYR.Session
 {
     public class Channel
     {
-        private static DataStream DataStream = null;
-        private static DataStream DebugStream = null;
-        private Project Project = null;
+        public List<Task> Tasks { get; set; } = new List<Task>();
         private readonly string ProjectPath = null;
+        private static DataStream DataStream { get; set; } = null;
+        private static DataStream DebugStream { get; set; } = null;
+        private Project Project { get; set; } = null;
+        private string LastData { get; set; } = string.Empty;
 
         /// <summary>
-        /// Create a new SEYR Channel
+        /// Create a new SEYR Channe
         /// </summary>
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
@@ -43,6 +49,8 @@ namespace SEYR.Session
             ProjectPath = projectPath;
             LoadProject();
         }
+
+        #region Opening and Closing
 
         public string GetProjectInfo()
         {
@@ -76,5 +84,21 @@ namespace SEYR.Session
             DataStream.Close();
             DebugStream.Close();
         }
+
+        #endregion
+
+        #region Image Processing
+
+        public void NewImage(Bitmap bmp)
+        {
+            Tasks.Add(Task.Factory.StartNew(() => LastData = ImageProcessing.BitmapFunctions.LoadImage(bmp)));
+        }
+
+        public string GetLastData()
+        {
+            return LastData;
+        }
+
+        #endregion
     }
 }
