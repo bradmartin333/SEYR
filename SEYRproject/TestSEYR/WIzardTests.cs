@@ -4,6 +4,7 @@ using System.IO;
 namespace TestSEYR
 {
     [TestFixture]
+    [Ignore("UI Tests")]
     public class WIzardTests
     {
         SEYR.Session.Channel Channel = null;

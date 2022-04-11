@@ -9,6 +9,8 @@ namespace SEYR.Wizard
 {
     internal partial class FiltersWizard : Form, IFilters
     {
+        #region IFilters Members
+
         public double Scaling
         {
             get => Channel.Project.Scaling;
@@ -39,6 +41,8 @@ namespace SEYR.Wizard
             }
         }
 
+        #endregion
+
         private readonly Bitmap InputImage;
         private bool ShowGrid = false;
 
@@ -48,6 +52,7 @@ namespace SEYR.Wizard
             InputImage = bmp;
             NumScaling.Value = (decimal)Scaling;
             NumThreshold.Value = Threshold;
+            NumAngle.Value = (decimal)Angle;
             PictureBox.BackgroundImage = BitmapFunctions.ApplyFilters((Bitmap)InputImage.Clone());
         }
 
