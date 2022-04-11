@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace SEYR.Session
 {
     public class Channel
     {
-        private static NLog.Logger Logger;
+        private static DataStream DataStream;
         private Project Project;
         private readonly string ProjectPath;
 
@@ -21,7 +16,7 @@ namespace SEYR.Session
         /// <param name="pixelsPerMM"></param>
         public Channel(string projectPath, string streamPath, double pixelsPerMM)
         {
-            CreateLogger(streamPath);
+            DataStream = new DataStream(streamPath);
             ProjectPath = projectPath;
             Project = new Project(pixelsPerMM);
             SaveProject();
@@ -34,9 +29,14 @@ namespace SEYR.Session
         /// <param name="streamPath"></param>
         public Channel(string projectPath, string streamPath)
         {
-            CreateLogger(streamPath);
+            DataStream = new DataStream(streamPath);
             ProjectPath = projectPath;
             LoadProject();
+        }
+
+        public string GetProjectInfo()
+        {
+            return $"{Project.PixelsPerMM}";
         }
 
         public void SaveProject()
@@ -46,7 +46,7 @@ namespace SEYR.Session
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Project.GetType());
                 x.Serialize(stream, Project);
             }
-            Logger.Info("Project Saved");
+            DataStream.WriteLine("Project Saved");
         }
 
         public void LoadProject()
@@ -56,13 +56,12 @@ namespace SEYR.Session
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Project.GetType());
                 Project = (Project)x.Deserialize(stream);
             }
-            Logger.Info("Project Loaded");
+            DataStream.WriteLine("Project Loaded");
         }
 
-        private static void CreateLogger(string path)
+        public void Close()
         {
-            Logger = NLog.LogManager.GetLogger(path);
-            Logger.Info("Logger Created");
+            DataStream.CloseStream();
         }
     }
 }
