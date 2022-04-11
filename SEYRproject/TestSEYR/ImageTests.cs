@@ -37,11 +37,5 @@ namespace TestSEYR
             Assert.AreEqual(5, len);
             Assert.AreEqual("Failed to process image", Channel.GetLastData());
         }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            Channel.Close();
-        }
     }
 }

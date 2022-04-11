@@ -10,19 +10,14 @@ namespace SEYR.ImageProcessing
     {
         public static string LoadImage(Bitmap bmp)
         {
-            try
-            {
-                Bitmap test = bmp.Clone(new Rectangle(1, 1, 1, 1), bmp.PixelFormat);
-                return test.Size.ToString();
-            }
-            catch (System.Exception)
-            {
-                return "Failed to process image";
-            }
+            Channel.Training.NewImage(DrawGrid(bmp));
+            return "Hello";
         }
 
         public static Bitmap ApplyFilters(Bitmap bmp, bool color = false)
         {
+            Channel.DebugStream.WriteLine("Got an image");
+
             // Resize incoming image
             Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
             using (Graphics g = Graphics.FromImage(resize))

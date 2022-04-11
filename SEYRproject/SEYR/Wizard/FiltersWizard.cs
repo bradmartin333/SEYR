@@ -44,6 +44,7 @@ namespace SEYR.Wizard
 
         #endregion
 
+        private readonly bool FormReady = false;
         private readonly Bitmap InputImage;
         private bool ShowGrid = false;
 
@@ -55,6 +56,7 @@ namespace SEYR.Wizard
             NumThreshold.Value = Threshold;
             NumAngle.Value = (decimal)Angle;
             PictureBox.BackgroundImage = BitmapFunctions.ApplyFilters((Bitmap)InputImage.Clone());
+            FormReady = true;
         }
 
         private void BtnConfirm_Click(object sender, EventArgs e)
@@ -71,6 +73,7 @@ namespace SEYR.Wizard
 
         private void UpdateImage()
         {
+            if (!FormReady) return;
             PictureBox.BackgroundImage = BitmapFunctions.ApplyFilters((Bitmap)InputImage.Clone());
         }
 

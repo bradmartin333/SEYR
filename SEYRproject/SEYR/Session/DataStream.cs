@@ -4,33 +4,28 @@ namespace SEYR.Session
 {
     internal class DataStream
     {
-        private readonly StreamWriter Stream = null;
+        private readonly string Path = null;
 
         public DataStream(string path, bool isDebug = false)
         {
-            Stream = new StreamWriter(path, false);
+            if (File.Exists(path)) File.Delete(path);
+            Path = path;
             if (isDebug) WriteDTLine("Stream Opened");
         }
 
         public void Write(string value)
         {
-            Stream.Write(value);
+            File.AppendAllText(Path, value);
         }
 
         public void WriteLine(string value)
         {
-            Stream.WriteLine(value);
+            File.AppendAllText(Path, $"{value}\n");
         }
 
         public void WriteDTLine(string value)
         {
-            Stream.WriteLine($"{System.DateTime.Now}\t{value}");
-        }
-
-        public void Close()
-        {
-            Stream.Close();
-            Stream.Dispose();
+            File.AppendAllText(Path, $"{System.DateTime.Now}\t{value}\n");
         }
     }
 }

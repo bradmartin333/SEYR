@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using SEYR.Wizard;
 using System.Windows.Forms;
+using SEYR.ImageProcessing;
 
 namespace SEYR.Session
 {
@@ -12,8 +13,9 @@ namespace SEYR.Session
     {
         public List<Task> Tasks { get; set; } = new List<Task>();
         internal static Project Project { get; set; } = null;
-        private static DataStream DataStream { get; set; } = null;
-        private static DataStream DebugStream { get; set; } = null;
+        internal static Training Training { get; set; } = new Training();
+        internal static DataStream DataStream { get; set; } = null;
+        internal static DataStream DebugStream { get; set; } = null;
         private string LastData { get; set; } = string.Empty;
         private readonly string ProjectPath = null;
 
@@ -22,7 +24,7 @@ namespace SEYR.Session
         /// </summary>
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
-        /// <param name="pixelsPerMM"></param>
+        /// <param name="pixelsPerMicron"></param>
         /// <param name="debugPath">
         /// If null, logs to temp directory
         /// </param>
@@ -75,19 +77,13 @@ namespace SEYR.Session
             DebugStream.WriteDTLine("Project Loaded");
         }
 
-        public void Close()
-        {
-            DataStream.Close();
-            DebugStream.Close();
-        }
-
         #endregion
 
         #region Image Processing
 
         public void NewImage(Bitmap bmp)
         {
-            Tasks.Add(Task.Factory.StartNew(() => LastData = ImageProcessing.BitmapFunctions.LoadImage(bmp)));
+            Tasks.Add(Task.Factory.StartNew(() => LastData = BitmapFunctions.LoadImage(bmp)));
         }
 
         public string GetLastData()
@@ -118,6 +114,8 @@ namespace SEYR.Session
                 else
                     return;
             }
+
+            Training.Show();
         }
 
         #endregion

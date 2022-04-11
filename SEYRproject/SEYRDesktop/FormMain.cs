@@ -26,7 +26,7 @@ namespace SEYRDesktop
         private void NextImage()
         {
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            // TODO
+            Channel.NewImage(bmp);
             GC.Collect();
         }
 
