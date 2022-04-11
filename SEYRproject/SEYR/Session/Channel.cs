@@ -3,18 +3,19 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Drawing;
-using System;
+using SEYR.Wizard;
+using System.Windows.Forms;
 
 namespace SEYR.Session
 {
     public class Channel
     {
         public List<Task> Tasks { get; set; } = new List<Task>();
-        private readonly string ProjectPath = null;
+        internal static Project Project { get; set; } = null;
         private static DataStream DataStream { get; set; } = null;
         private static DataStream DebugStream { get; set; } = null;
-        private Project Project { get; set; } = null;
         private string LastData { get; set; } = string.Empty;
+        private readonly string ProjectPath = null;
 
         /// <summary>
         /// Create a new SEYR Channe
@@ -97,6 +98,22 @@ namespace SEYR.Session
         public string GetLastData()
         {
             return LastData;
+        }
+
+        #endregion
+
+        #region Wizardry
+
+        public void RunWizard(Bitmap bmp)
+        {
+            using (FiltersWizard w = new FiltersWizard(bmp))
+            {
+                var result = w.ShowDialog();
+                if (result == DialogResult.OK)
+                    SaveProject();
+                else
+                    return;
+            }
         }
 
         #endregion
