@@ -7,8 +7,8 @@ namespace SEYR.Session
     [Serializable()]
     public class Project : IFilters, IGrid
     {
-        [XmlElement("PixelsPerMM")]
-        public double PixelsPerMM { get; set; } = 5.212e-3;
+        [XmlElement("PixelsPerMicron")]
+        public double PixelsPerMicron { get; set; } = 5.212;
         [XmlElement("Scaling")]
         public double Scaling { get; set; } = 0.25;
         [XmlElement("Threshold")]

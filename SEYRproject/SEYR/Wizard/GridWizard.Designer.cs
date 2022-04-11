@@ -104,7 +104,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Pitch X";
+            this.label3.Text = "Pitch X (μm)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumPitchX
@@ -129,7 +129,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Pitch Y";
+            this.label4.Text = "Pitch Y (μm)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumPitchY
@@ -167,7 +167,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Origin X";
+            this.label1.Text = "Origin X (μm)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumOriginX
@@ -192,7 +192,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Origin Y";
+            this.label2.Text = "Origin Y (μm)";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumOriginY

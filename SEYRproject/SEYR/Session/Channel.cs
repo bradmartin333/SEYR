@@ -26,12 +26,12 @@ namespace SEYR.Session
         /// <param name="debugPath">
         /// If null, logs to temp directory
         /// </param>
-        public Channel(string projectPath, string streamPath, double pixelsPerMM, string debugPath = null)
+        public Channel(string projectPath, string streamPath, double pixelsPerMicron, string debugPath = null)
         {
             DataStream = new DataStream(streamPath);
             DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
-            Project = new Project() { PixelsPerMM = pixelsPerMM };
+            Project = new Project() { PixelsPerMicron = pixelsPerMicron };
             SaveProject();
         }
 
@@ -52,11 +52,6 @@ namespace SEYR.Session
         }
 
         #region Opening and Closing
-
-        public string GetProjectInfo()
-        {
-            return $"{Project.PixelsPerMM}";
-        }
 
         public void SaveProject()
         {
@@ -106,7 +101,16 @@ namespace SEYR.Session
 
         public void RunWizard(Bitmap bmp)
         {
-            using (FiltersWizard w = new FiltersWizard(bmp))
+            using (FiltersWizard w = new FiltersWizard((Bitmap)bmp.Clone()))
+            {
+                var result = w.ShowDialog();
+                if (result == DialogResult.OK)
+                    SaveProject();
+                else
+                    return;
+            }
+
+            using (GridWizard w = new GridWizard(bmp))
             {
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)

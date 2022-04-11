@@ -4,7 +4,7 @@ using System.IO;
 namespace TestSEYR
 {
     [TestFixture]
-    [Ignore("UI Tests")]
+    //[Ignore("UI Tests")]
     public class WIzardTests
     {
         SEYR.Session.Channel Channel = null;
@@ -12,7 +12,7 @@ namespace TestSEYR
         [OneTimeSetUp]
         public void Setup()
         {
-            Channel = new SEYR.Session.Channel($"{Path.GetTempPath()}proj.seyr", $"{Path.GetTempPath()}log.txt", 5.2e-3);
+            Channel = new SEYR.Session.Channel($"{Path.GetTempPath()}proj.seyr", $"{Path.GetTempPath()}log.txt");
         }
 
         [Test]

@@ -85,7 +85,7 @@ namespace SEYR.Wizard
             NumPitchY.Value = PitchY;
             NumRows.Value = Rows;
             NumColumns.Value = Columns;
-            PictureBox.BackgroundImage = BitmapFunctions.ApplyFilters((Bitmap)InputImage.Clone());
+            PictureBox.BackgroundImage = InputImage;
         }
 
         private void BtnConfirm_Click(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace SEYR.Wizard
 
         private void UpdateImage()
         {
-            PictureBox.BackgroundImage = BitmapFunctions.ApplyFilters((Bitmap)InputImage.Clone());
+            PictureBox.Image = BitmapFunctions.DrawGrid((Bitmap)InputImage.Clone());
         }
 
         private void NumOriginX_ValueChanged(object sender, EventArgs e)
