@@ -39,6 +39,7 @@
             this.NumFrame = new System.Windows.Forms.NumericUpDown();
             this.BtnRunAll = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.BtnRepeat = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -51,14 +52,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.NumPxPerMicron, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnStop, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.BtnLaunchWizard, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.NumFrame, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnRunAll, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnLaunchWizard, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -104,12 +106,10 @@
             // 
             // BtnOpenDir
             // 
-            this.BtnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnOpenDir.AutoSize = true;
+            this.BtnOpenDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenDir.Location = new System.Drawing.Point(105, 8);
+            this.BtnOpenDir.Location = new System.Drawing.Point(3, 8);
             this.BtnOpenDir.Name = "BtnOpenDir";
             this.BtnOpenDir.Size = new System.Drawing.Size(96, 28);
             this.BtnOpenDir.TabIndex = 14;
@@ -135,9 +135,9 @@
             this.BtnLaunchWizard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnLaunchWizard.Enabled = false;
             this.BtnLaunchWizard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLaunchWizard.Location = new System.Drawing.Point(207, 8);
+            this.BtnLaunchWizard.Location = new System.Drawing.Point(105, 8);
             this.BtnLaunchWizard.Name = "BtnLaunchWizard";
-            this.BtnLaunchWizard.Size = new System.Drawing.Size(97, 28);
+            this.BtnLaunchWizard.Size = new System.Drawing.Size(96, 28);
             this.BtnLaunchWizard.TabIndex = 1;
             this.BtnLaunchWizard.Text = "Launch Wizard";
             this.BtnLaunchWizard.UseVisualStyleBackColor = true;
@@ -159,20 +159,10 @@
             this.NumFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NumFrame.Enabled = false;
             this.NumFrame.Location = new System.Drawing.Point(105, 44);
-            this.NumFrame.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.NumFrame.Name = "NumFrame";
             this.NumFrame.Size = new System.Drawing.Size(96, 20);
             this.NumFrame.TabIndex = 3;
             this.NumFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumFrame.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.NumFrame.ValueChanged += new System.EventHandler(this.numFrame_ValueChanged);
             // 
             // BtnRunAll
@@ -191,6 +181,19 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // BtnRepeat
+            // 
+            this.BtnRepeat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnRepeat.Enabled = false;
+            this.BtnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRepeat.Location = new System.Drawing.Point(207, 8);
+            this.BtnRepeat.Name = "BtnRepeat";
+            this.BtnRepeat.Size = new System.Drawing.Size(97, 28);
+            this.BtnRepeat.TabIndex = 17;
+            this.BtnRepeat.Text = "Repeat Image";
+            this.BtnRepeat.UseVisualStyleBackColor = true;
+            this.BtnRepeat.Click += new System.EventHandler(this.BtnRepeat_Click);
             // 
             // FormMain
             // 
@@ -224,6 +227,7 @@
         private System.Windows.Forms.Button BtnOpenDir;
         private System.Windows.Forms.NumericUpDown NumPxPerMicron;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnRepeat;
     }
 }
 

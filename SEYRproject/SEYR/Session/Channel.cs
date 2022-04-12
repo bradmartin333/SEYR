@@ -11,7 +11,6 @@ namespace SEYR.Session
     public class Channel
     {
         internal static Project Project { get; set; } = null;
-        internal static Training Training { get; set; } = new Training();
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
         private List<Task> Tasks { get; set; } = new List<Task>();
@@ -82,7 +81,6 @@ namespace SEYR.Session
         public void NewImage(Bitmap bmp)
         {
             Tasks.Add(Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp)));
-            Training.Show();
         }
 
         public void RunWizard(Bitmap bmp)

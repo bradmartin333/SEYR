@@ -21,7 +21,7 @@ namespace SEYR.ImageProcessing
 
         private static void SliceImage(Bitmap bmp)
         {
-            Rectangle rectangle = GetProjectGeometry(bmp.Height);
+            Rectangle rectangle = Channel.Project.GetGeometry();
             for (int i = 0; i < Channel.Project.Columns; i++)
             {
                 for (int j = 0; j < Channel.Project.Rows; j++)
@@ -32,15 +32,10 @@ namespace SEYR.ImageProcessing
                     Bitmap crop = new Bitmap(rectangle.Width, rectangle.Height);
                     for (int k = 0; k < rectangle.Width; k++)
                         for (int l = 0; l < rectangle.Height; l++)
-                                crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));   
-                    ScoreImage(crop);
+                            if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k <= bmp.Width && cropRect.Y + l <= bmp.Height)
+                                crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
                 }
             }
-        }
-
-        private static void ScoreImage(Bitmap bmp)
-        {
-            Tasks.Add(Task.Factory.StartNew(() => Channel.Training.NewImage(bmp)));
         }
 
         public static void ApplyFilters(ref Bitmap bmp, bool color = false)
@@ -60,13 +55,16 @@ namespace SEYR.ImageProcessing
                 Threshold threshold = new Threshold(Channel.Project.Threshold);
                 threshold.ApplyInPlace(working);
             }
+
+            Channel.Project.ImageHeight = working.Height;
+            Channel.Project.ImageWidth = working.Width;
             bmp = working;
         }
 
         internal static void DrawGrid(ref Bitmap bmp)
         {
             ApplyFilters(ref bmp, true);
-            Rectangle rectangle = GetProjectGeometry(bmp.Height);
+            Rectangle rectangle = Channel.Project.GetGeometry();
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
@@ -80,16 +78,6 @@ namespace SEYR.ImageProcessing
                     }
                 }
             }
-        }
-
-        internal static Rectangle GetProjectGeometry(int height)
-        {
-            Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
-                (int)(height - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
-            Point size = new Point((int)(Channel.Project.SizeX * Channel.Project.ScaledPixelsPerMicron),
-                (int)(Channel.Project.SizeY * Channel.Project.ScaledPixelsPerMicron));
-            Rectangle rectangle = new Rectangle(offset.X, offset.Y, size.X, size.Y);
-            return rectangle;
         }
 
         //private static double Scan(Bitmap colorImg, Bitmap filteredImg)

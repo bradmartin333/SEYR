@@ -45,6 +45,9 @@ namespace SEYRDesktop
                 NumFrame.Value++;
             }
             STOP = false;
+            BtnRunAll.Enabled = true;
+            BtnStop.Enabled = false;
+            NumFrame.Value = 0;
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
@@ -68,10 +71,11 @@ namespace SEYRDesktop
             NumPxPerMicron.Enabled = false;
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;
+            BtnRepeat.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             IMGS = GetSortedPicturesFrom(path).ToArray();
-            NumFrame.Maximum = IMGS.Length;
-            NumFrame.Value = 1;
+            NumFrame.Maximum = IMGS.Length - 1;
+            NumFrame.Value = 0;
             NextImage();
         }
 
@@ -93,6 +97,11 @@ namespace SEYRDesktop
             foreach (var filter in filters)
                 filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
             return filesFound.AlphanumericSort();
+        }
+
+        private void BtnRepeat_Click(object sender, EventArgs e)
+        {
+            NextImage();
         }
     }
 }
