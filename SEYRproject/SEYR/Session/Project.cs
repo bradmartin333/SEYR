@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace SEYR.Session
 {
     [Serializable()]
-    public class Project : IFilters, IGrid
+    public class Project : IFilters, IGrid, ITile
     {
         [XmlElement("PixelsPerMicron")]
         public double PixelsPerMicron { get; set; } = 2.606;
@@ -29,5 +29,11 @@ namespace SEYR.Session
         public int Rows { get; set; } = 1;
         [XmlElement("Columns")]
         public int Columns { get; set; } = 1;
+        [XmlElement("SizeX")]
+        public int SizeX { get; set; } = 500;
+        [XmlElement("SizeY")]
+        public int SizeY { get; set; } = 500;
+        [XmlElement("Density")]
+        public int Density { get; set; } = 100;
     }
 }

@@ -51,6 +51,27 @@ namespace SEYR.Wizard
             }
         }
 
+
+        public int SizeX
+        {
+            get => Channel.Project.SizeX;
+            set
+            {
+                Channel.Project.SizeX = value;
+                UpdateImage();
+            }
+        }
+
+        public int SizeY
+        {
+            get => Channel.Project.SizeY;
+            set
+            {
+                Channel.Project.SizeY = value;
+                UpdateImage();
+            }
+        }
+
         public int Rows
         {
             get => Channel.Project.Rows;
@@ -84,6 +105,8 @@ namespace SEYR.Wizard
             NumOriginY.Value = OriginY;
             NumPitchX.Value = PitchX;
             NumPitchY.Value = PitchY;
+            NumSizeX.Value = SizeX;
+            NumSizeY.Value = SizeY;
             NumRows.Value = Rows;
             NumColumns.Value = Columns;
             PictureBox.BackgroundImage = BitmapFunctions.DrawGrid((Bitmap)InputImage.Clone());
@@ -126,6 +149,16 @@ namespace SEYR.Wizard
         private void NumPitchY_ValueChanged(object sender, EventArgs e)
         {
             PitchY = (int)NumPitchY.Value;
+        }
+
+        private void NumSizeX_ValueChanged(object sender, EventArgs e)
+        {
+            SizeX = (int)NumSizeX.Value;
+        }
+
+        private void NumSizeY_ValueChanged(object sender, EventArgs e)
+        {
+            SizeY = (int)NumSizeY.Value;
         }
 
         private void NumRows_ValueChanged(object sender, EventArgs e)

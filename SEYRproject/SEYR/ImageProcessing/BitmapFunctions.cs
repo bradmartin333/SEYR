@@ -1,5 +1,6 @@
 ﻿using Accord.Imaging.Filters;
 using SEYR.Session;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -16,8 +17,6 @@ namespace SEYR.ImageProcessing
 
         public static Bitmap ApplyFilters(Bitmap bmp, bool color = false)
         {
-            Channel.DebugStream.WriteLine("Got an image");
-
             // Resize incoming image
             Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
             using (Graphics g = Graphics.FromImage(resize))
@@ -41,16 +40,21 @@ namespace SEYR.ImageProcessing
             Bitmap working = ApplyFilters(bmp, true);
             PointF offset = new PointF((float)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX), 
                 (float)(working.Height - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
+            Rectangle rectangle = new Rectangle(
+                (int)((Channel.Project.SizeX / 2 * Channel.Project.ScaledPixelsPerMicron) + offset.X),
+                (int)((Channel.Project.SizeY / 2 * Channel.Project.ScaledPixelsPerMicron) + offset.Y),
+                (int)(Channel.Project.SizeX * Channel.Project.PixelsPerMicron),
+                (int)(Channel.Project.SizeY * Channel.Project.PixelsPerMicron));
             using (Graphics g = Graphics.FromImage(working))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
                     for (int j = 0; j < Channel.Project.Rows; j++)
                     {
-                        int thisX = (int)(offset.X + (i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX));
-                        int thisY = (int)(offset.Y - (j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY));
-                        g.DrawLine(new Pen(Brushes.HotPink, (float)(working.Height * 0.01)), new Point(thisX, 0), new Point(thisX, bmp.Height));
-                        g.DrawLine(new Pen(Brushes.HotPink, (float)(working.Width * 0.01)), new Point(0, thisY), new Point(bmp.Width, thisY));
+                        int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                        int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.001)),
+                            rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
                     }
                 }
             }
