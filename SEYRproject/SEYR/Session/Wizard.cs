@@ -18,6 +18,7 @@ namespace SEYR.Session
                 Channel.Project.ScaledPixelsPerMicron = Channel.Project.PixelsPerMicron * Channel.Project.Scaling;
                 UpdateFilters();
                 UpdateGrid();
+                UpdateTile();
             }
         }
 

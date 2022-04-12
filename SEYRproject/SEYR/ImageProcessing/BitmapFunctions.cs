@@ -148,7 +148,8 @@ namespace SEYR.ImageProcessing
             byte[] data = new byte[size];
             Marshal.Copy(bmpData.Scan0, data, 0, size);
 
-            Size scanSize = new Size((int)(bmp.Width / (double)Channel.Project.Density), (int)(bmp.Height / (double)Channel.Project.Density));
+            Size scanSize = new Size((int)Math.Round(bmp.Width / (double)Channel.Project.Density, MidpointRounding.AwayFromZero), 
+                (int)Math.Round(bmp.Height / (double)Channel.Project.Density, MidpointRounding.AwayFromZero));
             List<Point3D> tiles = new List<Point3D>();
 
             for (int i = 0; i < bmp.Width; i += scanSize.Width)
