@@ -27,16 +27,11 @@ namespace SEYRDesktop
         {
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
             Channel.NewImage(bmp);
-            GC.Collect();
         }
 
         private void BtnLaunchWizard_Click(object sender, EventArgs e)
         {
             Channel.RunWizard(new Bitmap(IMGS[(int)NumFrame.Value]));
-            BtnLaunchWizard.Enabled = false;
-            BtnRunAll.Enabled = true;
-            NumPxPerMicron.Enabled = false;
-            NumFrame.Enabled = true;
         }
 
         private void btnRunAll_Click(object sender, EventArgs e)
@@ -63,13 +58,16 @@ namespace SEYRDesktop
         {
             string path = OpenFolder();
             if (path == null) return;
-            BtnOpenDir.Enabled = false;
-            BtnLaunchWizard.Enabled = true;
             string[] files = Directory.GetFiles(path, "*.seyr");
             if (files.Length > 0)
                 Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", $@"{path}\debug.txt");
             else
                 Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value, $@"{path}\debug.txt");
+            BtnOpenDir.Enabled = false;
+            BtnLaunchWizard.Enabled = true;
+            NumPxPerMicron.Enabled = false;
+            NumFrame.Enabled = true;
+            BtnRunAll.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             IMGS = GetSortedPicturesFrom(path).ToArray();
             NumFrame.Maximum = IMGS.Length;

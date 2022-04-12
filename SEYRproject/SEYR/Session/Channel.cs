@@ -10,12 +10,11 @@ namespace SEYR.Session
 {
     public class Channel
     {
-        public List<Task> Tasks { get; set; } = new List<Task>();
         internal static Project Project { get; set; } = null;
         internal static Training Training { get; set; } = new Training();
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
-        private string LastData { get; set; } = string.Empty;
+        private List<Task> Tasks { get; set; } = new List<Task>();
         private readonly string ProjectPath = null;
 
         /// <summary>
@@ -82,17 +81,9 @@ namespace SEYR.Session
 
         public void NewImage(Bitmap bmp)
         {
-            Tasks.Add(Task.Factory.StartNew(() => LastData = BitmapFunctions.LoadImage(bmp)));
+            Tasks.Add(Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp)));
+            Training.Show();
         }
-
-        public string GetLastData()
-        {
-            return LastData;
-        }
-
-        #endregion
-
-        #region Wizardry
 
         public void RunWizard(Bitmap bmp)
         {
@@ -104,8 +95,6 @@ namespace SEYR.Session
                 else
                     return;
             }
-
-            Training.Show();
         }
 
         #endregion

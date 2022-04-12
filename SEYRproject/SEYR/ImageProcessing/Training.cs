@@ -13,6 +13,7 @@ namespace SEYR.ImageProcessing
         public void NewImage(Bitmap bmp)
         {
             pictureBox1.BackgroundImage = bmp;
+            Application.DoEvents();
         }
     }
 }
