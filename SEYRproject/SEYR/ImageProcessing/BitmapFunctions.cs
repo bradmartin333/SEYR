@@ -9,31 +9,41 @@ namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
+        internal static Composite Composite = new Composite();
+
         public static void LoadImage(Bitmap bmp)
         {
             ApplyFilters(ref bmp, true);
-            SliceImage(bmp);
+            Bitmap test = SliceImage(bmp);
+            Composite.BackgroundImage = test;
             bmp.Dispose();
             GC.Collect();
         }
 
-        private static void SliceImage(Bitmap bmp)
+        private static Bitmap SliceImage(Bitmap bmp)
         {
             Rectangle rectangle = Channel.Project.GetGeometry();
-            for (int i = 0; i < Channel.Project.Columns; i++)
+            Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
+            using (Graphics g = Graphics.FromImage(frame))
             {
-                for (int j = 0; j < Channel.Project.Rows; j++)
+                for (int i = 0; i < Channel.Project.Columns; i++)
                 {
-                    int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                    int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                    Rectangle cropRect = new Rectangle(rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
-                    Bitmap crop = new Bitmap(rectangle.Width, rectangle.Height);
-                    for (int k = 0; k < rectangle.Width; k++)
-                        for (int l = 0; l < rectangle.Height; l++)
-                            if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k <= bmp.Width && cropRect.Y + l <= bmp.Height)
-                                crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
+                    for (int j = 0; j < Channel.Project.Rows; j++)
+                    {
+                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                        int thisY = rectangle.Y - (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
+                        Bitmap crop = new Bitmap(rectangle.Width, rectangle.Height);
+                        for (int k = 0; k < rectangle.Width; k++)
+                            for (int l = 0; l < rectangle.Height; l++)
+                                if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k <= bmp.Width && cropRect.Y + l <= bmp.Height)
+                                    crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
+
+                        g.DrawImage(crop, thisX, thisY);
+                    }
                 }
             }
+            return frame;
         }
 
         public static void ApplyFilters(ref Bitmap bmp, bool color = false)

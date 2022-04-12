@@ -81,6 +81,7 @@ namespace SEYR.Session
         public void NewImage(Bitmap bmp)
         {
             Tasks.Add(Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp)));
+            BitmapFunctions.Composite.Show();
         }
 
         public void RunWizard(Bitmap bmp)
