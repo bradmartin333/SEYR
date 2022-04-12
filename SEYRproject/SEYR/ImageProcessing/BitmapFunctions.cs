@@ -11,11 +11,12 @@ namespace SEYR.ImageProcessing
     {
         public static string LoadImage(Bitmap bmp)
         {
-            Channel.Training.NewImage(DrawGrid(bmp));
+            DrawGrid(ref bmp);
+            Channel.Training.NewImage(bmp);
             return "Hello";
         }
 
-        public static Bitmap ApplyFilters(Bitmap bmp, bool color = false)
+        public static void ApplyFilters(ref Bitmap bmp, bool color = false)
         {
             // Resize incoming image
             Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
@@ -32,20 +33,18 @@ namespace SEYR.ImageProcessing
                 Threshold threshold = new Threshold(Channel.Project.Threshold);
                 threshold.ApplyInPlace(working);
             }
-            return working;
+            bmp = working;
         }
 
-        internal static Bitmap DrawGrid(Bitmap bmp)
+        internal static void DrawGrid(ref Bitmap bmp)
         {
-            Bitmap working = ApplyFilters(bmp, true);
-            PointF offset = new PointF((float)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX), 
-                (float)(working.Height - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
-            Rectangle rectangle = new Rectangle(
-                (int)((Channel.Project.SizeX / 2 * Channel.Project.ScaledPixelsPerMicron) + offset.X),
-                (int)((Channel.Project.SizeY / 2 * Channel.Project.ScaledPixelsPerMicron) + offset.Y),
-                (int)(Channel.Project.SizeX * Channel.Project.PixelsPerMicron),
-                (int)(Channel.Project.SizeY * Channel.Project.PixelsPerMicron));
-            using (Graphics g = Graphics.FromImage(working))
+            ApplyFilters(ref bmp, true);
+            Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX), 
+                (int)(bmp.Height - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
+            Point size = new Point((int)(Channel.Project.SizeX * Channel.Project.ScaledPixelsPerMicron),
+                (int)(Channel.Project.SizeY * Channel.Project.ScaledPixelsPerMicron));
+            Rectangle rectangle = new Rectangle(offset.X, offset.Y, size.X, size.Y);
+            using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
@@ -53,12 +52,11 @@ namespace SEYR.ImageProcessing
                     {
                         int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                        g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.001)),
+                        g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.01)),
                             rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
                     }
                 }
             }
-            return working;
         }
 
         //private static double Scan(Bitmap colorImg, Bitmap filteredImg)

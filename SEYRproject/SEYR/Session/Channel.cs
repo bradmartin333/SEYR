@@ -3,7 +3,6 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Drawing;
-using SEYR.Wizard;
 using System.Windows.Forms;
 using SEYR.ImageProcessing;
 
@@ -97,16 +96,7 @@ namespace SEYR.Session
 
         public void RunWizard(Bitmap bmp)
         {
-            using (FiltersWizard w = new FiltersWizard((Bitmap)bmp.Clone()))
-            {
-                var result = w.ShowDialog();
-                if (result == DialogResult.OK)
-                    SaveProject();
-                else
-                    return;
-            }
-
-            using (GridWizard w = new GridWizard(bmp))
+            using (Wizard w = new Wizard((Bitmap)bmp.Clone()))
             {
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)

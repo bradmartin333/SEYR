@@ -1,11 +1,10 @@
-﻿using SEYR.ProjectComponents;
-using System;
+﻿using System;
 using System.Xml.Serialization;
 
 namespace SEYR.Session
 {
     [Serializable()]
-    public class Project : IFilters, IGrid, ITile
+    public class Project : IProject
     {
         [XmlElement("PixelsPerMicron")]
         public double PixelsPerMicron { get; set; } = 2.606;
