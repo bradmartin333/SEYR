@@ -64,10 +64,9 @@ namespace SEYR.Session
 
         private void LoadProject()
         {
-            DebugStream.Write("Loading Project");
+            DebugStream.Write($"Loading Project\t{ProjectPath}", true, true);
             using (StreamReader stream = new StreamReader(ProjectPath))
             {
-                DebugStream.Write($"\t{ProjectPath}", true);
                 XmlSerializer x = new XmlSerializer(typeof(Project));
                 Project = (Project)x.Deserialize(stream);
             }

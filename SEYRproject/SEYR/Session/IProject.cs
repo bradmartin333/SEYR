@@ -10,6 +10,7 @@
         int PitchX { get; set; }
         int PitchY { get; set; }
         int Rows { get; set; }
+        double Sampling { get; set; }
         double Scaling { get; set; }
         int SizeX { get; set; }
         int SizeY { get; set; }

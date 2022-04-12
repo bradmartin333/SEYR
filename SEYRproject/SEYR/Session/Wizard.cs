@@ -29,6 +29,7 @@ namespace SEYR.Session
                 Channel.Project.Threshold = value;
                 UpdateFilters();
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -40,6 +41,7 @@ namespace SEYR.Session
                 Channel.Project.Angle = value;
                 UpdateFilters();
                 UpdateGrid();
+                UpdateTile();
             }
         }
         public int OriginX
@@ -49,6 +51,7 @@ namespace SEYR.Session
             {
                 Channel.Project.OriginX = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -59,6 +62,7 @@ namespace SEYR.Session
             {
                 Channel.Project.OriginY = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -69,6 +73,7 @@ namespace SEYR.Session
             {
                 Channel.Project.PitchX = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -79,6 +84,7 @@ namespace SEYR.Session
             {
                 Channel.Project.PitchY = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -90,6 +96,7 @@ namespace SEYR.Session
             {
                 Channel.Project.SizeX = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -100,6 +107,7 @@ namespace SEYR.Session
             {
                 Channel.Project.SizeY = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -110,6 +118,7 @@ namespace SEYR.Session
             {
                 Channel.Project.Rows = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -120,6 +129,7 @@ namespace SEYR.Session
             {
                 Channel.Project.Columns = value;
                 UpdateGrid();
+                UpdateTile();
             }
         }
 
@@ -129,6 +139,17 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.Density = value;
+                UpdateTile();
+            }
+        }
+
+        public double Sampling
+        {
+            get => Channel.Project.Sampling;
+            set
+            {
+                Channel.Project.Sampling = value;
+                UpdateTile();
             }
         }
 
@@ -136,6 +157,27 @@ namespace SEYR.Session
 
         private readonly Bitmap InputImage;
         private bool FormReady = false;
+
+        private int _TileRow = 1;
+        private int TileRow
+        {
+            get => _TileRow;
+            set
+            {
+                _TileRow = value;
+                UpdateTile();
+            }
+        }
+        private int _TileColumn = 1;
+        private int TileColumn
+        {
+            get => _TileColumn;
+            set
+            {
+                _TileColumn = value;
+                UpdateTile();
+            }
+        }
 
         public Wizard(Bitmap bitmap)
         {
@@ -154,9 +196,11 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             NumDensity.Value = Density;
+            NumSampling.Value = (decimal)Sampling;
             FormReady = true;
             UpdateFilters();
             UpdateGrid();
+            UpdateTile();
         }
 
         private void UpdateFilters()
@@ -176,6 +220,15 @@ namespace SEYR.Session
             Bitmap bmp = (Bitmap)InputImage.Clone();
             BitmapFunctions.DrawGrid(ref bmp);
             PbxGrid.BackgroundImage = bmp;
+            FormReady = true;
+        }
+
+        private void UpdateTile()
+        {
+            if (!FormReady) return;
+            FormReady = false;
+            Bitmap bmp = (Bitmap)InputImage.Clone();
+            PbxTile.BackgroundImage = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
             FormReady = true;
         }
 
@@ -251,6 +304,21 @@ namespace SEYR.Session
         private void NumDensity_ValueChanged(object sender, EventArgs e)
         {
             Density = (int)NumDensity.Value;
+        }
+
+        private void NumSampling_ValueChanged(object sender, EventArgs e)
+        {
+            Sampling = (double)NumSampling.Value;
+        }
+
+        private void NumTileColumn_ValueChanged(object sender, EventArgs e)
+        {
+            TileColumn = (int)NumTileColumn.Value;
+        }
+
+        private void NumTileRow_ValueChanged(object sender, EventArgs e)
+        {
+            TileRow = (int)NumTileRow.Value;
         }
 
         #endregion

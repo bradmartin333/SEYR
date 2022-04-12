@@ -5,16 +5,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
         internal static Composite Composite = new Composite();
-        private static double _GridSize = 15;
-        private static double _AmountDataDesired = 0.5; // Highest 10% of available data from training grid
 
         private struct Point2D
         {
@@ -31,14 +32,14 @@ namespace SEYR.ImageProcessing
 
         public static void LoadImage(Bitmap bmp)
         {
-            ApplyFilters(ref bmp, true);
-            Bitmap test = SliceImage(bmp);
-            Composite.BackgroundImage = test;
+            ApplyFilters(ref bmp);
+            Bitmap composite = SliceImage(bmp);
+            Composite.BackgroundImage = composite;
             bmp.Dispose();
             GC.Collect();
         }
 
-        private static Bitmap SliceImage(Bitmap bmp)
+        private static Bitmap SliceImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0)
         {
             Rectangle rectangle = Channel.Project.GetGeometry();
             Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
@@ -58,15 +59,31 @@ namespace SEYR.ImageProcessing
                                 if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k <= bmp.Width && cropRect.Y + l <= bmp.Height)
                                     crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
                         Point2D[] focusTiles = GetTiles(crop);
-                        double score = ScoreImage(crop, focusTiles);
-                        data += $"{i}\t{j}\t{score}\n";
+                        data += $"{i}\t{j}\t{GenerateTileCode(focusTiles)}\n";
                         HighlightTiles(ref crop, focusTiles);
+                        if (singleTile && j == row && i == col) return crop;
                         g.DrawImage(crop, thisX, thisY);
                     }
                 }
             }
             Channel.DataStream.Write(data);
             return frame;
+        }
+
+        private static string GenerateTileCode(Point2D[] focusTiles)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (Point2D tile in focusTiles)
+                stringBuilder.Append($"{tile.X} {tile.Y} ");
+            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString())))
+            {
+                using (var compressedStream = new MemoryStream())
+                {
+                    using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, false))
+                        uncompressedStream.CopyTo(compressorStream);
+                    return Convert.ToBase64String(compressedStream.ToArray());
+                }
+            }
         }
 
         public static void ApplyFilters(ref Bitmap bmp, bool color = false)
@@ -111,76 +128,10 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        /// <summary>
-        /// Return average of scores
-        /// for desired tiles in image
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="tiles"></param>
-        /// <returns></returns>
-        private static double ScoreImage(Bitmap bmp, Point2D[] tiles)
+        internal static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
-            Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
-            BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            int size = bmpData.Stride * bmpData.Height;
-            byte[] data = new byte[size];
-            Marshal.Copy(bmpData.Scan0, data, 0, size);
-
-            Size scanSize = new Size(bmp.Width / (int)_GridSize, bmp.Height / (int)_GridSize);
-            List<double> scores = new List<double>();
-
-            foreach (Point2D tile in tiles)
-            {
-                Rectangle rect = new Rectangle((int)tile.X, (int)tile.Y, scanSize.Width, scanSize.Height);
-                if (bmpRect.Contains(rect)) scores.Add(ScoreTile(data, rect, bmpData.Stride));
-            }
-
-            bmp.UnlockBits(bmpData);
-            return scores.Average();
-        }
-
-        /// <summary>
-        /// Core of AutoFocus
-        /// </summary>
-        /// <param name="data">
-        /// BitmapData for current image
-        /// </param>
-        /// <param name="tile">
-        /// Rectangle to crop BitmapData
-        /// </param>
-        /// <param name="stride"></param>
-        /// <returns>
-        /// Calculated score for tile
-        /// </returns>
-        private static double ScoreTile(byte[] data, Rectangle tile, int stride)
-        {
-            List<double> PDiff = new List<double>(); // Turn the data array into a convolutional data array
-
-            for (int i = tile.Left; i < tile.Right; i += (int)(1 / _AmountDataDesired))
-                for (int j = tile.Top; j < tile.Bottom; j += (int)(1 / _AmountDataDesired))
-                {
-                    int idx = i * 3 + j * stride; // Find starting index of pixel in data
-                    if (idx + 2 < data.Length) // Determine if it is wihtin the padding
-                    {
-                        byte p1 = data[idx + 2]; // Get current pixel's Red channel value
-                        double localPDiff = 0; // Percent difference of p1 and neighboring p2's
-                        int counts = 0; // Number of p2's we found
-                        for (int k = i - (int)(0.5 / _AmountDataDesired); k < i + (int)(0.5 / _AmountDataDesired); k++)
-                            for (int l = j - (int)(0.5 / _AmountDataDesired); l < j + (int)(0.5 / _AmountDataDesired); l++)
-                            {
-                                int neighborIdx = k * 3 + l * stride;  // Find starting index of pixel in data
-                                if (neighborIdx + 2 > 0 && neighborIdx + 2 < data.Length)  // Determine if it is wihtin the array
-                                {
-                                    byte p2 = data[neighborIdx + 2]; // Get current pixel's Red channel value
-                                    localPDiff += Math.Abs(p1 - p2) / (double)((p1 + p2) / 2.0); // Add the calculated percent difference
-                                    counts++;
-                                }
-                            }
-                        PDiff.Add(localPDiff / counts); // Add the average to the list
-                    }
-                }
-
-            return PDiff.Average();
+            ApplyFilters(ref bmp);
+            return SliceImage(bmp, true, tileRow - 1, tileColumn - 1);
         }
 
         /// <summary>
@@ -198,7 +149,7 @@ namespace SEYR.ImageProcessing
             byte[] data = new byte[size];
             Marshal.Copy(bmpData.Scan0, data, 0, size);
 
-            Size scanSize = new Size(bmp.Width / (int)_GridSize, bmp.Height / (int)_GridSize);
+            Size scanSize = new Size((int)(bmp.Width / (double)Channel.Project.Density), (int)(bmp.Height / (double)Channel.Project.Density));
             List<Point3D> tiles = new List<Point3D>();
 
             for (int i = 0; i < bmp.Width; i += scanSize.Width)
@@ -210,7 +161,8 @@ namespace SEYR.ImageProcessing
 
             bmp.UnlockBits(bmpData);
             tiles.Sort((x, y) => y.Z.CompareTo(x.Z)); // Sort list by greatest entropy to smallest entropy
-            Point2D[] selectedTiles = tiles.Take((int)(tiles.Count() * _AmountDataDesired)).Select(x => new Point2D() { X = x.X, Y = x.Y }).ToArray();
+            Point2D[] selectedTiles = tiles.Take((int)(Math.Round(tiles.Count() * Channel.Project.Sampling, MidpointRounding.AwayFromZero))).
+                Select(x => new Point2D() { X = x.X, Y = x.Y }).ToArray();
             return selectedTiles;
         }
 
@@ -230,8 +182,8 @@ namespace SEYR.ImageProcessing
         private static float GetCropEntropyARGB(byte[] data, Rectangle tile, int stride)
         {
             List<int> counts = new List<int>(); // Each int is a ARGB value of a pixel
-            for (int i = tile.Left; i < tile.Right; i += (int)(1 / _AmountDataDesired))
-                for (int j = tile.Top; j < tile.Bottom; j += (int)(1 / _AmountDataDesired))
+            for (int i = tile.Left; i < tile.Right; i += (int)(1 / Channel.Project.Sampling))
+                for (int j = tile.Top; j < tile.Bottom; j += (int)(1 / Channel.Project.Sampling))
                 {
                     int idx = i * 3 + j * stride; // Find starting index of pixel in data
                     if (idx + 2 < data.Length) // Determine if it is wihtin the padding
@@ -254,41 +206,16 @@ namespace SEYR.ImageProcessing
         /// <param name="tiles"></param>
         private static void HighlightTiles(ref Bitmap bmp, Point2D[] tiles)
         {
-            Size scanSize = new Size(bmp.Width / (int)_GridSize, bmp.Height / (int)_GridSize);
+            Size scanSize = new Size(bmp.Width / Channel.Project.Density, bmp.Height / Channel.Project.Density);
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 foreach (Point2D tile in tiles)
                 {
-                    Rectangle rect = new Rectangle((int)tile.X, (int)tile.Y, scanSize.Width, scanSize.Height);
+                    Rectangle rect = new Rectangle(tile.X, tile.Y, scanSize.Width, scanSize.Height);
                     g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), rect);
                 }
             }
         }
-
-        //private static double Scan(Bitmap colorImg, Bitmap filteredImg)
-        //{
-        //    List<double> pixelVals = new List<double>();
-        //    int whitePixels = 0;
-        //    int blackPixels = 0;
-        //    for (int i = 0; i < filteredImg.Width; i++)
-        //    {
-        //        for (int j = 0; j < filteredImg.Height; j++)
-        //        {
-        //            Color color = colorImg.GetPixel(i, j);
-        //            pixelVals.Add(color.R);
-
-        //            Color binary = filteredImg.GetPixel(i, j);
-        //            if (binary.R == 255) whitePixels++;
-        //            if (binary.R == 0) blackPixels++;
-        //        }
-        //    }
-
-        //    if (whitePixels < 10 || blackPixels < 10)
-        //        return 0.0;
-        //    else
-        //        return Math.Round(Statistics.Entropy(pixelVals.ToArray()), 1) + (whitePixels / 2);
-        //    // Add a fraction of the number of white pixels to simulate a rotation filter
-        //}
 
         /// <summary>
         /// Method to rotate an image either clockwise or counter-clockwise
