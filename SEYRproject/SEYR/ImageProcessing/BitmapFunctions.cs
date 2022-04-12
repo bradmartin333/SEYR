@@ -159,9 +159,7 @@ namespace SEYR.ImageProcessing
                 }
 
             bmp.UnlockBits(bmpData);
-            tiles.Sort((x, y) => y.Z.CompareTo(x.Z)); // Sort list by greatest entropy to smallest entropy
-            Point2D[] selectedTiles = tiles.Take((int)(Math.Round(tiles.Count() * Channel.Project.Sampling, MidpointRounding.AwayFromZero))).
-                Select(x => new Point2D() { X = x.X, Y = x.Y }).ToArray();
+            Point2D[] selectedTiles = tiles.Where(t => t.Z > Channel.Project.Tolerance).Select(t => new Point2D() { X = t.X, Y = t.Y }).ToArray();
             return selectedTiles;
         }
 
@@ -181,8 +179,8 @@ namespace SEYR.ImageProcessing
         private static float GetCropEntropyARGB(byte[] data, Rectangle tile, int stride)
         {
             List<int> counts = new List<int>(); // Each int is a ARGB value of a pixel
-            for (int i = tile.Left; i < tile.Right; i += (int)(1 / Channel.Project.Sampling))
-                for (int j = tile.Top; j < tile.Bottom; j += (int)(1 / Channel.Project.Sampling))
+            for (int i = tile.Left; i < tile.Right; i++)
+                for (int j = tile.Top; j < tile.Bottom; j++)
                 {
                     int idx = i * 3 + j * stride; // Find starting index of pixel in data
                     if (idx + 2 < data.Length) // Determine if it is wihtin the padding

@@ -70,7 +70,7 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
-            this.NumSampling = new System.Windows.Forms.NumericUpDown();
+            this.NumTolerance = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
@@ -103,7 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSampling)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).BeginInit();
             this.flowLayoutPanel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).BeginInit();
@@ -685,7 +685,7 @@
             this.flowLayoutPanel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel10.AutoSize = true;
             this.flowLayoutPanel10.Controls.Add(this.label9);
-            this.flowLayoutPanel10.Controls.Add(this.NumSampling);
+            this.flowLayoutPanel10.Controls.Add(this.NumTolerance);
             this.flowLayoutPanel10.Location = new System.Drawing.Point(932, 420);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(152, 26);
@@ -698,39 +698,39 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(70, 13);
             this.label9.TabIndex = 5;
-            this.label9.Text = "Sampling (%)";
+            this.label9.Text = "Tolerance";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // NumSampling
+            // NumTolerance
             // 
-            this.NumSampling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSampling.DecimalPlaces = 2;
-            this.NumSampling.Increment = new decimal(new int[] {
+            this.NumTolerance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumTolerance.DecimalPlaces = 2;
+            this.NumTolerance.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.NumSampling.Location = new System.Drawing.Point(79, 3);
-            this.NumSampling.Maximum = new decimal(new int[] {
+            this.NumTolerance.Location = new System.Drawing.Point(79, 3);
+            this.NumTolerance.Maximum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.NumSampling.Minimum = new decimal(new int[] {
+            this.NumTolerance.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.NumSampling.Name = "NumSampling";
-            this.NumSampling.Size = new System.Drawing.Size(70, 20);
-            this.NumSampling.TabIndex = 4;
-            this.NumSampling.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSampling.Value = new decimal(new int[] {
+            this.NumTolerance.Name = "NumTolerance";
+            this.NumTolerance.Size = new System.Drawing.Size(70, 20);
+            this.NumTolerance.TabIndex = 4;
+            this.NumTolerance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumTolerance.Value = new decimal(new int[] {
             25,
             0,
             0,
             131072});
-            this.NumSampling.ValueChanged += new System.EventHandler(this.NumSampling_ValueChanged);
+            this.NumTolerance.ValueChanged += new System.EventHandler(this.NumTolerance_ValueChanged);
             // 
             // flowLayoutPanel11
             // 
@@ -863,7 +863,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSampling)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).EndInit();
             this.flowLayoutPanel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).EndInit();
@@ -914,7 +914,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown NumSampling;
+        private System.Windows.Forms.NumericUpDown NumTolerance;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown NumTileColumn;

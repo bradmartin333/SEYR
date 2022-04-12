@@ -143,12 +143,12 @@ namespace SEYR.Session
             }
         }
 
-        public double Sampling
+        public double Tolerance
         {
-            get => Channel.Project.Sampling;
+            get => Channel.Project.Tolerance;
             set
             {
-                Channel.Project.Sampling = value;
+                Channel.Project.Tolerance = value;
                 UpdateTile();
             }
         }
@@ -196,7 +196,7 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             NumDensity.Value = Density;
-            NumSampling.Value = (decimal)Sampling;
+            NumTolerance.Value = (decimal)Tolerance;
             FormReady = true;
             UpdateFilters();
             UpdateGrid();
@@ -312,9 +312,9 @@ namespace SEYR.Session
             Density = (int)NumDensity.Value;
         }
 
-        private void NumSampling_ValueChanged(object sender, EventArgs e)
+        private void NumTolerance_ValueChanged(object sender, EventArgs e)
         {
-            Sampling = (double)NumSampling.Value;
+            Tolerance = (double)NumTolerance.Value;
         }
 
         private void NumTileColumn_ValueChanged(object sender, EventArgs e)
