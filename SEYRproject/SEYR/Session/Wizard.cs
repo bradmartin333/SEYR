@@ -244,6 +244,12 @@ namespace SEYR.Session
             Close();
         }
 
+        private void BtnResetLogs_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Ignore;
+            Close();
+        }
+
         #region Num Handlers
 
         private void NumScaling_ValueChanged(object sender, EventArgs e)

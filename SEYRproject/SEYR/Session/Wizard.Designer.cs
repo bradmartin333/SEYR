@@ -76,6 +76,7 @@
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.NumTileRow = new System.Windows.Forms.NumericUpDown();
+            this.BtnResetLogs = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -649,9 +650,10 @@
             this.flowLayoutPanel6.AutoSize = true;
             this.flowLayoutPanel6.Controls.Add(this.BtnConfirm);
             this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(1046, 484);
+            this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(965, 484);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(162, 29);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(243, 29);
             this.flowLayoutPanel6.TabIndex = 8;
             // 
             // BtnConfirm
@@ -813,6 +815,18 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged);
             // 
+            // BtnResetLogs
+            // 
+            this.BtnResetLogs.BackColor = System.Drawing.Color.Gold;
+            this.BtnResetLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnResetLogs.Location = new System.Drawing.Point(165, 3);
+            this.BtnResetLogs.Name = "BtnResetLogs";
+            this.BtnResetLogs.Size = new System.Drawing.Size(75, 23);
+            this.BtnResetLogs.TabIndex = 6;
+            this.BtnResetLogs.Text = "Reset Logs";
+            this.BtnResetLogs.UseVisualStyleBackColor = false;
+            this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
+            // 
             // Wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -906,5 +920,6 @@
         private System.Windows.Forms.NumericUpDown NumTileColumn;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown NumTileRow;
+        private System.Windows.Forms.Button BtnResetLogs;
     }
 }

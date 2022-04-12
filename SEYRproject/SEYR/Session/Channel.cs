@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using SEYR.ImageProcessing;
+using System;
 
 namespace SEYR.Session
 {
@@ -48,6 +49,12 @@ namespace SEYR.Session
             LoadProject();
         }
 
+        private void ClearLogs()
+        {
+            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
+            if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
+        }
+
         #region Opening and Closing
 
         private void SaveProject()
@@ -88,6 +95,8 @@ namespace SEYR.Session
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)
                     SaveProject();
+                else if (result == DialogResult.Ignore)
+                    ClearLogs();
                 else
                     return;
             }

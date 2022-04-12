@@ -6,15 +6,15 @@ namespace SEYR.Session
 {
     internal class DataStream
     {
+        public string Path { get; set; } = null;
         private List<Task> Tasks { get; set; } = new List<Task>();
         private static readonly object Locker = new object();
-        private readonly string Path = null;
 
         public DataStream(string path, bool isDebug = false)
         {
             if (File.Exists(path)) File.Delete(path);
             Path = path;
-            if (isDebug) 
+            if (isDebug)
                 Write("Stream Opened", true, true);
             else
                 Write("Header", true);
