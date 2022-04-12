@@ -97,6 +97,8 @@ namespace SEYR.Session
                     SaveProject();
                 else if (result == DialogResult.Ignore)
                     ClearLogs();
+                else if (result == DialogResult.Abort)
+                    LoadProject();
                 else
                     return;
             }

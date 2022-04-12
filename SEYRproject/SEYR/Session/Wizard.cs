@@ -250,6 +250,12 @@ namespace SEYR.Session
             Close();
         }
 
+        private void BtnReloadProject_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+            Close();
+        }
+
         #region Num Handlers
 
         private void NumScaling_ValueChanged(object sender, EventArgs e)

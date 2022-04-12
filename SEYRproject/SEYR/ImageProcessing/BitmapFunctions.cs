@@ -120,7 +120,7 @@ namespace SEYR.ImageProcessing
                     {
                         int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                        g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
+                        g.DrawRectangle(new Pen(Brushes.LawnGreen, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
                             rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
                     }
                 }
@@ -209,7 +209,7 @@ namespace SEYR.ImageProcessing
                 foreach (Point2D tile in tiles)
                 {
                     Rectangle rect = new Rectangle(tile.X, tile.Y, scanSize.Width, scanSize.Height);
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), rect);
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), rect);
                 }
             }
         }
