@@ -88,7 +88,6 @@ namespace SEYR.Session
             }
         }
 
-
         public int SizeX
         {
             get => Channel.Project.SizeX;

@@ -182,7 +182,7 @@ namespace SEYR.ImageProcessing
             for (int i = tile.Left; i < tile.Right; i++)
                 for (int j = tile.Top; j < tile.Bottom; j++)
                 {
-                    int idx = i * 3 + j * stride; // Find starting index of pixel in data
+                    int idx = (i * 3) + (j * stride); // Find starting index of pixel in data
                     if (idx + 2 < data.Length) // Determine if it is wihtin the padding
                         counts.Add(data[idx + 2] << 16 | data[idx + 1] << 8 | data[idx]);
                     // Create ARGB int32 from RGB values which are ordered in the data array as BGR
