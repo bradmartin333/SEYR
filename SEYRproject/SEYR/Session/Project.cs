@@ -26,17 +26,17 @@ namespace SEYR.Session
         [XmlElement("OriginY")]
         public int OriginY { get; set; } = 10;
         [XmlElement("PitchX")]
-        public int PitchX { get; set; } = 100;
+        public int PitchX { get; set; } = 10;
         [XmlElement("PitchY")]
-        public int PitchY { get; set; } = 100;
+        public int PitchY { get; set; } = 10;
         [XmlElement("Rows")]
         public int Rows { get; set; } = 1;
         [XmlElement("Columns")]
         public int Columns { get; set; } = 1;
         [XmlElement("SizeX")]
-        public int SizeX { get; set; } = 500;
+        public int SizeX { get; set; } = 10;
         [XmlElement("SizeY")]
-        public int SizeY { get; set; } = 500;
+        public int SizeY { get; set; } = 10;
         [XmlElement("Density")]
         public int Density { get; set; } = 3;
         [XmlElement("Tolerance")]

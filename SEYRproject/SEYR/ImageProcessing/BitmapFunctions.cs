@@ -55,7 +55,7 @@ namespace SEYR.ImageProcessing
                         Bitmap crop = new Bitmap(rectangle.Width, rectangle.Height);
                         for (int k = 0; k < rectangle.Width; k++)
                             for (int l = 0; l < rectangle.Height; l++)
-                                if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k <= bmp.Width && cropRect.Y + l <= bmp.Height)
+                                if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k < bmp.Width && cropRect.Y + l < bmp.Height)
                                     crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
                         Point2D[] focusTiles = GetTiles(crop);
                         data += $"{i}\t{j}\t{GenerateTileCode(focusTiles)}\n";
