@@ -44,10 +44,10 @@ namespace SEYRDesktop
                 NextImage();
                 NumFrame.Value++;
             }
-            STOP = false;
             BtnRunAll.Enabled = true;
             BtnStop.Enabled = false;
-            NumFrame.Value = 0;
+            if (!STOP) NumFrame.Value = 0;
+            STOP = false;
         }
 
         private void BtnStop_Click(object sender, EventArgs e)

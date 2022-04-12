@@ -1,22 +1,20 @@
 ﻿using Accord.Imaging.Filters;
 using SEYR.Session;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Threading.Tasks;
 
 namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
-        private static List<Task> Tasks { get; set; } = new List<Task>();
-
         public static void LoadImage(Bitmap bmp)
         {
             ApplyFilters(ref bmp, true);
             SliceImage(bmp);
+            bmp.Dispose();
+            GC.Collect();
         }
 
         private static void SliceImage(Bitmap bmp)
