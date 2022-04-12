@@ -1,31 +1,43 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace SEYR.Session
 {
     internal class DataStream
     {
+        private List<Task> Tasks { get; set; } = new List<Task>();
+        private static readonly object Locker = new object();
         private readonly string Path = null;
 
         public DataStream(string path, bool isDebug = false)
         {
             if (File.Exists(path)) File.Delete(path);
             Path = path;
-            if (isDebug) WriteDTLine("Stream Opened");
+            while (true)
+            {
+                try
+                {
+                    if (isDebug) 
+                        Write("Stream Opened", true, true);
+                    else
+                        Write("Header", true);
+                    break;
+                }
+                catch (System.Exception) { }
+            }
         }
 
-        public void Write(string value)
+        public void Write(string value, bool addNewLine = false, bool addDT = false)
         {
-            File.AppendAllText(Path, value);
-        }
-
-        public void WriteLine(string value)
-        {
-            File.AppendAllText(Path, $"{value}\n");
-        }
-
-        public void WriteDTLine(string value)
-        {
-            File.AppendAllText(Path, $"{System.DateTime.Now}\t{value}\n");
+            Tasks.Add(Task.Factory.StartNew(() => 
+            {
+                lock (Locker)
+                {
+                    using (StreamWriter file = new StreamWriter(Path, append: true))
+                        file.Write($"{(addDT ? $"{System.DateTime.Now}\t" : "")}{value}{(addNewLine ? "\n" : "")}");
+                }
+            }));
         }
     }
 }
