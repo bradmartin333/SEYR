@@ -40,6 +40,7 @@ namespace SEYRDesktop
             BtnStop.Enabled = true;
             while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
+                System.Threading.Thread.Sleep(250);
                 Application.DoEvents();
                 NextImage();
                 NumFrame.Value++;

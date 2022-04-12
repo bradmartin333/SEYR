@@ -33,8 +33,7 @@ namespace SEYR.ImageProcessing
         public static void LoadImage(Bitmap bmp)
         {
             ApplyFilters(ref bmp);
-            Bitmap composite = SliceImage(bmp);
-            Composite.BackgroundImage = composite;
+            Composite.BackgroundImage = SliceImage(bmp);
             bmp.Dispose();
             GC.Collect();
         }

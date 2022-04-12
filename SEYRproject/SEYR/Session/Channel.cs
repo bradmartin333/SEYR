@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Drawing;
@@ -13,7 +12,6 @@ namespace SEYR.Session
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
-        private List<Task> Tasks { get; set; } = new List<Task>();
         private readonly string ProjectPath = null;
 
         /// <summary>
@@ -79,7 +77,7 @@ namespace SEYR.Session
 
         public void NewImage(Bitmap bmp)
         {
-            Tasks.Add(Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp)));
+            Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp));
             BitmapFunctions.Composite.Show();
         }
 
