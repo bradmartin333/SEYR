@@ -14,18 +14,10 @@ namespace SEYR.Session
         {
             if (File.Exists(path)) File.Delete(path);
             Path = path;
-            while (true)
-            {
-                try
-                {
-                    if (isDebug) 
-                        Write("Stream Opened", true, true);
-                    else
-                        Write("Header", true);
-                    break;
-                }
-                catch (System.Exception) { }
-            }
+            if (isDebug) 
+                Write("Stream Opened", true, true);
+            else
+                Write("Header", true);
         }
 
         public void Write(string value, bool addNewLine = false, bool addDT = false)
