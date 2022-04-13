@@ -67,6 +67,7 @@ namespace SEYR.Session
                 x.Serialize(stream, Project);
             }
             DebugStream.Write("Project Saved", true, true);
+            DeleteComposite();
         }
 
         private void LoadProject()

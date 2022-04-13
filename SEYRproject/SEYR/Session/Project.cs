@@ -56,5 +56,11 @@ namespace SEYR.Session
             Rectangle rectangle = new Rectangle(offset.X, offset.Y, ((int)Math.Round(size.X / 12.0)) * 12, size.Y);
             return rectangle;
         }
+
+        public Size GetScanSize(Size size)
+        {
+            return new Size((int)Math.Round(size.Width / (double)Channel.Project.Density, MidpointRounding.AwayFromZero),
+                (int)Math.Round(size.Height / (double)Channel.Project.Density, MidpointRounding.AwayFromZero));
+        }
     }
 }

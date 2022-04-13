@@ -360,7 +360,7 @@ namespace SEYR.Session
 
         private void NumContrast_ValueChanged(object sender, EventArgs e)
         {
-            Contrast = (double)NumTolerance.Value;
+            Contrast = (double)NumContrast.Value;
         }
 
         #endregion

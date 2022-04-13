@@ -29,15 +29,16 @@ namespace SEYR.ImageProcessing
 
         private void SetupComposite(Size size)
         {
-            Rows = size.Height;
-            Columns = size.Width;
+            Rows = size.Height + 1;
+            Columns = size.Width + 1;
             Data = new int[Columns, Rows];
             LastData = new int[Columns, Rows];
             Pbx.BackgroundImage = new Bitmap(Columns, Rows);
         }
 
-        public void AddTiles(Point[] tile, Size size)
+        public void AddHotspots(Point[] tile, Size size)
         {
+            if (Application.OpenForms.OfType<Wizard>().Any()) return;
             if (Data == null) SetupComposite(size);
             foreach (Point point in tile)
                 Data[point.X, point.Y]++;
