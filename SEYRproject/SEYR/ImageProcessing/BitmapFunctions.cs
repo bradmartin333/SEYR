@@ -1,5 +1,4 @@
-﻿using Accord.Imaging.Filters;
-using SEYR.Session;
+﻿using SEYR.Session;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,6 +14,8 @@ namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
+        private static readonly Point NullTile = new Point(-1, -1);
+
         private struct Point3D
         {
             public int X { get; set; }
@@ -22,16 +23,30 @@ namespace SEYR.ImageProcessing
             public float Z { get; set; }
         }
 
+        /// <summary>
+        /// Send a new image into SEYR
+        /// </summary>
+        /// <param name="bmp"></param>
         public static void LoadImage(Bitmap bmp)
         {
-            ProcessImage(bmp);
-            //bmp.Dispose();
+            ResizeAndRotate(ref bmp);
+            ProcessImage(bmp, NullTile);
         }
 
-        private static Bitmap ProcessImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0, bool needImg = false)
+        /// <summary>
+        /// Analyze an image and output it's string representation
+        /// </summary>
+        /// <param name="bmp">
+        /// Filtered image
+        /// </param>
+        /// <param name="singleTile">
+        /// Desired tile preview for Wizard
+        /// </param>
+        /// <returns>
+        /// Either a tile preview or the entire analyzed image
+        /// </returns>
+        private static Bitmap ProcessImage(Bitmap bmp, Point singleTile)
         {
-            ResizeAndRotate(ref bmp);
-
             Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
             BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
             int size = bmpData.Stride * bmpData.Height;
@@ -41,6 +56,7 @@ namespace SEYR.ImageProcessing
             Rectangle rectangle = Channel.Project.GetGeometry();
             Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
             string outputData = string.Empty;
+
             using (Graphics g = Graphics.FromImage(frame))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
@@ -51,82 +67,41 @@ namespace SEYR.ImageProcessing
                         int thisY = rectangle.Y - (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
                         Size scanSize = Channel.Project.GetScanSize(cropRect.Size);
-                        (Bitmap tile, double entropy, Point[] hotspots) = GetCropEntropyARGB(data, cropRect, bmpData.Stride, scanSize);
+                        (Bitmap tile, double entropy, Point[] hotspots) = AnalyzeData(data, cropRect, bmpData.Stride, scanSize);
                         outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t{GenerateTileCode(hotspots)}\n";
                         
-                        if (needImg)
+                        if (singleTile != NullTile)
                         {
                             HighlightHotspots(ref tile, hotspots, scanSize);
-                            if (singleTile && j == row && i == col) return tile;
+                            if (j == singleTile.X && i == singleTile.Y) return tile;
                             g.DrawImage(tile, thisX, thisY);
                         }
                     }
                 }
             }
+
             bmp.UnlockBits(bmpData);
             Channel.DataStream.Write(outputData);
             return frame;
         }
 
-        public static void ResizeAndRotate(ref Bitmap bmp)
-        {
-            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
-            using (Graphics g = Graphics.FromImage(resize))
-                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
-            bmp = RotateImage(resize, Channel.Project.Angle);
-            Channel.Project.ImageHeight = bmp.Height;
-            Channel.Project.ImageWidth = bmp.Width;
-        }
-
-        public static void ApplyManualThreshold(ref Bitmap bmp)
-        {
-            ImageAttributes imageAttr = new ImageAttributes();
-            imageAttr.SetThreshold(Channel.Project.Threshold);
-            using (Graphics g = Graphics.FromImage(bmp))
-                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
-        }
-
-        private static string GenerateTileCode(Point[] focusTiles)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (Point tile in focusTiles)
-                stringBuilder.Append($"{tile.X} {tile.Y} ");
-            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString())))
-            {
-                using (var compressedStream = new MemoryStream())
-                {
-                    using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, false))
-                        uncompressedStream.CopyTo(compressorStream);
-                    return Convert.ToBase64String(compressedStream.ToArray());
-                }
-            }
-        }
-
-        public static void DrawGrid(ref Bitmap bmp)
-        {
-            ResizeAndRotate(ref bmp);
-            Rectangle rectangle = Channel.Project.GetGeometry();
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                for (int i = 0; i < Channel.Project.Columns; i++)
-                {
-                    for (int j = 0; j < Channel.Project.Rows; j++)
-                    {
-                        int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                        g.DrawRectangle(new Pen(Brushes.LawnGreen, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
-                            rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
-                    }
-                }
-            }
-        }
-
-        public static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
-        {
-            return ProcessImage(bmp, true, tileRow - 1, tileColumn - 1, true);
-        }
-
-        private static (Bitmap, float, Point[]) GetCropEntropyARGB(byte[] data, Rectangle tile, int stride, Size scanSize)
+        /// <summary>
+        /// The SEYR Meat where BitmapData turns into hotspots
+        /// </summary>
+        /// <param name="data">
+        /// Entire image's bitmap data
+        /// </param>
+        /// <param name="tile">
+        /// Region to crop from image
+        /// </param>
+        /// <param name="stride">
+        /// Stride of bitmap data
+        /// </param>
+        /// <param name="scanSize">
+        /// ROI within cropped region
+        /// </param>
+        /// <returns></returns>
+        private static (Bitmap, float, Point[]) AnalyzeData(byte[] data, Rectangle tile, int stride, Size scanSize)
         {
             byte threshold = (byte)(255 * Channel.Project.Threshold);
             byte[] croppedBytes = new byte[tile.Width * tile.Height * 3];
@@ -187,6 +162,75 @@ namespace SEYR.ImageProcessing
             return entropy;
         }
 
+
+        #region Image Filters
+
+        public static void ResizeAndRotate(ref Bitmap bmp)
+        {
+            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
+            using (Graphics g = Graphics.FromImage(resize))
+                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
+            bmp = RotateImage(resize, Channel.Project.Angle);
+            Channel.Project.ImageHeight = bmp.Height;
+            Channel.Project.ImageWidth = bmp.Width;
+        }
+
+        public static void ApplyManualThreshold(ref Bitmap bmp)
+        {
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetThreshold(Channel.Project.Threshold);
+            using (Graphics g = Graphics.FromImage(bmp))
+                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
+        }
+
+        #endregion
+
+        #region Wizard Functions
+
+        public static void DrawGrid(ref Bitmap bmp)
+        {
+            ResizeAndRotate(ref bmp);
+            Rectangle rectangle = Channel.Project.GetGeometry();
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                for (int i = 0; i < Channel.Project.Columns; i++)
+                {
+                    for (int j = 0; j < Channel.Project.Rows; j++)
+                    {
+                        int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                        int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        g.DrawRectangle(new Pen(Brushes.LawnGreen, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
+                            rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
+                    }
+                }
+            }
+        }
+
+        public static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
+        {
+            return ProcessImage(bmp, new Point(tileRow - 1, tileColumn - 1));
+        }
+
+        #endregion
+
+        #region Data Representation
+
+        private static string GenerateTileCode(Point[] focusTiles)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (Point tile in focusTiles)
+                stringBuilder.Append($"{tile.X} {tile.Y} ");
+            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString())))
+            {
+                using (var compressedStream = new MemoryStream())
+                {
+                    using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, false))
+                        uncompressedStream.CopyTo(compressorStream);
+                    return Convert.ToBase64String(compressedStream.ToArray());
+                }
+            }
+        }
+
         private static void HighlightHotspots(ref Bitmap bmp, Point[] tiles, Size scanSize)
         {
             using (Graphics g = Graphics.FromImage(bmp))
@@ -195,6 +239,8 @@ namespace SEYR.ImageProcessing
                     g.FillRectangle(Brushes.LawnGreen, new Rectangle(tile.X * scanSize.Width, tile.Y * scanSize.Height, scanSize.Width, scanSize.Height));
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Method to rotate an image either clockwise or counter-clockwise
