@@ -39,8 +39,12 @@ namespace SEYR.Session
         public int SizeY { get; set; } = 10;
         [XmlElement("Density")]
         public int Density { get; set; } = 3;
+        [XmlElement("Contrast")]
+        public double Contrast { get; set; } = 0.25;
+        [XmlElement("Score")]
+        public int Score { get; set; } = 100;
         [XmlElement("Tolerance")]
-        public double Tolerance { get; set; } = 0.25;
+        public int Tolerance { get; set; } = 50;
 
         public Rectangle GetGeometry()
         {

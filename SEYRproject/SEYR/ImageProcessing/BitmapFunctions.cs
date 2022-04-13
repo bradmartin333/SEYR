@@ -157,7 +157,7 @@ namespace SEYR.ImageProcessing
                 }
 
             bmp.UnlockBits(bmpData);
-            Point[] selectedTiles = tiles.Where(t => t.Z > Channel.Project.Tolerance).Select(t => new Point(t.X, t.Y)).ToArray();
+            Point[] selectedTiles = tiles.Where(t => t.Z > Channel.Project.Contrast).Select(t => new Point(t.X, t.Y)).ToArray();
             Channel.Composite.AddTiles(selectedTiles, bmp.Size);
             return selectedTiles;
         }

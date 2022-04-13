@@ -143,7 +143,27 @@ namespace SEYR.Session
             }
         }
 
-        public double Tolerance
+        public double Contrast
+        {
+            get => Channel.Project.Contrast;
+            set
+            {
+                Channel.Project.Contrast = value;
+                UpdateTile();
+            }
+        }
+
+        public int Score
+        {
+            get => Channel.Project.Score;
+            set
+            {
+                Channel.Project.Score = value;
+                UpdateTile();
+            }
+        }
+
+        public int Tolerance
         {
             get => Channel.Project.Tolerance;
             set
@@ -196,7 +216,7 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             NumDensity.Value = Density;
-            NumTolerance.Value = (decimal)Tolerance;
+            NumTolerance.Value = (decimal)Contrast;
             FormReady = true;
             UpdateFilters();
             UpdateGrid();
@@ -320,7 +340,7 @@ namespace SEYR.Session
 
         private void NumTolerance_ValueChanged(object sender, EventArgs e)
         {
-            Tolerance = (double)NumTolerance.Value;
+            Tolerance = (int)NumTolerance.Value;
         }
 
         private void NumTileColumn_ValueChanged(object sender, EventArgs e)
@@ -331,6 +351,16 @@ namespace SEYR.Session
         private void NumTileRow_ValueChanged(object sender, EventArgs e)
         {
             TileRow = (int)NumTileRow.Value;
+        }
+
+        private void NumScore_ValueChanged(object sender, EventArgs e)
+        {
+            Score = (int)NumScore.Value;
+        }
+
+        private void NumContrast_ValueChanged(object sender, EventArgs e)
+        {
+            Contrast = (double)NumTolerance.Value;
         }
 
         #endregion
