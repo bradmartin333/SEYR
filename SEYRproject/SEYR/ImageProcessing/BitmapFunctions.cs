@@ -24,14 +24,14 @@ namespace SEYR.ImageProcessing
 
         public static void LoadImage(Bitmap bmp)
         {
-            ApplyFilters(ref bmp);
             ProcessImage(bmp);
-            bmp.Dispose();
-            GC.Collect();
+            //bmp.Dispose();
         }
 
         private static Bitmap ProcessImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0, bool needImg = false)
         {
+            ResizeAndRotate(ref bmp);
+
             Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
             BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
             int size = bmpData.Stride * bmpData.Height;
@@ -68,6 +68,24 @@ namespace SEYR.ImageProcessing
             return frame;
         }
 
+        public static void ResizeAndRotate(ref Bitmap bmp)
+        {
+            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
+            using (Graphics g = Graphics.FromImage(resize))
+                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
+            bmp = RotateImage(resize, Channel.Project.Angle);
+            Channel.Project.ImageHeight = bmp.Height;
+            Channel.Project.ImageWidth = bmp.Width;
+        }
+
+        public static void ApplyManualThreshold(ref Bitmap bmp)
+        {
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetThreshold(Channel.Project.Threshold);
+            using (Graphics g = Graphics.FromImage(bmp))
+                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
+        }
+
         private static string GenerateTileCode(Point[] focusTiles)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -84,32 +102,9 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public static void ApplyFilters(ref Bitmap bmp, bool color = false)
-        {
-            // Resize incoming image
-            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
-            using (Graphics g = Graphics.FromImage(resize))
-                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
-
-            // Clone with necessary pixel format for image filtering
-            Bitmap working = resize.Clone(new Rectangle(new Point(0, 0), resize.Size), PixelFormat.Format32bppArgb);
-            working = RotateImage(working, Channel.Project.Angle);
-            if (!color)
-            {
-                Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
-                working = filter.Apply(working);
-                Threshold threshold = new Threshold(Channel.Project.Threshold);
-                threshold.ApplyInPlace(working);
-            }
-
-            Channel.Project.ImageHeight = working.Height;
-            Channel.Project.ImageWidth = working.Width;
-            bmp = working;
-        }
-
         public static void DrawGrid(ref Bitmap bmp)
         {
-            ApplyFilters(ref bmp, true);
+            ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -128,12 +123,12 @@ namespace SEYR.ImageProcessing
 
         public static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
-            ApplyFilters(ref bmp);
             return ProcessImage(bmp, true, tileRow - 1, tileColumn - 1, true);
         }
 
         private static (Bitmap, float, Point[]) GetCropEntropyARGB(byte[] data, Rectangle tile, int stride, Size scanSize)
         {
+            byte threshold = (byte)(255 * Channel.Project.Threshold);
             byte[] croppedBytes = new byte[tile.Width * tile.Height * 3];
 
             Size hotspotSize = new Size(tile.Width / scanSize.Width + 1, tile.Height / scanSize.Height + 1);
@@ -148,10 +143,15 @@ namespace SEYR.ImageProcessing
                 {
                     int idx = (tile.Y * stride) + (i * stride) + (tile.X * 3) + j;
                     int croppedIndex = (i * tile.Width * 3) + j;
-                    for (int k = 0; k < 3; k++)
+                    for (int k = 0; k < 3; k++) // Pixel data formatted BGR
                         if (croppedIndex + k < croppedBytes.Length) croppedBytes[croppedIndex + k] = data[idx + k];
                     if (idx + 2 < data.Length) // Determine if it is wihtin the padding
-                        hotspotData[j / 3 / scanSize.Width, i / scanSize.Height].Add(data[idx + 2] << 16 | data[idx + 1] << 8 | data[idx]);
+                    {
+                        byte R = (byte)(data[idx + 2] > threshold ? 255 : 0);
+                        byte G = (byte)(data[idx + 1] > threshold ? 255 : 0);
+                        byte B = (byte)(data[idx + 0] > threshold ? 255 : 0);
+                        hotspotData[j / 3 / scanSize.Width, i / scanSize.Height].Add(R << 16 | G << 8 | B);
+                    }
                 }
             }
 

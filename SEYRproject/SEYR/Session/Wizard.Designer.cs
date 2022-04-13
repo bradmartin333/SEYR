@@ -65,12 +65,16 @@
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.NumDensity = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.NumContrast = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.BtnConfirm = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnResetLogs = new System.Windows.Forms.Button();
             this.BtnReloadProject = new System.Windows.Forms.Button();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.NumScore = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.NumTolerance = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
@@ -78,10 +82,6 @@
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.NumTileRow = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.NumContrast = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.NumScore = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -106,14 +106,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.flowLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).BeginInit();
             this.flowLayoutPanel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumScore)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -550,9 +550,15 @@
             // NumThreshold
             // 
             this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumThreshold.DecimalPlaces = 2;
+            this.NumThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.NumThreshold.Location = new System.Drawing.Point(79, 3);
             this.NumThreshold.Maximum = new decimal(new int[] {
-            255,
+            1,
             0,
             0,
             0});
@@ -560,6 +566,11 @@
             this.NumThreshold.Size = new System.Drawing.Size(70, 20);
             this.NumThreshold.TabIndex = 3;
             this.NumThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumThreshold.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
             // flowLayoutPanel8
@@ -652,6 +663,42 @@
             0});
             this.NumDensity.ValueChanged += new System.EventHandler(this.NumDensity_ValueChanged);
             // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.Location = new System.Drawing.Point(155, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(70, 13);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "Contrast";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumContrast
+            // 
+            this.NumContrast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumContrast.DecimalPlaces = 2;
+            this.NumContrast.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.NumContrast.Location = new System.Drawing.Point(231, 3);
+            this.NumContrast.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.NumContrast.Name = "NumContrast";
+            this.NumContrast.Size = new System.Drawing.Size(70, 20);
+            this.NumContrast.TabIndex = 6;
+            this.NumContrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumContrast.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.NumContrast.ValueChanged += new System.EventHandler(this.NumContrast_ValueChanged);
+            // 
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -725,6 +772,47 @@
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(304, 26);
             this.flowLayoutPanel10.TabIndex = 13;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.Location = new System.Drawing.Point(3, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(70, 13);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Score";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumScore
+            // 
+            this.NumScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumScore.DecimalPlaces = 2;
+            this.NumScore.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.NumScore.Location = new System.Drawing.Point(79, 3);
+            this.NumScore.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumScore.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.NumScore.Name = "NumScore";
+            this.NumScore.Size = new System.Drawing.Size(70, 20);
+            this.NumScore.TabIndex = 6;
+            this.NumScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumScore.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.NumScore.ValueChanged += new System.EventHandler(this.NumScore_ValueChanged);
             // 
             // label9
             // 
@@ -850,88 +938,6 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged);
             // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.Location = new System.Drawing.Point(155, 6);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(70, 13);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "Contrast";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumContrast
-            // 
-            this.NumContrast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumContrast.DecimalPlaces = 2;
-            this.NumContrast.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumContrast.Location = new System.Drawing.Point(231, 3);
-            this.NumContrast.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumContrast.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumContrast.Name = "NumContrast";
-            this.NumContrast.Size = new System.Drawing.Size(70, 20);
-            this.NumContrast.TabIndex = 6;
-            this.NumContrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumContrast.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
-            this.NumContrast.ValueChanged += new System.EventHandler(this.NumContrast_ValueChanged);
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.Location = new System.Drawing.Point(3, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(70, 13);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "Score";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumScore
-            // 
-            this.NumScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumScore.DecimalPlaces = 2;
-            this.NumScore.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumScore.Location = new System.Drawing.Point(79, 3);
-            this.NumScore.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumScore.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumScore.Name = "NumScore";
-            this.NumScore.Size = new System.Drawing.Size(70, 20);
-            this.NumScore.TabIndex = 6;
-            this.NumScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumScore.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
-            this.NumScore.ValueChanged += new System.EventHandler(this.NumScore_ValueChanged);
-            // 
             // Wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -967,14 +973,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.flowLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).EndInit();
             this.flowLayoutPanel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumScore)).EndInit();
             this.ResumeLayout(false);
 
         }

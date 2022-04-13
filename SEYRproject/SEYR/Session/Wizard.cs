@@ -9,7 +9,7 @@ namespace SEYR.Session
     {
         #region IProject Members
 
-        public double Scaling
+        public float Scaling
         {
             get => Channel.Project.Scaling;
             set
@@ -22,7 +22,7 @@ namespace SEYR.Session
             }
         }
 
-        public int Threshold
+        public float Threshold
         {
             get => Channel.Project.Threshold;
             set
@@ -205,7 +205,7 @@ namespace SEYR.Session
             InputImage = bitmap;
             PbxGrid.BackgroundImage = bitmap;
             NumScaling.Value = (decimal)Scaling;
-            NumThreshold.Value = Threshold;
+            NumThreshold.Value = (decimal)Threshold;
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
             NumOriginY.Value = OriginY;
@@ -228,7 +228,8 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            BitmapFunctions.ApplyFilters(ref bmp);
+            BitmapFunctions.ResizeAndRotate(ref bmp);
+            BitmapFunctions.ApplyManualThreshold(ref bmp);
             PbxFilters.BackgroundImage = bmp;
             FormReady = true;
         }
@@ -285,7 +286,7 @@ namespace SEYR.Session
 
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
-            Threshold = (int)NumThreshold.Value;
+            Threshold = (float)NumThreshold.Value;
         }
 
         private void NumAngle_ValueChanged(object sender, EventArgs e)
