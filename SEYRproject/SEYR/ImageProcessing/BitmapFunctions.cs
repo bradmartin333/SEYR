@@ -32,9 +32,15 @@ namespace SEYR.ImageProcessing
 
         private static Bitmap SliceImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0, bool needImg = false)
         {
+            Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
+            BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            int size = bmpData.Stride * bmpData.Height;
+            byte[] data = new byte[size];
+            Marshal.Copy(bmpData.Scan0, data, 0, size);
+
             Rectangle rectangle = Channel.Project.GetGeometry();
             Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
-            string data = string.Empty;
+            string outputData = string.Empty;
             using (Graphics g = Graphics.FromImage(frame))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
@@ -44,25 +50,22 @@ namespace SEYR.ImageProcessing
                         int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = rectangle.Y - (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
-                        Bitmap crop = new Bitmap(rectangle.Width, rectangle.Height);
-                        for (int k = 0; k < rectangle.Width; k++)
-                            for (int l = 0; l < rectangle.Height; l++)
-                                if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k < bmp.Width && cropRect.Y + l < bmp.Height)
-                                    crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
+                        (Bitmap tile, double entropy) = GetCropEntropyARGB(data, cropRect, bmpData.Stride);
                         
-                        Point[] focusTiles = GetTiles(crop);
-                        data += $"{i}\t{j}\t{GenerateTileCode(focusTiles)}\n";
+                        Point[] focusTiles = GetTiles(tile);
+                        outputData += $"{i}\t{j}\t{GenerateTileCode(focusTiles)}\n";
                         
                         if (needImg)
                         {
-                            HighlightTiles(ref crop, focusTiles);
-                            if (singleTile && j == row && i == col) return crop;
-                            g.DrawImage(crop, thisX, thisY);
+                            HighlightTiles(ref tile, focusTiles);
+                            if (singleTile && j == row && i == col) return tile;
+                            g.DrawImage(tile, thisX, thisY);
                         }
                     }
                 }
             }
-            Channel.DataStream.Write(data);
+            bmp.UnlockBits(bmpData);
+            Channel.DataStream.Write(outputData);
             return frame;
         }
 
@@ -153,7 +156,7 @@ namespace SEYR.ImageProcessing
                 for (int j = 0; j < bmp.Height; j += scanSize.Height)
                 {
                     Rectangle rect = new Rectangle(i, j, scanSize.Width, scanSize.Height);
-                    if (bmpRect.Contains(rect)) tiles.Add(new Point3D() { X = i, Y = j, Z = GetCropEntropyARGB(data, rect, bmpData.Stride) });
+                    if (bmpRect.Contains(rect)) tiles.Add(new Point3D() { X = i, Y = j, Z = GetCropEntropyARGB(data, rect, bmpData.Stride).Item2 });
                 }
 
             bmp.UnlockBits(bmpData);
@@ -175,8 +178,26 @@ namespace SEYR.ImageProcessing
         /// </param>
         /// <param name="stride"></param>
         /// <returns></returns>
-        private static float GetCropEntropyARGB(byte[] data, Rectangle tile, int stride)
+        private static (Bitmap, float) GetCropEntropyARGB(byte[] data, Rectangle tile, int stride)
         {
+            byte[] croppedBytes = new byte[tile.Width * tile.Height * 3];
+
+            for (int i = 0; i < tile.Height; i++)
+            {
+                for (int j = 0; j < tile.Width * 3; j += 3)
+                {
+                    int origIndex = (tile.Y * stride) + (i * stride) + (tile.X * 3) + j;
+                    int croppedIndex = (i * tile.Width * 3) + j;
+                    for (int k = 0; k < 3; k++)
+                        if (croppedIndex + k < croppedBytes.Length) croppedBytes[croppedIndex + k] = data[origIndex + k];
+                }
+            }
+
+            Bitmap croppedBitmap = new Bitmap(tile.Width, tile.Height);
+            BitmapData croppedData = croppedBitmap.LockBits(new Rectangle(0, 0, tile.Width, tile.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            Marshal.Copy(croppedBytes, 0, croppedData.Scan0, croppedBytes.Length);
+            croppedBitmap.UnlockBits(croppedData);
+
             List<int> counts = new List<int>(); // Each int is a ARGB value of a pixel
             for (int i = tile.Left; i < tile.Right; i++)
                 for (int j = tile.Top; j < tile.Bottom; j++)
@@ -192,7 +213,7 @@ namespace SEYR.ImageProcessing
                 double val = g.Count() / (double)(tile.Width * tile.Height);
                 entropy -= (float)(val * Math.Log(val, 2));
             }
-            return entropy;
+            return (croppedBitmap, entropy);
         }
 
         /// <summary>

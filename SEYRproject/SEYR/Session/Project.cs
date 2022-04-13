@@ -52,7 +52,8 @@ namespace SEYR.Session
                 (int)(ImageHeight - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
             Point size = new Point((int)(Channel.Project.SizeX * Channel.Project.ScaledPixelsPerMicron),
                 (int)(Channel.Project.SizeY * Channel.Project.ScaledPixelsPerMicron));
-            Rectangle rectangle = new Rectangle(offset.X, offset.Y, size.X, size.Y);
+            // Need the width to be a factor of 12 to crop with Bitmap data
+            Rectangle rectangle = new Rectangle(offset.X, offset.Y, ((int)Math.Round(size.X / 12.0)) * 12, size.Y);
             return rectangle;
         }
     }
