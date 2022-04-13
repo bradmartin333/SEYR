@@ -29,7 +29,6 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp"></param>
         public static void LoadImage(Bitmap bmp)
         {
-            ResizeAndRotate(ref bmp);
             ProcessImage(bmp, NullTile);
         }
 
@@ -47,6 +46,8 @@ namespace SEYR.ImageProcessing
         /// </returns>
         private static Bitmap ProcessImage(Bitmap bmp, Point singleTile)
         {
+            ResizeAndRotate(ref bmp);
+
             Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
             BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
             int size = bmpData.Stride * bmpData.Height;
@@ -73,7 +74,7 @@ namespace SEYR.ImageProcessing
                         if (singleTile != NullTile)
                         {
                             HighlightHotspots(ref tile, hotspots, scanSize);
-                            if (j == singleTile.X && i == singleTile.Y) return tile;
+                            if (i == singleTile.X && j == singleTile.Y) return tile;
                             g.DrawImage(tile, thisX, thisY);
                         }
                     }
@@ -208,7 +209,7 @@ namespace SEYR.ImageProcessing
 
         public static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
-            return ProcessImage(bmp, new Point(tileRow - 1, tileColumn - 1));
+            return ProcessImage(bmp, new Point(tileColumn - 1, tileRow - 1));
         }
 
         #endregion
