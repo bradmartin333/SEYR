@@ -216,7 +216,9 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             NumDensity.Value = Density;
-            NumTolerance.Value = (decimal)Contrast;
+            NumTolerance.Value = (decimal)Tolerance;
+            NumContrast.Value = (decimal)Contrast;
+            NumScore.Value = (decimal)Score;
             FormReady = true;
             UpdateFilters();
             UpdateGrid();

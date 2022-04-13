@@ -67,11 +67,6 @@
             this.NumDensity = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.NumContrast = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.BtnConfirm = new System.Windows.Forms.Button();
-            this.BtnCancel = new System.Windows.Forms.Button();
-            this.BtnResetLogs = new System.Windows.Forms.Button();
-            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.label15 = new System.Windows.Forms.Label();
             this.NumScore = new System.Windows.Forms.NumericUpDown();
@@ -82,6 +77,11 @@
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.NumTileRow = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.BtnConfirm = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnResetLogs = new System.Windows.Forms.Button();
+            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.LabelScore = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
@@ -108,13 +108,13 @@
             this.flowLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).BeginInit();
-            this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).BeginInit();
             this.flowLayoutPanel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).BeginInit();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -686,67 +686,6 @@
             this.NumContrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumContrast.ValueChanged += new System.EventHandler(this.NumContrast_ValueChanged);
             // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.Controls.Add(this.BtnConfirm);
-            this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
-            this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
-            this.flowLayoutPanel6.Controls.Add(this.BtnReloadProject);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(9, 484);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(384, 29);
-            this.flowLayoutPanel6.TabIndex = 8;
-            // 
-            // BtnConfirm
-            // 
-            this.BtnConfirm.BackColor = System.Drawing.Color.LightGreen;
-            this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfirm.Location = new System.Drawing.Point(3, 3);
-            this.BtnConfirm.Name = "BtnConfirm";
-            this.BtnConfirm.Size = new System.Drawing.Size(90, 23);
-            this.BtnConfirm.TabIndex = 5;
-            this.BtnConfirm.Text = "Confirm";
-            this.BtnConfirm.UseVisualStyleBackColor = false;
-            this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.LightCoral;
-            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Location = new System.Drawing.Point(99, 3);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(90, 23);
-            this.BtnCancel.TabIndex = 4;
-            this.BtnCancel.Text = "Cancel";
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // BtnResetLogs
-            // 
-            this.BtnResetLogs.BackColor = System.Drawing.Color.Gold;
-            this.BtnResetLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnResetLogs.Location = new System.Drawing.Point(195, 3);
-            this.BtnResetLogs.Name = "BtnResetLogs";
-            this.BtnResetLogs.Size = new System.Drawing.Size(90, 23);
-            this.BtnResetLogs.TabIndex = 6;
-            this.BtnResetLogs.Text = "Reset Logs";
-            this.BtnResetLogs.UseVisualStyleBackColor = false;
-            this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
-            // 
-            // BtnReloadProject
-            // 
-            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
-            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReloadProject.Location = new System.Drawing.Point(291, 3);
-            this.BtnReloadProject.Name = "BtnReloadProject";
-            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
-            this.BtnReloadProject.TabIndex = 7;
-            this.BtnReloadProject.Text = "Reload Project";
-            this.BtnReloadProject.UseVisualStyleBackColor = false;
-            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
-            // 
             // flowLayoutPanel10
             // 
             this.flowLayoutPanel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -773,7 +712,7 @@
             // NumScore
             // 
             this.NumScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumScore.DecimalPlaces = 2;
+            this.NumScore.DecimalPlaces = 1;
             this.NumScore.Increment = new decimal(new int[] {
             1,
             0,
@@ -781,7 +720,7 @@
             65536});
             this.NumScore.Location = new System.Drawing.Point(79, 3);
             this.NumScore.Maximum = new decimal(new int[] {
-            1,
+            100000000,
             0,
             0,
             0});
@@ -804,7 +743,7 @@
             // NumTolerance
             // 
             this.NumTolerance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumTolerance.DecimalPlaces = 2;
+            this.NumTolerance.DecimalPlaces = 1;
             this.NumTolerance.Increment = new decimal(new int[] {
             1,
             0,
@@ -812,7 +751,7 @@
             65536});
             this.NumTolerance.Location = new System.Drawing.Point(231, 3);
             this.NumTolerance.Maximum = new decimal(new int[] {
-            1,
+            100000000,
             0,
             0,
             0});
@@ -905,6 +844,67 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged);
             // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.Controls.Add(this.BtnConfirm);
+            this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
+            this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
+            this.flowLayoutPanel6.Controls.Add(this.BtnReloadProject);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(9, 484);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(384, 29);
+            this.flowLayoutPanel6.TabIndex = 8;
+            // 
+            // BtnConfirm
+            // 
+            this.BtnConfirm.BackColor = System.Drawing.Color.LightGreen;
+            this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConfirm.Location = new System.Drawing.Point(3, 3);
+            this.BtnConfirm.Name = "BtnConfirm";
+            this.BtnConfirm.Size = new System.Drawing.Size(90, 23);
+            this.BtnConfirm.TabIndex = 5;
+            this.BtnConfirm.Text = "Confirm";
+            this.BtnConfirm.UseVisualStyleBackColor = false;
+            this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.LightCoral;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Location = new System.Drawing.Point(99, 3);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(90, 23);
+            this.BtnCancel.TabIndex = 4;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnResetLogs
+            // 
+            this.BtnResetLogs.BackColor = System.Drawing.Color.Gold;
+            this.BtnResetLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnResetLogs.Location = new System.Drawing.Point(195, 3);
+            this.BtnResetLogs.Name = "BtnResetLogs";
+            this.BtnResetLogs.Size = new System.Drawing.Size(90, 23);
+            this.BtnResetLogs.TabIndex = 6;
+            this.BtnResetLogs.Text = "Reset Logs";
+            this.BtnResetLogs.UseVisualStyleBackColor = false;
+            this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
+            // 
+            // BtnReloadProject
+            // 
+            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
+            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReloadProject.Location = new System.Drawing.Point(291, 3);
+            this.BtnReloadProject.Name = "BtnReloadProject";
+            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
+            this.BtnReloadProject.TabIndex = 7;
+            this.BtnReloadProject.Text = "Reload Project";
+            this.BtnReloadProject.UseVisualStyleBackColor = false;
+            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
+            // 
             // LabelScore
             // 
             this.LabelScore.AutoSize = true;
@@ -952,13 +952,13 @@
             this.flowLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumDensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumContrast)).EndInit();
-            this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTolerance)).EndInit();
             this.flowLayoutPanel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).EndInit();
+            this.flowLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
