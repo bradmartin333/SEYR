@@ -15,14 +15,6 @@ namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
-        internal static Composite Composite = new Composite();
-
-        private struct Point2D
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
-        }
-
         private struct Point3D
         {
             public int X { get; set; }
@@ -33,12 +25,12 @@ namespace SEYR.ImageProcessing
         public static void LoadImage(Bitmap bmp)
         {
             ApplyFilters(ref bmp);
-            Composite.BackgroundImage = SliceImage(bmp);
+            SliceImage(bmp);
             bmp.Dispose();
             GC.Collect();
         }
 
-        private static Bitmap SliceImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0)
+        private static Bitmap SliceImage(Bitmap bmp, bool singleTile = false, int row = 0, int col = 0, bool needImg = false)
         {
             Rectangle rectangle = Channel.Project.GetGeometry();
             Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
@@ -57,11 +49,16 @@ namespace SEYR.ImageProcessing
                             for (int l = 0; l < rectangle.Height; l++)
                                 if (cropRect.X + k > 0 && cropRect.Y + l > 0 && cropRect.X + k < bmp.Width && cropRect.Y + l < bmp.Height)
                                     crop.SetPixel(k, l, bmp.GetPixel(cropRect.X + k, cropRect.Y + l));
-                        Point2D[] focusTiles = GetTiles(crop);
+                        
+                        Point[] focusTiles = GetTiles(crop);
                         data += $"{i}\t{j}\t{GenerateTileCode(focusTiles)}\n";
-                        HighlightTiles(ref crop, focusTiles);
-                        if (singleTile && j == row && i == col) return crop;
-                        g.DrawImage(crop, thisX, thisY);
+                        
+                        if (needImg)
+                        {
+                            HighlightTiles(ref crop, focusTiles);
+                            if (singleTile && j == row && i == col) return crop;
+                            g.DrawImage(crop, thisX, thisY);
+                        }
                     }
                 }
             }
@@ -69,10 +66,10 @@ namespace SEYR.ImageProcessing
             return frame;
         }
 
-        private static string GenerateTileCode(Point2D[] focusTiles)
+        private static string GenerateTileCode(Point[] focusTiles)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (Point2D tile in focusTiles)
+            foreach (Point tile in focusTiles)
                 stringBuilder.Append($"{tile.X} {tile.Y} ");
             using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString())))
             {
@@ -130,7 +127,7 @@ namespace SEYR.ImageProcessing
         internal static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
             ApplyFilters(ref bmp);
-            return SliceImage(bmp, true, tileRow - 1, tileColumn - 1);
+            return SliceImage(bmp, true, tileRow - 1, tileColumn - 1, true);
         }
 
         /// <summary>
@@ -140,7 +137,7 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Tiles within a grid that have entropies in the highest 2 histogram bins
         /// </returns>
-        private static Point2D[] GetTiles(Bitmap bmp)
+        private static Point[] GetTiles(Bitmap bmp)
         {
             Rectangle bmpRect = new Rectangle(Point.Empty, bmp.Size);
             BitmapData bmpData = bmp.LockBits(bmpRect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -160,7 +157,8 @@ namespace SEYR.ImageProcessing
                 }
 
             bmp.UnlockBits(bmpData);
-            Point2D[] selectedTiles = tiles.Where(t => t.Z > Channel.Project.Tolerance).Select(t => new Point2D() { X = t.X, Y = t.Y }).ToArray();
+            Point[] selectedTiles = tiles.Where(t => t.Z > Channel.Project.Tolerance).Select(t => new Point(t.X, t.Y)).ToArray();
+            Channel.Composite.AddTiles(selectedTiles, bmp.Size);
             return selectedTiles;
         }
 
@@ -202,12 +200,12 @@ namespace SEYR.ImageProcessing
         /// </summary>
         /// <param name="bmp"></param>
         /// <param name="tiles"></param>
-        private static void HighlightTiles(ref Bitmap bmp, Point2D[] tiles)
+        private static void HighlightTiles(ref Bitmap bmp, Point[] tiles)
         {
             Size scanSize = new Size(bmp.Width / Channel.Project.Density, bmp.Height / Channel.Project.Density);
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                foreach (Point2D tile in tiles)
+                foreach (Point tile in tiles)
                 {
                     Rectangle rect = new Rectangle(tile.X, tile.Y, scanSize.Width, scanSize.Height);
                     g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), rect);

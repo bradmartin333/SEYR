@@ -62,22 +62,26 @@ namespace SEYRDesktop
         {
             string path = OpenFolder();
             if (path == null) return;
+            
+            IMGS = GetSortedPicturesFrom(path).ToArray();
+            
             string[] files = Directory.GetFiles(path, "*.seyr");
             if (files.Length > 0)
                 Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", $@"{path}\debug.txt");
             else
                 Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value, $@"{path}\debug.txt");
+            
             BtnOpenDir.Enabled = false;
             BtnLaunchWizard.Enabled = true;
             NumPxPerMicron.Enabled = false;
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;
             BtnRepeat.Enabled = true;
+            BtnShowComposite.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
-            IMGS = GetSortedPicturesFrom(path).ToArray();
+            
             NumFrame.Maximum = IMGS.Length - 1;
             NumFrame.Value = 0;
-            NextImage();
         }
 
         private string OpenFolder()
@@ -103,6 +107,11 @@ namespace SEYRDesktop
         private void BtnRepeat_Click(object sender, EventArgs e)
         {
             NextImage();
+        }
+
+        private void BtnShowComposite_Click(object sender, EventArgs e)
+        {
+            Channel.ShowComposite();
         }
     }
 }

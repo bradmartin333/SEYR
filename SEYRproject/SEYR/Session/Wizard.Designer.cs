@@ -69,6 +69,7 @@
             this.BtnConfirm = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnResetLogs = new System.Windows.Forms.Button();
+            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.NumTolerance = new System.Windows.Forms.NumericUpDown();
@@ -77,7 +78,6 @@
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.NumTileRow = new System.Windows.Forms.NumericUpDown();
-            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -693,6 +693,18 @@
             this.BtnResetLogs.UseVisualStyleBackColor = false;
             this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
             // 
+            // BtnReloadProject
+            // 
+            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
+            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReloadProject.Location = new System.Drawing.Point(291, 3);
+            this.BtnReloadProject.Name = "BtnReloadProject";
+            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
+            this.BtnReloadProject.TabIndex = 7;
+            this.BtnReloadProject.Text = "Reload Project";
+            this.BtnReloadProject.UseVisualStyleBackColor = false;
+            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
+            // 
             // flowLayoutPanel10
             // 
             this.flowLayoutPanel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -828,18 +840,6 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged);
             // 
-            // BtnReloadProject
-            // 
-            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
-            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReloadProject.Location = new System.Drawing.Point(291, 3);
-            this.BtnReloadProject.Name = "BtnReloadProject";
-            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
-            this.BtnReloadProject.TabIndex = 7;
-            this.BtnReloadProject.Text = "Reload Project";
-            this.BtnReloadProject.UseVisualStyleBackColor = false;
-            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
-            // 
             // Wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -849,7 +849,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1227, 555);
             this.Name = "Wizard";
-            this.Text = "SEYR Wizard";
+            this.Text = "Wizard";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).EndInit();

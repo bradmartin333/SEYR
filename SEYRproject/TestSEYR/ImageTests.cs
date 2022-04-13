@@ -12,7 +12,7 @@ namespace TestSEYR
         [Ignore("Don't wantcha")]
         public void Setup()
         {
-            Channel = new SEYR.Session.Channel($"{Path.GetTempPath()}proj.seyr", $"{Path.GetTempPath()}log.txt", 5.2e-3);
+
         }
     }
 }

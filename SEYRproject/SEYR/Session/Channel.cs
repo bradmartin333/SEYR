@@ -13,6 +13,7 @@ namespace SEYR.Session
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
+        internal static Composite Composite { get; set; } = new Composite();
         private readonly string ProjectPath = null;
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace SEYR.Session
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
+            DeleteComposite();
         }
 
         #region Opening and Closing
@@ -85,7 +87,6 @@ namespace SEYR.Session
         public void NewImage(Bitmap bmp)
         {
             Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp));
-            BitmapFunctions.Composite.Show();
         }
 
         public void RunWizard(Bitmap bmp)
@@ -102,6 +103,17 @@ namespace SEYR.Session
                 else
                     return;
             }
+        }
+
+        public void ShowComposite()
+        {
+            if (Composite != null) Composite.Show();
+        }
+
+        private void DeleteComposite()
+        {
+            if (Composite != null) Composite.Close();
+            Composite = new Composite();
         }
 
         #endregion

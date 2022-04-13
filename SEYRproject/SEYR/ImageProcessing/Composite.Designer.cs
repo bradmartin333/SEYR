@@ -29,23 +29,39 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composite));
+            this.Pbx = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx)).BeginInit();
             this.SuspendLayout();
+            // 
+            // Pbx
+            // 
+            this.Pbx.BackColor = System.Drawing.Color.Black;
+            this.Pbx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Pbx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Pbx.Location = new System.Drawing.Point(0, 0);
+            this.Pbx.Name = "Pbx";
+            this.Pbx.Size = new System.Drawing.Size(584, 470);
+            this.Pbx.TabIndex = 0;
+            this.Pbx.TabStop = false;
             // 
             // Composite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(584, 470);
+            this.Controls.Add(this.Pbx);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Composite";
             this.Text = "Composite";
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox Pbx;
     }
 }
