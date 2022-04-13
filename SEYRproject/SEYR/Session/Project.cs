@@ -40,11 +40,11 @@ namespace SEYR.Session
         [XmlElement("Density")]
         public int Density { get; set; } = 3;
         [XmlElement("Contrast")]
-        public double Contrast { get; set; } = 0.25;
+        public float Contrast { get; set; } = 0.25f;
         [XmlElement("Score")]
-        public int Score { get; set; } = 100;
+        public float Score { get; set; } = 0.5f;
         [XmlElement("Tolerance")]
-        public int Tolerance { get; set; } = 50;
+        public float Tolerance { get; set; } = 0.25f;
 
         public Rectangle GetGeometry()
         {

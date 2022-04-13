@@ -503,7 +503,7 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumScaling.Location = new System.Drawing.Point(79, 3);
             this.NumScaling.Maximum = new decimal(new int[] {
             1,
@@ -520,7 +520,7 @@
             this.NumScaling.TabIndex = 4;
             this.NumScaling.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumScaling.Value = new decimal(new int[] {
-            25,
+            1,
             0,
             0,
             131072});
@@ -555,7 +555,7 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumThreshold.Location = new System.Drawing.Point(79, 3);
             this.NumThreshold.Maximum = new decimal(new int[] {
             1,
@@ -566,11 +566,6 @@
             this.NumThreshold.Size = new System.Drawing.Size(70, 20);
             this.NumThreshold.TabIndex = 3;
             this.NumThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumThreshold.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
             // flowLayoutPanel8
@@ -602,10 +597,10 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumAngle.Location = new System.Drawing.Point(79, 3);
             this.NumAngle.Maximum = new decimal(new int[] {
-            255,
+            360,
             0,
             0,
             0});
@@ -681,22 +676,12 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumContrast.Location = new System.Drawing.Point(231, 3);
-            this.NumContrast.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
             this.NumContrast.Name = "NumContrast";
             this.NumContrast.Size = new System.Drawing.Size(70, 20);
             this.NumContrast.TabIndex = 6;
             this.NumContrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumContrast.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
             this.NumContrast.ValueChanged += new System.EventHandler(this.NumContrast_ValueChanged);
             // 
             // flowLayoutPanel6
@@ -791,27 +776,17 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumScore.Location = new System.Drawing.Point(79, 3);
             this.NumScore.Maximum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.NumScore.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
             this.NumScore.Name = "NumScore";
             this.NumScore.Size = new System.Drawing.Size(70, 20);
             this.NumScore.TabIndex = 6;
             this.NumScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumScore.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
             this.NumScore.ValueChanged += new System.EventHandler(this.NumScore_ValueChanged);
             // 
             // label9
@@ -832,27 +807,17 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumTolerance.Location = new System.Drawing.Point(231, 3);
             this.NumTolerance.Maximum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.NumTolerance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
             this.NumTolerance.Name = "NumTolerance";
             this.NumTolerance.Size = new System.Drawing.Size(70, 20);
             this.NumTolerance.TabIndex = 4;
             this.NumTolerance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumTolerance.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
             this.NumTolerance.ValueChanged += new System.EventHandler(this.NumTolerance_ValueChanged);
             // 
             // flowLayoutPanel11

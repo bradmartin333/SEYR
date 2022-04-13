@@ -10,12 +10,12 @@
         int PitchX { get; set; }
         int PitchY { get; set; }
         int Rows { get; set; }
-        double Contrast { get; set; }
+        float Contrast { get; set; }
         float Scaling { get; set; }
         int SizeX { get; set; }
         int SizeY { get; set; }
         float Threshold { get; set; }
-        int Score { get; set; }
-        int Tolerance { get; set; }
+        float Score { get; set; }
+        float Tolerance { get; set; }
     }
 }

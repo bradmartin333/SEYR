@@ -143,7 +143,7 @@ namespace SEYR.Session
             }
         }
 
-        public double Contrast
+        public float Contrast
         {
             get => Channel.Project.Contrast;
             set
@@ -153,7 +153,7 @@ namespace SEYR.Session
             }
         }
 
-        public int Score
+        public float Score
         {
             get => Channel.Project.Score;
             set
@@ -163,7 +163,7 @@ namespace SEYR.Session
             }
         }
 
-        public int Tolerance
+        public float Tolerance
         {
             get => Channel.Project.Tolerance;
             set
@@ -341,7 +341,7 @@ namespace SEYR.Session
 
         private void NumTolerance_ValueChanged(object sender, EventArgs e)
         {
-            Tolerance = (int)NumTolerance.Value;
+            Tolerance = (float)NumTolerance.Value;
         }
 
         private void NumTileColumn_ValueChanged(object sender, EventArgs e)
@@ -356,12 +356,12 @@ namespace SEYR.Session
 
         private void NumScore_ValueChanged(object sender, EventArgs e)
         {
-            Score = (int)NumScore.Value;
+            Score = (float)NumScore.Value;
         }
 
         private void NumContrast_ValueChanged(object sender, EventArgs e)
         {
-            Contrast = (double)NumContrast.Value;
+            Contrast = (float)NumContrast.Value;
         }
 
         #endregion

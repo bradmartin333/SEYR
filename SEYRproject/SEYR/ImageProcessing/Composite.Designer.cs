@@ -36,6 +36,7 @@
             // Pbx
             // 
             this.Pbx.BackColor = System.Drawing.Color.Black;
+            this.Pbx.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
             this.Pbx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Pbx.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pbx.Location = new System.Drawing.Point(0, 0);
