@@ -29,6 +29,8 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp"></param>
         public static void LoadImage(Bitmap bmp)
         {
+            Channel.Project.ImageHeight = bmp.Height;
+            Channel.Project.ImageWidth = bmp.Width;
             ProcessImage(bmp, NullTile);
         }
 
@@ -54,7 +56,8 @@ namespace SEYR.ImageProcessing
             byte[] data = new byte[size];
             Marshal.Copy(bmpData.Scan0, data, 0, size);
 
-            Rectangle rectangle = Channel.Project.GetGeometry();
+            (Rectangle rectangle, Size scanSize) = Channel.Project.GetGeometry();
+            Size hotspotSize = new Size(rectangle.Width / scanSize.Width + 1, rectangle.Height / scanSize.Height + 1);
             Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
             string outputData = string.Empty;
 
@@ -65,12 +68,17 @@ namespace SEYR.ImageProcessing
                     for (int j = 0; j < Channel.Project.Rows; j++)
                     {
                         int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = rectangle.Y - (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
-                        Size scanSize = Channel.Project.GetScanSize(cropRect.Size);
-                        (Bitmap tile, double entropy, Point[] hotspots) = AnalyzeData(data, cropRect, bmpData.Stride, scanSize);
-                        outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t{GenerateTileCode(hotspots)}\n";
-                        
+                        (Bitmap tile, double entropy, Point[] hotspots) = AnalyzeData(data, cropRect, bmpData.Stride, scanSize, hotspotSize);
+                        if (Math.Abs(Channel.Project.Score - entropy) > Channel.Project.Tolerance)
+                            outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t@\n"; // Did not pass score
+                        else
+                        {
+                            outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t{GenerateTileCode(hotspots)}\n";
+                            Channel.Composite.AddHotspots(hotspots, hotspotSize);
+                        }
+                            
                         if (singleTile != NullTile)
                         {
                             HighlightHotspots(ref tile, hotspots, scanSize);
@@ -101,14 +109,17 @@ namespace SEYR.ImageProcessing
         /// <param name="scanSize">
         /// ROI within cropped region
         /// </param>
+        /// <param name="hotspotSize">
+        /// Size of ROI within ROI
+        /// </param>
         /// <returns></returns>
-        private static (Bitmap, float, Point[]) AnalyzeData(byte[] data, Rectangle tile, int stride, Size scanSize)
+        private static (Bitmap, float, Point[]) AnalyzeData(byte[] data, Rectangle tile, int stride, Size scanSize, Size hotspotSize)
         {
             byte threshold = (byte)(255 * Channel.Project.Threshold);
             byte[] croppedBytes = new byte[tile.Width * tile.Height * 3];
 
-            Size hotspotSize = new Size(tile.Width / scanSize.Width + 1, tile.Height / scanSize.Height + 1);
             List<int>[,] hotspotData = new List<int>[hotspotSize.Width, hotspotSize.Height];
+            List<int> hotspotData1D = new List<int>();
             for (int i = 0; i < hotspotSize.Width; i++)
                 for (int j = 0; j < hotspotSize.Height; j++)
                     hotspotData[i, j] = new List<int>();
@@ -126,7 +137,9 @@ namespace SEYR.ImageProcessing
                         byte R = (byte)(data[idx + 2] > threshold ? 255 : 0);
                         byte G = (byte)(data[idx + 1] > threshold ? 255 : 0);
                         byte B = (byte)(data[idx + 0] > threshold ? 255 : 0);
-                        hotspotData[j / 3 / scanSize.Width, i / scanSize.Height].Add(R << 16 | G << 8 | B);
+                        int RGB = R << 16 | G << 8 | B;
+                        hotspotData[j / 3 / scanSize.Width, i / scanSize.Height].Add(RGB);
+                        hotspotData1D.Add(RGB);
                     }
                 }
             }
@@ -138,9 +151,8 @@ namespace SEYR.ImageProcessing
 
             List<Point3D> hotspots = MakeHotspots(hotspotData, hotspotSize.Width, hotspotSize.Height, scanSize);
             Point[] selectedHotspots = hotspots.Where(t => t.Z > Channel.Project.Contrast).Select(t => new Point(t.X, t.Y)).ToArray();
-            Channel.Composite.AddHotspots(selectedHotspots, hotspotSize);
 
-            return (croppedBitmap, 0, selectedHotspots);
+            return (croppedBitmap, CalculateShannonEntropy(hotspotData1D.ToArray(), tile.Size), selectedHotspots);
         }
 
         private static List<Point3D> MakeHotspots(List<int>[,] data, int cols, int rows, Size size)
@@ -172,8 +184,6 @@ namespace SEYR.ImageProcessing
             using (Graphics g = Graphics.FromImage(resize))
                 g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
             bmp = RotateImage(resize, Channel.Project.Angle);
-            Channel.Project.ImageHeight = bmp.Height;
-            Channel.Project.ImageWidth = bmp.Width;
         }
 
         public static void ApplyManualThreshold(ref Bitmap bmp)
@@ -191,17 +201,17 @@ namespace SEYR.ImageProcessing
         public static void DrawGrid(ref Bitmap bmp)
         {
             ResizeAndRotate(ref bmp);
-            Rectangle rectangle = Channel.Project.GetGeometry();
+            Rectangle rectangle = Channel.Project.GetGeometry().Item1;
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
                     for (int j = 0; j < Channel.Project.Rows; j++)
                     {
-                        int thisX = (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         g.DrawRectangle(new Pen(Brushes.LawnGreen, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
-                            rectangle.X + thisX, rectangle.Y - thisY, rectangle.Width, rectangle.Height);
+                            thisX, thisY, rectangle.Width, rectangle.Height);
                     }
                 }
             }

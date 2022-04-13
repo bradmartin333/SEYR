@@ -46,21 +46,21 @@ namespace SEYR.Session
         [XmlElement("Tolerance")]
         public float Tolerance { get; set; } = 0.25f;
 
-        public Rectangle GetGeometry()
+        public (Rectangle, Size) GetGeometry()
         {
             Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
-                (int)(ImageHeight - (Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY)));
+                (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY));
             Point size = new Point((int)(Channel.Project.SizeX * Channel.Project.ScaledPixelsPerMicron),
                 (int)(Channel.Project.SizeY * Channel.Project.ScaledPixelsPerMicron));
             // Need the width to be a factor of 12 to crop with Bitmap data
-            Rectangle rectangle = new Rectangle(offset.X, offset.Y, ((int)Math.Round(size.X / 12.0)) * 12, size.Y);
-            return rectangle;
-        }
+            Rectangle rectangle = new Rectangle(offset.X, offset.Y, ((int)Math.Round(size.X / 12.0, MidpointRounding.AwayFromZero)) * 12, size.Y);
 
-        public Size GetScanSize(Size size)
-        {
-            return new Size((int)Math.Round(size.Width / (double)Channel.Project.Density, MidpointRounding.AwayFromZero),
-                (int)Math.Round(size.Height / (double)Channel.Project.Density, MidpointRounding.AwayFromZero));
+            int wid = (int)Math.Round(rectangle.Width / (double)Channel.Project.Density);
+            int hgt = (int)Math.Round(rectangle.Height / (double)Channel.Project.Density);
+            if (wid == 0) wid = 1;
+            if (hgt == 0) hgt = 1;
+            
+            return (rectangle, new Size(wid, hgt));
         }
     }
 }
