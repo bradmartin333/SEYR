@@ -77,13 +77,12 @@ namespace SEYR.ImageProcessing
                         {
                             outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t{GenerateTileCode(hotspots)}\n";
                             Channel.Composite.AddHotspots(hotspots, hotspotSize);
-                        }
-                            
-                        if (singleTile != NullTile)
-                        {
-                            HighlightHotspots(ref tile, hotspots, scanSize);
-                            if (i == singleTile.X && j == singleTile.Y) return (tile, entropy);
-                            g.DrawImage(tile, thisX, thisY);
+                            if (singleTile != NullTile)
+                            {
+                                HighlightHotspots(ref tile, hotspots, scanSize);
+                                if (i == singleTile.X && j == singleTile.Y) return (tile, entropy);
+                                g.DrawImage(tile, thisX, thisY);
+                            }
                         }
                     }
                 }

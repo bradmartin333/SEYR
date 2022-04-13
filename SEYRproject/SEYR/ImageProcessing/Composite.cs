@@ -29,8 +29,8 @@ namespace SEYR.ImageProcessing
 
         private void SetupComposite(Size size)
         {
-            Rows = size.Height + 1;
-            Columns = size.Width + 1;
+            Rows = size.Height;
+            Columns = size.Width;
             Data = new int[Columns, Rows];
             LastData = new int[Columns, Rows];
             Pbx.BackgroundImage = new Bitmap(Columns, Rows);
