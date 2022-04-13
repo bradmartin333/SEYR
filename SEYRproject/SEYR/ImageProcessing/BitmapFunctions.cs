@@ -46,7 +46,7 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static Bitmap ProcessImage(Bitmap bmp, Point singleTile)
+        private static (Bitmap, float) ProcessImage(Bitmap bmp, Point singleTile)
         {
             ResizeAndRotate(ref bmp);
 
@@ -70,9 +70,9 @@ namespace SEYR.ImageProcessing
                         int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
-                        (Bitmap tile, double entropy, Point[] hotspots) = AnalyzeData(data, cropRect, bmpData.Stride, scanSize, hotspotSize);
+                        (Bitmap tile, float entropy, Point[] hotspots) = AnalyzeData(data, cropRect, bmpData.Stride, scanSize, hotspotSize);
                         if (Math.Abs(Channel.Project.Score - entropy) > Channel.Project.Tolerance)
-                            outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t@\n"; // Did not pass score
+                            outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\tnull\n"; // Did not pass score
                         else
                         {
                             outputData += $"{i}\t{j}\t{entropy}\t{hotspots.Length}\t{GenerateTileCode(hotspots)}\n";
@@ -82,7 +82,7 @@ namespace SEYR.ImageProcessing
                         if (singleTile != NullTile)
                         {
                             HighlightHotspots(ref tile, hotspots, scanSize);
-                            if (i == singleTile.X && j == singleTile.Y) return tile;
+                            if (i == singleTile.X && j == singleTile.Y) return (tile, entropy);
                             g.DrawImage(tile, thisX, thisY);
                         }
                     }
@@ -91,7 +91,7 @@ namespace SEYR.ImageProcessing
 
             bmp.UnlockBits(bmpData);
             Channel.DataStream.Write(outputData);
-            return frame;
+            return (frame, 0f);
         }
 
         /// <summary>
@@ -151,8 +151,9 @@ namespace SEYR.ImageProcessing
 
             List<Point3D> hotspots = MakeHotspots(hotspotData, hotspotSize.Width, hotspotSize.Height, scanSize);
             Point[] selectedHotspots = hotspots.Where(t => t.Z > Channel.Project.Contrast).Select(t => new Point(t.X, t.Y)).ToArray();
+            float entropy = (float)Math.Round(CalculateShannonEntropy(hotspotData1D.ToArray(), tile.Size), 3);
 
-            return (croppedBitmap, CalculateShannonEntropy(hotspotData1D.ToArray(), tile.Size), selectedHotspots);
+            return (croppedBitmap, entropy, selectedHotspots);
         }
 
         private static List<Point3D> MakeHotspots(List<int>[,] data, int cols, int rows, Size size)
@@ -217,7 +218,7 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public static Bitmap GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
+        public static (Bitmap, float) GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
             return ProcessImage(bmp, new Point(tileColumn - 1, tileRow - 1));
         }

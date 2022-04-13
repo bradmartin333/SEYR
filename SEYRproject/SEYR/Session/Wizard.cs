@@ -249,7 +249,9 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            PbxTile.BackgroundImage = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            (Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            PbxTile.BackgroundImage = tile;
+            LabelScore.Text = $"Score = {entropy}";
             FormReady = true;
         }
 

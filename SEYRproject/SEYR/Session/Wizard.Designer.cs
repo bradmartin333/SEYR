@@ -82,6 +82,7 @@
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.NumTileRow = new System.Windows.Forms.NumericUpDown();
+            this.LabelScore = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -133,9 +134,10 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel9, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel10, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel11, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.LabelScore, 2, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -555,7 +557,7 @@
             1,
             0,
             0,
-            65536});
+            131072});
             this.NumThreshold.Location = new System.Drawing.Point(79, 3);
             this.NumThreshold.Maximum = new decimal(new int[] {
             1,
@@ -676,7 +678,7 @@
             1,
             0,
             0,
-            65536});
+            131072});
             this.NumContrast.Location = new System.Drawing.Point(231, 3);
             this.NumContrast.Name = "NumContrast";
             this.NumContrast.Size = new System.Drawing.Size(70, 20);
@@ -692,7 +694,7 @@
             this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
             this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
             this.flowLayoutPanel6.Controls.Add(this.BtnReloadProject);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(816, 484);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(9, 484);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(384, 29);
             this.flowLayoutPanel6.TabIndex = 8;
@@ -903,6 +905,17 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged);
             // 
+            // LabelScore
+            // 
+            this.LabelScore.AutoSize = true;
+            this.LabelScore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LabelScore.Location = new System.Drawing.Point(809, 481);
+            this.LabelScore.Name = "LabelScore";
+            this.LabelScore.Size = new System.Drawing.Size(399, 35);
+            this.LabelScore.TabIndex = 15;
+            this.LabelScore.Text = "Score = N/A";
+            this.LabelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1005,5 +1018,6 @@
         private System.Windows.Forms.NumericUpDown NumContrast;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown NumScore;
+        private System.Windows.Forms.Label LabelScore;
     }
 }
