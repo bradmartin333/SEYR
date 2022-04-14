@@ -228,7 +228,7 @@ namespace SEYR.Session
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature);
                 PbxTile.BackgroundImage = tile;
-                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = Features.Where(x => x.Name == ActiveFeature.Name).First().GetLastScore().ToString();
+                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = ActiveFeature.GetLastScore().ToString();
             }
             catch (Exception ex)
             {
@@ -365,7 +365,6 @@ namespace SEYR.Session
         private void ApplyFeature()
         {
             if (LoadingFeature || !FormReady) return;
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
             Channel.DebugStream.Write($"Apply {ActiveFeature.Name}");
             UpdateTile();
         }
