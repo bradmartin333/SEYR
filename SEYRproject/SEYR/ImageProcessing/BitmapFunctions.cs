@@ -76,7 +76,7 @@ namespace SEYR.ImageProcessing
                                 }
                                 else if (desiredFeature != null && feature.Name == desiredFeature.Name)
                                     g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
-                                if (desiredFeature == null) outputData += $"{i}\t{j}\t{feature.Name}\t{score}\n";
+                                if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
                             }
                         }
                         if (i == desiredTile.X && j == desiredTile.Y)

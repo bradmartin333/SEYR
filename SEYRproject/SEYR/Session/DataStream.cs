@@ -10,14 +10,14 @@ namespace SEYR.Session
         private List<Task> Tasks { get; set; } = new List<Task>();
         private static readonly object Locker = new object();
 
-        public DataStream(string path, bool isDebug = false)
+        public DataStream(string path, bool isDebug = false, string header = "")
         {
             if (File.Exists(path)) File.Delete(path);
             Path = path;
             if (isDebug)
                 Write("Stream Opened", addDT: true);
             else
-                Write("Header");
+                Write($"{header}TileRow\tTileCol\tFeature\tScore");
         }
 
         public void Write(string value, bool addNewLine = true, bool addDT = false)

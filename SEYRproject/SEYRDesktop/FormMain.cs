@@ -27,10 +27,9 @@ namespace SEYRDesktop
 
         private async Task NextImage()
         {
-            System.Diagnostics.Debug.WriteLine(NumFrame.Value);
+            SEYR.Session.Channel.OutputData = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
             string info = await Channel.NewImage(bmp);
-            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value} done {info}");
         }
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
@@ -70,9 +69,11 @@ namespace SEYRDesktop
             
             string[] files = Directory.GetFiles(path, "*.seyr");
             if (files.Length > 0)
-                Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", $@"{path}\debug.txt");
+                Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", 
+                    "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
             else
-                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value, $@"{path}\debug.txt");
+                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value,
+                    "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
             
             BtnOpenDir.Enabled = false;
             BtnOpenComposer.Enabled = true;

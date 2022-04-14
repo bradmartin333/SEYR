@@ -9,6 +9,11 @@ namespace SEYR.Session
 {
     public class Channel
     {
+        /// <summary>
+        /// Tab separated data to append to beggining of each data line:
+        /// Img# X Y RR RC R C SR SC
+        /// </summary>
+        public static string OutputData { get; set; }
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
@@ -21,12 +26,13 @@ namespace SEYR.Session
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
         /// <param name="pixelsPerMicron"></param>
+        /// <param name="dataHeader"></param>
         /// <param name="debugPath">
         /// If null, logs to temp directory
         /// </param>
-        public Channel(string projectPath, string streamPath, double pixelsPerMicron, string debugPath = null)
+        public Channel(string projectPath, string streamPath, double pixelsPerMicron, string dataHeader, string debugPath = null)
         {
-            DataStream = new DataStream(streamPath);
+            DataStream = new DataStream(streamPath, header: dataHeader);
             DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
             Project = new Project() { PixelsPerMicron = pixelsPerMicron };
@@ -38,12 +44,13 @@ namespace SEYR.Session
         /// </summary>
         /// <param name="projectPath"></param>
         /// <param name="streamPath"></param>
+        /// <param name="dataHeader"></param>
         /// <param name="debugPath">
         /// If null, logs to temp directory
         /// </param>
-        public Channel(string projectPath, string streamPath, string debugPath = null)
+        public Channel(string projectPath, string streamPath, string dataHeader, string debugPath = null)
         {
-            DataStream = new DataStream(streamPath);
+            DataStream = new DataStream(streamPath, header: dataHeader);
             DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
             LoadProject();
