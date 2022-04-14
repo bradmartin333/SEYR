@@ -53,6 +53,8 @@ namespace SEYR.Session
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
+            foreach (Feature feature in Project.Features)
+                feature.ResetScore();
             DiscardViewer();
         }
 
