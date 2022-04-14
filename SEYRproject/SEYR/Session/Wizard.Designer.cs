@@ -67,6 +67,11 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnResetLogs = new System.Windows.Forms.Button();
             this.BtnReloadProject = new System.Windows.Forms.Button();
+            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.NumTileRow = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -90,6 +95,9 @@
             this.flowLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -109,6 +117,7 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel9, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -644,6 +653,89 @@
             this.BtnReloadProject.UseVisualStyleBackColor = false;
             this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
             // 
+            // flowLayoutPanel9
+            // 
+            this.flowLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel9.AutoSize = true;
+            this.flowLayoutPanel9.Controls.Add(this.label8);
+            this.flowLayoutPanel9.Controls.Add(this.NumTileColumn);
+            this.flowLayoutPanel9.Controls.Add(this.label9);
+            this.flowLayoutPanel9.Controls.Add(this.NumTileRow);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(856, 388);
+            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(304, 26);
+            this.flowLayoutPanel9.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Location = new System.Drawing.Point(3, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Column";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumTileColumn
+            // 
+            this.NumTileColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumTileColumn.Location = new System.Drawing.Point(79, 3);
+            this.NumTileColumn.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumTileColumn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumTileColumn.Name = "NumTileColumn";
+            this.NumTileColumn.Size = new System.Drawing.Size(70, 20);
+            this.NumTileColumn.TabIndex = 7;
+            this.NumTileColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumTileColumn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumTileColumn.ValueChanged += new System.EventHandler(this.NumTileColumn_ValueChanged_1);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Location = new System.Drawing.Point(155, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Row";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumTileRow
+            // 
+            this.NumTileRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumTileRow.Location = new System.Drawing.Point(231, 3);
+            this.NumTileRow.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumTileRow.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumTileRow.Name = "NumTileRow";
+            this.NumTileRow.Size = new System.Drawing.Size(70, 20);
+            this.NumTileRow.TabIndex = 9;
+            this.NumTileRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumTileRow.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged_1);
+            // 
             // Wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -678,6 +770,9 @@
             this.flowLayoutPanel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -722,5 +817,10 @@
         private System.Windows.Forms.NumericUpDown NumAngle;
         private System.Windows.Forms.Button BtnResetLogs;
         private System.Windows.Forms.Button BtnReloadProject;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown NumTileColumn;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown NumTileRow;
     }
 }

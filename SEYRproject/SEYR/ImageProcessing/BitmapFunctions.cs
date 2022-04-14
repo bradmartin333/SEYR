@@ -64,12 +64,13 @@ namespace SEYR.ImageProcessing
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
-                    for (int j = 0; j < Channel.Project.Rows; j++)
+                    for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
                         int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
                         (Bitmap tile, float entropy) = AnalyzeData(data, cropRect, bmpData.Stride);
+                        if (i == singleTile.X && j == singleTile.Y) return (tile, entropy);
                     }
                 }
             }
@@ -171,7 +172,7 @@ namespace SEYR.ImageProcessing
 
         #region Wizard Functions
 
-        public static void DrawGrid(ref Bitmap bmp)
+        public static void DrawGrid(ref Bitmap bmp, int tileRow, int tileColumn)
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
@@ -179,11 +180,12 @@ namespace SEYR.ImageProcessing
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
-                    for (int j = 0; j < Channel.Project.Rows; j++)
+                    for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
                         int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
                         int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                        g.DrawRectangle(new Pen(Brushes.LawnGreen, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
+                        g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen, 
+                            (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
                             thisX, thisY, rectangle.Width, rectangle.Height);
                     }
                 }
@@ -192,36 +194,7 @@ namespace SEYR.ImageProcessing
 
         public static (Bitmap, float) GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
-            return ProcessImage(bmp, new Point(tileColumn - 1, tileRow - 1));
-        }
-
-        #endregion
-
-        #region Data Representation
-
-        private static string GenerateTileCode(Point[] focusTiles)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (Point tile in focusTiles)
-                stringBuilder.Append($"{tile.X} {tile.Y} ");
-            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString())))
-            {
-                using (var compressedStream = new MemoryStream())
-                {
-                    using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, false))
-                        uncompressedStream.CopyTo(compressorStream);
-                    return Convert.ToBase64String(compressedStream.ToArray());
-                }
-            }
-        }
-
-        private static void HighlightHotspots(ref Bitmap bmp, Point[] tiles, Size scanSize)
-        {
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                foreach (Point tile in tiles)
-                    g.FillRectangle(Brushes.LawnGreen, new Rectangle(tile.X * scanSize.Width, tile.Y * scanSize.Height, scanSize.Width, scanSize.Height));
-            }
+            return ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow));
         }
 
         #endregion

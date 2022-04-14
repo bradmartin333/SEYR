@@ -145,6 +145,7 @@ namespace SEYR.Session
             set
             {
                 _TileRow = value;
+                UpdateGrid();
                 UpdateTile();
             }
         }
@@ -155,6 +156,7 @@ namespace SEYR.Session
             set
             {
                 _TileColumn = value;
+                UpdateGrid();
                 UpdateTile();
             }
         }
@@ -197,7 +199,7 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            BitmapFunctions.DrawGrid(ref bmp);
+            BitmapFunctions.DrawGrid(ref bmp, TileRow, TileColumn);
             PbxGrid.BackgroundImage = bmp;
             FormReady = true;
         }
@@ -207,8 +209,8 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            //(Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
-            PbxTile.BackgroundImage = bmp;
+            (Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            PbxTile.BackgroundImage = tile;
             FormReady = true;
         }
 
@@ -293,14 +295,14 @@ namespace SEYR.Session
             Rows = (int)NumRows.Value;
         }
 
-        private void NumTileColumn_ValueChanged(object sender, EventArgs e)
+        private void NumTileColumn_ValueChanged_1(object sender, EventArgs e)
         {
-            TileColumn = 0;// (int)NumTileColumn.Value;
+            TileColumn = (int)NumTileColumn.Value;
         }
 
-        private void NumTileRow_ValueChanged(object sender, EventArgs e)
+        private void NumTileRow_ValueChanged_1(object sender, EventArgs e)
         {
-            TileRow = 0;// (int)NumTileRow.Value;
+            TileRow = (int)NumTileRow.Value;
         }
 
         #endregion
