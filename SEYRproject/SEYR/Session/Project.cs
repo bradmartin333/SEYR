@@ -37,7 +37,7 @@ namespace SEYR.Session
         [XmlElement("SizeY")]
         public int SizeY { get; set; } = 10;
         [XmlElement("PatternScore")]
-        public float PatternScore { get; set; } = 0.99f;
+        public float PatternScore { get; set; } = 0.95f;
         [XmlArray("Features")]
         public List<Feature> Features { get; set; } = new List<Feature>();
         
