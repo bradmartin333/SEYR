@@ -133,46 +133,6 @@ namespace SEYR.Session
             }
         }
 
-        public int Density
-        {
-            get => Channel.Project.Density;
-            set
-            {
-                Channel.Project.Density = value;
-                UpdateTile();
-            }
-        }
-
-        public float Contrast
-        {
-            get => Channel.Project.Contrast;
-            set
-            {
-                Channel.Project.Contrast = value;
-                UpdateTile();
-            }
-        }
-
-        public float Score
-        {
-            get => Channel.Project.Score;
-            set
-            {
-                Channel.Project.Score = value;
-                UpdateTile();
-            }
-        }
-
-        public float Tolerance
-        {
-            get => Channel.Project.Tolerance;
-            set
-            {
-                Channel.Project.Tolerance = value;
-                UpdateTile();
-            }
-        }
-
         #endregion
 
         private readonly Bitmap InputImage;
@@ -215,10 +175,6 @@ namespace SEYR.Session
             NumSizeY.Value = SizeY;
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
-            NumDensity.Value = Density;
-            NumTolerance.Value = (decimal)Tolerance;
-            NumContrast.Value = (decimal)Contrast;
-            NumScore.Value = (decimal)Score;
             FormReady = true;
             UpdateFilters();
             UpdateGrid();
@@ -251,9 +207,8 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            (Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
-            PbxTile.BackgroundImage = tile;
-            LabelScore.Text = $"Score = {entropy}";
+            //(Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            PbxTile.BackgroundImage = bmp;
             FormReady = true;
         }
 
@@ -338,34 +293,14 @@ namespace SEYR.Session
             Rows = (int)NumRows.Value;
         }
 
-        private void NumDensity_ValueChanged(object sender, EventArgs e)
-        {
-            Density = (int)NumDensity.Value;
-        }
-
-        private void NumTolerance_ValueChanged(object sender, EventArgs e)
-        {
-            Tolerance = (float)NumTolerance.Value;
-        }
-
         private void NumTileColumn_ValueChanged(object sender, EventArgs e)
         {
-            TileColumn = (int)NumTileColumn.Value;
+            TileColumn = 0;// (int)NumTileColumn.Value;
         }
 
         private void NumTileRow_ValueChanged(object sender, EventArgs e)
         {
-            TileRow = (int)NumTileRow.Value;
-        }
-
-        private void NumScore_ValueChanged(object sender, EventArgs e)
-        {
-            Score = (float)NumScore.Value;
-        }
-
-        private void NumContrast_ValueChanged(object sender, EventArgs e)
-        {
-            Contrast = (float)NumContrast.Value;
+            TileRow = 0;// (int)NumTileRow.Value;
         }
 
         #endregion

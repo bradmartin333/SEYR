@@ -37,16 +37,8 @@ namespace SEYR.Session
         public int SizeX { get; set; } = 10;
         [XmlElement("SizeY")]
         public int SizeY { get; set; } = 10;
-        [XmlElement("Density")]
-        public int Density { get; set; } = 3;
-        [XmlElement("Contrast")]
-        public float Contrast { get; set; } = 0.25f;
-        [XmlElement("Score")]
-        public float Score { get; set; } = 0.5f;
-        [XmlElement("Tolerance")]
-        public float Tolerance { get; set; } = 0.25f;
 
-        public (Rectangle, Size) GetGeometry()
+        public Rectangle GetGeometry()
         {
             Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
                 (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY));
@@ -55,12 +47,7 @@ namespace SEYR.Session
             // Need the width to be a factor of 12 to crop with Bitmap data
             Rectangle rectangle = new Rectangle(offset.X, offset.Y, ((int)Math.Round(size.X / 12.0, MidpointRounding.AwayFromZero)) * 12, size.Y);
 
-            int wid = (int)Math.Round(rectangle.Width / (double)Channel.Project.Density);
-            int hgt = (int)Math.Round(rectangle.Height / (double)Channel.Project.Density);
-            if (wid == 0) wid = 1;
-            if (hgt == 0) hgt = 1;
-            
-            return (rectangle, new Size(wid, hgt));
+            return rectangle;
         }
     }
 }
