@@ -91,7 +91,7 @@ namespace SEYR.ImageProcessing
         /// <returns></returns>
         private static (Bitmap, float) AnalyzeData(byte[] data, Rectangle tile, int stride)
         {
-            byte threshold = (byte)(255 * Channel.Project.Threshold);
+            byte threshold = (byte)(255 * 1);
             byte[] croppedBytes = new byte[tile.Width * tile.Height * 3];
 
             for (int i = 0; i < tile.Height; i++)
@@ -139,14 +139,6 @@ namespace SEYR.ImageProcessing
             using (Graphics g = Graphics.FromImage(resize))
                 g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
             bmp = RotateImage(resize, Channel.Project.Angle);
-        }
-
-        public static void ApplyManualThreshold(ref Bitmap bmp)
-        {
-            ImageAttributes imageAttr = new ImageAttributes();
-            imageAttr.SetThreshold(Channel.Project.Threshold);
-            using (Graphics g = Graphics.FromImage(bmp))
-                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
         }
 
         #endregion

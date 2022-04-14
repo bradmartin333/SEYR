@@ -18,6 +18,8 @@ namespace SEYR.Session
         [XmlElement("FailScore")]
         public float FailScore { get; set; } = 0f;
         [XmlElement("FailTolerance")]
-        public float FailTolerance{ get; set; } = 20f;
+        public float FailTolerance { get; set; } = 20f;
+        [XmlElement("Threshold")]
+        public float Threshold { get; set; } = 20f;
     }
 }

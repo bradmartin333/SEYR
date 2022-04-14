@@ -56,9 +56,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.LabelThreshold = new System.Windows.Forms.Label();
-            this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.NumAngle = new System.Windows.Forms.NumericUpDown();
@@ -90,8 +87,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
-            this.flowLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
             this.flowLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
@@ -114,10 +109,9 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel9, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -508,55 +502,13 @@
             131072});
             this.NumScaling.ValueChanged += new System.EventHandler(this.NumScaling_ValueChanged);
             // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel7.AutoSize = true;
-            this.flowLayoutPanel7.Controls.Add(this.LabelThreshold);
-            this.flowLayoutPanel7.Controls.Add(this.NumThreshold);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(125, 420);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(152, 26);
-            this.flowLayoutPanel7.TabIndex = 10;
-            // 
-            // LabelThreshold
-            // 
-            this.LabelThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelThreshold.Location = new System.Drawing.Point(3, 6);
-            this.LabelThreshold.Name = "LabelThreshold";
-            this.LabelThreshold.Size = new System.Drawing.Size(70, 13);
-            this.LabelThreshold.TabIndex = 2;
-            this.LabelThreshold.Text = "Threshold";
-            this.LabelThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumThreshold
-            // 
-            this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumThreshold.DecimalPlaces = 2;
-            this.NumThreshold.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumThreshold.Location = new System.Drawing.Point(79, 3);
-            this.NumThreshold.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumThreshold.Name = "NumThreshold";
-            this.NumThreshold.Size = new System.Drawing.Size(70, 20);
-            this.NumThreshold.TabIndex = 3;
-            this.NumThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
-            // 
             // flowLayoutPanel8
             // 
             this.flowLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel8.AutoSize = true;
             this.flowLayoutPanel8.Controls.Add(this.label1);
             this.flowLayoutPanel8.Controls.Add(this.NumAngle);
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(125, 452);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(125, 420);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Size = new System.Drawing.Size(152, 26);
             this.flowLayoutPanel8.TabIndex = 11;
@@ -765,8 +717,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
-            this.flowLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
             this.flowLayoutPanel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
@@ -789,10 +739,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label LabelThreshold;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnConfirm;
         private System.Windows.Forms.Button BtnCancel;
@@ -813,7 +761,6 @@
         private System.Windows.Forms.Label LabelScale;
         private System.Windows.Forms.NumericUpDown NumRows;
         private System.Windows.Forms.NumericUpDown NumScaling;
-        private System.Windows.Forms.NumericUpDown NumThreshold;
         private System.Windows.Forms.NumericUpDown NumAngle;
         private System.Windows.Forms.Button BtnResetLogs;
         private System.Windows.Forms.Button BtnReloadProject;

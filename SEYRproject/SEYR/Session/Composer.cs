@@ -23,18 +23,6 @@ namespace SEYR.Session
             }
         }
 
-        public float Threshold
-        {
-            get => Channel.Project.Threshold;
-            set
-            {
-                Channel.Project.Threshold = value;
-                UpdateFilters();
-                UpdateGrid();
-                UpdateTile();
-            }
-        }
-
         public float Angle
         {
             get => Channel.Project.Angle;
@@ -176,7 +164,6 @@ namespace SEYR.Session
             InputImage = bitmap;
             PbxGrid.BackgroundImage = bitmap;
             NumScaling.Value = (decimal)Scaling;
-            NumThreshold.Value = (decimal)Threshold;
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
             NumOriginY.Value = OriginY;
@@ -190,16 +177,6 @@ namespace SEYR.Session
             UpdateFilters();
             UpdateGrid();
             UpdateTile();
-
-            Features.Add(new Feature()
-            {
-                Name = "test",
-            });
-            Features.Add(new Feature()
-            {
-                Name = "test",
-                PassScore = 99f,
-            });
         }
 
         private void UpdateFilters()
@@ -208,7 +185,6 @@ namespace SEYR.Session
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
             BitmapFunctions.ResizeAndRotate(ref bmp);
-            BitmapFunctions.ApplyManualThreshold(ref bmp);
             PbxFilters.BackgroundImage = bmp;
             FormReady = true;
         }
@@ -262,11 +238,6 @@ namespace SEYR.Session
         private void NumScaling_ValueChanged(object sender, EventArgs e)
         {
             Scaling = (float)NumScaling.Value;
-        }
-
-        private void NumThreshold_ValueChanged(object sender, EventArgs e)
-        {
-            Threshold = (float)NumThreshold.Value;
         }
 
         private void NumAngle_ValueChanged(object sender, EventArgs e)
