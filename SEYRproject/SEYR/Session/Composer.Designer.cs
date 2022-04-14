@@ -609,19 +609,21 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.ComboFeatures, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BtnAddFeature, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.ComboFeatures, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.BtnAddFeature, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 114);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -630,9 +632,9 @@
             this.BtnCopyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
             this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(313, 3);
+            this.BtnCopyFeature.Location = new System.Drawing.Point(313, 23);
             this.BtnCopyFeature.Name = "BtnCopyFeature";
-            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 51);
+            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnCopyFeature.TabIndex = 3;
             this.BtnCopyFeature.Text = "Copy";
             this.BtnCopyFeature.UseVisualStyleBackColor = false;
@@ -643,9 +645,9 @@
             this.BtnDeleteFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
             this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDeleteFeature.Location = new System.Drawing.Point(172, 3);
+            this.BtnDeleteFeature.Location = new System.Drawing.Point(172, 23);
             this.BtnDeleteFeature.Name = "BtnDeleteFeature";
-            this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 51);
+            this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnDeleteFeature.TabIndex = 2;
             this.BtnDeleteFeature.Text = "Delete";
             this.BtnDeleteFeature.UseVisualStyleBackColor = false;
@@ -656,7 +658,7 @@
             this.ComboFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.ComboFeatures, 3);
             this.ComboFeatures.FormattingEnabled = true;
-            this.ComboFeatures.Location = new System.Drawing.Point(3, 75);
+            this.ComboFeatures.Location = new System.Drawing.Point(3, 65);
             this.ComboFeatures.Name = "ComboFeatures";
             this.ComboFeatures.Size = new System.Drawing.Size(416, 21);
             this.ComboFeatures.TabIndex = 0;
@@ -667,9 +669,9 @@
             this.BtnAddFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnAddFeature.BackColor = System.Drawing.Color.White;
             this.BtnAddFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAddFeature.Location = new System.Drawing.Point(32, 3);
+            this.BtnAddFeature.Location = new System.Drawing.Point(32, 23);
             this.BtnAddFeature.Name = "BtnAddFeature";
-            this.BtnAddFeature.Size = new System.Drawing.Size(75, 51);
+            this.BtnAddFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnAddFeature.TabIndex = 1;
             this.BtnAddFeature.Text = "Add";
             this.BtnAddFeature.UseVisualStyleBackColor = false;

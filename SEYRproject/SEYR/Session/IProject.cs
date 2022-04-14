@@ -12,6 +12,7 @@
         float Scaling { get; set; }
         int SizeX { get; set; }
         int SizeY { get; set; }
+        float PatternScore { get; set; }
         System.Collections.Generic.List<Feature> Features { get; set; }
     }
 }

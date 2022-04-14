@@ -35,6 +35,7 @@ namespace SEYR.Session
                 UpdateTile();
             }
         }
+
         public int OriginX
         {
             get => Channel.Project.OriginX;
@@ -129,6 +130,12 @@ namespace SEYR.Session
             {
                 Channel.Project.Features = value;
             }
+        }
+
+        public float PatternScore
+        {
+            get => Channel.Project.PatternScore;
+            set => Channel.Project.PatternScore = value;
         }
 
         #endregion
@@ -570,15 +577,15 @@ namespace SEYR.Session
             {
                 Bitmap sourceImage = (Bitmap)InputImage.Clone();
                 BitmapFunctions.ResizeAndRotate(ref sourceImage);
-                var tm = new ExhaustiveTemplateMatching(0.75f);
+                var tm = new ExhaustiveTemplateMatching(PatternScore);
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, Channel.Pattern);
                 foreach (TemplateMatch m in matchings)
                 {
                     Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
-                }
-                using (Graphics g = Graphics.FromImage(sourceImage))
-                {
-                    g.FillRectangle(Brushes.HotPink, matchings[0].Rectangle);
+                    using (Graphics g = Graphics.FromImage(sourceImage))
+                    {
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.HotPink)), m.Rectangle);
+                    }
                 }
                 PbxGrid.Image = sourceImage;
             }
