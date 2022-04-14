@@ -67,16 +67,16 @@ namespace SEYR.ImageProcessing
                             foreach (Feature feature in Channel.Project.Features)
                             {
                                 float score = await Task.Run(() => AnalyzeData(crop, feature));
-                                if (score > 0)
+                                if (score == 1000f)
+                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
+                                else if (score > 0)
                                 {
                                     feature.AddScore(score);
-                                    g2.FillRectangle(new SolidBrush(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore(), 50)), feature.GetGeometry());
+                                    g2.DrawRectangle(new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore())), feature.GetGeometry());
                                 }
-                                else if (score == 1000)
-                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(50, Color.Black)), feature.GetGeometry());
-                                Color border = (desiredFeature != null && feature.Name == desiredFeature.Name) ? Color.HotPink : Color.Black;
-                                g2.DrawRectangle(new Pen(border, (float)Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                                outputData += $"{desiredTile.X + 1}\t{Channel.Project.Rows - desiredTile.Y}\t{feature.Name}\t{score}\n";
+                                else if (desiredFeature != null && feature.Name == desiredFeature.Name)
+                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                                if (desiredFeature == null) outputData += $"{i}\t{j}\t{feature.Name}\t{score}\n";
                             }
                         }
                         if (i == desiredTile.X && j == desiredTile.Y)
@@ -234,7 +234,7 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, byte opacity, double value = 1, double saturation = 1)
+        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, double value = 1, double saturation = 1, byte opacity = 255)
         {
             double toLow = 255;
             double toHigh = 0;
