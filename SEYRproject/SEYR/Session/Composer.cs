@@ -163,11 +163,21 @@ namespace SEYR.Session
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
-            ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             InputImage = bitmap;
+            InitializeHandlers();
+            InitializeUI();
+            InitializeFeaturesAndImages();
+        }
+
+        private void InitializeHandlers()
+        {
+            ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
+        }
 
+        private void InitializeUI()
+        {
             NumScaling.Value = (decimal)Scaling;
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
@@ -178,7 +188,10 @@ namespace SEYR.Session
             NumSizeY.Value = SizeY;
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
+        }
 
+        private void InitializeFeaturesAndImages()
+        {
             FormReady = true;
             SetupFeatureUI(true);
             while (!FormReady) Application.DoEvents();
@@ -197,7 +210,7 @@ namespace SEYR.Session
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
-                PbxGrid.BackgroundImage = await BitmapFunctions.DrawGrid(bmp, _TileRow, _TileColumn);
+                PbxGrid.BackgroundImage = await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
             catch (Exception ex)
             {
@@ -214,7 +227,7 @@ namespace SEYR.Session
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 string featureName = (ActiveFeature == null) ? "" : ActiveFeature.Name;
-                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, _TileRow, _TileColumn, featureName);
+                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, featureName);
                 PbxTile.BackgroundImage = tile;
             }
             catch (Exception ex)
