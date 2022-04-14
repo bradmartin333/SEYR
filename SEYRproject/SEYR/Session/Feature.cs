@@ -27,7 +27,7 @@ namespace SEYR.Session
         [XmlElement("Rectangle")]
         public Rectangle Rectangle { get; set; } = new Rectangle(10, 10, 10, 10);
         [XmlElement("Threshold")]
-        public float Threshold { get; set; } = 20f;
+        public float Threshold { get; set; } = 0.2f;
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
@@ -104,6 +104,17 @@ namespace SEYR.Session
             lock (Locker)
             {
                 return Scores.Max() + 1;
+            }
+        }
+
+        internal double GetLastScore()
+        {
+            lock (Locker)
+            {
+                if (Scores.Count > 0)
+                    return Scores.Last();
+                else
+                    return 0.0;
             }
         }
     }

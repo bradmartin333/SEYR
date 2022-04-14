@@ -141,19 +141,6 @@ namespace SEYR.ImageProcessing
             return entropy;
         }
 
-
-        #region Image Filters
-
-        public static void ResizeAndRotate(ref Bitmap bmp)
-        {
-            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
-            using (Graphics g = Graphics.FromImage(resize))
-                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
-            bmp = RotateImage(resize, Channel.Project.Angle);
-        }
-
-        #endregion
-
         #region Composer Functions
 
         public static async Task<Bitmap> DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
@@ -187,6 +174,14 @@ namespace SEYR.ImageProcessing
         #endregion
 
         #region Boilerplate Methods
+
+        public static void ResizeAndRotate(ref Bitmap bmp)
+        {
+            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
+            using (Graphics g = Graphics.FromImage(resize))
+                g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
+            bmp = RotateImage(resize, Channel.Project.Angle);
+        }
 
         /// <summary>
         /// Method to rotate an image either clockwise or counter-clockwise

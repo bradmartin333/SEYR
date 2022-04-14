@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -138,7 +139,7 @@ namespace SEYR.Session
             set
             {
                 _TileRow = value;
-                InitializeImages();
+                UpdateImages();
             }
         }
         private int _TileColumn = 1;
@@ -148,7 +149,7 @@ namespace SEYR.Session
             set
             {
                 _TileColumn = value;
-                InitializeImages();
+                UpdateImages();
             }
         }
 
@@ -166,7 +167,7 @@ namespace SEYR.Session
             InitializeUI();
             FormReady = true;
             SetupFeatureUI(true);
-            InitializeImages();
+            UpdateImages();
         }
 
         private void InitializeHandlers()
@@ -174,6 +175,7 @@ namespace SEYR.Session
             ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
+            PbxTile.MouseDown += PbxTile_MouseDown;
         }
 
         private void InitializeUI()
@@ -190,13 +192,13 @@ namespace SEYR.Session
             NumRows.Value = Rows;
         }
 
-        private void InitializeImages()
+        private void UpdateImages()
         {
             while (!FormReady) Application.DoEvents();
-            Channel.DebugStream.Write($"Initializing Grid");
+            Channel.DebugStream.Write($"Updating Grid");
             UpdateGrid();
             while (!FormReady) Application.DoEvents();
-            Channel.DebugStream.Write($"Initializing Tile");
+            Channel.DebugStream.Write($"Updating Tile");
             UpdateTile();
             while (!FormReady) Application.DoEvents();
         }
@@ -226,6 +228,7 @@ namespace SEYR.Session
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature);
                 PbxTile.BackgroundImage = tile;
+                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = Features.Where(x => x.Name == ActiveFeature.Name).First().GetLastScore().ToString();
             }
             catch (Exception ex)
             {
@@ -248,9 +251,24 @@ namespace SEYR.Session
 
         #region PBX Handlers
 
+        private void PbxTile_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetThreshold(ActiveFeature.Threshold);
+            Bitmap bmp = (Bitmap)PbxTile.BackgroundImage.Clone();
+            using (Graphics g = Graphics.FromImage(bmp))
+                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
+            PbxTile.Image = bmp;
+        }
+
         private void PbxTile_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!ClickGrid) return;
+            if (!ClickGrid)
+            {
+                PbxTile.Image = null;
+                return;
+            }
             LoadingFeature = true;
             Point point = ZoomMousePos(e.Location, PbxTile.Size, PbxTile.BackgroundImage.Size);
             if (ActiveFeature != null)
@@ -332,9 +350,9 @@ namespace SEYR.Session
                 ActiveFeature = null;
                 ComboFeatures.Text = "";
                 tabControl.SelectedIndex = 0;
-                FormReady = true;
-                UpdateTile();
             }
+            FormReady = true;
+            UpdateTile();
             Channel.DebugStream.Write($"Load Feature UI");
         }
 
