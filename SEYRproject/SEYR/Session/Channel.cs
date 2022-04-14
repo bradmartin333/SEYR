@@ -94,19 +94,14 @@ namespace SEYR.Session
 
         public void OpenComposer(Bitmap bmp)
         {
+            Project project = Project;
             using (Composer w = new Composer((Bitmap)bmp.Clone()))
             {
-                Feature[] featuresBuffer = (Feature[])Project.Features.ToArray().Clone();
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)
                     SaveProject();
                 else
-                {
-                    Project.Features.Clear();
-                    foreach (Feature feature in featuresBuffer)
-                        Project.Features.Add(feature);
-                    return;
-                }  
+                    Project = project;
             }
         }
 

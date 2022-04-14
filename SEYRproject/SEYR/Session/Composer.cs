@@ -253,7 +253,7 @@ namespace SEYR.Session
 
         private void PbxTile_MouseDown(object sender, MouseEventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || ClickGrid) return;
             ImageAttributes imageAttr = new ImageAttributes();
             imageAttr.SetThreshold(ActiveFeature.Threshold);
             Bitmap bmp = (Bitmap)PbxTile.BackgroundImage.Clone();

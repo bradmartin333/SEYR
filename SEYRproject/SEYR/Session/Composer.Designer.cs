@@ -1117,14 +1117,15 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
             // ClickGridToolStripMenuItem
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
