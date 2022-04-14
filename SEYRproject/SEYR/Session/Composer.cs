@@ -315,9 +315,8 @@ namespace SEYR.Session
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadingFeature = true;
-            Channel.DebugStream.Write($"{ComboFeatures.SelectedIndex}");
             ActiveFeature = Features[ComboFeatures.SelectedIndex];
-            Channel.DebugStream.Write($"{ActiveFeature.Name}");
+            Channel.DebugStream.Write($"Editing Feature: {ActiveFeature.Name}");
             NumFeatureX.Value = ActiveFeature.Rectangle.X;
             NumFeatureY.Value = ActiveFeature.Rectangle.Y;
             NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
