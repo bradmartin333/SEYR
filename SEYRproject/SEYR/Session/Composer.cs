@@ -138,6 +138,12 @@ namespace SEYR.Session
             set => Channel.Project.PatternScore = value;
         }
 
+        public List<Point> PatternLocations
+        {
+            get => Channel.Project.PatternLocations;
+            set => Channel.Project.PatternLocations = value;
+        }
+
         #endregion
 
         private int _TileRow = 1;
@@ -575,6 +581,7 @@ namespace SEYR.Session
             Application.DoEvents();
             if (Channel.Pattern != null)
             {
+                PatternLocations = new List<Point>();
                 Bitmap sourceImage = (Bitmap)InputImage.Clone();
                 BitmapFunctions.ResizeAndRotate(ref sourceImage);
                 var tm = new ExhaustiveTemplateMatching(PatternScore);
@@ -582,6 +589,7 @@ namespace SEYR.Session
                 foreach (TemplateMatch m in matchings)
                 {
                     Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
+                    PatternLocations.Add(m.Rectangle.Center());
                     using (Graphics g = Graphics.FromImage(sourceImage))
                     {
                         g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.HotPink)), m.Rectangle);

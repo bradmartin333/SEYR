@@ -38,9 +38,11 @@ namespace SEYR.Session
         public int SizeY { get; set; } = 10;
         [XmlElement("PatternScore")]
         public float PatternScore { get; set; } = 0.95f;
+        [XmlArray("PatternLocations")]
+        public List<Point> PatternLocations { get; set; } = new List<Point>();
         [XmlArray("Features")]
         public List<Feature> Features { get; set; } = new List<Feature>();
-        
+
         public Rectangle GetGeometry()
         {
             Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
