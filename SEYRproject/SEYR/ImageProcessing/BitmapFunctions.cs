@@ -67,13 +67,11 @@ namespace SEYR.ImageProcessing
                             foreach (Feature feature in Channel.Project.Features)
                             {
                                 float score = await Task.Run(() => AnalyzeData(crop, feature));
+                                feature.AddScore(score);
                                 if (score == 1000f)
                                     g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
                                 else if (score > 0)
-                                {
-                                    feature.AddScore(score);
                                     g2.DrawRectangle(new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore())), feature.GetGeometry());
-                                }
                                 else if (desiredFeature != null && feature.Name == desiredFeature.Name)
                                     g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
                                 if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";

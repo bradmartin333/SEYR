@@ -117,5 +117,17 @@ namespace SEYR.Session
                     return 0.0;
             }
         }
+
+        internal int QuickGlance()
+        {
+            float val = 0f;
+            lock (Locker)
+            {
+                if (Scores.Count > 5) val = Scores.Average();
+                if (val == 0f) return 0;
+                else
+                    return (int)(Scores.Where(x => x > val).Count() / (double)Scores.Count() * 100);
+            }
+        }
     }
 }

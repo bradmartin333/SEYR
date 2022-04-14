@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SEYR.ImageProcessing;
 using System.Threading.Tasks;
+using System;
 
 namespace SEYR.Session
 {
@@ -96,7 +97,15 @@ namespace SEYR.Session
         public async Task<string> NewImage(Bitmap bmp)
         {
             await Task.Run(() => BitmapFunctions.LoadImage(bmp));
-            return "hi";
+            return CreateStatusString();
+        }
+
+        private string CreateStatusString()
+        {
+            string output = string.Empty;
+            foreach (Feature feature in Project.Features)
+                output += $"{feature.Name}\t{feature.QuickGlance()}\n";
+            return output;
         }
 
         public void OpenComposer(Bitmap bmp)

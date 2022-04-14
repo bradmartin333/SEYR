@@ -30,6 +30,7 @@ namespace SEYRDesktop
             SEYR.Session.Channel.OutputData = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
             string info = await Channel.NewImage(bmp);
+            System.Diagnostics.Debug.WriteLine(info + '\n');
         }
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
