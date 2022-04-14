@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SEYR.Session
@@ -158,6 +159,8 @@ namespace SEYR.Session
             }
         }
 
+        private Feature ActiveFeature;
+
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
@@ -174,6 +177,7 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             FormReady = true;
+            SetupFeatureUI();
             UpdateFilters();
             UpdateGrid();
             UpdateTile();
@@ -232,6 +236,32 @@ namespace SEYR.Session
             DialogResult = DialogResult.Abort;
             Close();
         }
+
+        #region Feature Management
+
+        private void SetupFeatureUI()
+        {
+            ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
+            ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
+        }
+
+        private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActiveFeature = Features[ComboFeatures.SelectedIndex];
+            NumFeatureX.Value = ActiveFeature.Rectangle.X;
+            NumFeatureY.Value = ActiveFeature.Rectangle.Y;
+            NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
+            NumFeatureHeight.Value = ActiveFeature.Rectangle.Height;
+            NumFeaturePass.Value = (decimal)ActiveFeature.PassScore;
+            NumFeaturePassTolerance.Value = (decimal)ActiveFeature.PassTolerance;
+            NumFeatureFail.Value = (decimal)ActiveFeature.FailScore;
+            NumFeatureFailTolerance.Value = (decimal)ActiveFeature.FailTolerance;
+            TxtFeatureName.Text = ActiveFeature.Name;
+            NumFeatureThreshold.Value = (decimal)ActiveFeature.Threshold;
+            ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
+        }
+
+        #endregion
 
         #region Num Handlers
 

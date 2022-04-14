@@ -56,11 +56,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.BtnConfirm = new System.Windows.Forms.Button();
-            this.BtnCancel = new System.Windows.Forms.Button();
-            this.BtnResetLogs = new System.Windows.Forms.Button();
-            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.NumTileColumn = new System.Windows.Forms.NumericUpDown();
@@ -71,34 +66,22 @@
             this.NumAngle = new System.Windows.Forms.NumericUpDown();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
-            this.tabPageInfo = new System.Windows.Forms.TabPage();
-            this.tabPageGeometry = new System.Windows.Forms.TabPage();
-            this.tabPageFilters = new System.Windows.Forms.TabPage();
-            this.tabPageScoring = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnCopyFeature = new System.Windows.Forms.Button();
+            this.BtnDeleteFeature = new System.Windows.Forms.Button();
             this.ComboFeatures = new System.Windows.Forms.ComboBox();
             this.BtnAddFeature = new System.Windows.Forms.Button();
-            this.BtnDeleteFeature = new System.Windows.Forms.Button();
-            this.BtnCopyFeature = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.TxtFeatureName = new System.Windows.Forms.TextBox();
-            this.LabelCurrentFeatureScore = new System.Windows.Forms.Label();
+            this.tabPageGeometry = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
+            this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
+            this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.NumFeatureX = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.NumFeatureThreshold = new System.Windows.Forms.NumericUpDown();
-            this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
+            this.tabPageScoring = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.NumFeatureFailTolerance = new System.Windows.Forms.NumericUpDown();
             this.NumFeatureFail = new System.Windows.Forms.NumericUpDown();
@@ -108,6 +91,24 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.NumFeaturePass = new System.Windows.Forms.NumericUpDown();
+            this.tabPageInfo = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnApplyFeatureName = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.TxtFeatureName = new System.Windows.Forms.TextBox();
+            this.LabelCurrentFeatureScore = new System.Windows.Forms.Label();
+            this.tabPageFilters = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.NumFeatureThreshold = new System.Windows.Forms.NumericUpDown();
+            this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.BtnConfirm = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnResetLogs = new System.Windows.Forms.Button();
+            this.BtnReloadProject = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
@@ -126,7 +127,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
-            this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).BeginInit();
@@ -134,24 +134,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageFeatures.SuspendLayout();
-            this.tabPageInfo.SuspendLayout();
-            this.tabPageGeometry.SuspendLayout();
-            this.tabPageFilters.SuspendLayout();
-            this.tabPageScoring.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tabPageGeometry.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).BeginInit();
-            this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).BeginInit();
+            this.tabPageScoring.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFailTolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePassTolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePass)).BeginInit();
+            this.tabPageInfo.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tabPageFilters.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).BeginInit();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -561,73 +562,6 @@
             131072});
             this.NumScaling.ValueChanged += new System.EventHandler(this.NumScaling_ValueChanged);
             // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.Controls.Add(this.BtnConfirm);
-            this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
-            this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
-            this.flowLayoutPanel6.Controls.Add(this.BtnReloadProject);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(9, 455);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(0, 14, 0, 0);
-            this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanel6, 2);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(384, 58);
-            this.flowLayoutPanel6.TabIndex = 8;
-            // 
-            // BtnConfirm
-            // 
-            this.BtnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnConfirm.BackColor = System.Drawing.Color.LightGreen;
-            this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfirm.Location = new System.Drawing.Point(3, 17);
-            this.BtnConfirm.Name = "BtnConfirm";
-            this.BtnConfirm.Size = new System.Drawing.Size(90, 23);
-            this.BtnConfirm.TabIndex = 5;
-            this.BtnConfirm.Text = "Confirm";
-            this.BtnConfirm.UseVisualStyleBackColor = false;
-            this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCancel.BackColor = System.Drawing.Color.LightCoral;
-            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Location = new System.Drawing.Point(99, 17);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(90, 23);
-            this.BtnCancel.TabIndex = 4;
-            this.BtnCancel.Text = "Cancel";
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // BtnResetLogs
-            // 
-            this.BtnResetLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnResetLogs.BackColor = System.Drawing.Color.Gold;
-            this.BtnResetLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnResetLogs.Location = new System.Drawing.Point(195, 17);
-            this.BtnResetLogs.Name = "BtnResetLogs";
-            this.BtnResetLogs.Size = new System.Drawing.Size(90, 23);
-            this.BtnResetLogs.TabIndex = 6;
-            this.BtnResetLogs.Text = "Reset Logs";
-            this.BtnResetLogs.UseVisualStyleBackColor = false;
-            this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
-            // 
-            // BtnReloadProject
-            // 
-            this.BtnReloadProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
-            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReloadProject.Location = new System.Drawing.Point(291, 17);
-            this.BtnReloadProject.Name = "BtnReloadProject";
-            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
-            this.BtnReloadProject.TabIndex = 7;
-            this.BtnReloadProject.Text = "Reload Project";
-            this.BtnReloadProject.UseVisualStyleBackColor = false;
-            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
-            // 
             // flowLayoutPanel9
             // 
             this.flowLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -779,47 +713,6 @@
             this.tabPageFeatures.TabIndex = 0;
             this.tabPageFeatures.Text = "Features";
             // 
-            // tabPageInfo
-            // 
-            this.tabPageInfo.BackColor = System.Drawing.Color.Bisque;
-            this.tabPageInfo.Controls.Add(this.tableLayoutPanel3);
-            this.tabPageInfo.Location = new System.Drawing.Point(4, 22);
-            this.tabPageInfo.Name = "tabPageInfo";
-            this.tabPageInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInfo.Size = new System.Drawing.Size(391, 64);
-            this.tabPageInfo.TabIndex = 1;
-            this.tabPageInfo.Text = "Info";
-            // 
-            // tabPageGeometry
-            // 
-            this.tabPageGeometry.BackColor = System.Drawing.Color.Honeydew;
-            this.tabPageGeometry.Controls.Add(this.tableLayoutPanel4);
-            this.tabPageGeometry.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGeometry.Name = "tabPageGeometry";
-            this.tabPageGeometry.Size = new System.Drawing.Size(391, 64);
-            this.tabPageGeometry.TabIndex = 2;
-            this.tabPageGeometry.Text = "Geometry";
-            // 
-            // tabPageFilters
-            // 
-            this.tabPageFilters.BackColor = System.Drawing.Color.MistyRose;
-            this.tabPageFilters.Controls.Add(this.tableLayoutPanel5);
-            this.tabPageFilters.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFilters.Name = "tabPageFilters";
-            this.tabPageFilters.Size = new System.Drawing.Size(391, 64);
-            this.tabPageFilters.TabIndex = 3;
-            this.tabPageFilters.Text = "Filters";
-            // 
-            // tabPageScoring
-            // 
-            this.tabPageScoring.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.tabPageScoring.Controls.Add(this.tableLayoutPanel6);
-            this.tabPageScoring.Location = new System.Drawing.Point(4, 22);
-            this.tabPageScoring.Name = "tabPageScoring";
-            this.tabPageScoring.Size = new System.Drawing.Size(391, 64);
-            this.tabPageScoring.TabIndex = 4;
-            this.tabPageScoring.Text = "Scoring";
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
@@ -839,27 +732,17 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(385, 58);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // ComboFeatures
+            // BtnCopyFeature
             // 
-            this.ComboFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.SetColumnSpan(this.ComboFeatures, 3);
-            this.ComboFeatures.FormattingEnabled = true;
-            this.ComboFeatures.Location = new System.Drawing.Point(3, 33);
-            this.ComboFeatures.Name = "ComboFeatures";
-            this.ComboFeatures.Size = new System.Drawing.Size(379, 21);
-            this.ComboFeatures.TabIndex = 0;
-            // 
-            // BtnAddFeature
-            // 
-            this.BtnAddFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.BtnAddFeature.BackColor = System.Drawing.Color.White;
-            this.BtnAddFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAddFeature.Location = new System.Drawing.Point(26, 3);
-            this.BtnAddFeature.Name = "BtnAddFeature";
-            this.BtnAddFeature.Size = new System.Drawing.Size(75, 23);
-            this.BtnAddFeature.TabIndex = 1;
-            this.BtnAddFeature.Text = "Add";
-            this.BtnAddFeature.UseVisualStyleBackColor = false;
+            this.BtnCopyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
+            this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCopyFeature.Location = new System.Drawing.Point(283, 3);
+            this.BtnCopyFeature.Name = "BtnCopyFeature";
+            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 23);
+            this.BtnCopyFeature.TabIndex = 3;
+            this.BtnCopyFeature.Text = "Copy";
+            this.BtnCopyFeature.UseVisualStyleBackColor = false;
             // 
             // BtnDeleteFeature
             // 
@@ -873,76 +756,38 @@
             this.BtnDeleteFeature.Text = "Delete";
             this.BtnDeleteFeature.UseVisualStyleBackColor = false;
             // 
-            // BtnCopyFeature
+            // ComboFeatures
             // 
-            this.BtnCopyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
-            this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(283, 3);
-            this.BtnCopyFeature.Name = "BtnCopyFeature";
-            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 23);
-            this.BtnCopyFeature.TabIndex = 3;
-            this.BtnCopyFeature.Text = "Copy";
-            this.BtnCopyFeature.UseVisualStyleBackColor = false;
+            this.ComboFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.ComboFeatures, 3);
+            this.ComboFeatures.FormattingEnabled = true;
+            this.ComboFeatures.Location = new System.Drawing.Point(3, 33);
+            this.ComboFeatures.Name = "ComboFeatures";
+            this.ComboFeatures.Size = new System.Drawing.Size(379, 21);
+            this.ComboFeatures.TabIndex = 0;
+            this.ComboFeatures.SelectedIndexChanged += new System.EventHandler(this.ComboFeatures_SelectedIndexChanged);
             // 
-            // tableLayoutPanel3
+            // BtnAddFeature
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.TxtFeatureName, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.LabelCurrentFeatureScore, 1, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(385, 58);
-            this.tableLayoutPanel3.TabIndex = 0;
+            this.BtnAddFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnAddFeature.BackColor = System.Drawing.Color.White;
+            this.BtnAddFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddFeature.Location = new System.Drawing.Point(26, 3);
+            this.BtnAddFeature.Name = "BtnAddFeature";
+            this.BtnAddFeature.Size = new System.Drawing.Size(75, 23);
+            this.BtnAddFeature.TabIndex = 1;
+            this.BtnAddFeature.Text = "Add";
+            this.BtnAddFeature.UseVisualStyleBackColor = false;
             // 
-            // label10
+            // tabPageGeometry
             // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 29);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Name";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 29);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Current Score";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // TxtFeatureName
-            // 
-            this.TxtFeatureName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TxtFeatureName.Location = new System.Drawing.Point(81, 4);
-            this.TxtFeatureName.Name = "TxtFeatureName";
-            this.TxtFeatureName.Size = new System.Drawing.Size(91, 20);
-            this.TxtFeatureName.TabIndex = 2;
-            // 
-            // LabelCurrentFeatureScore
-            // 
-            this.LabelCurrentFeatureScore.AutoSize = true;
-            this.LabelCurrentFeatureScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(81, 29);
-            this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
-            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(301, 29);
-            this.LabelCurrentFeatureScore.TabIndex = 3;
-            this.LabelCurrentFeatureScore.Text = "N/A";
-            this.LabelCurrentFeatureScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tabPageGeometry.BackColor = System.Drawing.Color.Honeydew;
+            this.tabPageGeometry.Controls.Add(this.tableLayoutPanel4);
+            this.tabPageGeometry.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGeometry.Name = "tabPageGeometry";
+            this.tabPageGeometry.Size = new System.Drawing.Size(391, 64);
+            this.tabPageGeometry.TabIndex = 2;
+            this.tabPageGeometry.Text = "Geometry";
             // 
             // tableLayoutPanel4
             // 
@@ -967,6 +812,65 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(391, 64);
             this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // NumFeatureHeight
+            // 
+            this.NumFeatureHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.NumFeatureHeight.Location = new System.Drawing.Point(253, 38);
+            this.NumFeatureHeight.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumFeatureHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumFeatureHeight.Name = "NumFeatureHeight";
+            this.NumFeatureHeight.Size = new System.Drawing.Size(91, 20);
+            this.NumFeatureHeight.TabIndex = 7;
+            this.NumFeatureHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // NumFeatureY
+            // 
+            this.NumFeatureY.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.NumFeatureY.Location = new System.Drawing.Point(46, 38);
+            this.NumFeatureY.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumFeatureY.Name = "NumFeatureY";
+            this.NumFeatureY.Size = new System.Drawing.Size(91, 20);
+            this.NumFeatureY.TabIndex = 6;
+            // 
+            // NumFeatureWidth
+            // 
+            this.NumFeatureWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.NumFeatureWidth.Location = new System.Drawing.Point(253, 6);
+            this.NumFeatureWidth.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumFeatureWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumFeatureWidth.Name = "NumFeatureWidth";
+            this.NumFeatureWidth.Size = new System.Drawing.Size(91, 20);
+            this.NumFeatureWidth.TabIndex = 5;
+            this.NumFeatureWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label14
             // 
@@ -1025,121 +929,15 @@
             this.NumFeatureX.Size = new System.Drawing.Size(91, 20);
             this.NumFeatureX.TabIndex = 4;
             // 
-            // NumFeatureWidth
+            // tabPageScoring
             // 
-            this.NumFeatureWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureWidth.Location = new System.Drawing.Point(253, 6);
-            this.NumFeatureWidth.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeatureWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumFeatureWidth.Name = "NumFeatureWidth";
-            this.NumFeatureWidth.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureWidth.TabIndex = 5;
-            this.NumFeatureWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // NumFeatureY
-            // 
-            this.NumFeatureY.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureY.Location = new System.Drawing.Point(46, 38);
-            this.NumFeatureY.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeatureY.Name = "NumFeatureY";
-            this.NumFeatureY.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureY.TabIndex = 6;
-            // 
-            // NumFeatureHeight
-            // 
-            this.NumFeatureHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureHeight.Location = new System.Drawing.Point(253, 38);
-            this.NumFeatureHeight.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeatureHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumFeatureHeight.Name = "NumFeatureHeight";
-            this.NumFeatureHeight.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureHeight.TabIndex = 7;
-            this.NumFeatureHeight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.label18, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label19, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.NumFeatureThreshold, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.ComboFeatureNullDetection, 1, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(391, 64);
-            this.tableLayoutPanel5.TabIndex = 1;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(3, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(101, 32);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Threshold";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(3, 32);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(101, 32);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Null Detection Type";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // NumFeatureThreshold
-            // 
-            this.NumFeatureThreshold.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureThreshold.Location = new System.Drawing.Point(110, 6);
-            this.NumFeatureThreshold.Name = "NumFeatureThreshold";
-            this.NumFeatureThreshold.Size = new System.Drawing.Size(120, 20);
-            this.NumFeatureThreshold.TabIndex = 4;
-            // 
-            // ComboFeatureNullDetection
-            // 
-            this.ComboFeatureNullDetection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ComboFeatureNullDetection.FormattingEnabled = true;
-            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 37);
-            this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
-            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(121, 21);
-            this.ComboFeatureNullDetection.TabIndex = 5;
+            this.tabPageScoring.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.tabPageScoring.Controls.Add(this.tableLayoutPanel6);
+            this.tabPageScoring.Location = new System.Drawing.Point(4, 22);
+            this.tabPageScoring.Name = "tabPageScoring";
+            this.tabPageScoring.Size = new System.Drawing.Size(391, 64);
+            this.tabPageScoring.TabIndex = 4;
+            this.tabPageScoring.Text = "Scoring";
             // 
             // tableLayoutPanel6
             // 
@@ -1281,6 +1079,224 @@
             this.NumFeaturePass.Size = new System.Drawing.Size(91, 20);
             this.NumFeaturePass.TabIndex = 4;
             // 
+            // tabPageInfo
+            // 
+            this.tabPageInfo.BackColor = System.Drawing.Color.Bisque;
+            this.tabPageInfo.Controls.Add(this.tableLayoutPanel3);
+            this.tabPageInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabPageInfo.Name = "tabPageInfo";
+            this.tabPageInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageInfo.Size = new System.Drawing.Size(391, 64);
+            this.tabPageInfo.TabIndex = 1;
+            this.tabPageInfo.Text = "Information";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.BtnApplyFeatureName, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.TxtFeatureName, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.LabelCurrentFeatureScore, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(385, 58);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // BtnApplyFeatureName
+            // 
+            this.BtnApplyFeatureName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnApplyFeatureName.BackColor = System.Drawing.Color.White;
+            this.BtnApplyFeatureName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnApplyFeatureName.Location = new System.Drawing.Point(307, 3);
+            this.BtnApplyFeatureName.Name = "BtnApplyFeatureName";
+            this.BtnApplyFeatureName.Size = new System.Drawing.Size(75, 23);
+            this.BtnApplyFeatureName.TabIndex = 4;
+            this.BtnApplyFeatureName.Text = "Apply";
+            this.BtnApplyFeatureName.UseVisualStyleBackColor = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(3, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 29);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Name";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(3, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(72, 29);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Current Score";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TxtFeatureName
+            // 
+            this.TxtFeatureName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TxtFeatureName.Location = new System.Drawing.Point(81, 3);
+            this.TxtFeatureName.Name = "TxtFeatureName";
+            this.TxtFeatureName.Size = new System.Drawing.Size(220, 20);
+            this.TxtFeatureName.TabIndex = 2;
+            // 
+            // LabelCurrentFeatureScore
+            // 
+            this.LabelCurrentFeatureScore.AutoSize = true;
+            this.LabelCurrentFeatureScore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(81, 29);
+            this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
+            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(220, 29);
+            this.LabelCurrentFeatureScore.TabIndex = 3;
+            this.LabelCurrentFeatureScore.Text = "N/A";
+            this.LabelCurrentFeatureScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tabPageFilters
+            // 
+            this.tabPageFilters.BackColor = System.Drawing.Color.MistyRose;
+            this.tabPageFilters.Controls.Add(this.tableLayoutPanel5);
+            this.tabPageFilters.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFilters.Name = "tabPageFilters";
+            this.tabPageFilters.Size = new System.Drawing.Size(391, 64);
+            this.tabPageFilters.TabIndex = 3;
+            this.tabPageFilters.Text = "Filters";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label19, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.NumFeatureThreshold, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.ComboFeatureNullDetection, 1, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(391, 64);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(3, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(101, 32);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Threshold";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Location = new System.Drawing.Point(3, 32);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(101, 32);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Null Detection Type";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // NumFeatureThreshold
+            // 
+            this.NumFeatureThreshold.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.NumFeatureThreshold.Location = new System.Drawing.Point(110, 6);
+            this.NumFeatureThreshold.Name = "NumFeatureThreshold";
+            this.NumFeatureThreshold.Size = new System.Drawing.Size(120, 20);
+            this.NumFeatureThreshold.TabIndex = 4;
+            // 
+            // ComboFeatureNullDetection
+            // 
+            this.ComboFeatureNullDetection.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ComboFeatureNullDetection.FormattingEnabled = true;
+            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 37);
+            this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
+            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(121, 21);
+            this.ComboFeatureNullDetection.TabIndex = 5;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.Controls.Add(this.BtnConfirm);
+            this.flowLayoutPanel6.Controls.Add(this.BtnCancel);
+            this.flowLayoutPanel6.Controls.Add(this.BtnResetLogs);
+            this.flowLayoutPanel6.Controls.Add(this.BtnReloadProject);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(9, 455);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(0, 14, 0, 0);
+            this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanel6, 2);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(384, 58);
+            this.flowLayoutPanel6.TabIndex = 8;
+            // 
+            // BtnConfirm
+            // 
+            this.BtnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnConfirm.BackColor = System.Drawing.Color.LightGreen;
+            this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConfirm.Location = new System.Drawing.Point(3, 17);
+            this.BtnConfirm.Name = "BtnConfirm";
+            this.BtnConfirm.Size = new System.Drawing.Size(90, 23);
+            this.BtnConfirm.TabIndex = 5;
+            this.BtnConfirm.Text = "Confirm";
+            this.BtnConfirm.UseVisualStyleBackColor = false;
+            this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel.BackColor = System.Drawing.Color.LightCoral;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Location = new System.Drawing.Point(99, 17);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(90, 23);
+            this.BtnCancel.TabIndex = 4;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnResetLogs
+            // 
+            this.BtnResetLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnResetLogs.BackColor = System.Drawing.Color.Gold;
+            this.BtnResetLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnResetLogs.Location = new System.Drawing.Point(195, 17);
+            this.BtnResetLogs.Name = "BtnResetLogs";
+            this.BtnResetLogs.Size = new System.Drawing.Size(90, 23);
+            this.BtnResetLogs.TabIndex = 6;
+            this.BtnResetLogs.Text = "Reset Logs";
+            this.BtnResetLogs.UseVisualStyleBackColor = false;
+            this.BtnResetLogs.Click += new System.EventHandler(this.BtnResetLogs_Click);
+            // 
+            // BtnReloadProject
+            // 
+            this.BtnReloadProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnReloadProject.BackColor = System.Drawing.Color.LightBlue;
+            this.BtnReloadProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReloadProject.Location = new System.Drawing.Point(291, 17);
+            this.BtnReloadProject.Name = "BtnReloadProject";
+            this.BtnReloadProject.Size = new System.Drawing.Size(90, 23);
+            this.BtnReloadProject.TabIndex = 7;
+            this.BtnReloadProject.Text = "Reload Project";
+            this.BtnReloadProject.UseVisualStyleBackColor = false;
+            this.BtnReloadProject.Click += new System.EventHandler(this.BtnReloadProject_Click);
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1310,7 +1326,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
-            this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumTileColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTileRow)).EndInit();
@@ -1318,28 +1333,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPageFeatures.ResumeLayout(false);
-            this.tabPageInfo.ResumeLayout(false);
-            this.tabPageGeometry.ResumeLayout(false);
-            this.tabPageFilters.ResumeLayout(false);
-            this.tabPageScoring.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
+            this.tabPageGeometry.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).EndInit();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).EndInit();
+            this.tabPageScoring.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFailTolerance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePassTolerance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePass)).EndInit();
+            this.tabPageInfo.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tabPageFilters.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).EndInit();
+            this.flowLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1425,5 +1441,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.NumericUpDown NumFeaturePass;
+        private System.Windows.Forms.Button BtnApplyFeatureName;
     }
 }
