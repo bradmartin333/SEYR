@@ -154,14 +154,24 @@ namespace SEYR.Session
             }
         }
 
+        private Feature _ActiveFeature = null;
+        public Feature ActiveFeature
+        {
+            get => _ActiveFeature;
+            set
+            {
+                _ActiveFeature = value;
+            }
+        }
+
         private readonly Bitmap InputImage;
         private bool FormReady = false;
         private bool ClickGrid = false;
-        private Feature ActiveFeature = null;
 
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
+            ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             InputImage = bitmap;
             PbxGrid.BackgroundImage = bitmap;
             PbxGrid.MouseUp += PbxGrid_MouseUp;
@@ -177,7 +187,7 @@ namespace SEYR.Session
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
             FormReady = true;
-            SetupFeatureUI();
+            SetupFeatureUI(true);
             UpdateGrid();
             UpdateTile();
         }
@@ -285,10 +295,11 @@ namespace SEYR.Session
 
         #region Feature Management
 
-        private void SetupFeatureUI()
+        private void SetupFeatureUI(bool setNull)
         {
+            ComboFeatures.Items.Clear();
             ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
-            ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
+            ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
         }
 
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
@@ -298,13 +309,90 @@ namespace SEYR.Session
             NumFeatureY.Value = ActiveFeature.Rectangle.Y;
             NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
             NumFeatureHeight.Value = ActiveFeature.Rectangle.Height;
-            NumFeaturePass.Value = (decimal)ActiveFeature.PassScore;
-            NumFeaturePassTolerance.Value = (decimal)ActiveFeature.PassTolerance;
-            NumFeatureFail.Value = (decimal)ActiveFeature.FailScore;
-            NumFeatureFailTolerance.Value = (decimal)ActiveFeature.FailTolerance;
             TxtFeatureName.Text = ActiveFeature.Name;
             NumFeatureThreshold.Value = (decimal)ActiveFeature.Threshold;
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
+        }
+
+        private void AddFeature(Feature feature)
+        {
+            Features.Add(feature);
+            SetupFeatureUI(false);
+        }
+
+        private void BtnAddFeature_Click(object sender, EventArgs e)
+        {
+            Feature feature = new Feature();
+            AddFeature(feature);
+        }
+
+        private void BtnDeleteFeature_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Features.RemoveAt(ComboFeatures.SelectedIndex);
+            SetupFeatureUI(true);
+            ComboFeatures.Text = "";
+        }
+
+        private void BtnCopyFeature_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Feature feature = ActiveFeature.Clone();
+            AddFeature(feature);
+        }
+
+        private void NumFeatureX_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Rectangle R = ActiveFeature.Rectangle;
+            ActiveFeature.Rectangle = new Rectangle((int)NumFeatureX.Value, R.Y, R.Width, R.Height);
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+        }
+
+        private void NumFeatureY_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Rectangle R = ActiveFeature.Rectangle;
+            ActiveFeature.Rectangle = new Rectangle(R.X, (int)NumFeatureY.Value, R.Width, R.Height);
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+        }
+
+        private void NumFeatureWidth_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Rectangle R = ActiveFeature.Rectangle;
+            ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, (int)NumFeatureWidth.Value, R.Height);
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+        }
+
+        private void NumFeatureHeight_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            Rectangle R = ActiveFeature.Rectangle;
+            ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, R.Width, (int)NumFeatureHeight.Value);
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+        }
+
+        private void BtnApplyFeatureName_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            ActiveFeature.Name = TxtFeatureName.Text;
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            SetupFeatureUI(false);
+        }
+
+        private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            ActiveFeature.Threshold = (float)NumFeatureThreshold.Value;
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+        }
+
+        private void ComboFeatureNullDetection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            ActiveFeature.NullDetection = (Feature.NullDetectionTypes)ComboFeatureNullDetection.SelectedIndex;
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
         }
 
         #endregion

@@ -74,16 +74,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.NumFeatureX = new System.Windows.Forms.NumericUpDown();
-            this.tabPageScoring = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.NumFeatureFailTolerance = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureFail = new System.Windows.Forms.NumericUpDown();
-            this.NumFeaturePassTolerance = new System.Windows.Forms.NumericUpDown();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.NumFeaturePass = new System.Windows.Forms.NumericUpDown();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnApplyFeatureName = new System.Windows.Forms.Button();
@@ -135,12 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).BeginInit();
-            this.tabPageScoring.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFailTolerance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePassTolerance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePass)).BeginInit();
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPageFilters.SuspendLayout();
@@ -581,7 +565,6 @@
             // 
             this.tabControl.Controls.Add(this.tabPageFeatures);
             this.tabControl.Controls.Add(this.tabPageGeometry);
-            this.tabControl.Controls.Add(this.tabPageScoring);
             this.tabControl.Controls.Add(this.tabPageInfo);
             this.tabControl.Controls.Add(this.tabPageFilters);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -633,6 +616,7 @@
             this.BtnCopyFeature.TabIndex = 3;
             this.BtnCopyFeature.Text = "Copy";
             this.BtnCopyFeature.UseVisualStyleBackColor = false;
+            this.BtnCopyFeature.Click += new System.EventHandler(this.BtnCopyFeature_Click);
             // 
             // BtnDeleteFeature
             // 
@@ -645,6 +629,7 @@
             this.BtnDeleteFeature.TabIndex = 2;
             this.BtnDeleteFeature.Text = "Delete";
             this.BtnDeleteFeature.UseVisualStyleBackColor = false;
+            this.BtnDeleteFeature.Click += new System.EventHandler(this.BtnDeleteFeature_Click);
             // 
             // ComboFeatures
             // 
@@ -668,6 +653,7 @@
             this.BtnAddFeature.TabIndex = 1;
             this.BtnAddFeature.Text = "Add";
             this.BtnAddFeature.UseVisualStyleBackColor = false;
+            this.BtnAddFeature.Click += new System.EventHandler(this.BtnAddFeature_Click);
             // 
             // tabPageGeometry
             // 
@@ -725,6 +711,7 @@
             0,
             0,
             0});
+            this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.NumFeatureHeight_ValueChanged);
             // 
             // NumFeatureY
             // 
@@ -738,6 +725,7 @@
             this.NumFeatureY.Name = "NumFeatureY";
             this.NumFeatureY.Size = new System.Drawing.Size(91, 20);
             this.NumFeatureY.TabIndex = 6;
+            this.NumFeatureY.ValueChanged += new System.EventHandler(this.NumFeatureY_ValueChanged);
             // 
             // NumFeatureWidth
             // 
@@ -761,6 +749,7 @@
             0,
             0,
             0});
+            this.NumFeatureWidth.ValueChanged += new System.EventHandler(this.NumFeatureWidth_ValueChanged);
             // 
             // label14
             // 
@@ -818,156 +807,7 @@
             this.NumFeatureX.Name = "NumFeatureX";
             this.NumFeatureX.Size = new System.Drawing.Size(91, 20);
             this.NumFeatureX.TabIndex = 4;
-            // 
-            // tabPageScoring
-            // 
-            this.tabPageScoring.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.tabPageScoring.Controls.Add(this.tableLayoutPanel6);
-            this.tabPageScoring.Location = new System.Drawing.Point(4, 22);
-            this.tabPageScoring.Name = "tabPageScoring";
-            this.tabPageScoring.Size = new System.Drawing.Size(428, 96);
-            this.tabPageScoring.TabIndex = 4;
-            this.tabPageScoring.Text = "Scoring";
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 4;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.NumFeatureFailTolerance, 3, 1);
-            this.tableLayoutPanel6.Controls.Add(this.NumFeatureFail, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.NumFeaturePassTolerance, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label20, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label21, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.label22, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label23, 2, 1);
-            this.tableLayoutPanel6.Controls.Add(this.NumFeaturePass, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(428, 96);
-            this.tableLayoutPanel6.TabIndex = 1;
-            // 
-            // NumFeatureFailTolerance
-            // 
-            this.NumFeatureFailTolerance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureFailTolerance.Location = new System.Drawing.Point(278, 62);
-            this.NumFeatureFailTolerance.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeatureFailTolerance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumFeatureFailTolerance.Name = "NumFeatureFailTolerance";
-            this.NumFeatureFailTolerance.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureFailTolerance.TabIndex = 7;
-            this.NumFeatureFailTolerance.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // NumFeatureFail
-            // 
-            this.NumFeatureFail.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureFail.Location = new System.Drawing.Point(39, 62);
-            this.NumFeatureFail.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeatureFail.Name = "NumFeatureFail";
-            this.NumFeatureFail.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureFail.TabIndex = 6;
-            // 
-            // NumFeaturePassTolerance
-            // 
-            this.NumFeaturePassTolerance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeaturePassTolerance.Location = new System.Drawing.Point(278, 14);
-            this.NumFeaturePassTolerance.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeaturePassTolerance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumFeaturePassTolerance.Name = "NumFeaturePassTolerance";
-            this.NumFeaturePassTolerance.Size = new System.Drawing.Size(91, 20);
-            this.NumFeaturePassTolerance.TabIndex = 5;
-            this.NumFeaturePassTolerance.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(3, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(30, 48);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Pass";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(3, 48);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(30, 48);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "Fail";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(191, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(81, 48);
-            this.label22.TabIndex = 2;
-            this.label22.Text = "Pass Tolerance";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label23.Location = new System.Drawing.Point(191, 48);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(81, 48);
-            this.label23.TabIndex = 3;
-            this.label23.Text = "Fail Tolerance";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // NumFeaturePass
-            // 
-            this.NumFeaturePass.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeaturePass.Location = new System.Drawing.Point(39, 14);
-            this.NumFeaturePass.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumFeaturePass.Name = "NumFeaturePass";
-            this.NumFeaturePass.Size = new System.Drawing.Size(91, 20);
-            this.NumFeaturePass.TabIndex = 4;
+            this.NumFeatureX.ValueChanged += new System.EventHandler(this.NumFeatureX_ValueChanged);
             // 
             // tabPageInfo
             // 
@@ -1011,6 +851,7 @@
             this.BtnApplyFeatureName.TabIndex = 4;
             this.BtnApplyFeatureName.Text = "Apply";
             this.BtnApplyFeatureName.UseVisualStyleBackColor = false;
+            this.BtnApplyFeatureName.Click += new System.EventHandler(this.BtnApplyFeatureName_Click);
             // 
             // label10
             // 
@@ -1110,6 +951,7 @@
             this.NumFeatureThreshold.Name = "NumFeatureThreshold";
             this.NumFeatureThreshold.Size = new System.Drawing.Size(120, 20);
             this.NumFeatureThreshold.TabIndex = 4;
+            this.NumFeatureThreshold.ValueChanged += new System.EventHandler(this.NumFeatureThreshold_ValueChanged);
             // 
             // ComboFeatureNullDetection
             // 
@@ -1119,6 +961,7 @@
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
             this.ComboFeatureNullDetection.Size = new System.Drawing.Size(121, 21);
             this.ComboFeatureNullDetection.TabIndex = 5;
+            this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
             // 
             // flowLayoutPanel1
             // 
@@ -1251,14 +1094,14 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
             // ClickGridToolStripMenuItem
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
@@ -1304,13 +1147,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).EndInit();
-            this.tabPageScoring.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFailTolerance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureFail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePassTolerance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeaturePass)).EndInit();
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -1378,7 +1214,6 @@
         private System.Windows.Forms.Label LabelCurrentFeatureScore;
         private System.Windows.Forms.TabPage tabPageGeometry;
         private System.Windows.Forms.TabPage tabPageFilters;
-        private System.Windows.Forms.TabPage tabPageScoring;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.NumericUpDown NumFeatureHeight;
         private System.Windows.Forms.NumericUpDown NumFeatureY;
@@ -1393,15 +1228,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown NumFeatureThreshold;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.NumericUpDown NumFeatureFailTolerance;
-        private System.Windows.Forms.NumericUpDown NumFeatureFail;
-        private System.Windows.Forms.NumericUpDown NumFeaturePassTolerance;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.NumericUpDown NumFeaturePass;
         private System.Windows.Forms.Button BtnApplyFeatureName;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ConfirmToolStripMenuItem;

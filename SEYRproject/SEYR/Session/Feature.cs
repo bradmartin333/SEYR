@@ -24,19 +24,26 @@ namespace SEYR.Session
         [XmlElement("Name")]
         public string Name { get; set; }
         [XmlElement("Rectangle")]
-        public Rectangle Rectangle { get; set; }
-        [XmlElement("PassScore")]
-        public float PassScore { get; set; } = 100f;
-        [XmlElement("PassTolerance")]
-        public float PassTolerance { get; set; } = 50f;
-        [XmlElement("FailScore")]
-        public float FailScore { get; set; } = 0f;
-        [XmlElement("FailTolerance")]
-        public float FailTolerance { get; set; } = 20f;
+        public Rectangle Rectangle { get; set; } = new Rectangle(10, 10, 10, 10);
         [XmlElement("Threshold")]
         public float Threshold { get; set; } = 20f;
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
+
+        public Feature()
+        {
+            Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(); // Random string
+        }
+        public Feature Clone(bool userClone = false)
+        {
+            return new Feature()
+            {
+                Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(), // Random string
+                Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
+                Threshold = Threshold,
+                NullDetection = NullDetection,
+            };
+        }
 
         public static string[] GetDisplayNames()
         {
