@@ -38,13 +38,14 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp">
         /// Filtered image
         /// </param>
-        /// <param name="singleTile">
+        /// <param name="desiredTile">
         /// Desired tile preview for Composer
         /// </param>
+        /// <param name="desiredFeature"></param>
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point singleTile, string featureName = "")
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, Feature desiredFeature = null)
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
@@ -62,18 +63,32 @@ namespace SEYR.ImageProcessing
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
                         {
-                            g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
+                            if (i == desiredTile.X && j == desiredTile.Y && desiredFeature != null)
+                            {
+                                ImageAttributes imageAttr = new ImageAttributes();
+                                imageAttr.SetThreshold(desiredFeature.Threshold);
+                                g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size),
+                                    cropRect.X, cropRect.Y, cropRect.Width, cropRect.Height, 
+                                    GraphicsUnit.Pixel, imageAttr);
+                            }
+                            else
+                                g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
                             foreach (Feature feature in Channel.Project.Features)
                             {
                                 float entropy = await Task.Run(() => AnalyzeData(ref crop, feature));
                                 feature.AddScore(entropy);
                                 g2.FillRectangle(new SolidBrush(ColorFromHSV(entropy, feature.GetMinScore(), feature.GetMaxScore(), 100)), feature.GetGeometry());
-                                Color border = (feature.Name == featureName) ? Color.HotPink : Color.Black;
-                                g2.DrawRectangle(new Pen(border, (float)(Channel.Project.ScaledPixelsPerMicron)), feature.GetGeometry());
-                                outputData += $"{feature.Name}\t{entropy}\n";
+                                Color border = (desiredFeature != null && feature.Name == desiredFeature.Name) ? Color.HotPink : Color.Black;
+                                g2.DrawRectangle(new Pen(border, (float)Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                                outputData += $"{desiredTile.X + 1}\t{Channel.Project.Rows - desiredTile.Y}\t{feature.Name}\t{entropy}\n";
                             }
                         }
-                        if (i == singleTile.X && j == singleTile.Y) return crop;
+                        if (i == desiredTile.X && j == desiredTile.Y)
+                        {
+                            Channel.DebugStream.Write($"Return tile {desiredTile.X + 1}, {Channel.Project.Rows - desiredTile.Y} and feature " +
+                                $"{(desiredFeature != null ? desiredFeature.Name : "null")}");
+                            return crop;
+                        }
                         g.DrawImage(crop, thisX, thisY);
                     }   
                 }
@@ -164,9 +179,9 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, string featureName)
+        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature)
         {
-            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), featureName);
+            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature);
         }
 
         #endregion

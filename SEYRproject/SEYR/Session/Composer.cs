@@ -138,8 +138,7 @@ namespace SEYR.Session
             set
             {
                 _TileRow = value;
-                UpdateGrid();
-                UpdateTile();
+                InitializeImages();
             }
         }
         private int _TileColumn = 1;
@@ -149,8 +148,7 @@ namespace SEYR.Session
             set
             {
                 _TileColumn = value;
-                UpdateGrid();
-                UpdateTile();
+                InitializeImages();
             }
         }
 
@@ -166,7 +164,9 @@ namespace SEYR.Session
             InputImage = bitmap;
             InitializeHandlers();
             InitializeUI();
-            InitializeFeaturesAndImages();
+            FormReady = true;
+            SetupFeatureUI(true);
+            InitializeImages();
         }
 
         private void InitializeHandlers()
@@ -190,10 +190,8 @@ namespace SEYR.Session
             NumRows.Value = Rows;
         }
 
-        private void InitializeFeaturesAndImages()
+        private void InitializeImages()
         {
-            FormReady = true;
-            SetupFeatureUI(true);
             while (!FormReady) Application.DoEvents();
             Channel.DebugStream.Write($"Initializing Grid");
             UpdateGrid();
@@ -226,8 +224,7 @@ namespace SEYR.Session
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
-                string featureName = (ActiveFeature == null) ? "" : ActiveFeature.Name;
-                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, featureName);
+                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature);
                 PbxTile.BackgroundImage = tile;
             }
             catch (Exception ex)
@@ -329,14 +326,16 @@ namespace SEYR.Session
             ComboFeatures.Items.Clear();
             ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
             ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
+            FormReady = true;
             if (setNull)
             {
                 ActiveFeature = null;
                 ComboFeatures.Text = "";
+                tabControl.SelectedIndex = 0;
+                FormReady = true;
                 UpdateTile();
             }
             Channel.DebugStream.Write($"Load Feature UI");
-            FormReady = true;
         }
 
         private void AddFeature(Feature feature)
@@ -347,7 +346,7 @@ namespace SEYR.Session
 
         private void ApplyFeature()
         {
-            if (LoadingFeature) return;
+            if (LoadingFeature || !FormReady) return;
             Features[ComboFeatures.SelectedIndex] = ActiveFeature;
             Channel.DebugStream.Write($"Apply {ActiveFeature.Name}");
             UpdateTile();
@@ -507,12 +506,12 @@ namespace SEYR.Session
             Rows = (int)NumRows.Value;
         }
 
-        private void NumTileColumn_ValueChanged_1(object sender, EventArgs e)
+        private void NumTileColumn_ValueChanged(object sender, EventArgs e)
         {
             TileColumn = (int)NumTileColumn.Value;
         }
 
-        private void NumTileRow_ValueChanged_1(object sender, EventArgs e)
+        private void NumTileRow_ValueChanged(object sender, EventArgs e)
         {
             TileRow = (int)NumTileRow.Value;
         }

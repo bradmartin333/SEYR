@@ -81,6 +81,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnShowViewer.Enabled = true;
+            BtnClearLogs.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             
             NumFrame.Maximum = IMGS.Length - 1;
