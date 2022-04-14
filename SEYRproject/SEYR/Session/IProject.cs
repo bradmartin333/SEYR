@@ -12,5 +12,6 @@
         float Scaling { get; set; }
         int SizeX { get; set; }
         int SizeY { get; set; }
+        System.Collections.Generic.List<Feature> Features { get; set; }
     }
 }

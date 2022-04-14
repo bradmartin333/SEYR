@@ -1,14 +1,10 @@
 ﻿using SEYR.Session;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SEYR.ImageProcessing
 {
@@ -92,12 +88,6 @@ namespace SEYR.ImageProcessing
         /// <param name="stride">
         /// Stride of bitmap data
         /// </param>
-        /// <param name="scanSize">
-        /// ROI within cropped region
-        /// </param>
-        /// <param name="hotspotSize">
-        /// Size of ROI within ROI
-        /// </param>
         /// <returns></returns>
         private static (Bitmap, float) AnalyzeData(byte[] data, Rectangle tile, int stride)
         {
@@ -127,15 +117,6 @@ namespace SEYR.ImageProcessing
             Marshal.Copy(croppedBytes, 0, croppedData.Scan0, croppedBytes.Length);
             croppedBitmap.UnlockBits(croppedData);
             return (croppedBitmap, 0f);
-        }
-
-        private static List<Point3D> MakeHotspots(List<int>[,] data, int cols, int rows, Size size)
-        {
-            List<Point3D> hotspots = new List<Point3D>();
-            for (int i = 0; i < cols; i++)
-                for (int j = 0; j < rows; j++)
-                    hotspots.Add(new Point3D() { X = i, Y = j, Z = CalculateShannonEntropy(data[i, j].ToArray(), size) });
-            return hotspots;
         }
 
         private static float CalculateShannonEntropy(int[] data, Size size)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Xml.Serialization;
 
@@ -37,6 +38,8 @@ namespace SEYR.Session
         public int SizeX { get; set; } = 10;
         [XmlElement("SizeY")]
         public int SizeY { get; set; } = 10;
+        [XmlArray("Features")]
+        public List<Feature> Features { get; set; } = new List<Feature>();
 
         public Rectangle GetGeometry()
         {

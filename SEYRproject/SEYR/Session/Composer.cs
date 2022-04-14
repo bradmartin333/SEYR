@@ -1,5 +1,6 @@
 ﻿using SEYR.ImageProcessing;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -133,6 +134,14 @@ namespace SEYR.Session
             }
         }
 
+        public List<Feature> Features {
+            get => Channel.Project.Features;
+            set
+            {
+                Channel.Project.Features = value;
+            }
+        }
+
         #endregion
 
         private readonly Bitmap InputImage;
@@ -181,6 +190,16 @@ namespace SEYR.Session
             UpdateFilters();
             UpdateGrid();
             UpdateTile();
+
+            Features.Add(new Feature()
+            {
+                Name = "test",
+            });
+            Features.Add(new Feature()
+            {
+                Name = "test",
+                PassScore = 99f,
+            });
         }
 
         private void UpdateFilters()

@@ -117,7 +117,7 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel9, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel9, 2, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -661,9 +661,9 @@
             this.flowLayoutPanel9.Controls.Add(this.NumTileColumn);
             this.flowLayoutPanel9.Controls.Add(this.label9);
             this.flowLayoutPanel9.Controls.Add(this.NumTileRow);
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(856, 388);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(856, 484);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(304, 26);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(304, 29);
             this.flowLayoutPanel9.TabIndex = 12;
             // 
             // label8
