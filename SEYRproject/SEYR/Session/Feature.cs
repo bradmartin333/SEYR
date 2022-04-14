@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace SEYR.Session
@@ -29,6 +30,8 @@ namespace SEYR.Session
         public float Threshold { get; set; } = 20f;
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
+
+        private List<float> Scores = new List<float>();
 
         public Feature()
         {
@@ -69,6 +72,26 @@ namespace SEYR.Session
                     displaynames.Add(fd.Name);
             }
             return displaynames.ToArray();
+        }
+
+        internal void ResetScore()
+        {
+            Scores.Clear();
+        }
+
+        internal void AddScore(float score)
+        {
+            Scores.Add(score);
+        }
+
+        internal double GetMinScore()
+        {
+            return Scores.Min() - 1;
+        }
+
+        internal double GetMaxScore()
+        {
+            return Scores.Max() + 1;
         }
     }
 }

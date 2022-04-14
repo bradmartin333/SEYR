@@ -98,6 +98,8 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnResetScoreHistory = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -844,20 +846,23 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.label20, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.TxtFeatureName, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.LabelCurrentFeatureScore, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.BtnResetScoreHistory, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 114);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -867,7 +872,7 @@
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(3, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 57);
+            this.label10.Size = new System.Drawing.Size(72, 37);
             this.label10.TabIndex = 0;
             this.label10.Text = "Name";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -876,9 +881,9 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 57);
+            this.label11.Location = new System.Drawing.Point(3, 37);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 57);
+            this.label11.Size = new System.Drawing.Size(72, 37);
             this.label11.TabIndex = 1;
             this.label11.Text = "Current Score";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -886,7 +891,7 @@
             // TxtFeatureName
             // 
             this.TxtFeatureName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TxtFeatureName.Location = new System.Drawing.Point(81, 18);
+            this.TxtFeatureName.Location = new System.Drawing.Point(81, 8);
             this.TxtFeatureName.Name = "TxtFeatureName";
             this.TxtFeatureName.Size = new System.Drawing.Size(91, 20);
             this.TxtFeatureName.TabIndex = 2;
@@ -896,9 +901,9 @@
             // 
             this.LabelCurrentFeatureScore.AutoSize = true;
             this.LabelCurrentFeatureScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(81, 57);
+            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(81, 37);
             this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
-            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(338, 57);
+            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(338, 37);
             this.LabelCurrentFeatureScore.TabIndex = 3;
             this.LabelCurrentFeatureScore.Text = "N/A";
             this.LabelCurrentFeatureScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1115,6 +1120,30 @@
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
+            // BtnResetScoreHistory
+            // 
+            this.BtnResetScoreHistory.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnResetScoreHistory.BackColor = System.Drawing.Color.White;
+            this.BtnResetScoreHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnResetScoreHistory.Location = new System.Drawing.Point(81, 82);
+            this.BtnResetScoreHistory.Name = "BtnResetScoreHistory";
+            this.BtnResetScoreHistory.Size = new System.Drawing.Size(75, 23);
+            this.BtnResetScoreHistory.TabIndex = 4;
+            this.BtnResetScoreHistory.Text = "Reset";
+            this.BtnResetScoreHistory.UseVisualStyleBackColor = false;
+            this.BtnResetScoreHistory.Click += new System.EventHandler(this.BtnResetScoreHistory_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label20.Location = new System.Drawing.Point(3, 74);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(72, 40);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Score History";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1246,5 +1275,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ApplyDeskewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClickGridToolStripMenuItem;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button BtnResetScoreHistory;
     }
 }

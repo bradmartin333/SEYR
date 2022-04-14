@@ -1,5 +1,6 @@
 ﻿using SEYR.Session;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -43,7 +44,7 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point singleTile)
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point singleTile, string featureName = "")
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
@@ -64,8 +65,11 @@ namespace SEYR.ImageProcessing
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
                             foreach (Feature feature in Channel.Project.Features)
                             {
-                                g2.DrawRectangle(new Pen(Color.Black, (float)(Channel.Project.ScaledPixelsPerMicron)), feature.GetGeometry());
-                                float entropy = await Task.Run(() => AnalyzeData(ref crop));
+                                float entropy = await Task.Run(() => AnalyzeData(ref crop, feature));
+                                feature.AddScore(entropy);
+                                g2.FillRectangle(new SolidBrush(ColorFromHSV(entropy, feature.GetMinScore(), feature.GetMaxScore(), 100)), feature.GetGeometry());
+                                Color border = (feature.Name == featureName) ? Color.HotPink : Color.Black;
+                                g2.DrawRectangle(new Pen(border, (float)(Channel.Project.ScaledPixelsPerMicron)), feature.GetGeometry());
                                 outputData += $"{feature.Name}\t{entropy}\n";
                             }
                         }
@@ -79,36 +83,38 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        private static float AnalyzeData(ref Bitmap bmp)
+        private static float AnalyzeData(ref Bitmap bmp, Feature feature)
         {
-            //foreach (Feature feature in Channel.Project.Features)
-            //{
-            //    if (feature == null) continue;
-            //    Bitmap crop = new Bitmap(feature.Rectangle.Width, feature.Rectangle.Height);
-            //    using (Graphics g = Graphics.FromImage(crop))
-            //        g.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), feature.Rectangle, GraphicsUnit.Pixel);
-            //    using (Graphics g = Graphics.FromImage(bmp))
-            //        g.FillRectangle(Brushes.Black, feature.Rectangle);
-            //}
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
+            IntPtr ptr = bmpData.Scan0;
+            int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
+            byte[] rgbValues = new byte[bytes];
+            Marshal.Copy(ptr, rgbValues, 0, bytes);
 
-            //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            //BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-            //IntPtr ptr = bmpData.Scan0;
-            //int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
-            //byte[] rgbValues = new byte[bytes];
-            //Marshal.Copy(ptr, rgbValues, 0, bytes);
+            byte threshold = (byte)(255 * feature.Threshold);
+            List<byte> rVals = new List<byte>();
+            List<byte> rtVals = new List<byte>();
+            for (int counter = 2; counter < rgbValues.Length; counter += 3)
+            {
+                byte r =rgbValues[counter];
+                byte rt = (byte)(r > threshold ? 1 : 0);
+                rVals.Add(r);
+                rtVals.Add(rt);
+            }
 
-            //byte threshold = (byte)(255 * 1);
-            //for (int counter = 2; counter < rgbValues.Length; counter += 3)
-            //{
-            //    byte r = rgbValues[counter];
-            //}
+            bmp.UnlockBits(bmpData);
 
-            //bmp.UnlockBits(bmpData);
-            return 0;
+            int blackVals = rtVals.Where(x => x == 0).Count();
+            int whiteVals = rtVals.Where(x => x == 1).Count();
+            float score = (float)Math.Round(CalculateShannonEntropy(rVals.ToArray(), rect.Size) + (whiteVals / 2), 3);
+            if (blackVals < 10 || whiteVals < 10)
+                return 0f; // Look at feature params here
+            else
+                return score;
         }
 
-        private static float CalculateShannonEntropy(int[] data, Size size)
+        private static float CalculateShannonEntropy(byte[] data, Size size)
         {
             float entropy = 0; // Calculate Shannon entropy
             foreach (var g in data.GroupBy(i => i)) // Turn list into an array of counts
@@ -154,9 +160,9 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
+        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, string featureName)
         {
-            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow));
+            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), featureName);
         }
 
         #endregion
@@ -195,7 +201,7 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, double value = 1, double saturation = 1)
+        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, byte opacity, double value = 1, double saturation = 1)
         {
             double toLow = 255;
             double toHigh = 0;
@@ -210,17 +216,17 @@ namespace SEYR.ImageProcessing
             int q = Convert.ToInt32(value * (1 - (f * saturation)));
             int t = Convert.ToInt32(value * (1 - ((1 - f) * saturation)));
             if (hi == 0)
-                return Color.FromArgb(255, v, t, p);
+                return Color.FromArgb(opacity, v, t, p);
             else if (hi == 1)
-                return Color.FromArgb(255, q, v, p);
+                return Color.FromArgb(opacity, q, v, p);
             else if (hi == 2)
-                return Color.FromArgb(255, p, v, t);
+                return Color.FromArgb(opacity, p, v, t);
             else if (hi == 3)
-                return Color.FromArgb(255, p, q, v);
+                return Color.FromArgb(opacity, p, q, v);
             else if (hi == 4)
-                return Color.FromArgb(255, t, p, v);
+                return Color.FromArgb(opacity, t, p, v);
             else
-                return Color.FromArgb(255, v, p, q);
+                return Color.FromArgb(opacity, v, p, q);
         }
 
         #endregion
