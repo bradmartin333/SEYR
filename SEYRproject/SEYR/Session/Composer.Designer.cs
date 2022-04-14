@@ -733,7 +733,7 @@
             0,
             0,
             0});
-            this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.NumFeatureHeight_ValueChanged);
+            this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
             // NumFeatureY
             // 
@@ -747,7 +747,7 @@
             this.NumFeatureY.Name = "NumFeatureY";
             this.NumFeatureY.Size = new System.Drawing.Size(91, 20);
             this.NumFeatureY.TabIndex = 6;
-            this.NumFeatureY.ValueChanged += new System.EventHandler(this.NumFeatureY_ValueChanged);
+            this.NumFeatureY.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
             // NumFeatureWidth
             // 
@@ -771,7 +771,7 @@
             0,
             0,
             0});
-            this.NumFeatureWidth.ValueChanged += new System.EventHandler(this.NumFeatureWidth_ValueChanged);
+            this.NumFeatureWidth.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
             // label14
             // 
@@ -829,7 +829,7 @@
             this.NumFeatureX.Name = "NumFeatureX";
             this.NumFeatureX.Size = new System.Drawing.Size(91, 20);
             this.NumFeatureX.TabIndex = 4;
-            this.NumFeatureX.ValueChanged += new System.EventHandler(this.NumFeatureX_ValueChanged);
+            this.NumFeatureX.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
             // tabPageInfo
             // 

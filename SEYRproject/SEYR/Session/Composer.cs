@@ -221,6 +221,7 @@ namespace SEYR.Session
         private void PbxTile_MouseUp(object sender, MouseEventArgs e)
         {
             if (!ClickGrid) return;
+            LoadingFeature = true;
             Point point = ZoomMousePos(e.Location, PbxTile.Size, PbxTile.BackgroundImage.Size);
             if (ActiveFeature != null)
             {
@@ -229,6 +230,8 @@ namespace SEYR.Session
             }
             ClickGrid = false;
             ToolsToolStripMenuItem.Text = "Tools";
+            LoadingFeature = false;
+            UpdateRectangle();
         }
 
         private void PbxGrid_MouseUp(object sender, MouseEventArgs e)
@@ -292,6 +295,7 @@ namespace SEYR.Session
             ComboFeatures.Items.Clear();
             ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
             ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
+            Channel.DebugStream.Write($"Load Feature UI");
         }
 
         private void AddFeature(Feature feature)
@@ -304,19 +308,21 @@ namespace SEYR.Session
         {
             if (LoadingFeature) return;
             Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            Channel.DebugStream.Write($"Apply {ActiveFeature.Name}");
             UpdateTile();
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
+            Channel.DebugStream.Write($"User Apply {ActiveFeature.Name}");
         }
 
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadingFeature = true;
             ActiveFeature = Features[ComboFeatures.SelectedIndex];
-            Channel.DebugStream.Write($"Editing Feature: {ActiveFeature.Name}");
+            Channel.DebugStream.Write($"Editing {ActiveFeature.Name}");
             NumFeatureX.Value = ActiveFeature.Rectangle.X;
             NumFeatureY.Value = ActiveFeature.Rectangle.Y;
             NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
@@ -332,11 +338,13 @@ namespace SEYR.Session
         {
             Feature feature = new Feature();
             AddFeature(feature);
+            Channel.DebugStream.Write($"{feature.Name} Added");
         }
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Deleted");
             Features.RemoveAt(ComboFeatures.SelectedIndex);
             SetupFeatureUI(true);
             ComboFeatures.Text = "";
@@ -347,66 +355,54 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null) return;
             Feature feature = ActiveFeature.Clone();
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Copied To {feature.Name}");
             AddFeature(feature);
             SetupFeatureUI(false);
         }
 
-        private void NumFeatureX_ValueChanged(object sender, EventArgs e)
+        private void FeatureRectangle_ValueChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
-            Rectangle R = ActiveFeature.Rectangle;
-            ActiveFeature.Rectangle = new Rectangle((int)NumFeatureX.Value, R.Y, R.Width, R.Height);
-            ApplyFeature();
+            UpdateRectangle();
         }
 
-        private void NumFeatureY_ValueChanged(object sender, EventArgs e)
+        private void UpdateRectangle()
         {
-            if (ActiveFeature == null) return;
-            Rectangle R = ActiveFeature.Rectangle;
-            ActiveFeature.Rectangle = new Rectangle(R.X, (int)NumFeatureY.Value, R.Width, R.Height);
-            ApplyFeature();
-        }
-
-        private void NumFeatureWidth_ValueChanged(object sender, EventArgs e)
-        {
-            if (ActiveFeature == null) return;
-            Rectangle R = ActiveFeature.Rectangle;
-            ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, (int)NumFeatureWidth.Value, R.Height);
-            ApplyFeature();
-        }
-
-        private void NumFeatureHeight_ValueChanged(object sender, EventArgs e)
-        {
-            if (ActiveFeature == null) return;
-            Rectangle R = ActiveFeature.Rectangle;
-            ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, R.Width, (int)NumFeatureHeight.Value);
+            if (ActiveFeature == null || LoadingFeature) return;
+            ActiveFeature.Rectangle = new Rectangle((int)NumFeatureX.Value, (int)NumFeatureY.Value, (int)NumFeatureWidth.Value, (int)NumFeatureHeight.Value);
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Rectangle Changed");
             ApplyFeature();
         }
 
         private void TxtFeatureName_TextChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || LoadingFeature) return;
             if (Features.Where(x => x.Name != ActiveFeature.Name).Select(x => x.Name).Contains(TxtFeatureName.Text))
                 TxtFeatureName.BackColor = Color.LightCoral;
             else
             {
                 TxtFeatureName.BackColor = Color.White;
+                Channel.DebugStream.Write($"{ActiveFeature.Name} Renamed To {TxtFeatureName.Text}");
                 ActiveFeature.Name = TxtFeatureName.Text;
-                ApplyFeature();
+                int lastIndex = ComboFeatures.SelectedIndex;
+                ComboFeatures.Items.Clear();
+                ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
+                ComboFeatures.SelectedIndex = lastIndex;
             }    
         }
 
         private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = (float)NumFeatureThreshold.Value;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
             ApplyFeature();
         }
 
         private void ComboFeatureNullDetection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.NullDetection = (Feature.NullDetectionTypes)ComboFeatureNullDetection.SelectedIndex;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Detection Changed");
             ApplyFeature();
         }
 
