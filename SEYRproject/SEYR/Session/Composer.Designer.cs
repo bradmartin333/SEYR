@@ -98,6 +98,7 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trainLoadedPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1109,7 +1110,8 @@
             // 
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
-            this.ClickGridToolStripMenuItem});
+            this.ClickGridToolStripMenuItem,
+            this.trainLoadedPatternToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1117,7 +1119,7 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
@@ -1125,9 +1127,16 @@
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
             this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
+            // 
+            // trainLoadedPatternToolStripMenuItem
+            // 
+            this.trainLoadedPatternToolStripMenuItem.Name = "trainLoadedPatternToolStripMenuItem";
+            this.trainLoadedPatternToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.trainLoadedPatternToolStripMenuItem.Text = "Train Loaded Pattern";
+            this.trainLoadedPatternToolStripMenuItem.Click += new System.EventHandler(this.trainLoadedPatternToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1257,5 +1266,6 @@
         private System.Windows.Forms.NumericUpDown NumFeatureThreshold;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
+        private System.Windows.Forms.ToolStripMenuItem trainLoadedPatternToolStripMenuItem;
     }
 }

@@ -194,7 +194,7 @@ namespace SEYR.ImageProcessing
 
         public static void ResizeAndRotate(ref Bitmap bmp)
         {
-            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height));
+            Bitmap resize = new Bitmap((int)(Channel.Project.Scaling * bmp.Width), (int)(Channel.Project.Scaling * bmp.Height), PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(resize))
                 g.DrawImage(bmp, 0, 0, resize.Width, resize.Height);
             bmp = RotateImage(resize, Channel.Project.Angle);
@@ -213,7 +213,7 @@ namespace SEYR.ImageProcessing
         private static Bitmap RotateImage(Bitmap img, float rotationAngle)
         {
             //create an empty Bitmap image
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
+            Bitmap bmp = new Bitmap(img.Width, img.Height, PixelFormat.Format24bppRgb);
             //turn the Bitmap into a Graphics object
             Graphics g = Graphics.FromImage(bmp);
             //now we set the rotation point to the center of our image

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using SEYR.ImageProcessing;
 using System.Threading.Tasks;
 using System;
+using System.Drawing.Imaging;
 
 namespace SEYR.Session
 {
@@ -19,6 +20,7 @@ namespace SEYR.Session
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
         internal static Viewer Viewer { get; set; } = new Viewer();
+        internal static Bitmap Pattern { get; set; } = null;
         private readonly string ProjectPath = null;
 
         /// <summary>
@@ -88,6 +90,21 @@ namespace SEYR.Session
                 Project = (Project)x.Deserialize(stream);
             }
             DebugStream.Write("Project Loaded", addDT: true);
+            LoadPattern();
+        }
+
+        private void LoadPattern()
+        {
+            FileInfo info = new FileInfo(ProjectPath);
+            string patternPath = $@"{info.DirectoryName}\SEYRpattern.png";
+            if (File.Exists(patternPath))
+            {
+                Bitmap bmp = new Bitmap(patternPath);
+                Pattern = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format24bppRgb);
+                using (Graphics g = Graphics.FromImage(Pattern))
+                    g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+                DebugStream.Write("Pattern Loaded");
+            } 
         }
 
         #endregion

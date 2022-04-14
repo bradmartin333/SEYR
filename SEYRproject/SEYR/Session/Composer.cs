@@ -1,4 +1,5 @@
-﻿using SEYR.ImageProcessing;
+﻿using Accord.Imaging;
+using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -559,6 +560,29 @@ namespace SEYR.Session
         {
             ToolsToolStripMenuItem.Text = "Ready for click...";
             ClickGrid = true;
+        }
+
+        private void trainLoadedPatternToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolsToolStripMenuItem.Text = "Working...";
+            Application.DoEvents();
+            if (Channel.Pattern != null)
+            {
+                Bitmap sourceImage = (Bitmap)InputImage.Clone();
+                BitmapFunctions.ResizeAndRotate(ref sourceImage);
+                var tm = new ExhaustiveTemplateMatching(0.75f);
+                TemplateMatch[] matchings = tm.ProcessImage(sourceImage, Channel.Pattern);
+                foreach (TemplateMatch m in matchings)
+                {
+                    Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
+                }
+                using (Graphics g = Graphics.FromImage(sourceImage))
+                {
+                    g.FillRectangle(Brushes.HotPink, matchings[0].Rectangle);
+                }
+                PbxGrid.Image = sourceImage;
+            }
+            ToolsToolStripMenuItem.Text = "Tools";
         }
 
         #endregion
