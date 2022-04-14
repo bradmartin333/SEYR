@@ -1,75 +1,16 @@
-﻿using SEYR.Session;
-using System;
+﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SEYR.ImageProcessing
 {
     public partial class Viewer : Form
     {
-        private int Rows;
-        private int Columns;
-        private int[,] Data = null;
-        private int[,] LastData = null;
-        private Timer Timer = new Timer()
-        {
-            Interval = 1000,
-            Enabled = true,
-        };
-
         public Viewer()
         {
             InitializeComponent();
             Location = Point.Empty;
-            Timer.Start();
-            Timer.Tick += Timer_Tick;
             Show();
-        }
-
-        private void SetupViewer(Size size)
-        {
-            Rows = size.Height;
-            Columns = size.Width;
-            Data = new int[Columns, Rows];
-            LastData = new int[Columns, Rows];
-            Pbx.BackgroundImage = new Bitmap(Columns, Rows);
-        }
-
-        public void AddHotspots(Point[] tile, Size size)
-        {
-            if (Application.OpenForms.OfType<Composer>().Any()) return;
-            if (Data == null) SetupViewer(size);
-            foreach (Point point in tile)
-                Data[point.X, point.Y]++;
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (Data != null) UpdatePlot();
-        }
-
-        public void UpdatePlot()
-        {
-            int min = Data.Cast<int>().Min();
-            int max = Data.Cast<int>().Max();
-            using (Graphics g = Graphics.FromImage(Pbx.BackgroundImage))
-            {
-                for (int i = 0; i < Columns; i++)
-                {
-                    for (int j = 0; j < Rows; j++)
-                    {
-                        if (Data[i, j] > LastData[i, j])
-                        {
-                            Color c = ColorFromHSV(Map(Data[i, j], min, max));
-                            Rectangle r = new Rectangle(i, j, 1, 1);
-                            g.FillRectangle(new SolidBrush(c), r);
-                            LastData[i, j] = Data[i, j];
-                        }
-                    }
-                }
-            }
-            Pbx.Refresh();
         }
 
         private Color ColorFromHSV(double hue, double value = 1, double saturation = 1)

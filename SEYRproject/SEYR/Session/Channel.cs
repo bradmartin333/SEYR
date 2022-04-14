@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using SEYR.ImageProcessing;
+using System.Threading.Tasks;
 
 namespace SEYR.Session
 {
@@ -84,9 +84,10 @@ namespace SEYR.Session
 
         #region Image Processing
 
-        public void NewImage(Bitmap bmp)
+        public async Task<string> NewImage(Bitmap bmp)
         {
-            Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp));
+            await Task.Run(() => BitmapFunctions.LoadImage(bmp));
+            return "hi";
         }
 
         public void OpenComposer(Bitmap bmp)

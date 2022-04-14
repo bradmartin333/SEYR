@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYRDesktop
@@ -18,15 +19,18 @@ namespace SEYRDesktop
             InitializeComponent();
         }
 
-        private void numFrame_ValueChanged(object sender, EventArgs e)
+        private async void numFrame_ValueChanged(object sender, EventArgs e)
         {
-            NextImage();
+            if (!BtnRunAll.Enabled) return;
+            await NextImage();
         }
 
-        private void NextImage()
+        private async Task NextImage()
         {
+            System.Diagnostics.Debug.WriteLine(NumFrame.Value);
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            Channel.NewImage(bmp);
+            string info = await Channel.NewImage(bmp);
+            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value} done {info}");
         }
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
@@ -34,15 +38,14 @@ namespace SEYRDesktop
             Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
-        private void btnRunAll_Click(object sender, EventArgs e)
+        private async void btnRunAll_Click(object sender, EventArgs e)
         {
             BtnRunAll.Enabled = false;
             BtnStop.Enabled = true;
             while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
-                //System.Threading.Thread.Sleep(100);
                 Application.DoEvents();
-                NextImage();
+                await NextImage();
                 NumFrame.Value++;
             }
             BtnRunAll.Enabled = true;

@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace SEYR.ImageProcessing
 {
@@ -23,11 +24,11 @@ namespace SEYR.ImageProcessing
         /// Send a new image into SEYR
         /// </summary>
         /// <param name="bmp"></param>
-        public static void LoadImage(Bitmap bmp)
+        public static async void LoadImage(Bitmap bmp)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            ProcessImage(bmp, NullTile);
+            await ProcessImage(bmp, NullTile);
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static (Bitmap, float) ProcessImage(Bitmap bmp, Point singleTile)
+        private static async Task<(Bitmap, float)> ProcessImage(Bitmap bmp, Point singleTile)
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
@@ -61,7 +62,7 @@ namespace SEYR.ImageProcessing
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
-                        float entropy = AnalyzeData(ref crop);
+                        float entropy = await Task.Run(() => AnalyzeData(ref crop));
                         g.DrawImage(crop, thisX, thisY);
                         if (i == singleTile.X && j == singleTile.Y) return (crop, entropy);
                     }
@@ -137,9 +138,9 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public static (Bitmap, float) GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
+        public static async Task<(Bitmap, float)> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
-            return ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow));
+            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow));
         }
 
         #endregion

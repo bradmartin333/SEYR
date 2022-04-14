@@ -193,12 +193,12 @@ namespace SEYR.Session
             FormReady = true;
         }
 
-        private void UpdateTile()
+        private async void UpdateTile()
         {
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            (Bitmap tile, float entropy) = BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            (Bitmap tile, float entropy) = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
             PbxTile.BackgroundImage = tile;
             FormReady = true;
         }
