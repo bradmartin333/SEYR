@@ -154,7 +154,6 @@ namespace SEYR.Session
             }
         }
 
-
         private readonly Bitmap InputImage;
         private bool FormReady = false;
         private bool ClickGrid = false;

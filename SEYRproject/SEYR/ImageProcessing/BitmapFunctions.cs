@@ -159,27 +159,20 @@ namespace SEYR.ImageProcessing
         {
             //create an empty Bitmap image
             Bitmap bmp = new Bitmap(img.Width, img.Height);
-
             //turn the Bitmap into a Graphics object
             Graphics g = Graphics.FromImage(bmp);
-
             //now we set the rotation point to the center of our image
             g.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
-
             //now rotate the image
             g.RotateTransform(rotationAngle);
             g.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
-
             //set the InterpolationMode to HighQualityBicubic so to ensure a high
             //quality image once it is transformed to the specified size
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
             //now draw our new image onto the graphics object
             g.DrawImage(img, new Point(0, 0));
-
             //dispose of our Graphics object
             g.Dispose();
-
             //return the image
             return bmp;
         }

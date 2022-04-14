@@ -93,7 +93,7 @@ namespace SEYR.ImageProcessing
             for (i = 0; i <= Count - 1; i++)
             {
                 dIndex = hl[i].Index / cSteps;
-                AlphaIndex = hl[i].Index - dIndex * cSteps;
+                AlphaIndex = hl[i].Index - (dIndex * cSteps);
                 hl[i].Alpha = GetAlpha(AlphaIndex);
                 hl[i].d = dIndex + cDMin;
             }
@@ -133,17 +133,14 @@ namespace SEYR.ImageProcessing
 
             for (alpha = 0; alpha <= cSteps - 1; alpha++)
             {
-                d = y * cCosA[alpha] - x * cSinA[alpha];
+                d = (y * cCosA[alpha]) - (x * cSinA[alpha]);
                 dIndex = (int)CalcDIndex(d);
-                Index = dIndex * cSteps + alpha;
+                Index = (dIndex * cSteps) + alpha;
                 try
                 {
                     cHMatrix[Index] += 1;
                 }
-                catch (Exception ex)
-                {
-
-                }
+                catch (Exception) {}
             }
         }
 
@@ -179,12 +176,12 @@ namespace SEYR.ImageProcessing
             // Range of d:
             cDMin = -cBmp.Width;
             cDCount = (int)(2 * (cBmp.Width + cBmp.Height) / cDStep);
-            cHMatrix = new int[cDCount * cSteps + 1];
+            cHMatrix = new int[(cDCount * cSteps) + 1];
         }
 
         public double GetAlpha(int Index)
         {
-            return cAlphaStart + Index * cAlphaStep;
+            return cAlphaStart + (Index * cAlphaStep);
         }
     }
 }
