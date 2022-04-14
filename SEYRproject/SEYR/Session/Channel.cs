@@ -50,7 +50,7 @@ namespace SEYR.Session
             LoadProject();
         }
 
-        private void ClearLogs()
+        public void ClearLogs()
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
@@ -97,10 +97,6 @@ namespace SEYR.Session
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)
                     SaveProject();
-                else if (result == DialogResult.Ignore)
-                    ClearLogs();
-                else if (result == DialogResult.Abort)
-                    LoadProject();
                 else
                     return;
             }

@@ -113,5 +113,10 @@ namespace SEYRDesktop
         {
             Channel.ShowComposite();
         }
+
+        private void BtnClearLogs_Click(object sender, EventArgs e)
+        {
+            Channel.ClearLogs();
+        }
     }
 }

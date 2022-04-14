@@ -18,7 +18,6 @@ namespace SEYR.Session
             {
                 Channel.Project.Scaling = value;
                 Channel.Project.ScaledPixelsPerMicron = Channel.Project.PixelsPerMicron * Channel.Project.Scaling;
-                UpdateFilters();
                 UpdateGrid();
                 UpdateTile();
             }
@@ -30,7 +29,6 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.Angle = value;
-                UpdateFilters();
                 UpdateGrid();
                 UpdateTile();
             }
@@ -178,19 +176,8 @@ namespace SEYR.Session
             NumRows.Value = Rows;
             FormReady = true;
             SetupFeatureUI();
-            UpdateFilters();
             UpdateGrid();
             UpdateTile();
-        }
-
-        private void UpdateFilters()
-        {
-            if (!FormReady) return;
-            FormReady = false;
-            Bitmap bmp = (Bitmap)InputImage.Clone();
-            BitmapFunctions.ResizeAndRotate(ref bmp);
-            PbxFilters.BackgroundImage = bmp;
-            FormReady = true;
         }
 
         private void UpdateGrid()
@@ -213,27 +200,15 @@ namespace SEYR.Session
             FormReady = true;
         }
 
-        private void BtnConfirm_Click(object sender, EventArgs e)
+        private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void CancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void BtnResetLogs_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Ignore;
-            Close();
-        }
-
-        private void BtnReloadProject_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Abort;
             Close();
         }
 
@@ -326,5 +301,23 @@ namespace SEYR.Session
         }
 
         #endregion
+
+        private void ApplyDeskewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolsToolStripMenuItem.Text = "Working...";
+            Application.DoEvents();
+            try
+            {
+                Deskew deskew = new Deskew((Bitmap)InputImage.Clone());
+                double angle = deskew.GetSkewAngle();
+                NumAngle.Value = (decimal)angle;
+                Channel.DebugStream.Write($"Deskew Success: Angle = {angle}", true);
+            }
+            catch (Exception ex)
+            {
+                Channel.DebugStream.Write($"Deskew Failed: {ex}", true);
+            }
+            ToolsToolStripMenuItem.Text = "Tools";
+        }
     }
 }
