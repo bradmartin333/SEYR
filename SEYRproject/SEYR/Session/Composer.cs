@@ -154,16 +154,7 @@ namespace SEYR.Session
             }
         }
 
-        private Feature _ActiveFeature = null;
-        public Feature ActiveFeature
-        {
-            get => _ActiveFeature;
-            set
-            {
-                _ActiveFeature = value;
-            }
-        }
-
+        private Feature ActiveFeature = null;
         private readonly Bitmap InputImage;
         private bool FormReady = false;
         private bool ClickGrid = false;
@@ -207,7 +198,7 @@ namespace SEYR.Session
             if (!FormReady) return;
             FormReady = false;
             Bitmap bmp = (Bitmap)InputImage.Clone();
-            (Bitmap tile, float entropy) = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
+            Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn);
             PbxTile.BackgroundImage = tile;
             FormReady = true;
         }
@@ -302,6 +293,26 @@ namespace SEYR.Session
             ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
         }
 
+        private void AddFeature(Feature feature)
+        {
+            Features.Add(feature);
+            SetupFeatureUI(false);
+        }
+
+        private void ApplyFeature()
+        {
+            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            UpdateTile();
+        }
+
+        private void BtnApply_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            ActiveFeature.Name = TxtFeatureName.Text;
+            ApplyFeature();
+            SetupFeatureUI(false);
+        }
+
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActiveFeature = Features[ComboFeatures.SelectedIndex];
@@ -312,12 +323,6 @@ namespace SEYR.Session
             TxtFeatureName.Text = ActiveFeature.Name;
             NumFeatureThreshold.Value = (decimal)ActiveFeature.Threshold;
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
-        }
-
-        private void AddFeature(Feature feature)
-        {
-            Features.Add(feature);
-            SetupFeatureUI(false);
         }
 
         private void BtnAddFeature_Click(object sender, EventArgs e)
@@ -332,6 +337,7 @@ namespace SEYR.Session
             Features.RemoveAt(ComboFeatures.SelectedIndex);
             SetupFeatureUI(true);
             ComboFeatures.Text = "";
+            UpdateTile();
         }
 
         private void BtnCopyFeature_Click(object sender, EventArgs e)
@@ -339,6 +345,7 @@ namespace SEYR.Session
             if (ActiveFeature == null) return;
             Feature feature = ActiveFeature.Clone();
             AddFeature(feature);
+            SetupFeatureUI(false);
         }
 
         private void NumFeatureX_ValueChanged(object sender, EventArgs e)
@@ -346,7 +353,7 @@ namespace SEYR.Session
             if (ActiveFeature == null) return;
             Rectangle R = ActiveFeature.Rectangle;
             ActiveFeature.Rectangle = new Rectangle((int)NumFeatureX.Value, R.Y, R.Width, R.Height);
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            ApplyFeature();
         }
 
         private void NumFeatureY_ValueChanged(object sender, EventArgs e)
@@ -354,7 +361,7 @@ namespace SEYR.Session
             if (ActiveFeature == null) return;
             Rectangle R = ActiveFeature.Rectangle;
             ActiveFeature.Rectangle = new Rectangle(R.X, (int)NumFeatureY.Value, R.Width, R.Height);
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            ApplyFeature();
         }
 
         private void NumFeatureWidth_ValueChanged(object sender, EventArgs e)
@@ -362,7 +369,7 @@ namespace SEYR.Session
             if (ActiveFeature == null) return;
             Rectangle R = ActiveFeature.Rectangle;
             ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, (int)NumFeatureWidth.Value, R.Height);
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            ApplyFeature();
         }
 
         private void NumFeatureHeight_ValueChanged(object sender, EventArgs e)
@@ -370,29 +377,21 @@ namespace SEYR.Session
             if (ActiveFeature == null) return;
             Rectangle R = ActiveFeature.Rectangle;
             ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, R.Width, (int)NumFeatureHeight.Value);
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
-        }
-
-        private void BtnApplyFeatureName_Click(object sender, EventArgs e)
-        {
-            if (ActiveFeature == null) return;
-            ActiveFeature.Name = TxtFeatureName.Text;
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
-            SetupFeatureUI(false);
+            ApplyFeature();
         }
 
         private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
             ActiveFeature.Threshold = (float)NumFeatureThreshold.Value;
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            ApplyFeature();
         }
 
         private void ComboFeatureNullDetection_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
             ActiveFeature.NullDetection = (Feature.NullDetectionTypes)ComboFeatureNullDetection.SelectedIndex;
-            Features[ComboFeatures.SelectedIndex] = ActiveFeature;
+            ApplyFeature();
         }
 
         #endregion

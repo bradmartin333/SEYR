@@ -43,8 +43,8 @@ namespace SEYR.Session
         {
             Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
                 (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY));
-            Point size = new Point((int)(Channel.Project.SizeX * Channel.Project.ScaledPixelsPerMicron),
-                (int)(Channel.Project.SizeY * Channel.Project.ScaledPixelsPerMicron));
+            Point size = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.SizeX),
+                (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.SizeY));
             return new Rectangle(offset.X, offset.Y, size.X, size.Y);
         }
     }

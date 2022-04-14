@@ -43,14 +43,13 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<(Bitmap, float)> ProcessImage(Bitmap bmp, Point singleTile)
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point singleTile)
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
-            Bitmap frame = new Bitmap(bmp.Width, bmp.Height);
             string outputData = string.Empty;
 
-            using (Graphics g = Graphics.FromImage(frame))
+            using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
@@ -61,34 +60,52 @@ namespace SEYR.ImageProcessing
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
+                        {
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
-                        float entropy = await Task.Run(() => AnalyzeData(ref crop));
+                            foreach (Feature feature in Channel.Project.Features)
+                            {
+                                Channel.DebugStream.Write($"{feature.Name} {feature.GetGeometry()}", true);
+                                g2.FillRectangle(Brushes.Black, feature.GetGeometry());
+                            }
+                            
+                            //float entropy = await Task.Run(() => AnalyzeData(ref crop));
+                        }
+                        if (i == singleTile.X && j == singleTile.Y) return crop;
                         g.DrawImage(crop, thisX, thisY);
-                        if (i == singleTile.X && j == singleTile.Y) return (crop, entropy);
-                    }
+                    }   
                 }
             }
 
             Channel.DataStream.Write(outputData);
-            return (frame, 0f);
+            return bmp;
         }
 
         private static float AnalyzeData(ref Bitmap bmp)
         {
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-            IntPtr ptr = bmpData.Scan0;
-            int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
-            byte[] rgbValues = new byte[bytes];
-            Marshal.Copy(ptr, rgbValues, 0, bytes);
+            //foreach (Feature feature in Channel.Project.Features)
+            //{
+            //    if (feature == null) continue;
+            //    Bitmap crop = new Bitmap(feature.Rectangle.Width, feature.Rectangle.Height);
+            //    using (Graphics g = Graphics.FromImage(crop))
+            //        g.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), feature.Rectangle, GraphicsUnit.Pixel);
+            //    using (Graphics g = Graphics.FromImage(bmp))
+            //        g.FillRectangle(Brushes.Black, feature.Rectangle);
+            //}
 
-            byte threshold = (byte)(255 * 1);
-            for (int counter = 2; counter < rgbValues.Length; counter += 3)
-            {
-                byte r = rgbValues[counter];
-            }
+            //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            //BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
+            //IntPtr ptr = bmpData.Scan0;
+            //int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
+            //byte[] rgbValues = new byte[bytes];
+            //Marshal.Copy(ptr, rgbValues, 0, bytes);
 
-            bmp.UnlockBits(bmpData);
+            //byte threshold = (byte)(255 * 1);
+            //for (int counter = 2; counter < rgbValues.Length; counter += 3)
+            //{
+            //    byte r = rgbValues[counter];
+            //}
+
+            //bmp.UnlockBits(bmpData);
             return 0;
         }
 
@@ -138,7 +155,7 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public static async Task<(Bitmap, float)> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
+        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn)
         {
             return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow));
         }

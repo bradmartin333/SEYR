@@ -34,6 +34,16 @@ namespace SEYR.Session
         {
             Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(); // Random string
         }
+
+        public Rectangle GetGeometry()
+        {
+            Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Rectangle.X),
+                (int)(Channel.Project.ScaledPixelsPerMicron * Rectangle.Y));
+            Point size = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Rectangle.Width),
+                (int)(Channel.Project.ScaledPixelsPerMicron * Rectangle.Height));
+            return new Rectangle(offset.X, offset.Y, size.X, size.Y);
+        }
+
         public Feature Clone(bool userClone = false)
         {
             return new Feature()
