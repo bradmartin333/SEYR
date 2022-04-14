@@ -19,7 +19,7 @@ namespace SEYR.ImageProcessing
             if (hue == 0) return Color.FromArgb(255, Color.Black);
 
             int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
-            double f = hue / 60 - Math.Floor(hue / 60);
+            double f = (hue / 60) - Math.Floor(hue / 60);
 
             value *= 255;
             int v = Convert.ToInt32(value);
