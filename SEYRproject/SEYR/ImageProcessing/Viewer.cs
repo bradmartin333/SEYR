@@ -13,6 +13,15 @@ namespace SEYR.ImageProcessing
             Show();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
+
         public void UpdateImage(Bitmap bmp)
         {
             Pbx.BackgroundImage = bmp;
