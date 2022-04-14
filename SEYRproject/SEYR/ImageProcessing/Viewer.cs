@@ -12,5 +12,10 @@ namespace SEYR.ImageProcessing
             Location = Point.Empty;
             Show();
         }
+
+        public void UpdateImage(Bitmap bmp)
+        {
+            Pbx.BackgroundImage = bmp;
+        }
     }
 }

@@ -79,6 +79,7 @@ namespace SEYR.ImageProcessing
                 }
             }
 
+            Channel.Viewer.UpdateImage(bmp);
             Channel.DataStream.Write(outputData, false);
             return bmp;
         }
@@ -140,24 +141,27 @@ namespace SEYR.ImageProcessing
 
         #region Composer Functions
 
-        public static void DrawGrid(ref Bitmap bmp, int tileRow, int tileColumn)
+        public static async Task<Bitmap> DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                for (int i = 0; i < Channel.Project.Columns; i++)
+            await Task.Run(() => {
+                using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    for (int j = Channel.Project.Rows - 1; j >= 0; j--)
+                    for (int i = 0; i < Channel.Project.Columns; i++)
                     {
-                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                        g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen, 
-                            (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
-                            thisX, thisY, rectangle.Width, rectangle.Height);
+                        for (int j = Channel.Project.Rows - 1; j >= 0; j--)
+                        {
+                            int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                            int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                            g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen,
+                                (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
+                                thisX, thisY, rectangle.Width, rectangle.Height);
+                        }
                     }
                 }
-            }
+            });
+            return bmp;
         }
 
         public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, string featureName)

@@ -165,9 +165,9 @@ namespace SEYR.Session
             InitializeComponent();
             ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             InputImage = bitmap;
-            PbxGrid.BackgroundImage = bitmap;
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
+
             NumScaling.Value = (decimal)Scaling;
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
@@ -178,21 +178,26 @@ namespace SEYR.Session
             NumSizeY.Value = SizeY;
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
+
             FormReady = true;
             SetupFeatureUI(true);
+            while (!FormReady) Application.DoEvents();
+            Channel.DebugStream.Write($"Initializing Grid");
             UpdateGrid();
+            while (!FormReady) Application.DoEvents();
+            Channel.DebugStream.Write($"Initializing Tile");
             UpdateTile();
+            while (!FormReady) Application.DoEvents();
         }
 
-        private void UpdateGrid()
+        private async void UpdateGrid()
         {
             if (!FormReady) return;
             FormReady = false;
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
-                BitmapFunctions.DrawGrid(ref bmp, TileRow, TileColumn);
-                PbxGrid.BackgroundImage = bmp;
+                PbxGrid.BackgroundImage = await BitmapFunctions.DrawGrid(bmp, _TileRow, _TileColumn);
             }
             catch (Exception ex)
             {
@@ -209,7 +214,7 @@ namespace SEYR.Session
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 string featureName = (ActiveFeature == null) ? "" : ActiveFeature.Name;
-                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, featureName);
+                Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, _TileRow, _TileColumn, featureName);
                 PbxTile.BackgroundImage = tile;
             }
             catch (Exception ex)
@@ -307,6 +312,7 @@ namespace SEYR.Session
 
         private void SetupFeatureUI(bool setNull)
         {
+            FormReady = false;
             ComboFeatures.Items.Clear();
             ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
             ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
@@ -317,6 +323,7 @@ namespace SEYR.Session
                 UpdateTile();
             }
             Channel.DebugStream.Write($"Load Feature UI");
+            FormReady = true;
         }
 
         private void AddFeature(Feature feature)

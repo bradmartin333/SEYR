@@ -32,6 +32,7 @@ namespace SEYR.Session
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
         private List<float> Scores = new List<float>();
+        private static readonly object Locker = new object();
 
         public Feature()
         {
@@ -76,22 +77,34 @@ namespace SEYR.Session
 
         internal void ResetScore()
         {
-            Scores.Clear();
+            lock (Locker)
+            {
+                Scores.Clear();
+            }
         }
 
         internal void AddScore(float score)
         {
-            Scores.Add(score);
+            lock (Locker)
+            {
+                Scores.Add(score);
+            }
         }
 
         internal double GetMinScore()
         {
-            return Scores.Min() - 1;
+            lock (Locker)
+            {
+                return Scores.Min() - 1;
+            }
         }
 
         internal double GetMaxScore()
         {
-            return Scores.Max() + 1;
+            lock (Locker)
+            {
+                return Scores.Max() + 1;
+            }
         }
     }
 }
