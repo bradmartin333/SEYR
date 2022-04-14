@@ -1,6 +1,6 @@
 ﻿namespace SEYR.Session
 {
-    partial class Wizard
+    partial class Composer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wizard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.PbxFilters = new System.Windows.Forms.PictureBox();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
@@ -736,7 +736,7 @@
             0});
             this.NumTileRow.ValueChanged += new System.EventHandler(this.NumTileRow_ValueChanged_1);
             // 
-            // Wizard
+            // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -744,8 +744,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1227, 555);
-            this.Name = "Wizard";
-            this.Text = "Wizard";
+            this.Name = "Composer";
+            this.Text = "Composer";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxFilters)).EndInit();

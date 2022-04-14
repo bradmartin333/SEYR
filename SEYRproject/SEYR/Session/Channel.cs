@@ -90,9 +90,9 @@ namespace SEYR.Session
             Task.Factory.StartNew(() => BitmapFunctions.LoadImage(bmp));
         }
 
-        public void RunWizard(Bitmap bmp)
+        public void OpenComposer(Bitmap bmp)
         {
-            using (Wizard w = new Wizard((Bitmap)bmp.Clone()))
+            using (Composer w = new Composer((Bitmap)bmp.Clone()))
             {
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)

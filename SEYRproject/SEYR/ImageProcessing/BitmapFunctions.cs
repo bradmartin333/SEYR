@@ -41,7 +41,7 @@ namespace SEYR.ImageProcessing
         /// Filtered image
         /// </param>
         /// <param name="singleTile">
-        /// Desired tile preview for Wizard
+        /// Desired tile preview for Composer
         /// </param>
         /// <returns>
         /// Either a tile preview or the entire analyzed image
@@ -170,7 +170,7 @@ namespace SEYR.ImageProcessing
 
         #endregion
 
-        #region Wizard Functions
+        #region Composer Functions
 
         public static void DrawGrid(ref Bitmap bmp, int tileRow, int tileColumn)
         {

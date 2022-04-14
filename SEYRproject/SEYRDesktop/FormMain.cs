@@ -29,9 +29,9 @@ namespace SEYRDesktop
             Channel.NewImage(bmp);
         }
 
-        private void BtnLaunchWizard_Click(object sender, EventArgs e)
+        private void BtnOpenComposer_Click(object sender, EventArgs e)
         {
-            Channel.RunWizard(new Bitmap(IMGS[(int)NumFrame.Value]));
+            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
         private void btnRunAll_Click(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace SEYRDesktop
                 Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value, $@"{path}\debug.txt");
             
             BtnOpenDir.Enabled = false;
-            BtnLaunchWizard.Enabled = true;
+            BtnOpenComposer.Enabled = true;
             NumPxPerMicron.Enabled = false;
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;

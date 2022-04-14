@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnShowComposite = new System.Windows.Forms.Button();
             this.BtnRepeat = new System.Windows.Forms.Button();
             this.NumPxPerMicron = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,9 +39,8 @@
             this.NumFrame = new System.Windows.Forms.NumericUpDown();
             this.BtnRunAll = new System.Windows.Forms.Button();
             this.BtnOpenDir = new System.Windows.Forms.Button();
-            this.BtnLaunchWizard = new System.Windows.Forms.Button();
+            this.BtnOpenComposer = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.BtnShowComposite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -62,7 +62,7 @@
             this.tableLayoutPanel1.Controls.Add(this.NumFrame, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnRunAll, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnLaunchWizard, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -74,6 +74,19 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 110);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // BtnShowComposite
+            // 
+            this.BtnShowComposite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnShowComposite.Enabled = false;
+            this.BtnShowComposite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnShowComposite.Location = new System.Drawing.Point(182, 75);
+            this.BtnShowComposite.Name = "BtnShowComposite";
+            this.BtnShowComposite.Size = new System.Drawing.Size(104, 28);
+            this.BtnShowComposite.TabIndex = 18;
+            this.BtnShowComposite.Text = "Show Composite";
+            this.BtnShowComposite.UseVisualStyleBackColor = true;
+            this.BtnShowComposite.Click += new System.EventHandler(this.BtnShowComposite_Click);
             // 
             // BtnRepeat
             // 
@@ -180,35 +193,22 @@
             this.BtnOpenDir.UseVisualStyleBackColor = true;
             this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
-            // BtnLaunchWizard
+            // BtnOpenComposer
             // 
-            this.BtnLaunchWizard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnLaunchWizard.Enabled = false;
-            this.BtnLaunchWizard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLaunchWizard.Location = new System.Drawing.Point(182, 41);
-            this.BtnLaunchWizard.Name = "BtnLaunchWizard";
-            this.BtnLaunchWizard.Size = new System.Drawing.Size(104, 28);
-            this.BtnLaunchWizard.TabIndex = 1;
-            this.BtnLaunchWizard.Text = "Launch Wizard";
-            this.BtnLaunchWizard.UseVisualStyleBackColor = true;
-            this.BtnLaunchWizard.Click += new System.EventHandler(this.BtnLaunchWizard_Click);
+            this.BtnOpenComposer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnOpenComposer.Enabled = false;
+            this.BtnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpenComposer.Location = new System.Drawing.Point(182, 41);
+            this.BtnOpenComposer.Name = "BtnOpenComposer";
+            this.BtnOpenComposer.Size = new System.Drawing.Size(104, 28);
+            this.BtnOpenComposer.TabIndex = 1;
+            this.BtnOpenComposer.Text = "Open Composer";
+            this.BtnOpenComposer.UseVisualStyleBackColor = true;
+            this.BtnOpenComposer.Click += new System.EventHandler(this.BtnOpenComposer_Click);
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // BtnShowComposite
-            // 
-            this.BtnShowComposite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnShowComposite.Enabled = false;
-            this.BtnShowComposite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShowComposite.Location = new System.Drawing.Point(182, 75);
-            this.BtnShowComposite.Name = "BtnShowComposite";
-            this.BtnShowComposite.Size = new System.Drawing.Size(104, 28);
-            this.BtnShowComposite.TabIndex = 18;
-            this.BtnShowComposite.Text = "Show Composite";
-            this.BtnShowComposite.UseVisualStyleBackColor = true;
-            this.BtnShowComposite.Click += new System.EventHandler(this.BtnShowComposite_Click);
             // 
             // FormMain
             // 
@@ -233,7 +233,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button BtnLaunchWizard;
+        private System.Windows.Forms.Button BtnOpenComposer;
         private System.Windows.Forms.NumericUpDown NumFrame;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button BtnRunAll;

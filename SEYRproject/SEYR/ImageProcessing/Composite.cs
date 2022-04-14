@@ -38,7 +38,7 @@ namespace SEYR.ImageProcessing
 
         public void AddHotspots(Point[] tile, Size size)
         {
-            if (Application.OpenForms.OfType<Wizard>().Any()) return;
+            if (Application.OpenForms.OfType<Composer>().Any()) return;
             if (Data == null) SetupComposite(size);
             foreach (Point point in tile)
                 Data[point.X, point.Y]++;

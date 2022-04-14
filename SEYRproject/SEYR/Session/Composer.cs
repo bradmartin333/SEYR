@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SEYR.Session
 {
-    public partial class Wizard : Form, IProject
+    public partial class Composer : Form, IProject
     {
         #region IProject Members
 
@@ -161,7 +161,7 @@ namespace SEYR.Session
             }
         }
 
-        public Wizard(Bitmap bitmap)
+        public Composer(Bitmap bitmap)
         {
             InitializeComponent();
             InputImage = bitmap;
