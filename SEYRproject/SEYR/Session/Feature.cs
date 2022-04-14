@@ -7,6 +7,14 @@ namespace SEYR.Session
     [Serializable()]
     public class Feature
     {
+        public enum NullDetectionTypes
+        {
+            None,
+            IncludeEmpty,
+            IncludeFilled,
+            IncludeBoth,
+        }
+
         [XmlElement("Name")]
         public string Name { get; set; }
         [XmlElement("Rectangle")]
@@ -21,5 +29,7 @@ namespace SEYR.Session
         public float FailTolerance { get; set; } = 20f;
         [XmlElement("Threshold")]
         public float Threshold { get; set; } = 20f;
+        [XmlElement("NullDetection")]
+        public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
     }
 }
