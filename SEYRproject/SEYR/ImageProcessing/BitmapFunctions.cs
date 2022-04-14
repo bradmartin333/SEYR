@@ -63,19 +63,10 @@ namespace SEYR.ImageProcessing
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
                         {
-                            if (i == desiredTile.X && j == desiredTile.Y && desiredFeature != null)
-                            {
-                                ImageAttributes imageAttr = new ImageAttributes();
-                                imageAttr.SetThreshold(desiredFeature.Threshold);
-                                g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size),
-                                    cropRect.X, cropRect.Y, cropRect.Width, cropRect.Height, 
-                                    GraphicsUnit.Pixel, imageAttr);
-                            }
-                            else
-                                g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
+                            g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
                             foreach (Feature feature in Channel.Project.Features)
                             {
-                                float entropy = await Task.Run(() => AnalyzeData(ref crop, feature));
+                                float entropy = await Task.Run(() => AnalyzeData(crop, feature));
                                 feature.AddScore(entropy);
                                 g2.FillRectangle(new SolidBrush(ColorFromHSV(entropy, feature.GetMinScore(), feature.GetMaxScore(), 100)), feature.GetGeometry());
                                 Color border = (desiredFeature != null && feature.Name == desiredFeature.Name) ? Color.HotPink : Color.Black;
@@ -99,8 +90,13 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        private static float AnalyzeData(ref Bitmap bmp, Feature feature)
+        private static float AnalyzeData(Bitmap bmpTile, Feature feature)
         {
+            Rectangle cropRect = feature.GetGeometry();
+            Bitmap bmp = new Bitmap(feature.Rectangle.Width, feature.Rectangle.Height);
+            using (Graphics g = Graphics.FromImage(bmp))
+                g.DrawImage(bmpTile, new Rectangle(Point.Empty, cropRect.Size), cropRect, GraphicsUnit.Pixel);
+
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
             IntPtr ptr = bmpData.Scan0;
