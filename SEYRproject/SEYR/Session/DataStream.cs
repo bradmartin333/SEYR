@@ -15,12 +15,12 @@ namespace SEYR.Session
             if (File.Exists(path)) File.Delete(path);
             Path = path;
             if (isDebug)
-                Write("Stream Opened", true, true);
+                Write("Stream Opened", addDT: true);
             else
-                Write("Header", true);
+                Write("Header");
         }
 
-        public void Write(string value, bool addNewLine = false, bool addDT = false)
+        public void Write(string value, bool addNewLine = true, bool addDT = false)
         {
             Tasks.Add(Task.Factory.StartNew(() => 
             {

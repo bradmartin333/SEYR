@@ -64,11 +64,10 @@ namespace SEYR.ImageProcessing
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
                             foreach (Feature feature in Channel.Project.Features)
                             {
-                                Channel.DebugStream.Write($"{feature.Name} {feature.GetGeometry()}", true);
-                                g2.FillRectangle(Brushes.Black, feature.GetGeometry());
+                                g2.DrawRectangle(new Pen(Color.Black, (float)(Channel.Project.ScaledPixelsPerMicron)), feature.GetGeometry());
+                                float entropy = await Task.Run(() => AnalyzeData(ref crop));
+                                outputData += $"{feature.Name}\t{entropy}\n";
                             }
-                            
-                            //float entropy = await Task.Run(() => AnalyzeData(ref crop));
                         }
                         if (i == singleTile.X && j == singleTile.Y) return crop;
                         g.DrawImage(crop, thisX, thisY);
@@ -76,7 +75,7 @@ namespace SEYR.ImageProcessing
                 }
             }
 
-            Channel.DataStream.Write(outputData);
+            Channel.DataStream.Write(outputData, false);
             return bmp;
         }
 
@@ -162,6 +161,8 @@ namespace SEYR.ImageProcessing
 
         #endregion
 
+        #region Boilerplate Methods
+
         /// <summary>
         /// Method to rotate an image either clockwise or counter-clockwise
         /// </summary>
@@ -193,5 +194,35 @@ namespace SEYR.ImageProcessing
             //return the image
             return bmp;
         }
+
+        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, double value = 1, double saturation = 1)
+        {
+            double toLow = 255;
+            double toHigh = 0;
+            hue = (hue - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+            if (hue == 360) return Color.FromArgb(255, Color.White);
+            if (hue == 0) return Color.FromArgb(255, Color.Black);
+            int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+            double f = (hue / 60) - Math.Floor(hue / 60);
+            value *= 255;
+            int v = Convert.ToInt32(value);
+            int p = Convert.ToInt32(value * (1 - saturation));
+            int q = Convert.ToInt32(value * (1 - (f * saturation)));
+            int t = Convert.ToInt32(value * (1 - ((1 - f) * saturation)));
+            if (hi == 0)
+                return Color.FromArgb(255, v, t, p);
+            else if (hi == 1)
+                return Color.FromArgb(255, q, v, p);
+            else if (hi == 2)
+                return Color.FromArgb(255, p, v, t);
+            else if (hi == 3)
+                return Color.FromArgb(255, p, q, v);
+            else if (hi == 4)
+                return Color.FromArgb(255, t, p, v);
+            else
+                return Color.FromArgb(255, v, p, q);
+        }
+
+        #endregion
     }
 }

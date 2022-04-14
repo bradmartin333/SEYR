@@ -158,6 +158,7 @@ namespace SEYR.Session
         private readonly Bitmap InputImage;
         private bool FormReady = false;
         private bool ClickGrid = false;
+        private bool LoadingFeature = false;
 
         public Composer(Bitmap bitmap)
         {
@@ -301,6 +302,7 @@ namespace SEYR.Session
 
         private void ApplyFeature()
         {
+            if (LoadingFeature) return;
             Features[ComboFeatures.SelectedIndex] = ActiveFeature;
             UpdateTile();
         }
@@ -308,14 +310,14 @@ namespace SEYR.Session
         private void BtnApply_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
-            ActiveFeature.Name = TxtFeatureName.Text;
-            ApplyFeature();
-            SetupFeatureUI(false);
         }
 
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadingFeature = true;
+            Channel.DebugStream.Write($"{ComboFeatures.SelectedIndex}");
             ActiveFeature = Features[ComboFeatures.SelectedIndex];
+            Channel.DebugStream.Write($"{ActiveFeature.Name}");
             NumFeatureX.Value = ActiveFeature.Rectangle.X;
             NumFeatureY.Value = ActiveFeature.Rectangle.Y;
             NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
@@ -323,6 +325,8 @@ namespace SEYR.Session
             TxtFeatureName.Text = ActiveFeature.Name;
             NumFeatureThreshold.Value = (decimal)ActiveFeature.Threshold;
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
+            LoadingFeature = false;
+            ApplyFeature();
         }
 
         private void BtnAddFeature_Click(object sender, EventArgs e)
@@ -378,6 +382,19 @@ namespace SEYR.Session
             Rectangle R = ActiveFeature.Rectangle;
             ActiveFeature.Rectangle = new Rectangle(R.X, R.Y, R.Width, (int)NumFeatureHeight.Value);
             ApplyFeature();
+        }
+
+        private void TxtFeatureName_TextChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            if (Features.Where(x => x.Name != ActiveFeature.Name).Select(x => x.Name).Contains(TxtFeatureName.Text))
+                TxtFeatureName.BackColor = Color.LightCoral;
+            else
+            {
+                TxtFeatureName.BackColor = Color.White;
+                ActiveFeature.Name = TxtFeatureName.Text;
+                ApplyFeature();
+            }    
         }
 
         private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
@@ -471,11 +488,11 @@ namespace SEYR.Session
                 Deskew deskew = new Deskew((Bitmap)InputImage.Clone());
                 double angle = deskew.GetSkewAngle();
                 NumAngle.Value = (decimal)angle;
-                Channel.DebugStream.Write($"Deskew Success: Angle = {angle}", true);
+                Channel.DebugStream.Write($"Deskew Success: Angle = {angle}");
             }
             catch (Exception ex)
             {
-                Channel.DebugStream.Write($"Deskew Failed: {ex}", true);
+                Channel.DebugStream.Write($"Deskew Failed: {ex}");
             }
             ToolsToolStripMenuItem.Text = "Tools";
         }

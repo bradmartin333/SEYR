@@ -890,6 +890,7 @@
             this.TxtFeatureName.Name = "TxtFeatureName";
             this.TxtFeatureName.Size = new System.Drawing.Size(91, 20);
             this.TxtFeatureName.TabIndex = 2;
+            this.TxtFeatureName.TextChanged += new System.EventHandler(this.TxtFeatureName_TextChanged);
             // 
             // LabelCurrentFeatureScore
             // 

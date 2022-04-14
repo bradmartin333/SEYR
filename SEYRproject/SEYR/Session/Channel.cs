@@ -65,19 +65,19 @@ namespace SEYR.Session
                 XmlSerializer x = new XmlSerializer(typeof(Project));
                 x.Serialize(stream, Project);
             }
-            DebugStream.Write("Project Saved", true, true);
+            DebugStream.Write("Project Saved", addDT: true);
             DiscardViewer();
         }
 
         private void LoadProject()
         {
-            DebugStream.Write($"Loading Project\t{ProjectPath}", true, true);
+            DebugStream.Write($"Loading Project\t{ProjectPath}", addDT: true);
             using (StreamReader stream = new StreamReader(ProjectPath))
             {
                 XmlSerializer x = new XmlSerializer(typeof(Project));
                 Project = (Project)x.Deserialize(stream);
             }
-            DebugStream.Write("Project Loaded", true, true);
+            DebugStream.Write("Project Loaded", addDT: true);
         }
 
         #endregion
