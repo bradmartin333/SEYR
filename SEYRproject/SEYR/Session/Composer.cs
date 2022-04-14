@@ -131,9 +131,6 @@ namespace SEYR.Session
 
         #endregion
 
-        private readonly Bitmap InputImage;
-        private bool FormReady = false;
-
         private int _TileRow = 1;
         private int TileRow
         {
@@ -157,13 +154,19 @@ namespace SEYR.Session
             }
         }
 
-        private Feature ActiveFeature;
+
+        private readonly Bitmap InputImage;
+        private bool FormReady = false;
+        private bool ClickGrid = false;
+        private Feature ActiveFeature = null;
 
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
             InputImage = bitmap;
             PbxGrid.BackgroundImage = bitmap;
+            PbxGrid.MouseUp += PbxGrid_MouseUp;
+            PbxTile.MouseUp += PbxTile_MouseUp;
             NumScaling.Value = (decimal)Scaling;
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
@@ -211,6 +214,75 @@ namespace SEYR.Session
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        #region PBX Handlers
+
+        private void PbxTile_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!ClickGrid) return;
+            Point point = ZoomMousePos(e.Location, PbxTile.Size, PbxTile.BackgroundImage.Size);
+            if (ActiveFeature != null)
+            {
+                NumFeatureX.Value = point.X;
+                NumFeatureY.Value = point.Y;
+            }
+            ClickGrid = false;
+            ToolsToolStripMenuItem.Text = "Tools";
+        }
+
+        private void PbxGrid_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!ClickGrid) return;
+            Point point = ZoomMousePos(e.Location, PbxGrid.Size, PbxGrid.BackgroundImage.Size);
+            NumOriginX.Value = point.X;
+            NumOriginY.Value = point.Y;
+            ClickGrid = false;
+            ToolsToolStripMenuItem.Text = "Tools";
+        }
+
+        /// <summary>
+        /// Method for adjusting mouse pos to pictureBox set to Zoom
+        /// </summary>
+        /// <param name="click">
+        /// Mouse coordinates
+        /// </param>
+        /// <param name="pbxSize"></param>
+        /// <param name="imgSize"></param>
+        /// <returns>
+        /// Pixel coordinates
+        /// </returns>
+        private Point ZoomMousePos(Point click, Size pbxSize, Size imgSize)
+        {
+            float ImageAspect = imgSize.Width / (float)imgSize.Height;
+            float controlAspect = pbxSize.Width / (float)pbxSize.Height;
+            PointF pos = new PointF(click.X, click.Y);
+            if (ImageAspect > controlAspect)
+            {
+                float ratioWidth = imgSize.Width / (float)pbxSize.Width;
+                pos.X *= ratioWidth;
+                float scale = pbxSize.Width / (float)imgSize.Width;
+                float displayHeight = scale * imgSize.Height;
+                float diffHeight = pbxSize.Height - displayHeight;
+                diffHeight /= 2;
+                pos.Y -= diffHeight;
+                pos.Y /= scale;
+            }
+            else
+            {
+                float ratioHeight = imgSize.Height / (float)pbxSize.Height;
+                pos.Y *= ratioHeight;
+                float scale = pbxSize.Height / (float)imgSize.Height;
+                float displayWidth = scale * imgSize.Width;
+                float diffWidth = pbxSize.Width - displayWidth;
+                diffWidth /= 2;
+                pos.X -= diffWidth;
+                pos.X /= scale;
+            }
+            return new Point((int)(pos.X / Channel.Project.ScaledPixelsPerMicron), 
+                (int)(pos.Y / Channel.Project.ScaledPixelsPerMicron));
+        }
+
+        #endregion
 
         #region Feature Management
 
@@ -302,6 +374,8 @@ namespace SEYR.Session
 
         #endregion
 
+        #region Tools
+
         private void ApplyDeskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolsToolStripMenuItem.Text = "Working...";
@@ -319,5 +393,13 @@ namespace SEYR.Session
             }
             ToolsToolStripMenuItem.Text = "Tools";
         }
+
+        private void ClickGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolsToolStripMenuItem.Text = "Ready for click...";
+            ClickGrid = true;
+        }
+
+        #endregion
     }
 }

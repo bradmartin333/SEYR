@@ -77,7 +77,7 @@ namespace SEYRDesktop
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;
             BtnRepeat.Enabled = true;
-            BtnShowComposite.Enabled = true;
+            BtnShowViewer.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             
             NumFrame.Maximum = IMGS.Length - 1;
@@ -109,9 +109,9 @@ namespace SEYRDesktop
             NextImage();
         }
 
-        private void BtnShowComposite_Click(object sender, EventArgs e)
+        private void BtnShowViewer_Click(object sender, EventArgs e)
         {
-            Channel.ShowComposite();
+            Channel.ShowViewer();
         }
 
         private void BtnClearLogs_Click(object sender, EventArgs e)

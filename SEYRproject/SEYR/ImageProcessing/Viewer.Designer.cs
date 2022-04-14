@@ -1,6 +1,6 @@
 ﻿namespace SEYR.ImageProcessing
 {
-    partial class Composite
+    partial class Viewer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composite));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Viewer));
             this.Pbx = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Pbx)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +45,7 @@
             this.Pbx.TabIndex = 0;
             this.Pbx.TabStop = false;
             // 
-            // Composite
+            // Viewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -54,8 +54,9 @@
             this.Controls.Add(this.Pbx);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Composite";
-            this.Text = "Composite";
+            this.Name = "Viewer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.Pbx)).EndInit();
             this.ResumeLayout(false);
 

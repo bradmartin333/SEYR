@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using SEYR.ImageProcessing;
-using System;
 
 namespace SEYR.Session
 {
@@ -13,7 +12,7 @@ namespace SEYR.Session
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
-        internal static Composite Composite { get; set; } = new Composite();
+        internal static Viewer Viewer { get; set; } = new Viewer();
         private readonly string ProjectPath = null;
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace SEYR.Session
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
-            DeleteComposite();
+            DiscardViewer();
         }
 
         #region Opening and Closing
@@ -67,7 +66,7 @@ namespace SEYR.Session
                 x.Serialize(stream, Project);
             }
             DebugStream.Write("Project Saved", true, true);
-            DeleteComposite();
+            DiscardViewer();
         }
 
         private void LoadProject()
@@ -102,15 +101,15 @@ namespace SEYR.Session
             }
         }
 
-        public void ShowComposite()
+        public void ShowViewer()
         {
-            if (Composite != null) Composite.Show();
+            if (Viewer != null) Viewer.Show();
         }
 
-        private void DeleteComposite()
+        private void DiscardViewer()
         {
-            if (Composite != null) Composite.Close();
-            Composite = new Composite();
+            if (Viewer != null) Viewer.Close();
+            Viewer = new Viewer();
         }
 
         #endregion

@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnShowComposite = new System.Windows.Forms.Button();
+            this.BtnShowViewer = new System.Windows.Forms.Button();
             this.BtnRepeat = new System.Windows.Forms.Button();
             this.NumPxPerMicron = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.BtnClearLogs, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnShowComposite, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnShowViewer, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.NumPxPerMicron, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
@@ -77,18 +77,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 110);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // BtnShowComposite
+            // BtnShowViewer
             // 
-            this.BtnShowComposite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnShowComposite.Enabled = false;
-            this.BtnShowComposite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShowComposite.Location = new System.Drawing.Point(190, 75);
-            this.BtnShowComposite.Name = "BtnShowComposite";
-            this.BtnShowComposite.Size = new System.Drawing.Size(100, 28);
-            this.BtnShowComposite.TabIndex = 18;
-            this.BtnShowComposite.Text = "Show Composite";
-            this.BtnShowComposite.UseVisualStyleBackColor = true;
-            this.BtnShowComposite.Click += new System.EventHandler(this.BtnShowComposite_Click);
+            this.BtnShowViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnShowViewer.Enabled = false;
+            this.BtnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnShowViewer.Location = new System.Drawing.Point(190, 75);
+            this.BtnShowViewer.Name = "BtnShowViewer";
+            this.BtnShowViewer.Size = new System.Drawing.Size(100, 28);
+            this.BtnShowViewer.TabIndex = 18;
+            this.BtnShowViewer.Text = "Show Viewer";
+            this.BtnShowViewer.UseVisualStyleBackColor = true;
+            this.BtnShowViewer.Click += new System.EventHandler(this.BtnShowViewer_Click);
             // 
             // BtnRepeat
             // 
@@ -258,7 +258,7 @@
         private System.Windows.Forms.NumericUpDown NumPxPerMicron;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnRepeat;
-        private System.Windows.Forms.Button BtnShowComposite;
+        private System.Windows.Forms.Button BtnShowViewer;
         private System.Windows.Forms.Button BtnClearLogs;
     }
 }

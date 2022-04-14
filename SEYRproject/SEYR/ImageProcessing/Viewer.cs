@@ -2,12 +2,11 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYR.ImageProcessing
 {
-    public partial class Composite : Form
+    public partial class Viewer : Form
     {
         private int Rows;
         private int Columns;
@@ -19,15 +18,16 @@ namespace SEYR.ImageProcessing
             Enabled = true,
         };
 
-        public Composite()
+        public Viewer()
         {
             InitializeComponent();
+            Location = Point.Empty;
             Timer.Start();
             Timer.Tick += Timer_Tick;
             Show();
         }
 
-        private void SetupComposite(Size size)
+        private void SetupViewer(Size size)
         {
             Rows = size.Height;
             Columns = size.Width;
@@ -39,7 +39,7 @@ namespace SEYR.ImageProcessing
         public void AddHotspots(Point[] tile, Size size)
         {
             if (Application.OpenForms.OfType<Composer>().Any()) return;
-            if (Data == null) SetupComposite(size);
+            if (Data == null) SetupViewer(size);
             foreach (Point point in tile)
                 Data[point.X, point.Y]++;
         }
