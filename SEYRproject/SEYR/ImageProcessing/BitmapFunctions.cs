@@ -66,12 +66,17 @@ namespace SEYR.ImageProcessing
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
                             foreach (Feature feature in Channel.Project.Features)
                             {
-                                float entropy = await Task.Run(() => AnalyzeData(crop, feature));
-                                feature.AddScore(entropy);
-                                g2.FillRectangle(new SolidBrush(ColorFromHSV(entropy, feature.GetMinScore(), feature.GetMaxScore(), 100)), feature.GetGeometry());
+                                float score = await Task.Run(() => AnalyzeData(crop, feature));
+                                if (score > 0)
+                                {
+                                    feature.AddScore(score);
+                                    g2.FillRectangle(new SolidBrush(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore(), 50)), feature.GetGeometry());
+                                }
+                                else if (score == 1000)
+                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(50, Color.Black)), feature.GetGeometry());
                                 Color border = (desiredFeature != null && feature.Name == desiredFeature.Name) ? Color.HotPink : Color.Black;
                                 g2.DrawRectangle(new Pen(border, (float)Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                                outputData += $"{desiredTile.X + 1}\t{Channel.Project.Rows - desiredTile.Y}\t{feature.Name}\t{entropy}\n";
+                                outputData += $"{desiredTile.X + 1}\t{Channel.Project.Rows - desiredTile.Y}\t{feature.Name}\t{score}\n";
                             }
                         }
                         if (i == desiredTile.X && j == desiredTile.Y)
@@ -109,7 +114,7 @@ namespace SEYR.ImageProcessing
             List<byte> rtVals = new List<byte>();
             for (int counter = 2; counter < rgbValues.Length; counter += 3)
             {
-                byte r =rgbValues[counter];
+                byte r = rgbValues[counter];
                 byte rt = (byte)(r > threshold ? 1 : 0);
                 rVals.Add(r);
                 rtVals.Add(rt);
@@ -119,9 +124,27 @@ namespace SEYR.ImageProcessing
 
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
+            int filterVal = (int)(0.2 * (bmp.Width * bmp.Height));
             float score = (float)Math.Round(CalculateShannonEntropy(rVals.ToArray(), rect.Size) + (whiteVals / 2), 3);
-            if (blackVals < 10 || whiteVals < 10)
-                return 0f; // Look at feature params here
+
+            if (blackVals < filterVal || whiteVals < filterVal)
+            {
+                switch (feature.NullDetection)
+                {
+                    case Feature.NullDetectionTypes.None:
+                        return 0f;
+                    case Feature.NullDetectionTypes.IncludeEmpty:
+                        if (whiteVals < filterVal) return 1000f;
+                        else return 0f;
+                    case Feature.NullDetectionTypes.IncludeFilled:
+                        if (blackVals < filterVal) return 1000f;
+                        else return 0f;
+                    case Feature.NullDetectionTypes.IncludeBoth:
+                        return 1000f;
+                    default:
+                        return 0f;
+                }
+            }
             else
                 return score;
         }
