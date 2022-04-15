@@ -176,12 +176,33 @@ namespace SEYR.Session
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
+            
+            LocationChanged += Composer_LocationChanged;
+            ResizeEnd += Composer_ResizeEnd;
+            if (Channel.Project.ComposerLocation != Point.Empty)
+            {
+                StartPosition = FormStartPosition.Manual;
+                Location = Channel.Project.ComposerLocation;
+            }
+            if (Channel.Project.ComposerSize != Size.Empty)
+                Size = Channel.Project.ComposerSize;
+
             InputImage = bitmap;
             InitializeHandlers();
             InitializeUI();
             FormReady = true;
             SetupFeatureUI(true);
             UpdateImages();
+        }
+
+        private void Composer_LocationChanged(object sender, EventArgs e)
+        {
+            Channel.Project.ComposerLocation = Location;
+        }
+
+        private void Composer_ResizeEnd(object sender, EventArgs e)
+        {
+            Channel.Project.ComposerSize = Size;
         }
 
         private void InitializeHandlers()
@@ -575,7 +596,7 @@ namespace SEYR.Session
             ClickGrid = true;
         }
 
-        private void trainLoadedPatternToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TrainLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolsToolStripMenuItem.Text = "Working...";
             Application.DoEvents();
@@ -598,6 +619,11 @@ namespace SEYR.Session
                 PbxGrid.Image = sourceImage;
             }
             ToolsToolStripMenuItem.Text = "Tools";
+        }
+
+        private void HideLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PbxGrid.Image = null;
         }
 
         #endregion

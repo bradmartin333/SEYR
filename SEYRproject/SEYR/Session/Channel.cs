@@ -19,7 +19,7 @@ namespace SEYR.Session
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
-        internal static Viewer Viewer { get; set; } = new Viewer();
+        internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
         private readonly string ProjectPath = null;
 
@@ -40,6 +40,7 @@ namespace SEYR.Session
             ProjectPath = projectPath;
             Project = new Project() { PixelsPerMicron = pixelsPerMicron };
             SaveProject();
+            Viewer = new Viewer();
         }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace SEYR.Session
             DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
             ProjectPath = projectPath;
             LoadProject();
+            Viewer = new Viewer();
         }
 
         public void ClearLogs()

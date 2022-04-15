@@ -98,7 +98,9 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trainLoadedPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FollowerPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TrainLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HideLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1113,7 +1115,7 @@
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
-            this.trainLoadedPatternToolStripMenuItem});
+            this.FollowerPatternToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1121,7 +1123,7 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
@@ -1129,16 +1131,33 @@
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
             this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
-            // trainLoadedPatternToolStripMenuItem
+            // FollowerPatternToolStripMenuItem
             // 
-            this.trainLoadedPatternToolStripMenuItem.Name = "trainLoadedPatternToolStripMenuItem";
-            this.trainLoadedPatternToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.trainLoadedPatternToolStripMenuItem.Text = "Train Loaded Pattern";
-            this.trainLoadedPatternToolStripMenuItem.Click += new System.EventHandler(this.trainLoadedPatternToolStripMenuItem_Click);
+            this.FollowerPatternToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TrainLocationsToolStripMenuItem,
+            this.HideLocationsToolStripMenuItem});
+            this.FollowerPatternToolStripMenuItem.Name = "FollowerPatternToolStripMenuItem";
+            this.FollowerPatternToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.FollowerPatternToolStripMenuItem.Text = "Follower Pattern";
+            // 
+            // TrainLocationsToolStripMenuItem
+            // 
+            this.TrainLocationsToolStripMenuItem.Name = "TrainLocationsToolStripMenuItem";
+            this.TrainLocationsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.TrainLocationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.TrainLocationsToolStripMenuItem.Text = "Train Locations";
+            this.TrainLocationsToolStripMenuItem.Click += new System.EventHandler(this.TrainLocationsToolStripMenuItem_Click);
+            // 
+            // HideLocationsToolStripMenuItem
+            // 
+            this.HideLocationsToolStripMenuItem.Name = "HideLocationsToolStripMenuItem";
+            this.HideLocationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.HideLocationsToolStripMenuItem.Text = "Hide Locations";
+            this.HideLocationsToolStripMenuItem.Click += new System.EventHandler(this.HideLocationsToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1268,6 +1287,8 @@
         private System.Windows.Forms.NumericUpDown NumFeatureThreshold;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
-        private System.Windows.Forms.ToolStripMenuItem trainLoadedPatternToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FollowerPatternToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TrainLocationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HideLocationsToolStripMenuItem;
     }
 }
