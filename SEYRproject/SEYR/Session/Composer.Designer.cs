@@ -1095,18 +1095,20 @@
             // 
             // ConfirmToolStripMenuItem
             // 
+            this.ConfirmToolStripMenuItem.AutoSize = false;
             this.ConfirmToolStripMenuItem.BackColor = System.Drawing.Color.PaleGreen;
             this.ConfirmToolStripMenuItem.Name = "ConfirmToolStripMenuItem";
-            this.ConfirmToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.ConfirmToolStripMenuItem.Text = "Confirm";
+            this.ConfirmToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.ConfirmToolStripMenuItem.Text = "Save All";
             this.ConfirmToolStripMenuItem.Click += new System.EventHandler(this.ConfirmToolStripMenuItem_Click);
             // 
             // CancelToolStripMenuItem
             // 
             this.CancelToolStripMenuItem.AutoSize = false;
             this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightCoral;
+            this.CancelToolStripMenuItem.Margin = new System.Windows.Forms.Padding(50, 0, 0, 0);
             this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
-            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.CancelToolStripMenuItem.Text = "Cancel";
             this.CancelToolStripMenuItem.Click += new System.EventHandler(this.CancelToolStripMenuItem_Click);
             // 
@@ -1116,6 +1118,7 @@
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
             this.FollowerPatternToolStripMenuItem});
+            this.ToolsToolStripMenuItem.Margin = new System.Windows.Forms.Padding(50, 0, 0, 0);
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.ToolsToolStripMenuItem.Text = "Tools";
