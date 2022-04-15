@@ -7,6 +7,7 @@ namespace SEYR.Session
     internal class DataStream
     {
         public string Path { get; set; } = null;
+        internal static string Header = null;
         private List<Task> Tasks { get; set; } = new List<Task>();
         private static readonly object Locker = new object();
 
@@ -17,7 +18,10 @@ namespace SEYR.Session
             if (isDebug)
                 Write("Stream Opened", addDT: true);
             else
-                Write($"{header}TileRow\tTileCol\tFeature\tScore");
+            {
+                Header = $"{header}TileRow\tTileCol\tFeature\tScore";
+                Write(Header);
+            } 
         }
 
         public void Write(string value, bool addNewLine = true, bool addDT = false)

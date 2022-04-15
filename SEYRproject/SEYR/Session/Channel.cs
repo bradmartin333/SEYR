@@ -113,11 +113,12 @@ namespace SEYR.Session
 
         #region Image Processing
 
-        public async Task<string> NewImage(Bitmap bmp)
+        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false)
         {
-            await Task.Run(() => BitmapFunctions.LoadImage(bmp));
+            await Task.Run(() => BitmapFunctions.LoadImage(bmp, forcePattern));
             return CreateStatusString();
         }
+
 
         private string CreateStatusString()
         {

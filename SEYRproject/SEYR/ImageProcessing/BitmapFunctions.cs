@@ -1,4 +1,5 @@
-﻿using SEYR.Session;
+﻿using Accord.Imaging;
+using SEYR.Session;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +13,8 @@ namespace SEYR.ImageProcessing
 {
     internal static class BitmapFunctions
     {
-        private static readonly Point NullTile = new Point(-1, -1);
+        private static readonly Point NullPoint = new Point(-1, -1);
+        private static Point Offset = Point.Empty;
 
         private struct Point3D
         {
@@ -25,11 +27,12 @@ namespace SEYR.ImageProcessing
         /// Send a new image into SEYR
         /// </summary>
         /// <param name="bmp"></param>
-        public static async void LoadImage(Bitmap bmp)
+        /// <param name="forcePattern"></param>
+        public static async void LoadImage(Bitmap bmp, bool forcePattern)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            await ProcessImage(bmp, NullTile);
+            await ProcessImage(bmp, NullPoint, forcePattern);
         }
 
         /// <summary>
@@ -41,13 +44,16 @@ namespace SEYR.ImageProcessing
         /// <param name="desiredTile">
         /// Desired tile preview for Composer
         /// </param>
+        /// <param name="forcePattern"></param>
         /// <param name="desiredFeature"></param>
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, Feature desiredFeature = null)
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, bool forcePattern, Feature desiredFeature = null)
         {
             ResizeAndRotate(ref bmp);
+            Offset = await FollowPattern(bmp, forcePattern);
+
             Rectangle rectangle = Channel.Project.GetGeometry();
             string outputData = string.Empty;
 
@@ -57,8 +63,8 @@ namespace SEYR.ImageProcessing
                 {
                     for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
-                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX) - Offset.X;
+                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY) - Offset.Y;
                         Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
@@ -158,6 +164,47 @@ namespace SEYR.ImageProcessing
             return entropy;
         }
 
+        private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern)
+        {
+            if (Channel.Pattern != null && DataStream.Header != null)
+            {
+                if (forcePattern)
+                    return await FindPattern(bmp);
+                else
+                {
+                    string[] cols = DataStream.Header.Split('\t');
+                    for (int i = 0; i < cols.Length; i++)
+                        if (!string.IsNullOrEmpty(cols[i]))
+                            if (cols[i] == Channel.Project.PatternIntervalString)
+                                if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
+                                    if (matchVal == Channel.Project.PatternIntervalValue)
+                                    {
+                                        return await FindPattern(bmp);
+                                    }
+                }
+            }
+            return NullPoint;
+        }
+
+        private static async Task<Point> FindPattern(Bitmap bmp)
+        {
+            Bitmap sourceImage = (Bitmap)bmp.Clone();
+            Bitmap pattern = (Bitmap)Channel.Pattern.Clone();
+            var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
+            TemplateMatch[] matchings = await Task.Run(() => tm.ProcessImage(sourceImage, pattern));
+            TemplateMatch m = matchings[0];
+            Channel.DebugStream.Write($"Best pattern: {m.Similarity} {m.Rectangle}");
+            foreach (Point point in Channel.Project.PatternLocations)
+            {
+                Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
+                int deltaH = (int)Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
+                Channel.DebugStream.Write($"Delta = {deltaH}");
+                if (deltaH <= Channel.Project.PatternDeltaMax)
+                    return delta;
+            }
+            return NullPoint;
+        }
+
         #region Composer Functions
 
         public static async Task<Bitmap> DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
@@ -185,7 +232,7 @@ namespace SEYR.ImageProcessing
 
         public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature)
         {
-            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature);
+            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), false, feature);
         }
 
         #endregion

@@ -13,6 +13,7 @@ namespace SEYRDesktop
         private SEYR.Session.Channel Channel;
         private string[] IMGS = null;
         private bool STOP;
+        private bool BUSY;
 
         public FormMain()
         {
@@ -21,16 +22,18 @@ namespace SEYRDesktop
 
         private async void numFrame_ValueChanged(object sender, EventArgs e)
         {
-            if (!BtnRunAll.Enabled) return;
+            if (!BtnRunAll.Enabled || BUSY) return;
             await NextImage();
         }
 
-        private async Task NextImage()
+        private async Task NextImage(bool forcePattern = false)
         {
+            BUSY = true;
             SEYR.Session.Channel.OutputData = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            string info = await Channel.NewImage(bmp);
+            string info = await Channel.NewImage(bmp, forcePattern);
             System.Diagnostics.Debug.WriteLine(info + '\n');
+            BUSY = false;
         }
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
@@ -61,7 +64,7 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
         }
 
-        private void btnOpenDir_Click(object sender, EventArgs e)
+        private async void btnOpenDir_Click(object sender, EventArgs e)
         {
             string path = OpenFolder();
             if (path == null) return;
@@ -84,10 +87,13 @@ namespace SEYRDesktop
             BtnRepeat.Enabled = true;
             BtnShowViewer.Enabled = true;
             BtnClearLogs.Enabled = true;
+            BtnForcePattern.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             
             NumFrame.Maximum = IMGS.Length - 1;
             NumFrame.Value = 0;
+
+            await NextImage();
         }
 
         private string OpenFolder()
@@ -110,9 +116,9 @@ namespace SEYRDesktop
             return filesFound.AlphanumericSort();
         }
 
-        private void BtnRepeat_Click(object sender, EventArgs e)
+        private async void BtnRepeat_Click(object sender, EventArgs e)
         {
-            NextImage();
+            await NextImage();
         }
 
         private void BtnShowViewer_Click(object sender, EventArgs e)
@@ -123,6 +129,11 @@ namespace SEYRDesktop
         private void BtnClearLogs_Click(object sender, EventArgs e)
         {
             Channel.ClearLogs();
+        }
+
+        private async void BtnForcePattern_Click(object sender, EventArgs e)
+        {
+            await NextImage(true);
         }
     }
 }

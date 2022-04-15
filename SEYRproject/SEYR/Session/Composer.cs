@@ -124,25 +124,25 @@ namespace SEYR.Session
             }
         }
 
-        public List<Feature> Features {
-            get => Channel.Project.Features;
-            set
-            {
-                Channel.Project.Features = value;
-            }
-        }
+        public List<Feature> Features { get => Channel.Project.Features; set => Channel.Project.Features = value;}
 
-        public float PatternScore
-        {
-            get => Channel.Project.PatternScore;
-            set => Channel.Project.PatternScore = value;
-        }
+        public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public List<Point> PatternLocations
-        {
-            get => Channel.Project.PatternLocations;
-            set => Channel.Project.PatternLocations = value;
-        }
+        public int PatternIntervalValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int PatternDeltaMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public float PatternScore{get => Channel.Project.PatternScore; set => Channel.Project.PatternScore = value; }
+
+        public List<Point> PatternLocations{ get => Channel.Project.PatternLocations; set => Channel.Project.PatternLocations = value;}
+
+        public Point ComposerLocation { get => Channel.Project.ComposerLocation; set => Channel.Project.ComposerLocation = value; }
+
+        public Size ComposerSize { get => Channel.Project.ComposerSize; set => Channel.Project.ComposerSize = value; }
+
+        public Point ViewerLocation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public Size ViewerSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion
 
@@ -179,13 +179,13 @@ namespace SEYR.Session
             
             LocationChanged += Composer_LocationChanged;
             ResizeEnd += Composer_ResizeEnd;
-            if (Channel.Project.ComposerLocation != Point.Empty)
+            if (ComposerLocation != Point.Empty)
             {
                 StartPosition = FormStartPosition.Manual;
-                Location = Channel.Project.ComposerLocation;
+                Location = ComposerLocation;
             }
-            if (Channel.Project.ComposerSize != Size.Empty)
-                Size = Channel.Project.ComposerSize;
+            if (ComposerSize != Size.Empty)
+                Size = ComposerSize;
 
             InputImage = bitmap;
             InitializeHandlers();
@@ -197,12 +197,12 @@ namespace SEYR.Session
 
         private void Composer_LocationChanged(object sender, EventArgs e)
         {
-            Channel.Project.ComposerLocation = Location;
+            ComposerLocation = Location;
         }
 
         private void Composer_ResizeEnd(object sender, EventArgs e)
         {
-            Channel.Project.ComposerSize = Size;
+            ComposerSize = Size;
         }
 
         private void InitializeHandlers()

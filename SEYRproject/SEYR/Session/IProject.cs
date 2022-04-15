@@ -1,4 +1,7 @@
-﻿namespace SEYR.Session
+﻿using System.Collections.Generic;
+using System.Drawing;
+
+namespace SEYR.Session
 {
     public interface IProject
     {
@@ -13,7 +16,14 @@
         int SizeX { get; set; }
         int SizeY { get; set; }
         float PatternScore { get; set; }
-        System.Collections.Generic.List<System.Drawing.Point> PatternLocations { get; set; }
-        System.Collections.Generic.List<Feature> Features { get; set; }
+        Point ComposerLocation { get; set; }
+        Size ComposerSize { get; set; }
+        Point ViewerLocation { get; set; }
+        Size ViewerSize { get; set; }
+        string PatternIntervalString { get; set; }
+        int PatternIntervalValue { get; set; }
+        int PatternDeltaMax { get; set; }
+        List<Point> PatternLocations { get; set; }
+        List<Feature> Features { get; set; }
     }
 }
