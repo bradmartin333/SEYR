@@ -33,7 +33,7 @@ namespace SEYR.Session
         /// <param name="debugPath">
         /// If null, logs to temp directory
         /// </param>
-        public Channel(string projectPath, string streamPath, double pixelsPerMicron, string dataHeader, string debugPath = null)
+        public Channel(string projectPath, string streamPath, float pixelsPerMicron, string dataHeader, string debugPath = null)
         {
             DataStream = new DataStream(streamPath, header: dataHeader);
             DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);

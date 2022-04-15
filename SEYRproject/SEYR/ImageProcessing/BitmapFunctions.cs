@@ -46,10 +46,11 @@ namespace SEYR.ImageProcessing
         /// </param>
         /// <param name="forcePattern"></param>
         /// <param name="desiredFeature"></param>
+        /// <param name="graphics"></param>
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, bool forcePattern, Feature desiredFeature = null)
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, bool forcePattern, Feature desiredFeature = null, bool graphics = true)
         {
             ResizeAndRotate(ref bmp);
             Offset = await FollowPattern(bmp, forcePattern);
@@ -70,17 +71,35 @@ namespace SEYR.ImageProcessing
                         using (Graphics g2 = Graphics.FromImage(crop))
                         {
                             g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
-                            foreach (Feature feature in Channel.Project.Features)
+                            if (graphics)
                             {
-                                float score = await Task.Run(() => AnalyzeData(crop, feature));
-                                feature.AddScore(score);
-                                if (score == 1000f)
-                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
-                                else if (score > 0)
-                                    g2.DrawRectangle(new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore())), feature.GetGeometry());
-                                else if (desiredFeature != null && feature.Name == desiredFeature.Name)
-                                    g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
-                                if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
+                                Bitmap tile = (Bitmap)crop.Clone();
+                                foreach (Feature feature in Channel.Project.Features)
+                                {
+                                    float score = await Task.Run(() => AnalyzeData(tile, feature));
+                                    if (score == 1000f) // Special pass
+                                    {
+                                        g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
+                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
+                                            g2.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                                    }
+                                    else if (score > 0) // Normal
+                                    {
+                                        feature.AddScore(score);
+                                        g2.DrawRectangle(
+                                            new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore(), Channel.Project.ScaledPixelsPerMicron)),
+                                            feature.GetGeometry());
+                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
+                                            g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                                    }
+                                    else // Special fail
+                                    {
+                                        g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
+                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
+                                            g2.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                                    }
+                                    if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
+                                }
                             }
                         }
                         if (i == desiredTile.X && j == desiredTile.Y)
@@ -177,10 +196,8 @@ namespace SEYR.ImageProcessing
                         if (!string.IsNullOrEmpty(cols[i]))
                             if (cols[i] == Channel.Project.PatternIntervalString)
                                 if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
-                                    if (matchVal == Channel.Project.PatternIntervalValue)
-                                    {
+                                    if (matchVal % Channel.Project.PatternIntervalValue == 0)
                                         return await FindPattern(bmp);
-                                    }
                 }
             }
             return NullPoint;
@@ -230,9 +247,9 @@ namespace SEYR.ImageProcessing
             return bmp;
         }
 
-        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature)
+        public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature, bool graphics = true)
         {
-            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), false, feature);
+            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), false, feature, graphics);
         }
 
         #endregion

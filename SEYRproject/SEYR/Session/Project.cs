@@ -13,9 +13,9 @@ namespace SEYR.Session
         [XmlElement("ImageWidth")]
         public int ImageWidth { get; set; } = 1;
         [XmlElement("PixelsPerMicron")]
-        public double PixelsPerMicron { get; set; } = 2.606;
+        public float PixelsPerMicron { get; set; } = 2.606f;
         [XmlElement("ScaledPixelsPerMicron")]
-        public double ScaledPixelsPerMicron { get; set; } = 0.6515;
+        public float ScaledPixelsPerMicron { get; set; } = 0.6515f;
         [XmlElement("Scaling")]
         public float Scaling { get; set; } = 0.25f;
         [XmlElement("Angle")]

@@ -286,15 +286,16 @@ namespace SEYR.Session
 
         #region PBX Handlers
 
-        private void PbxTile_MouseDown(object sender, MouseEventArgs e)
+        private async void PbxTile_MouseDown(object sender, MouseEventArgs e)
         {
             if (ActiveFeature == null || ClickGrid) return;
             ImageAttributes imageAttr = new ImageAttributes();
             imageAttr.SetThreshold(ActiveFeature.Threshold);
-            Bitmap bmp = (Bitmap)PbxTile.BackgroundImage.Clone();
-            using (Graphics g = Graphics.FromImage(bmp))
-                g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
-            PbxTile.Image = bmp;
+            Bitmap bmp = (Bitmap)InputImage.Clone();
+            Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature, false);
+            using (Graphics g = Graphics.FromImage(tile))
+                g.DrawImage(tile, new Rectangle(Point.Empty, tile.Size), 0, 0, tile.Width, tile.Height, GraphicsUnit.Pixel, imageAttr);
+            PbxTile.Image = tile;
         }
 
         private void PbxTile_MouseUp(object sender, MouseEventArgs e)

@@ -53,7 +53,6 @@ namespace SEYRDesktop
             }
             BtnRunAll.Enabled = true;
             BtnStop.Enabled = false;
-            if (!STOP) NumFrame.Value = 0;
             STOP = false;
         }
 
@@ -76,7 +75,7 @@ namespace SEYRDesktop
                 Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", 
                     "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
             else
-                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (double)NumPxPerMicron.Value,
+                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (float)NumPxPerMicron.Value,
                     "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
             
             BtnOpenDir.Enabled = false;
