@@ -32,7 +32,7 @@ namespace SEYR.ImageProcessing
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            await ProcessImage(bmp, NullPoint, forcePattern);
+            await ProcessImage(bmp, forcePattern, NullPoint);
         }
 
         /// <summary>
@@ -41,16 +41,22 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp">
         /// Filtered image
         /// </param>
-        /// <param name="desiredTile">
+        /// <param name="forcePattern">
+        /// User wants to test pattern right now
+        /// </param>
+        /// /// <param name="desiredTile">
         /// Desired tile preview for Composer
         /// </param>
-        /// <param name="forcePattern"></param>
-        /// <param name="desiredFeature"></param>
-        /// <param name="graphics"></param>
+        /// <param name="desiredFeature">
+        /// Desired feature for Composer
+        /// </param>
+        /// <param name="graphics">
+        /// Return image with no added feature graphics
+        /// </param>
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, Point desiredTile, bool forcePattern, Feature desiredFeature = null, bool graphics = true)
+        private static async Task<Bitmap> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, Feature desiredFeature = null, bool graphics = true)
         {
             ResizeAndRotate(ref bmp);
             Offset = await FollowPattern(bmp, forcePattern);
@@ -97,12 +103,7 @@ namespace SEYR.ImageProcessing
                                 }
                             }
                         }
-                        if (i == desiredTile.X && j == desiredTile.Y)
-                        {
-                            Channel.DebugStream.Write($"Return tile {desiredTile.X + 1}, {Channel.Project.Rows - desiredTile.Y} and feature " +
-                                $"{(desiredFeature != null ? desiredFeature.Name : "null")}");
-                            return crop;
-                        }
+                        if (i == desiredTile.X && j == desiredTile.Y) return crop;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
@@ -243,7 +244,7 @@ namespace SEYR.ImageProcessing
 
         public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature, bool graphics = true)
         {
-            return await ProcessImage(bmp, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), false, feature, graphics);
+            return await ProcessImage(bmp, false, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature, graphics);
         }
 
         #endregion
