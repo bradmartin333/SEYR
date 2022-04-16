@@ -51,11 +51,19 @@ namespace SEYR.Session
 
         public Rectangle GetGeometry()
         {
-            Point offset = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginX),
-                (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.OriginY));
-            Point size = new Point((int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.SizeX),
-                (int)(Channel.Project.ScaledPixelsPerMicron * Channel.Project.SizeY));
-            return new Rectangle(offset.X, offset.Y, size.X, size.Y);
+            return new Rectangle(
+                (int)(ScaledPixelsPerMicron * OriginX),
+                (int)(ScaledPixelsPerMicron * OriginY),
+                (int)(ScaledPixelsPerMicron * SizeX),
+                (int)(ScaledPixelsPerMicron * SizeY));
+        }
+
+        public Rectangle GetIndexedGeometry(int i, int j, Point offset)
+        {
+            Rectangle rectangle = GetGeometry();
+            int thisX = rectangle.X + (int)(i * ScaledPixelsPerMicron * PitchX) - offset.X;
+            int thisY = rectangle.Y + (int)(j * ScaledPixelsPerMicron * PitchY) - offset.Y;
+            return new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
         }
     }
 }

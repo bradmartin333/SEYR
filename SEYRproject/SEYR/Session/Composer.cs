@@ -124,7 +124,7 @@ namespace SEYR.Session
             }
         }
 
-        public List<Feature> Features { get => Channel.Project.Features; set => Channel.Project.Features = value;}
+        public List<Feature> Features { get => Channel.Project.Features; set => Channel.Project.Features = value; }
 
         public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -132,9 +132,9 @@ namespace SEYR.Session
 
         public int PatternDeltaMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public float PatternScore{get => Channel.Project.PatternScore; set => Channel.Project.PatternScore = value; }
+        public float PatternScore { get => Channel.Project.PatternScore; set => Channel.Project.PatternScore = value; }
 
-        public List<Point> PatternLocations{ get => Channel.Project.PatternLocations; set => Channel.Project.PatternLocations = value;}
+        public List<Point> PatternLocations { get => Channel.Project.PatternLocations; set => Channel.Project.PatternLocations = value; }
 
         #endregion
 

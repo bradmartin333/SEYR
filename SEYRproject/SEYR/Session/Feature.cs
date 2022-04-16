@@ -31,7 +31,8 @@ namespace SEYR.Session
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
-        private List<float> Scores = new List<float>();
+        private List<float> CleanScores { get => Scores.Where(x => x != 0 && x != 1000).ToList(); }
+        private readonly List<float> Scores = new List<float>();
         private static readonly object Locker = new object();
 
         public Feature()
@@ -48,7 +49,7 @@ namespace SEYR.Session
             return new Rectangle(offset.X, offset.Y, size.X, size.Y);
         }
 
-        public Feature Clone(bool userClone = false)
+        public Feature Clone()
         {
             return new Feature()
             {
@@ -95,7 +96,7 @@ namespace SEYR.Session
         {
             lock (Locker)
             {
-                return Scores.Min() - 1;
+                return CleanScores.Min() - 1;
             }
         }
 
@@ -103,7 +104,7 @@ namespace SEYR.Session
         {
             lock (Locker)
             {
-                return Scores.Max() + 1;
+                return CleanScores.Max() + 1;
             }
         }
 
@@ -123,10 +124,10 @@ namespace SEYR.Session
             float val = 0f;
             lock (Locker)
             {
-                if (Scores.Count > 5) val = Scores.Average();
+                if (CleanScores.Count > 5) val = CleanScores.Average();
                 if (val == 0f) return 0;
                 else
-                    return (int)(Scores.Where(x => x > val).Count() / (double)Scores.Count() * 100);
+                    return (int)(CleanScores.Where(x => x > val).Count() / (double)CleanScores.Count() * 100);
             }
         }
     }

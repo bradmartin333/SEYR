@@ -54,19 +54,14 @@ namespace SEYR.ImageProcessing
         {
             ResizeAndRotate(ref bmp);
             Offset = await FollowPattern(bmp, forcePattern);
-
-            Rectangle rectangle = Channel.Project.GetGeometry();
             string outputData = string.Empty;
-
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
                 {
                     for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
-                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX) - Offset.X;
-                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY) - Offset.Y;
-                        Rectangle cropRect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
+                        Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         using (Graphics g2 = Graphics.FromImage(crop))
                         {
@@ -77,6 +72,7 @@ namespace SEYR.ImageProcessing
                                 foreach (Feature feature in Channel.Project.Features)
                                 {
                                     float score = await Task.Run(() => AnalyzeData(tile, feature));
+                                    feature.AddScore(score);
                                     if (score == 1000f) // Special pass
                                     {
                                         g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
@@ -85,7 +81,6 @@ namespace SEYR.ImageProcessing
                                     }
                                     else if (score > 0) // Normal
                                     {
-                                        feature.AddScore(score);
                                         g2.DrawRectangle(
                                             new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore(), Channel.Project.ScaledPixelsPerMicron)),
                                             feature.GetGeometry());
@@ -108,11 +103,10 @@ namespace SEYR.ImageProcessing
                                 $"{(desiredFeature != null ? desiredFeature.Name : "null")}");
                             return crop;
                         }
-                        g.DrawImage(crop, thisX, thisY);
+                        g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
             }
-
             Channel.Viewer.UpdateImage(bmp);
             Channel.DataStream.Write(outputData, false);
             return bmp;
@@ -300,7 +294,7 @@ namespace SEYR.ImageProcessing
         {
             double toLow = 255;
             double toHigh = 0;
-            hue = (hue - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+            hue = ((hue - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
             if (hue == 360) return Color.FromArgb(255, Color.White);
             if (hue == 0) return Color.FromArgb(255, Color.Black);
             int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;

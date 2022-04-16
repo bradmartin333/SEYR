@@ -135,7 +135,6 @@ namespace SEYR.Session
             return CreateStatusString();
         }
 
-
         private string CreateStatusString()
         {
             string output = string.Empty;
