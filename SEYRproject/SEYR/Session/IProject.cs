@@ -16,10 +16,6 @@ namespace SEYR.Session
         int SizeX { get; set; }
         int SizeY { get; set; }
         float PatternScore { get; set; }
-        Point ComposerLocation { get; set; }
-        Size ComposerSize { get; set; }
-        Point ViewerLocation { get; set; }
-        Size ViewerSize { get; set; }
         string PatternIntervalString { get; set; }
         int PatternIntervalValue { get; set; }
         int PatternDeltaMax { get; set; }

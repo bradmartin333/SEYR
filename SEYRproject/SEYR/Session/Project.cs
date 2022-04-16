@@ -36,14 +36,6 @@ namespace SEYR.Session
         public int SizeX { get; set; } = 10;
         [XmlElement("SizeY")]
         public int SizeY { get; set; } = 10;
-        [XmlElement("ComposerLocation")]
-        public Point ComposerLocation { get; set; } = Point.Empty;
-        [XmlElement("ComposerSize")]
-        public Size ComposerSize { get; set; } = Size.Empty;
-        [XmlElement("ViewerLocation")]
-        public Point ViewerLocation { get; set; } = Point.Empty;
-        [XmlElement("ViewerSize")]
-        public Size ViewerSize { get; set; } = Size.Empty;
         [XmlElement("PatternScore")]
         public float PatternScore { get; set; } = 0.95f;
         [XmlElement("PatternIntervalString")]

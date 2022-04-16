@@ -6,6 +6,7 @@ using SEYR.ImageProcessing;
 using System.Threading.Tasks;
 using System;
 using System.Drawing.Imaging;
+using System.IO.Compression;
 
 namespace SEYR.Session
 {
@@ -22,22 +23,22 @@ namespace SEYR.Session
         internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
         private readonly string ProjectPath = null;
+        private readonly string DirPath = null;
 
         /// <summary>
-        /// Create a new SEYR Channe
+        /// Create a new SEYR Channel
         /// </summary>
-        /// <param name="projectPath"></param>
-        /// <param name="streamPath"></param>
+        /// <param name="projectDir"></param>
         /// <param name="pixelsPerMicron"></param>
-        /// <param name="dataHeader"></param>
-        /// <param name="debugPath">
-        /// If null, logs to temp directory
+        /// <param name="dataHeader">
+        /// Header for OutputData Lines
         /// </param>
-        public Channel(string projectPath, string streamPath, float pixelsPerMicron, string dataHeader, string debugPath = null)
+        public Channel(string projectDir, float pixelsPerMicron, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
-            DataStream = new DataStream(streamPath, header: dataHeader);
-            DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
-            ProjectPath = projectPath;
+            DirPath = projectDir;
+            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", header: dataHeader);
+            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", true);
+            ProjectPath = DirPath + @"\project.seyr";
             Project = new Project() { PixelsPerMicron = pixelsPerMicron };
             SaveProject();
             Viewer = new Viewer();
@@ -46,17 +47,15 @@ namespace SEYR.Session
         /// <summary>
         /// Open an existing SEYR Channel
         /// </summary>
-        /// <param name="projectPath"></param>
-        /// <param name="streamPath"></param>
-        /// <param name="dataHeader"></param>
-        /// <param name="debugPath">
-        /// If null, logs to temp directory
+        /// <param name="projectDir"></param>
+        /// <param name="dataHeader">
         /// </param>
-        public Channel(string projectPath, string streamPath, string dataHeader, string debugPath = null)
+        public Channel(string projectDir, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
-            DataStream = new DataStream(streamPath, header: dataHeader);
-            DebugStream = new DataStream(string.IsNullOrEmpty(debugPath) ? $"{Path.GetTempPath()}SEYRdebug.txt" : debugPath, true);
-            ProjectPath = projectPath;
+            DirPath = projectDir;
+            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", header: dataHeader);
+            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", true);
+            ProjectPath = DirPath + @"\project.seyr";
             LoadProject();
             Viewer = new Viewer();
         }
@@ -107,6 +106,23 @@ namespace SEYR.Session
                     g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
                 DebugStream.Write("Pattern Loaded");
             } 
+        }
+
+        /// <summary>
+        /// Make an archive of all active files
+        /// </summary>
+        public void MakeArchive()
+        {
+            string zipPath = $@"{DirPath}\{DateTime.Now.ToString("s").Replace(':', '_')}.seyrup";
+            DebugStream.Write($"Adding seyrup to {zipPath}");
+            // Create and open a new ZIP file
+            using (ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
+            {
+                zip.CreateEntryFromFile(DataStream.Path, Path.GetFileName(DataStream.Path));
+                zip.CreateEntryFromFile(DebugStream.Path, Path.GetFileName(DebugStream.Path));
+                zip.CreateEntryFromFile(ProjectPath, Path.GetFileName(ProjectPath));
+                if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
+            }
         }
 
         #endregion

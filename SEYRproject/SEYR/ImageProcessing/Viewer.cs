@@ -10,24 +10,7 @@ namespace SEYR.ImageProcessing
         public Viewer()
         {
             InitializeComponent();
-
-            LocationChanged += Viewer_LocationChanged;
-            ResizeEnd += Viewer_ResizeEnd;
-
-            Location = Channel.Project.ViewerLocation;
-            if (Channel.Project.ViewerSize != Size.Empty)
-                Size = Channel.Project.ViewerSize;
             Show();
-        }
-
-        private void Viewer_LocationChanged(object sender, EventArgs e)
-        {
-            Channel.Project.ViewerLocation = Location;
-        }
-
-        private void Viewer_ResizeEnd(object sender, EventArgs e)
-        {
-            Channel.Project.ViewerSize = Size;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

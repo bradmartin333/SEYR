@@ -185,7 +185,7 @@ namespace SEYR.ImageProcessing
 
         private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern)
         {
-            if (Channel.Pattern != null && DataStream.Header != null)
+            if (Channel.Pattern != null && DataStream.Header != null && Channel.Project.PatternIntervalValue != 0)
             {
                 if (forcePattern)
                     return await FindPattern(bmp);

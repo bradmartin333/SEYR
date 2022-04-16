@@ -53,6 +53,7 @@ namespace SEYRDesktop
             }
             BtnRunAll.Enabled = true;
             BtnStop.Enabled = false;
+            if (!STOP) Channel.MakeArchive();
             STOP = false;
         }
 
@@ -72,15 +73,13 @@ namespace SEYRDesktop
             
             string[] files = Directory.GetFiles(path, "*.seyr");
             if (files.Length > 0)
-                Channel = new SEYR.Session.Channel(files[0], $@"{path}\data.txt", 
-                    "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
+                Channel = new SEYR.Session.Channel(path);
             else
-                Channel = new SEYR.Session.Channel($@"{path}\project.seyr", $@"{path}\data.txt", (float)NumPxPerMicron.Value,
-                    "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
-            
+                Channel = new SEYR.Session.Channel(path, (float)NumPxPerMicron.Value);
+
+            NumPxPerMicron.Enabled = false;
             BtnOpenDir.Enabled = false;
             BtnOpenComposer.Enabled = true;
-            NumPxPerMicron.Enabled = false;
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;
             BtnRepeat.Enabled = true;
@@ -112,6 +111,10 @@ namespace SEYRDesktop
             List<string> filesFound = new List<string>();
             foreach (var filter in filters)
                 filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
+            string patFile = string.Empty;
+            foreach (var file in filesFound)
+                if (file.Contains("SEYRpattern")) patFile = file;
+            if (!string.IsNullOrEmpty(patFile)) filesFound.Remove(patFile);
             return filesFound.AlphanumericSort();
         }
 

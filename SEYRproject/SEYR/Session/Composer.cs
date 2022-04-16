@@ -136,14 +136,6 @@ namespace SEYR.Session
 
         public List<Point> PatternLocations{ get => Channel.Project.PatternLocations; set => Channel.Project.PatternLocations = value;}
 
-        public Point ComposerLocation { get => Channel.Project.ComposerLocation; set => Channel.Project.ComposerLocation = value; }
-
-        public Size ComposerSize { get => Channel.Project.ComposerSize; set => Channel.Project.ComposerSize = value; }
-
-        public Point ViewerLocation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public Size ViewerSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         #endregion
 
         private int _TileRow = 1;
@@ -176,33 +168,12 @@ namespace SEYR.Session
         public Composer(Bitmap bitmap)
         {
             InitializeComponent();
-            
-            LocationChanged += Composer_LocationChanged;
-            ResizeEnd += Composer_ResizeEnd;
-            if (ComposerLocation != Point.Empty)
-            {
-                StartPosition = FormStartPosition.Manual;
-                Location = ComposerLocation;
-            }
-            if (ComposerSize != Size.Empty)
-                Size = ComposerSize;
-
             InputImage = bitmap;
             InitializeHandlers();
             InitializeUI();
             FormReady = true;
             SetupFeatureUI(true);
             UpdateImages();
-        }
-
-        private void Composer_LocationChanged(object sender, EventArgs e)
-        {
-            ComposerLocation = Location;
-        }
-
-        private void Composer_ResizeEnd(object sender, EventArgs e)
-        {
-            ComposerSize = Size;
         }
 
         private void InitializeHandlers()
