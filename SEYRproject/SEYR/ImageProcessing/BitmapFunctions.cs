@@ -85,6 +85,7 @@ namespace SEYR.ImageProcessing
                     }   
                 }
             }
+
             Channel.Viewer.UpdateImage(bmp);
             await Channel.DataStream.Write(outputData, false);
             return bmp;
