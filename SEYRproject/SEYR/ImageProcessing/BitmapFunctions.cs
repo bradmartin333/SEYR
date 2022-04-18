@@ -233,14 +233,14 @@ namespace SEYR.ImageProcessing
                 int deltaH = (int)Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
                 if (deltaH <= Channel.Project.PatternDeltaMax)
                 {
-                    await Channel.DebugStream.Write($"Pattern follower delta = {deltaH}");
+                    await Channel.DebugStream.Write($"Pattern follower delta = {deltaH}", showInViewer: true);
                     return delta;
                 }    
             }
             if (Channel.Project.PatternLocations.Count == 0)
-                await Channel.DebugStream.Write($"Pattern location not taught");
+                await Channel.DebugStream.Write($"Pattern location not taught", showInViewer: true);
             else
-                await Channel.DebugStream.Write($"Failed to find valid pattern. Best score = {m.Similarity}");
+                await Channel.DebugStream.Write($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
             return NullPoint;
         }
 

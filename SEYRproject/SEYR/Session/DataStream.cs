@@ -22,10 +22,16 @@ namespace SEYR.Session
             } 
         }
 
-        public async Task Write(string value, bool addNewLine = true, bool addDT = false)
+        public async Task Write(string value, bool addNewLine = true, bool addDT = false, bool showInViewer = false)
         {
             using (StreamWriter file = new StreamWriter(Path, append: true))
                 await file.WriteAsync($"{(addDT ? $"{System.DateTime.Now}\t" : "")}{value}{(addNewLine ? "\n" : "")}");
+            if (showInViewer)
+            {
+                try { Channel.Viewer.Invoke((System.Windows.Forms.MethodInvoker)delegate { 
+                    Channel.Viewer.InfoLabel.Text = $"{System.DateTime.Now}   {value.Replace("\t", "   ")}"; }); }
+                catch (System.Exception) { }
+            }
         }
     }
 }
