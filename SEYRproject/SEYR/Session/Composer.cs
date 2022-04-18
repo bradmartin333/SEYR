@@ -148,6 +148,7 @@ namespace SEYR.Session
                 UpdateImages();
             }
         }
+
         private int _TileColumn = 1;
         private int TileColumn
         {
@@ -234,7 +235,7 @@ namespace SEYR.Session
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature);
                 PbxTile.BackgroundImage = tile;
-                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = ActiveFeature.GetLastScore().ToString();
+                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = ActiveFeature.GetScoreInfo().Item1.ToString();
             }
             catch (Exception ex)
             {
@@ -472,7 +473,7 @@ namespace SEYR.Session
         private void BtnResetScoreHistory_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
-            ActiveFeature.ResetScore();
+            ActiveFeature.Scores.Clear();
             ApplyFeature();
         }
 

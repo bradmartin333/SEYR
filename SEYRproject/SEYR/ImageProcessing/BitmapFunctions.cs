@@ -28,7 +28,7 @@ namespace SEYR.ImageProcessing
         /// </summary>
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
-        public static async void LoadImage(Bitmap bmp, bool forcePattern)
+        public static async Task LoadImage(Bitmap bmp, bool forcePattern)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
@@ -77,8 +77,8 @@ namespace SEYR.ImageProcessing
                                 Bitmap tile = (Bitmap)crop.Clone();
                                 foreach (Feature feature in Channel.Project.Features)
                                 {
-                                    float score = await Task.Run(() => AnalyzeData(tile, feature));
-                                    feature.AddScore(score);
+                                    float score = AnalyzeData(tile, feature);
+                                    feature.Scores.Add(score);
                                     if (score == 1000f) // Special pass
                                     {
                                         g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
@@ -88,7 +88,7 @@ namespace SEYR.ImageProcessing
                                     else if (score > 0) // Normal
                                     {
                                         g2.DrawRectangle(
-                                            new Pen(ColorFromHSV(score, feature.GetMinScore(), feature.GetMaxScore(), Channel.Project.ScaledPixelsPerMicron)),
+                                            new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron),
                                             feature.GetGeometry());
                                         if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
                                             g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
@@ -109,7 +109,7 @@ namespace SEYR.ImageProcessing
                 }
             }
             Channel.Viewer.UpdateImage(bmp);
-            Channel.DataStream.Write(outputData, false);
+            await Channel.DataStream.Write(outputData, false);
             return bmp;
         }
 
@@ -143,7 +143,8 @@ namespace SEYR.ImageProcessing
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
             int filterVal = (int)(0.2 * (bmp.Width * bmp.Height));
-            float score = (float)Math.Round(CalculateShannonEntropy(rVals.ToArray(), rect.Size) + (whiteVals / 2), 3);
+            float entropy = CalculateShannonEntropy(rVals.ToArray(), rect.Size);
+            float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
 
             if (blackVals < filterVal || whiteVals < filterVal)
             {
@@ -192,7 +193,11 @@ namespace SEYR.ImageProcessing
                             if (cols[i] == Channel.Project.PatternIntervalString)
                                 if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
+                                    {
+                                        await Channel.DebugStream.Write($"Pattern follower interval hit: {Channel.OutputData}");
                                         return await FindPattern(bmp);
+                                    }
+                                        
                 }
             }
             return NullPoint;
@@ -203,17 +208,22 @@ namespace SEYR.ImageProcessing
             Bitmap sourceImage = (Bitmap)bmp.Clone();
             Bitmap pattern = (Bitmap)Channel.Pattern.Clone();
             var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
-            TemplateMatch[] matchings = await Task.Run(() => tm.ProcessImage(sourceImage, pattern));
+            TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
             TemplateMatch m = matchings[0];
-            Channel.DebugStream.Write($"Best pattern: {m.Similarity} {m.Rectangle}");
             foreach (Point point in Channel.Project.PatternLocations)
             {
                 Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
                 int deltaH = (int)Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
-                Channel.DebugStream.Write($"Delta = {deltaH}");
                 if (deltaH <= Channel.Project.PatternDeltaMax)
+                {
+                    await Channel.DebugStream.Write($"Pattern follower delta = {deltaH}");
                     return delta;
+                }    
             }
+            if (Channel.Project.PatternLocations.Count == 0)
+                await Channel.DebugStream.Write($"Pattern location not taught");
+            else
+                await Channel.DebugStream.Write($"Failed to find valid pattern. Best score = {m.Similarity}");
             return NullPoint;
         }
 
@@ -223,22 +233,20 @@ namespace SEYR.ImageProcessing
         {
             ResizeAndRotate(ref bmp);
             Rectangle rectangle = Channel.Project.GetGeometry();
-            await Task.Run(() => {
-                using (Graphics g = Graphics.FromImage(bmp))
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                for (int i = 0; i < Channel.Project.Columns; i++)
                 {
-                    for (int i = 0; i < Channel.Project.Columns; i++)
+                    for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
-                        for (int j = Channel.Project.Rows - 1; j >= 0; j--)
-                        {
-                            int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                            int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
-                            g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen,
-                                (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
-                                thisX, thisY, rectangle.Width, rectangle.Height);
-                        }
+                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen,
+                            (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
+                            thisX, thisY, rectangle.Width, rectangle.Height);
                     }
                 }
-            });
+            }
             return bmp;
         }
 
@@ -289,34 +297,6 @@ namespace SEYR.ImageProcessing
             g.Dispose();
             //return the image
             return bmp;
-        }
-
-        private static Color ColorFromHSV(double hue, double fromLow, double fromHigh, double value = 1, double saturation = 1, byte opacity = 255)
-        {
-            double toLow = 255;
-            double toHigh = 0;
-            hue = ((hue - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
-            if (hue == 360) return Color.FromArgb(255, Color.White);
-            if (hue == 0) return Color.FromArgb(255, Color.Black);
-            int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
-            double f = (hue / 60) - Math.Floor(hue / 60);
-            value *= 255;
-            int v = Convert.ToInt32(value);
-            int p = Convert.ToInt32(value * (1 - saturation));
-            int q = Convert.ToInt32(value * (1 - (f * saturation)));
-            int t = Convert.ToInt32(value * (1 - ((1 - f) * saturation)));
-            if (hi == 0)
-                return Color.FromArgb(opacity, v, t, p);
-            else if (hi == 1)
-                return Color.FromArgb(opacity, q, v, p);
-            else if (hi == 2)
-                return Color.FromArgb(opacity, p, v, t);
-            else if (hi == 3)
-                return Color.FromArgb(opacity, p, q, v);
-            else if (hi == 4)
-                return Color.FromArgb(opacity, t, p, v);
-            else
-                return Color.FromArgb(opacity, v, p, q);
         }
 
         #endregion

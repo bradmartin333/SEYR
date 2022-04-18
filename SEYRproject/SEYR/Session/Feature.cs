@@ -31,10 +31,10 @@ namespace SEYR.Session
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
-        private List<float> CleanScores { get => Scores.Where(x => x != 0 && x != 1000).ToList(); }
-        private readonly List<float> Scores = new List<float>();
-        private static readonly object Locker = new object();
-
+        private List<float> _Scores = new List<float>();
+        internal List<float> Scores { get => _Scores; set => _Scores = value; }
+        
+        
         public Feature()
         {
             Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(); // Random string
@@ -76,59 +76,52 @@ namespace SEYR.Session
             return displaynames.ToArray();
         }
 
-        internal void ResetScore()
+        internal (float, float[]) GetScoreInfo()
         {
-            lock (Locker)
-            {
-                Scores.Clear();
-            }
+            float[] theseScores = (float[])Scores.ToArray().Clone();
+            if (theseScores.Length > 0)
+                return (theseScores.Last(), theseScores);
+            else
+                return (0f, new float[] { 0f });
         }
 
-        internal void AddScore(float score)
+        public Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
         {
-            lock (Locker)
+            (float hueIn, float[] scores) = GetScoreInfo();
+            double fromLow;
+            double fromHigh;
+            float[] cleanScores = scores.Where(x => x > 0f && x < 1000f).ToArray();
+            if (cleanScores.Count() > 5)
             {
-                Scores.Add(score);
+                fromLow = cleanScores.Min();
+                fromHigh = cleanScores.Max();
             }
-        }
-
-        internal double GetMinScore()
-        {
-            lock (Locker)
-            {
-                return CleanScores.Min() - 1;
-            }
-        }
-
-        internal double GetMaxScore()
-        {
-            lock (Locker)
-            {
-                return CleanScores.Max() + 1;
-            }
-        }
-
-        internal double GetLastScore()
-        {
-            lock (Locker)
-            {
-                if (Scores.Count > 0)
-                    return Scores.Last();
-                else
-                    return 0.0;
-            }
-        }
-
-        internal int QuickGlance()
-        {
-            float val = 0f;
-            lock (Locker)
-            {
-                if (CleanScores.Count > 5) val = CleanScores.Average();
-                if (val == 0f) return 0;
-                else
-                    return (int)(CleanScores.Where(x => x > val).Count() / (double)CleanScores.Count() * 100);
-            }
+            else
+                return Color.Black;
+            double toLow = 255;
+            double toHigh = 0;
+            double hue = (double)((hueIn - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
+            if (hue == 360) return Color.FromArgb(255, Color.White);
+            if (hue == 0) return Color.FromArgb(255, Color.Black);
+            int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+            double f = (hue / 60) - Math.Floor(hue / 60);
+            value *= 255;
+            int v = Convert.ToInt32(value);
+            int p = Convert.ToInt32(value * (1 - saturation));
+            int q = Convert.ToInt32(value * (1 - (f * saturation)));
+            int t = Convert.ToInt32(value * (1 - ((1 - f) * saturation)));
+            if (hi == 0)
+                return Color.FromArgb(opacity, v, t, p);
+            else if (hi == 1)
+                return Color.FromArgb(opacity, q, v, p);
+            else if (hi == 2)
+                return Color.FromArgb(opacity, p, v, t);
+            else if (hi == 3)
+                return Color.FromArgb(opacity, p, q, v);
+            else if (hi == 4)
+                return Color.FromArgb(opacity, t, p, v);
+            else
+                return Color.FromArgb(opacity, v, p, q);
         }
     }
 }

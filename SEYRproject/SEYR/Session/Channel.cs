@@ -36,8 +36,8 @@ namespace SEYR.Session
         public Channel(string projectDir, float pixelsPerMicron, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
             DirPath = projectDir;
-            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", header: dataHeader);
-            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", true);
+            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
+            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
             Project = new Project() { PixelsPerMicron = pixelsPerMicron };
             SaveProject();
@@ -53,8 +53,8 @@ namespace SEYR.Session
         public Channel(string projectDir, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
             DirPath = projectDir;
-            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", header: dataHeader);
-            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", true);
+            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
+            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
             LoadProject();
             Viewer = new Viewer();
@@ -62,10 +62,10 @@ namespace SEYR.Session
 
         public void ClearLogs()
         {
-            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path);
-            if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, true);
+            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.Header);
+            if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, isDebug: true);
             foreach (Feature feature in Project.Features)
-                feature.ResetScore();
+                feature.Scores.Clear();
             DiscardViewer();
         }
 
@@ -131,7 +131,7 @@ namespace SEYR.Session
 
         public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false)
         {
-            await Task.Run(() => BitmapFunctions.LoadImage(bmp, forcePattern));
+            await BitmapFunctions.LoadImage(bmp, forcePattern);
             return CreateStatusString();
         }
 
@@ -139,7 +139,7 @@ namespace SEYR.Session
         {
             string output = string.Empty;
             foreach (Feature feature in Project.Features)
-                output += $"{feature.Name}\t{feature.QuickGlance()}\n";
+                output += $"{feature.Name}\t{feature.GetScoreInfo().Item1}\n";
             return output;
         }
 
