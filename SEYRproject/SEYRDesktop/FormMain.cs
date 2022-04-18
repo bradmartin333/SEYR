@@ -1,118 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SEYRDesktop
 {
     public partial class FormMain : Form
     {
-        Image IMG = null;
-        FrameDimension DIM = null;
-        string[] IMGS = null;
-        int FRAMECOUNT = 0;
-        bool STOP = false;
+        private SEYR.Session.Channel Channel;
+        private string[] IMGS = null;
+        private bool STOP;
+        private bool BUSY;
 
         public FormMain()
         {
             InitializeComponent();
-            SEYR.Pipeline.Appear();
         }
 
-        private void btnOpenComposer_Click(object sender, System.EventArgs e)
+        private async void numFrame_ValueChanged(object sender, EventArgs e)
         {
-            SEYR.Pipeline.Appear();
+            if (!BtnRunAll.Enabled || BUSY) return;
+            await NextImage();
         }
 
-        private void btnOpenGIF_Click(object sender, System.EventArgs e)
+        private async Task NextImage(bool forcePattern = false)
         {
-            string path = OpenFile("Open a GIF", "GIF file (*.gif)|*.gif");
-            if (path == null)
-                return;
-
-            btnOpenDir.Enabled = false;
-
-            btnOpenGIF.BackColor = Color.LawnGreen;
-
-            IMG = Image.FromFile(path);
-            DIM = new FrameDimension(IMG.FrameDimensionsList[0]);
-            FRAMECOUNT = IMG.GetFrameCount(DIM);
-
-            if (FRAMECOUNT > 100) MessageBox.Show("This is a large GIF, consider using a Dir of images instead.");
-
-            numFrame.Maximum = FRAMECOUNT;
-            numFrame.Value = 1;
-            NextImage();
+            BUSY = true;
+            SEYR.Session.Channel.OutputData = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
+            Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
+            string info = await Channel.NewImage(bmp, forcePattern);
+            //System.Diagnostics.Debug.WriteLine(info + '\n');
+            BUSY = false;
         }
 
-        private void btnOpenDir_Click(object sender, EventArgs e)
+        private void BtnOpenComposer_Click(object sender, EventArgs e)
+        {
+            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
+        }
+
+        private async void btnRunAll_Click(object sender, EventArgs e)
+        {
+            BtnRunAll.Enabled = false;
+            BtnStop.Enabled = true;
+            while (!STOP && NumFrame.Value < NumFrame.Maximum)
+            {
+                Application.DoEvents();
+                await NextImage();
+                NumFrame.Value++;
+            }
+            BtnRunAll.Enabled = true;
+            BtnStop.Enabled = false;
+            if (!STOP) Channel.MakeArchive();
+            STOP = false;
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            STOP = true;
+            BtnRunAll.Enabled = true;
+            BtnStop.Enabled = false;
+        }
+
+        private async void btnOpenDir_Click(object sender, EventArgs e)
         {
             string path = OpenFolder();
-            if (path == null)
-                return;
-
-            btnOpenGIF.Enabled = false;
-
-            btnOpenDir.BackColor = Color.LawnGreen;
-
+            if (path == null) return;
+            
             IMGS = GetSortedPicturesFrom(path).ToArray();
-            FRAMECOUNT = IMGS.Count();
+            
+            string[] files = Directory.GetFiles(path, "*.seyr");
+            if (files.Length > 0)
+                Channel = new SEYR.Session.Channel(path);
+            else
+                Channel = new SEYR.Session.Channel(path, (float)NumPxPerMicron.Value);
 
-            numFrame.Maximum = FRAMECOUNT;
-            numFrame.Value = 1;
-            NextImage();
-        }
+            NumPxPerMicron.Enabled = false;
+            BtnOpenDir.Enabled = false;
+            BtnOpenComposer.Enabled = true;
+            NumFrame.Enabled = true;
+            BtnRunAll.Enabled = true;
+            BtnRepeat.Enabled = true;
+            BtnShowViewer.Enabled = true;
+            BtnClearLogs.Enabled = true;
+            BtnForcePattern.Enabled = true;
+            BtnOpenDir.BackColor = Color.LawnGreen;
+            
+            NumFrame.Maximum = IMGS.Length - 1;
+            NumFrame.Value = 0;
 
-        private void numFrame_ValueChanged(object sender, System.EventArgs e)
-        {
-            NextImage();
-        }
-
-        private void NextImage()
-        {
-            SEYR.Pipeline.ImageIdx = (int)numFrame.Value;
-            SEYR.Pipeline.X = (int)(((double)numFrame.Value) % Math.Sqrt(FRAMECOUNT)) + 1;
-            SEYR.Pipeline.Y = (int)(((double)numFrame.Value) / Math.Sqrt(FRAMECOUNT)) + (((int)SEYR.Pipeline.X > 1) ? 1 : 0);
-            if (btnOpenGIF.Enabled)
-            {
-                IMG.SelectActiveFrame(DIM, (int)numFrame.Value - 1);
-                Image image = (Image)IMG.Clone();
-                Bitmap bitmap = new Bitmap(image);
-                SEYR.Pipeline.LoadNewImage(bitmap);
-                while (SEYR.Pipeline.Working)
-                    Application.DoEvents();
-            }
-            else if (btnOpenDir.Enabled)
-            {
-                SEYR.Pipeline.LoadNewImage(new Bitmap(IMGS[(int)(numFrame.Value - 1)]));
-                while (SEYR.Pipeline.Working)
-                    Application.DoEvents();
-            }
-
-            string lastData = SEYR.Pipeline.GetData();
-            if (!string.IsNullOrEmpty(lastData))
-            {
-                string[] dataLines = lastData.Split('\n');
-                int pass = dataLines.Where(x => !string.IsNullOrEmpty(x) && x.Split('\t')[4] == "Pass").Count();
-                System.Diagnostics.Debug.WriteLine($"Pass: {pass}\tYield: {Math.Round(pass / (double)dataLines.Length * 100, 1)}%");
-            }
-        }
-
-        private string OpenFile(string title, string filter)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.Title = title;
-                openFileDialog.Filter = filter;
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    return openFileDialog.FileName;
-            }
-            return null;
+            await NextImage();
         }
 
         private string OpenFolder()
@@ -126,46 +105,37 @@ namespace SEYRDesktop
             return null;
         }
 
-        private void btnRunAll_Click(object sender, System.EventArgs e)
-        {
-            for (int i = (int)numFrame.Value; i < FRAMECOUNT; i++)
-            {
-                if (STOP)
-                {
-                    STOP = false;
-                    return;
-                }
-                while (SEYR.Pipeline.Working)
-                {
-                    Application.DoEvents();
-                }
-                numFrame.Value++;
-                Application.DoEvents();
-            }
-        }
-
-        private void numPatternFollowInterval_ValueChanged(object sender, System.EventArgs e)
-        {
-            SEYR.Pipeline.PatternFollowInterval = (int)numPatternFollowInterval.Value;
-        }
-
-        private void btnClearData_Click(object sender, EventArgs e)
-        {
-            SEYR.Pipeline.ClearOutput(reloadImage: true);
-        }
-
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            STOP = true;
-        }
-
-        public static IEnumerable<string> GetSortedPicturesFrom(string searchFolder)
+        private static IEnumerable<string> GetSortedPicturesFrom(string searchFolder)
         {
             string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
             List<string> filesFound = new List<string>();
             foreach (var filter in filters)
                 filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
+            string patFile = string.Empty;
+            foreach (var file in filesFound)
+                if (file.Contains("SEYRpattern")) patFile = file;
+            if (!string.IsNullOrEmpty(patFile)) filesFound.Remove(patFile);
             return filesFound.AlphanumericSort();
+        }
+
+        private async void BtnRepeat_Click(object sender, EventArgs e)
+        {
+            await NextImage();
+        }
+
+        private void BtnShowViewer_Click(object sender, EventArgs e)
+        {
+            Channel.ShowViewer();
+        }
+
+        private void BtnClearLogs_Click(object sender, EventArgs e)
+        {
+            Channel.ClearLogs();
+        }
+
+        private async void BtnForcePattern_Click(object sender, EventArgs e)
+        {
+            await NextImage(true);
         }
     }
 }

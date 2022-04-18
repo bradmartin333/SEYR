@@ -30,232 +30,233 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnOpenDir = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnOpenComposer = new System.Windows.Forms.Button();
-            this.btnClearData = new System.Windows.Forms.Button();
-            this.btnOpenGIF = new System.Windows.Forms.Button();
+            this.BtnClearLogs = new System.Windows.Forms.Button();
+            this.BtnShowViewer = new System.Windows.Forms.Button();
+            this.BtnRepeat = new System.Windows.Forms.Button();
+            this.NumPxPerMicron = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.BtnStop = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.numFrame = new System.Windows.Forms.NumericUpDown();
-            this.btnRunAll = new System.Windows.Forms.Button();
-            this.numPatternFollowInterval = new System.Windows.Forms.NumericUpDown();
+            this.NumFrame = new System.Windows.Forms.NumericUpDown();
+            this.BtnRunAll = new System.Windows.Forms.Button();
+            this.BtnOpenDir = new System.Windows.Forms.Button();
+            this.BtnOpenComposer = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.BtnForcePattern = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numFrame)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnOpenDir, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnStop, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnOpenComposer, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnClearData, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnOpenGIF, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.numFrame, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnRunAll, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.numPatternFollowInterval, 4, 4);
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.BtnClearLogs, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnShowViewer, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.NumPxPerMicron, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnStop, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.NumFrame, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnRunAll, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 149);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 123);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // btnOpenDir
+            // BtnClearLogs
             // 
-            this.btnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenDir.AutoSize = true;
-            this.btnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenDir.Location = new System.Drawing.Point(97, 15);
-            this.btnOpenDir.Name = "btnOpenDir";
-            this.btnOpenDir.Size = new System.Drawing.Size(72, 28);
-            this.btnOpenDir.TabIndex = 14;
-            this.btnOpenDir.Text = "Open Dir";
-            this.btnOpenDir.UseVisualStyleBackColor = true;
-            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
+            this.BtnClearLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnClearLogs.Enabled = false;
+            this.BtnClearLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClearLogs.Location = new System.Drawing.Point(303, 13);
+            this.BtnClearLogs.Name = "BtnClearLogs";
+            this.BtnClearLogs.Size = new System.Drawing.Size(94, 28);
+            this.BtnClearLogs.TabIndex = 19;
+            this.BtnClearLogs.Text = "Clear Logs";
+            this.BtnClearLogs.UseVisualStyleBackColor = true;
+            this.BtnClearLogs.Click += new System.EventHandler(this.BtnClearLogs_Click);
             // 
-            // btnStop
+            // BtnShowViewer
             // 
-            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.btnStop, 2);
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStop.Location = new System.Drawing.Point(175, 80);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(184, 28);
-            this.btnStop.TabIndex = 13;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.BtnShowViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnShowViewer.Enabled = false;
+            this.BtnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnShowViewer.Location = new System.Drawing.Point(203, 81);
+            this.BtnShowViewer.Name = "BtnShowViewer";
+            this.BtnShowViewer.Size = new System.Drawing.Size(94, 28);
+            this.BtnShowViewer.TabIndex = 18;
+            this.BtnShowViewer.Text = "Show Viewer";
+            this.BtnShowViewer.UseVisualStyleBackColor = true;
+            this.BtnShowViewer.Click += new System.EventHandler(this.BtnShowViewer_Click);
             // 
-            // btnOpenComposer
+            // BtnRepeat
             // 
-            this.btnOpenComposer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.btnOpenComposer, 2);
-            this.btnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenComposer.Location = new System.Drawing.Point(175, 15);
-            this.btnOpenComposer.Name = "btnOpenComposer";
-            this.btnOpenComposer.Size = new System.Drawing.Size(184, 28);
-            this.btnOpenComposer.TabIndex = 1;
-            this.btnOpenComposer.Text = "Open Composer";
-            this.btnOpenComposer.UseVisualStyleBackColor = true;
-            this.btnOpenComposer.Click += new System.EventHandler(this.btnOpenComposer_Click);
+            this.BtnRepeat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnRepeat.Enabled = false;
+            this.BtnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRepeat.Location = new System.Drawing.Point(203, 13);
+            this.BtnRepeat.Name = "BtnRepeat";
+            this.BtnRepeat.Size = new System.Drawing.Size(94, 28);
+            this.BtnRepeat.TabIndex = 17;
+            this.BtnRepeat.Text = "Repeat Image";
+            this.BtnRepeat.UseVisualStyleBackColor = true;
+            this.BtnRepeat.Click += new System.EventHandler(this.BtnRepeat_Click);
             // 
-            // btnClearData
+            // NumPxPerMicron
             // 
-            this.btnClearData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearData.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.btnClearData, 2);
-            this.btnClearData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearData.Location = new System.Drawing.Point(6, 80);
-            this.btnClearData.Name = "btnClearData";
-            this.btnClearData.Size = new System.Drawing.Size(163, 28);
-            this.btnClearData.TabIndex = 12;
-            this.btnClearData.Text = "Clear Data";
-            this.btnClearData.UseVisualStyleBackColor = true;
-            this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
-            // 
-            // btnOpenGIF
-            // 
-            this.btnOpenGIF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenGIF.AutoSize = true;
-            this.btnOpenGIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenGIF.Location = new System.Drawing.Point(6, 15);
-            this.btnOpenGIF.Name = "btnOpenGIF";
-            this.btnOpenGIF.Size = new System.Drawing.Size(85, 28);
-            this.btnOpenGIF.TabIndex = 0;
-            this.btnOpenGIF.Text = "Open GIF";
-            this.btnOpenGIF.UseVisualStyleBackColor = true;
-            this.btnOpenGIF.Click += new System.EventHandler(this.btnOpenGIF_Click);
+            this.NumPxPerMicron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumPxPerMicron.DecimalPlaces = 3;
+            this.NumPxPerMicron.Location = new System.Drawing.Point(103, 85);
+            this.NumPxPerMicron.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumPxPerMicron.Name = "NumPxPerMicron";
+            this.NumPxPerMicron.Size = new System.Drawing.Size(94, 20);
+            this.NumPxPerMicron.TabIndex = 16;
+            this.NumPxPerMicron.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumPxPerMicron.Value = new decimal(new int[] {
+            2606,
+            0,
+            0,
+            196608});
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(175, 111);
+            this.label1.Location = new System.Drawing.Point(3, 78);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 26);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Follow Interval";
+            this.label1.Size = new System.Drawing.Size(94, 34);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Pixels/Micron";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // BtnStop
+            // 
+            this.BtnStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnStop.Enabled = false;
+            this.BtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnStop.Location = new System.Drawing.Point(303, 81);
+            this.BtnStop.Name = "BtnStop";
+            this.BtnStop.Size = new System.Drawing.Size(94, 28);
+            this.BtnStop.TabIndex = 13;
+            this.BtnStop.Text = "Stop";
+            this.BtnStop.UseVisualStyleBackColor = true;
+            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(6, 46);
+            this.label4.Location = new System.Drawing.Point(3, 44);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 31);
+            this.label4.Size = new System.Drawing.Size(94, 34);
             this.label4.TabIndex = 11;
             this.label4.Text = "Frame #";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // numFrame
+            // NumFrame
             // 
-            this.numFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numFrame.Location = new System.Drawing.Point(97, 49);
-            this.numFrame.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numFrame.Name = "numFrame";
-            this.numFrame.Size = new System.Drawing.Size(72, 20);
-            this.numFrame.TabIndex = 3;
-            this.numFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numFrame.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numFrame.ValueChanged += new System.EventHandler(this.numFrame_ValueChanged);
+            this.NumFrame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumFrame.Enabled = false;
+            this.NumFrame.Location = new System.Drawing.Point(103, 51);
+            this.NumFrame.Name = "NumFrame";
+            this.NumFrame.Size = new System.Drawing.Size(94, 20);
+            this.NumFrame.TabIndex = 3;
+            this.NumFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumFrame.ValueChanged += new System.EventHandler(this.numFrame_ValueChanged);
             // 
-            // btnRunAll
+            // BtnRunAll
             // 
-            this.btnRunAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.btnRunAll, 2);
-            this.btnRunAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunAll.Location = new System.Drawing.Point(175, 49);
-            this.btnRunAll.Name = "btnRunAll";
-            this.btnRunAll.Size = new System.Drawing.Size(184, 25);
-            this.btnRunAll.TabIndex = 4;
-            this.btnRunAll.Text = "Run All";
-            this.btnRunAll.UseVisualStyleBackColor = true;
-            this.btnRunAll.Click += new System.EventHandler(this.btnRunAll_Click);
+            this.BtnRunAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnRunAll.Enabled = false;
+            this.BtnRunAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRunAll.Location = new System.Drawing.Point(303, 47);
+            this.BtnRunAll.Name = "BtnRunAll";
+            this.BtnRunAll.Size = new System.Drawing.Size(94, 28);
+            this.BtnRunAll.TabIndex = 4;
+            this.BtnRunAll.Text = "Run All";
+            this.BtnRunAll.UseVisualStyleBackColor = true;
+            this.BtnRunAll.Click += new System.EventHandler(this.btnRunAll_Click);
             // 
-            // numPatternFollowInterval
+            // BtnOpenDir
             // 
-            this.numPatternFollowInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPatternFollowInterval.Location = new System.Drawing.Point(256, 114);
-            this.numPatternFollowInterval.Maximum = new decimal(new int[] {
-            276447232,
-            23283,
-            0,
-            0});
-            this.numPatternFollowInterval.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPatternFollowInterval.Name = "numPatternFollowInterval";
-            this.numPatternFollowInterval.Size = new System.Drawing.Size(103, 20);
-            this.numPatternFollowInterval.TabIndex = 5;
-            this.numPatternFollowInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numPatternFollowInterval.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPatternFollowInterval.ValueChanged += new System.EventHandler(this.numPatternFollowInterval_ValueChanged);
+            this.BtnOpenDir.AutoSize = true;
+            this.BtnOpenDir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpenDir.Location = new System.Drawing.Point(3, 13);
+            this.BtnOpenDir.Name = "BtnOpenDir";
+            this.BtnOpenDir.Size = new System.Drawing.Size(94, 28);
+            this.BtnOpenDir.TabIndex = 14;
+            this.BtnOpenDir.Text = "Open Dir";
+            this.BtnOpenDir.UseVisualStyleBackColor = true;
+            this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
+            // 
+            // BtnOpenComposer
+            // 
+            this.BtnOpenComposer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnOpenComposer.Enabled = false;
+            this.BtnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpenComposer.Location = new System.Drawing.Point(203, 47);
+            this.BtnOpenComposer.Name = "BtnOpenComposer";
+            this.BtnOpenComposer.Size = new System.Drawing.Size(94, 28);
+            this.BtnOpenComposer.TabIndex = 1;
+            this.BtnOpenComposer.Text = "Open Composer";
+            this.BtnOpenComposer.UseVisualStyleBackColor = true;
+            this.BtnOpenComposer.Click += new System.EventHandler(this.BtnOpenComposer_Click);
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // BtnForcePattern
+            // 
+            this.BtnForcePattern.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnForcePattern.Enabled = false;
+            this.BtnForcePattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnForcePattern.Location = new System.Drawing.Point(103, 13);
+            this.BtnForcePattern.Name = "BtnForcePattern";
+            this.BtnForcePattern.Size = new System.Drawing.Size(94, 28);
+            this.BtnForcePattern.TabIndex = 20;
+            this.BtnForcePattern.Text = "Force Pattern";
+            this.BtnForcePattern.UseVisualStyleBackColor = true;
+            this.BtnForcePattern.Click += new System.EventHandler(this.BtnForcePattern_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 149);
+            this.ClientSize = new System.Drawing.Size(400, 123);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(416, 149);
             this.Name = "FormMain";
-            this.Text = "SEYR Desktop   v1.2.2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "v1.3.0";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numFrame)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPatternFollowInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -263,17 +264,19 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnOpenGIF;
-        private System.Windows.Forms.Button btnOpenComposer;
-        private System.Windows.Forms.NumericUpDown numFrame;
+        private System.Windows.Forms.Button BtnOpenComposer;
+        private System.Windows.Forms.NumericUpDown NumFrame;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Button btnRunAll;
-        private System.Windows.Forms.NumericUpDown numPatternFollowInterval;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnRunAll;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnClearData;
-        private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnOpenDir;
+        private System.Windows.Forms.Button BtnStop;
+        private System.Windows.Forms.Button BtnOpenDir;
+        private System.Windows.Forms.NumericUpDown NumPxPerMicron;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnRepeat;
+        private System.Windows.Forms.Button BtnShowViewer;
+        private System.Windows.Forms.Button BtnClearLogs;
+        private System.Windows.Forms.Button BtnForcePattern;
     }
 }
 
