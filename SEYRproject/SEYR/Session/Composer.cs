@@ -20,8 +20,7 @@ namespace SEYR.Session
             {
                 Channel.Project.Scaling = value;
                 Channel.Project.ScaledPixelsPerMicron = Channel.Project.PixelsPerMicron * Channel.Project.Scaling;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -31,8 +30,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.Angle = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -42,8 +40,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.OriginX = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -53,8 +50,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.OriginY = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -64,8 +60,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.PitchX = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -75,8 +70,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.PitchY = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -86,8 +80,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.SizeX = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -97,8 +90,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.SizeY = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -108,8 +100,7 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.Rows = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
@@ -119,12 +110,18 @@ namespace SEYR.Session
             set
             {
                 Channel.Project.Columns = value;
-                UpdateGrid();
-                UpdateTile();
+                UpdateImages();
             }
         }
 
-        public List<Feature> Features { get => Channel.Project.Features; set => Channel.Project.Features = value; }
+        public List<Feature> Features { 
+            get => Channel.Project.Features;
+            set
+            {
+                Channel.Project.Features = value;
+                UpdateImages();
+            }
+        }
 
         public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -162,9 +159,8 @@ namespace SEYR.Session
 
         private Feature ActiveFeature = null;
         private readonly Bitmap InputImage;
-        private bool FormReady = false;
         private bool ClickGrid = false;
-        private bool LoadingFeature = false;
+        private bool LoadingFeature = true;
 
         public Composer(Bitmap bitmap)
         {
@@ -172,7 +168,6 @@ namespace SEYR.Session
             InputImage = bitmap;
             InitializeHandlers();
             InitializeUI();
-            FormReady = true;
             SetupFeatureUI(true);
             UpdateImages();
         }
@@ -201,19 +196,13 @@ namespace SEYR.Session
 
         private void UpdateImages()
         {
-            while (!FormReady) Application.DoEvents();
-            Channel.DebugStream.Write($"Updating Grid");
+            if (LoadingFeature) return;
             UpdateGrid();
-            while (!FormReady) Application.DoEvents();
-            Channel.DebugStream.Write($"Updating Tile");
             UpdateTile();
-            while (!FormReady) Application.DoEvents();
         }
 
         private async void UpdateGrid()
         {
-            if (!FormReady) return;
-            FormReady = false;
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
@@ -223,13 +212,10 @@ namespace SEYR.Session
             {
                 Channel.DebugStream.Write($"Exception in UpdateGrid: {ex}");
             }
-            FormReady = true;
         }
 
         private async void UpdateTile()
         {
-            if (!FormReady) return;
-            FormReady = false;
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
@@ -241,7 +227,6 @@ namespace SEYR.Session
             {
                 Channel.DebugStream.Write($"Exception in UpdateTile: {ex}");
             }
-            FormReady = true;
         }
 
         private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
@@ -348,19 +333,17 @@ namespace SEYR.Session
 
         private void SetupFeatureUI(bool setNull)
         {
-            FormReady = false;
             ComboFeatures.Items.Clear();
             ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
-            ComboFeatures.SelectedIndex = setNull ? -1 : Features.Count - 1;
-            FormReady = true;
             if (setNull)
             {
                 ActiveFeature = null;
                 ComboFeatures.Text = "";
+                ComboFeatures.SelectedIndex = -1;
                 tabControl.SelectedIndex = 0;
             }
-            FormReady = true;
-            UpdateTile();
+            LoadingFeature = false;
+            UpdateImages();
             Channel.DebugStream.Write($"Load Feature UI");
         }
 
@@ -372,16 +355,16 @@ namespace SEYR.Session
 
         private void ApplyFeature()
         {
-            if (LoadingFeature || !FormReady) return;
+            if (LoadingFeature) return;
             Channel.DebugStream.Write($"Apply {ActiveFeature.Name}");
-            UpdateTile();
+            UpdateImages();
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
             Channel.DebugStream.Write($"User Apply");
-            SetupFeatureUI(true);
+            SetupFeatureUI(false);
         }
 
         private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
@@ -413,7 +396,6 @@ namespace SEYR.Session
             Channel.DebugStream.Write($"{ActiveFeature.Name} Deleted");
             Features.RemoveAt(ComboFeatures.SelectedIndex);
             SetupFeatureUI(true);
-            UpdateTile();
         }
 
         private void BtnCopyFeature_Click(object sender, EventArgs e)
@@ -554,7 +536,7 @@ namespace SEYR.Session
                 Deskew deskew = new Deskew((Bitmap)InputImage.Clone());
                 double angle = deskew.GetSkewAngle();
                 NumAngle.Value = (decimal)angle;
-                Channel.DebugStream.Write($"Deskew Success: Angle = {angle}");
+                Channel.DebugStream.Write($"Deskew Success: Angle = {Math.Round(angle, 3)}");
             }
             catch (Exception ex)
             {

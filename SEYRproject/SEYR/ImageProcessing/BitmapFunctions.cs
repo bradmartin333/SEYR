@@ -59,7 +59,18 @@ namespace SEYR.ImageProcessing
         private static async Task<Bitmap> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, Feature desiredFeature = null, bool graphics = true)
         {
             ResizeAndRotate(ref bmp);
-            Offset = await FollowPattern(bmp, forcePattern);
+
+            if (desiredTile == NullPoint ) 
+                Offset = await FollowPattern(bmp, forcePattern);
+            else
+            {
+                Rectangle cropRect = Channel.Project.GetIndexedGeometry(desiredTile.X, desiredTile.Y, Offset);
+                Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
+                await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics);
+                await Channel.DebugStream.Write($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
+                return crop;
+            }
+
             string outputData = string.Empty;
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -69,41 +80,7 @@ namespace SEYR.ImageProcessing
                     {
                         Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
-                        using (Graphics g2 = Graphics.FromImage(crop))
-                        {
-                            g2.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
-                            if (graphics)
-                            {
-                                Bitmap tile = (Bitmap)crop.Clone();
-                                foreach (Feature feature in Channel.Project.Features)
-                                {
-                                    float score = AnalyzeData(tile, feature);
-                                    feature.Scores.Add(score);
-                                    if (score == 1000f) // Special pass
-                                    {
-                                        g2.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
-                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
-                                            g2.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                                    }
-                                    else if (score > 0) // Normal
-                                    {
-                                        g2.DrawRectangle(
-                                            new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron),
-                                            feature.GetGeometry());
-                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
-                                            g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
-                                    }
-                                    else // Special fail
-                                    {
-                                        g2.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
-                                        if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
-                                            g2.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                                    }
-                                    if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
-                                }
-                            }
-                        }
-                        if (i == desiredTile.X && j == desiredTile.Y) return crop;
+                        outputData += await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics);
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
@@ -111,6 +88,46 @@ namespace SEYR.ImageProcessing
             Channel.Viewer.UpdateImage(bmp);
             await Channel.DataStream.Write(outputData, false);
             return bmp;
+        }
+
+        private static Task<string> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics)
+        {
+            string outputData = string.Empty;
+            using (Graphics g = Graphics.FromImage(crop))
+            {
+                g.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
+                if (graphics)
+                {
+                    Bitmap tile = (Bitmap)crop.Clone();
+                    foreach (Feature feature in Channel.Project.Features)
+                    {
+                        float score = AnalyzeData(tile, feature);
+                        feature.Scores.Add(score);
+                        if (score == 1000f) // Special pass
+                        {
+                            g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
+                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
+                                g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                        }
+                        else if (score > 0) // Normal
+                        {
+                            g.DrawRectangle(
+                                new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron),
+                                feature.GetGeometry());
+                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                        }
+                        else // Special fail
+                        {
+                            g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
+                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
+                                g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                        }
+                        if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
+                    }
+                }
+            }
+            return Task.FromResult(outputData);
         }
 
         private static float AnalyzeData(Bitmap bmpTile, Feature feature)
