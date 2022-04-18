@@ -34,7 +34,6 @@ namespace SEYR.Session
         private List<float> _Scores = new List<float>();
         internal List<float> Scores { get => _Scores; set => _Scores = value; }
         
-        
         public Feature()
         {
             Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(); // Random string

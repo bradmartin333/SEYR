@@ -137,30 +137,11 @@ namespace SEYR.ImageProcessing
             using (Graphics g = Graphics.FromImage(bmp))
                 g.DrawImage(bmpTile, new Rectangle(Point.Empty, cropRect.Size), cropRect, GraphicsUnit.Pixel);
 
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-            IntPtr ptr = bmpData.Scan0;
-            int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
-            byte[] rgbValues = new byte[bytes];
-            Marshal.Copy(ptr, rgbValues, 0, bytes);
-
-            byte threshold = (byte)(255 * feature.Threshold);
-            List<byte> rVals = new List<byte>();
-            List<byte> rtVals = new List<byte>();
-            for (int counter = 2; counter < rgbValues.Length; counter += 3)
-            {
-                byte r = rgbValues[counter];
-                byte rt = (byte)(r > threshold ? 1 : 0);
-                rVals.Add(r);
-                rtVals.Add(rt);
-            }
-
-            bmp.UnlockBits(bmpData);
-
+            (byte[] rVals, byte[] rtVals, Rectangle rect) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
             int filterVal = (int)(0.2 * (bmp.Width * bmp.Height));
-            float entropy = CalculateShannonEntropy(rVals.ToArray(), rect.Size);
+            float entropy = CalculateShannonEntropy(rVals, rect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
 
             if (blackVals < filterVal || whiteVals < filterVal)
@@ -183,6 +164,29 @@ namespace SEYR.ImageProcessing
             }
             else
                 return score;
+        }
+
+        private static (byte[], byte[], Rectangle) GetPixelData(Bitmap bmp, float threshold)
+        {
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
+            IntPtr ptr = bmpData.Scan0;
+            int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
+            byte[] rgbValues = new byte[bytes];
+            Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+            List<byte> rVals = new List<byte>();
+            List<byte> rtVals = new List<byte>();
+            for (int counter = 2; counter < rgbValues.Length; counter += 3)
+            {
+                byte r = rgbValues[counter];
+                byte rt = (byte)(r > threshold ? 1 : 0);
+                rVals.Add(r);
+                rtVals.Add(rt);
+            }
+
+            bmp.UnlockBits(bmpData);
+            return (rVals.ToArray(), rtVals.ToArray(), rect);
         }
 
         private static float CalculateShannonEntropy(byte[] data, Size size)
@@ -214,7 +218,6 @@ namespace SEYR.ImageProcessing
                                         await Channel.DebugStream.Write($"Pattern follower interval hit: {Channel.OutputData}");
                                         return await FindPattern(bmp);
                                     }
-                                        
                 }
             }
             return NullPoint;
