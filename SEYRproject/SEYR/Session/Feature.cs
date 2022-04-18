@@ -89,7 +89,7 @@ namespace SEYR.Session
             (float hueIn, float[] scores) = GetScoreInfo();
             double fromLow;
             double fromHigh;
-            float[] cleanScores = scores.Where(x => x > 0f && x < 1000f).ToArray();
+            float[] cleanScores = scores.Where(x => x > 0f).ToArray();
             if (cleanScores.Count() > 5)
             {
                 fromLow = cleanScores.Min();

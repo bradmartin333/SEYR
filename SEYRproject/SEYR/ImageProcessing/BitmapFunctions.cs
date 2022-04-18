@@ -104,27 +104,25 @@ namespace SEYR.ImageProcessing
                     {
                         float score = AnalyzeData(tile, feature);
                         feature.Scores.Add(score);
-                        if (score == 1000f) // Special pass
+                        if (score == 0f) // Special pass
                         {
                             g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
                                 g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
                         }
-                        else if (score > 0) // Normal
-                        {
-                            g.DrawRectangle(
-                                new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron),
-                                feature.GetGeometry());
-                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
-                        }
-                        else // Special fail
+                        else if (score == -1f) // Special fail
                         {
                             g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
                                 g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
                         }
-                        if (desiredFeature == null) outputData += $"{Channel.OutputData}\t{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
+                        else // Normal
+                        {
+                            g.DrawRectangle(new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                        }
+                        if (desiredFeature == null) outputData += $"{Channel.OutputData}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
                     }
                 }
             }
@@ -150,17 +148,17 @@ namespace SEYR.ImageProcessing
                 switch (feature.NullDetection)
                 {
                     case Feature.NullDetectionTypes.None:
-                        return 0f;
+                        return -10f;
                     case Feature.NullDetectionTypes.IncludeEmpty:
-                        if (whiteVals < filterVal) return 1000f;
-                        else return 0f;
+                        if (whiteVals < filterVal) return 0f;
+                        else return -10f;
                     case Feature.NullDetectionTypes.IncludeFilled:
-                        if (blackVals < filterVal) return 1000f;
-                        else return 0f;
+                        if (blackVals < filterVal) return 0f;
+                        else return -10f;
                     case Feature.NullDetectionTypes.IncludeBoth:
-                        return 1000f;
-                    default:
                         return 0f;
+                    default:
+                        return -10f;
                 }
             }
             else
