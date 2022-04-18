@@ -62,7 +62,7 @@ namespace SEYR.Session
 
         public void ClearLogs()
         {
-            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.Header);
+            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.BaseHeader);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, isDebug: true);
             foreach (Feature feature in Project.Features)
                 feature.Scores.Clear();

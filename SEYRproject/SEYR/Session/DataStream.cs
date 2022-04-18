@@ -7,6 +7,7 @@ namespace SEYR.Session
     internal class DataStream
     {
         public string Path { get; set; } = null;
+        internal static string BaseHeader = null;
         internal static string Header = null;
 
         public DataStream(string path, string header = "", bool isDebug = false)
@@ -17,6 +18,7 @@ namespace SEYR.Session
                 Write("Stream Opened", addDT: true);
             else
             {
+                BaseHeader = header;
                 Header = $"{header}TileRow\tTileCol\tFeature\tScore";
                 Write(Header);
             } 

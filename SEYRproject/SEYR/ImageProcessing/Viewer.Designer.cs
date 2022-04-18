@@ -41,17 +41,18 @@
             this.Pbx.BackColor = System.Drawing.Color.Black;
             this.Pbx.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
             this.Pbx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Pbx.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pbx.Location = new System.Drawing.Point(3, 3);
             this.Pbx.Name = "Pbx";
-            this.Pbx.Size = new System.Drawing.Size(522, 444);
+            this.Pbx.Size = new System.Drawing.Size(478, 435);
             this.Pbx.TabIndex = 0;
             this.Pbx.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.Pbx, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.InfoLabel, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -60,18 +61,17 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1057, 470);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(484, 461);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
             this.InfoLabel.BackColor = System.Drawing.Color.Silver;
-            this.tableLayoutPanel1.SetColumnSpan(this.InfoLabel, 2);
             this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InfoLabel.Location = new System.Drawing.Point(3, 450);
+            this.InfoLabel.Location = new System.Drawing.Point(3, 441);
             this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(1051, 20);
+            this.InfoLabel.Size = new System.Drawing.Size(478, 20);
             this.InfoLabel.TabIndex = 1;
             this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -80,7 +80,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1057, 470);
+            this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
