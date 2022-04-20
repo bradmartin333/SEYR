@@ -250,7 +250,7 @@ namespace SEYR.ImageProcessing
 
         public static async Task<Bitmap> DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
         {
-            ResizeAndRotate(ref bmp);
+            bmp = new Bitmap(bmp.Width, bmp.Height);
             Rectangle rectangle = Channel.Project.GetGeometry();
             using (Graphics g = Graphics.FromImage(bmp))
             {

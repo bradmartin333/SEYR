@@ -36,7 +36,7 @@ namespace SEYR.Session
         
         public Feature()
         {
-            Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(); // Random string
+            Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
         }
 
         public Rectangle GetGeometry()
@@ -52,7 +52,7 @@ namespace SEYR.Session
         {
             return new Feature()
             {
-                Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(), // Random string
+                Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(),
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
                 NullDetection = NullDetection,

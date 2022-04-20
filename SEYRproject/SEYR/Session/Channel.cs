@@ -13,6 +13,10 @@ namespace SEYR.Session
     public class Channel
     {
         /// <summary>
+        /// Backup for situations where NewImage cannot be awaited
+        /// </summary>
+        public bool Working { get; set; } = false;
+        /// <summary>
         /// Tab separated data to append to beggining of each data line:
         /// Img# X Y RR RC R C SR SC
         /// </summary>
@@ -131,7 +135,9 @@ namespace SEYR.Session
 
         public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false)
         {
+            Working = true;
             await BitmapFunctions.LoadImage(bmp, forcePattern);
+            Working = false;
             return CreateStatusString();
         }
 

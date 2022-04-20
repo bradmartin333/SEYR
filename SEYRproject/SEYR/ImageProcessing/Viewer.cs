@@ -8,6 +8,8 @@ namespace SEYR.ImageProcessing
         public Viewer()
         {
             InitializeComponent();
+            Rectangle screen = Screen.FromControl(this).Bounds;
+            Location = new Point(screen.X - Width, 0);
             Show();
         }
 

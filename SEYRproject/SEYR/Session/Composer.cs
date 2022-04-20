@@ -160,6 +160,7 @@ namespace SEYR.Session
         private Feature ActiveFeature = null;
         private readonly Bitmap InputImage;
         private bool ClickGrid = false;
+        private bool ShowThreshold = false;
         private bool LoadingFeature = true;
 
         public Composer(Bitmap bitmap)
@@ -177,7 +178,6 @@ namespace SEYR.Session
             ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
-            PbxTile.MouseDown += PbxTile_MouseDown;
         }
 
         private void InitializeUI()
@@ -206,7 +206,16 @@ namespace SEYR.Session
             try
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
-                PbxGrid.BackgroundImage = await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
+                BitmapFunctions.ResizeAndRotate(ref bmp);
+                if (ShowThreshold)
+                {
+                    ImageAttributes imageAttr = new ImageAttributes();
+                    imageAttr.SetThreshold(ActiveFeature.Threshold);
+                    using (Graphics g = Graphics.FromImage(bmp))
+                        g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
+                }
+                PbxGrid.BackgroundImage = bmp;
+                PbxGrid.Image = await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
             catch (Exception ex)
             {
@@ -243,23 +252,11 @@ namespace SEYR.Session
 
         #region PBX Handlers
 
-        private async void PbxTile_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (ActiveFeature == null || ClickGrid) return;
-            ImageAttributes imageAttr = new ImageAttributes();
-            imageAttr.SetThreshold(ActiveFeature.Threshold);
-            Bitmap bmp = (Bitmap)InputImage.Clone();
-            Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature, false);
-            using (Graphics g = Graphics.FromImage(tile))
-                g.DrawImage(tile, new Rectangle(Point.Empty, tile.Size), 0, 0, tile.Width, tile.Height, GraphicsUnit.Pixel, imageAttr);
-            PbxTile.Image = tile;
-        }
-
         private void PbxTile_MouseUp(object sender, MouseEventArgs e)
         {
             if (!ClickGrid)
             {
-                PbxTile.Image = null;
+                //PbxTile.Image = null;
                 return;
             }
             LoadingFeature = true;
@@ -363,6 +360,7 @@ namespace SEYR.Session
         private void BtnApply_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
+            ShowThreshold = false;
             Channel.DebugStream.Write($"User Apply");
             SetupFeatureUI(false);
         }
@@ -439,6 +437,7 @@ namespace SEYR.Session
         private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
+            ShowThreshold = true;
             ActiveFeature.Threshold = (float)NumFeatureThreshold.Value;
             Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
             ApplyFeature();
