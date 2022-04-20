@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SEYRDesktop"
-#define MyAppVersion "1.3.1"
+#define MyAppVersion "1.3.2"
 #define MyAppPublisher "bradmartin333"
 #define MyAppURL "https://github.com/bradmartin333/SEYR"
 #define MyAppExeName "SEYRDesktop.exe"
@@ -24,7 +24,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=S:\SEYR\Setup
+OutputDir=C:\Repos\SEYR\Setup
 OutputBaseFilename=SEYRDesktopSetup
 Compression=lzma
 SolidCompression=yes
@@ -37,20 +37,20 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Imaging.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Math.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Math.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Statistics.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\System.Drawing.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\ObjectListView.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Imaging.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Math.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Math.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\Accord.Statistics.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\System.Drawing.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Repos\SEYR\SEYRproject\SEYRDesktop\bin\Release\ObjectListView.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

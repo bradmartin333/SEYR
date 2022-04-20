@@ -139,7 +139,7 @@ namespace SEYR.ImageProcessing
             (byte[] rVals, byte[] rtVals, Rectangle rect) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
-            int filterVal = (int)(0.2 * (bmp.Width * bmp.Height));
+            int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
             float entropy = CalculateShannonEntropy(rVals, rect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
 
@@ -228,23 +228,28 @@ namespace SEYR.ImageProcessing
             Bitmap pattern = (Bitmap)Channel.Pattern.Clone();
             var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
             TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
-            TemplateMatch m = matchings[0];
-            foreach (Point point in Channel.Project.PatternLocations)
+            if (matchings.Length > 0)
             {
-                Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
-                double deltaH = Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
-                if (deltaH <= Channel.Project.PatternDeltaMax)
+                TemplateMatch m = matchings[0];
+                foreach (Point point in Channel.Project.PatternLocations)
                 {
-                    await Channel.DebugStream.WriteAsync(
-                        $"Pattern follower delta = {Math.Round(deltaH, 2):F2} px, " +
-                        $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
-                    return delta;
-                }    
+                    Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
+                    double deltaH = Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
+                    if (deltaH <= Channel.Project.PatternDeltaMax)
+                    {
+                        await Channel.DebugStream.WriteAsync(
+                            $"Pattern follower delta = {Math.Round(deltaH, 2):F2} px, " +
+                            $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
+                        return delta;
+                    }
+                }
+                if (Channel.Project.PatternLocations.Count == 0)
+                    await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
+                else
+                    await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
             }
-            if (Channel.Project.PatternLocations.Count == 0)
-                await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
             else
-                await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
+                await Channel.DebugStream.WriteAsync($"Failed to find pattern.", showInViewer: true);
             return NullPoint;
         }
 

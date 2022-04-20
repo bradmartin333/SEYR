@@ -10,6 +10,10 @@ namespace SEYR.ImageProcessing
             InitializeComponent();
             Rectangle screen = Screen.FromControl(this).Bounds;
             Location = new Point(screen.X - Width, 0);
+            if (screen.X - Width > 0)
+                Location = new Point(screen.X - Width, 0);
+            else
+                Location = new Point(0, 0);
             Show();
         }
 

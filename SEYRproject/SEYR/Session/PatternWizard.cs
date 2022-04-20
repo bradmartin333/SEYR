@@ -146,6 +146,8 @@ namespace SEYR.Session
 
         #region Score
 
+        List<Point> PatternLocations = new List<Point>();
+
         private void ScoreUtility(float score = -1f)
         {
             WizardLabel.Text = "Decrease the pattern score as much as possible without allowing false positives.";
@@ -158,14 +160,14 @@ namespace SEYR.Session
             Application.DoEvents();
             if (Channel.Pattern != null)
             {
-                List<Point> patternLocations = new List<Point>();
+                PatternLocations = new List<Point>();
                 Bitmap sourceImage = (Bitmap)InputImage.Clone();
                 var tm = new ExhaustiveTemplateMatching(score == -1 ? (float)NumPatternScore.Value : score);
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, Channel.Pattern);
                 foreach (TemplateMatch m in matchings)
                 {
                     Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
-                    patternLocations.Add(m.Rectangle.Center());
+                    PatternLocations.Add(m.Rectangle.Center());
                     using (Graphics g = Graphics.FromImage(sourceImage))
                     {
                         g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.HotPink)), m.Rectangle);
@@ -191,9 +193,10 @@ namespace SEYR.Session
             ScoreUtility((float)NumPatternScore.Value);
         }
 
-        private void ScoreScore()
+        private void SaveScore()
         {
             Channel.Project.PatternScore = (float)NumPatternScore.Value;
+            Channel.Project.PatternLocations = PatternLocations;
         }
 
         #endregion
@@ -230,7 +233,7 @@ namespace SEYR.Session
                     ScoreUtility();
                     break;
                 case WizardState.Score:
-                    ScoreScore();
+                    SaveScore();
                     State = WizardState.Interval;
                     IntervalUtility();
                     break;
