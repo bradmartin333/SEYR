@@ -567,6 +567,11 @@ namespace SEYR.Session
             }
         }
 
+        private void ClearLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Channel.ClearLogs();
+        }
+
         #endregion
     }
 }

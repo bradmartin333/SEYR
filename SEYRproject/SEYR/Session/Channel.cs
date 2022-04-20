@@ -65,7 +65,7 @@ namespace SEYR.Session
             Viewer = new Viewer();
         }
 
-        public void ClearLogs()
+        public static void ClearLogs()
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.BaseHeader);
             if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, isDebug: true);
@@ -120,6 +120,7 @@ namespace SEYR.Session
         {
             string zipPath = $@"{DirPath}\{DateTime.Now.ToString("s").Replace(':', '_')}.seyrup";
             DebugStream.Write($"Adding seyrup to {zipPath}");
+            Viewer.InfoLabel.Text = "SEYRUP file created";
             // Create and open a new ZIP file
             using (ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
             {
@@ -167,7 +168,7 @@ namespace SEYR.Session
             if (Viewer != null) Viewer.Show();
         }
 
-        private void DiscardViewer()
+        private static void DiscardViewer()
         {
             if (Viewer != null) Viewer.Close();
             Viewer = new Viewer();

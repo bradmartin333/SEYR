@@ -102,6 +102,7 @@
             this.PatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
             this.PbxTile = new System.Windows.Forms.PictureBox();
+            this.ClearLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).BeginInit();
@@ -1097,7 +1098,8 @@
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
-            this.PatternWizardToolStripMenuItem});
+            this.PatternWizardToolStripMenuItem,
+            this.ClearLogsToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1164,6 +1166,13 @@
             this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxTile.TabIndex = 2;
             this.PbxTile.TabStop = false;
+            // 
+            // ClearLogsToolStripMenuItem
+            // 
+            this.ClearLogsToolStripMenuItem.Name = "ClearLogsToolStripMenuItem";
+            this.ClearLogsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearLogsToolStripMenuItem.Text = "Clear Logs";
+            this.ClearLogsToolStripMenuItem.Click += new System.EventHandler(this.ClearLogsToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1297,5 +1306,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private System.Windows.Forms.ToolStripMenuItem PatternWizardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClearLogsToolStripMenuItem;
     }
 }

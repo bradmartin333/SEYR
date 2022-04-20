@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnClearLogs = new System.Windows.Forms.Button();
             this.BtnShowViewer = new System.Windows.Forms.Button();
             this.BtnRepeat = new System.Windows.Forms.Button();
             this.NumPxPerMicron = new System.Windows.Forms.NumericUpDown();
@@ -39,10 +38,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.NumFrame = new System.Windows.Forms.NumericUpDown();
             this.BtnRunAll = new System.Windows.Forms.Button();
-            this.BtnOpenDir = new System.Windows.Forms.Button();
             this.BtnOpenComposer = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.BtnForcePattern = new System.Windows.Forms.Button();
+            this.BtnOpenDir = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -55,9 +54,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.BtnClearLogs, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnShowViewer, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.NumPxPerMicron, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.BtnStop, 3, 3);
@@ -65,7 +63,7 @@
             this.tableLayoutPanel1.Controls.Add(this.NumFrame, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnRunAll, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -79,19 +77,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 123);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // BtnClearLogs
-            // 
-            this.BtnClearLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnClearLogs.Enabled = false;
-            this.BtnClearLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClearLogs.Location = new System.Drawing.Point(303, 13);
-            this.BtnClearLogs.Name = "BtnClearLogs";
-            this.BtnClearLogs.Size = new System.Drawing.Size(94, 28);
-            this.BtnClearLogs.TabIndex = 19;
-            this.BtnClearLogs.Text = "Clear Logs";
-            this.BtnClearLogs.UseVisualStyleBackColor = true;
-            this.BtnClearLogs.Click += new System.EventHandler(this.BtnClearLogs_Click);
             // 
             // BtnShowViewer
             // 
@@ -111,7 +96,7 @@
             this.BtnRepeat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRepeat.Enabled = false;
             this.BtnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRepeat.Location = new System.Drawing.Point(203, 13);
+            this.BtnRepeat.Location = new System.Drawing.Point(303, 13);
             this.BtnRepeat.Name = "BtnRepeat";
             this.BtnRepeat.Size = new System.Drawing.Size(94, 28);
             this.BtnRepeat.TabIndex = 17;
@@ -198,19 +183,6 @@
             this.BtnRunAll.UseVisualStyleBackColor = true;
             this.BtnRunAll.Click += new System.EventHandler(this.btnRunAll_Click);
             // 
-            // BtnOpenDir
-            // 
-            this.BtnOpenDir.AutoSize = true;
-            this.BtnOpenDir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenDir.Location = new System.Drawing.Point(3, 13);
-            this.BtnOpenDir.Name = "BtnOpenDir";
-            this.BtnOpenDir.Size = new System.Drawing.Size(94, 28);
-            this.BtnOpenDir.TabIndex = 14;
-            this.BtnOpenDir.Text = "Open Dir";
-            this.BtnOpenDir.UseVisualStyleBackColor = true;
-            this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
-            // 
             // BtnOpenComposer
             // 
             this.BtnOpenComposer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -224,22 +196,36 @@
             this.BtnOpenComposer.UseVisualStyleBackColor = true;
             this.BtnOpenComposer.Click += new System.EventHandler(this.BtnOpenComposer_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // BtnForcePattern
             // 
             this.BtnForcePattern.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnForcePattern.Enabled = false;
             this.BtnForcePattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnForcePattern.Location = new System.Drawing.Point(103, 13);
+            this.BtnForcePattern.Location = new System.Drawing.Point(203, 13);
             this.BtnForcePattern.Name = "BtnForcePattern";
             this.BtnForcePattern.Size = new System.Drawing.Size(94, 28);
             this.BtnForcePattern.TabIndex = 20;
             this.BtnForcePattern.Text = "Force Pattern";
             this.BtnForcePattern.UseVisualStyleBackColor = true;
             this.BtnForcePattern.Click += new System.EventHandler(this.BtnForcePattern_Click);
+            // 
+            // BtnOpenDir
+            // 
+            this.BtnOpenDir.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.BtnOpenDir, 2);
+            this.BtnOpenDir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpenDir.Location = new System.Drawing.Point(3, 13);
+            this.BtnOpenDir.Name = "BtnOpenDir";
+            this.BtnOpenDir.Size = new System.Drawing.Size(194, 28);
+            this.BtnOpenDir.TabIndex = 14;
+            this.BtnOpenDir.Text = "Open Dir";
+            this.BtnOpenDir.UseVisualStyleBackColor = true;
+            this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // FormMain
             // 
@@ -252,7 +238,7 @@
             this.MinimumSize = new System.Drawing.Size(416, 149);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "v1.3.0";
+            this.Text = "v1.3.1";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();
@@ -275,7 +261,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnRepeat;
         private System.Windows.Forms.Button BtnShowViewer;
-        private System.Windows.Forms.Button BtnClearLogs;
         private System.Windows.Forms.Button BtnForcePattern;
     }
 }

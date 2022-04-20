@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SEYRDesktop"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.3.1"
 #define MyAppPublisher "bradmartin333"
 #define MyAppURL "https://github.com/bradmartin333/SEYR"
 #define MyAppExeName "SEYRDesktop.exe"
@@ -50,6 +50,7 @@ Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYR.xml"; DestDir: "{app}"
 Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\SEYRDesktop.pdb"; DestDir: "{app}"; Flags: ignoreversion
 Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\System.Drawing.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "S:\SEYR\SEYRproject\SEYRDesktop\bin\Release\ObjectListView.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

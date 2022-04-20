@@ -84,7 +84,6 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnShowViewer.Enabled = true;
-            BtnClearLogs.Enabled = true;
             BtnForcePattern.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             
@@ -126,11 +125,6 @@ namespace SEYRDesktop
         private void BtnShowViewer_Click(object sender, EventArgs e)
         {
             Channel.ShowViewer();
-        }
-
-        private void BtnClearLogs_Click(object sender, EventArgs e)
-        {
-            Channel.ClearLogs();
         }
 
         private async void BtnForcePattern_Click(object sender, EventArgs e)
