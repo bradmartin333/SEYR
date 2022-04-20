@@ -26,8 +26,9 @@ namespace SEYR.Session
         internal static DataStream DebugStream { get; set; } = null;
         internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
-        private readonly string ProjectPath = null;
+        internal static string PatternPath { get; set; } = null;
         private readonly string DirPath = null;
+        private readonly string ProjectPath = null;
 
         /// <summary>
         /// Create a new SEYR Channel
@@ -101,10 +102,10 @@ namespace SEYR.Session
         private void LoadPattern()
         {
             FileInfo info = new FileInfo(ProjectPath);
-            string patternPath = $@"{info.DirectoryName}\SEYRpattern.png";
-            if (File.Exists(patternPath))
+            PatternPath = $@"{info.DirectoryName}\SEYRpattern.png";
+            if (File.Exists(PatternPath))
             {
-                Bitmap bmp = new Bitmap(patternPath);
+                Bitmap bmp = new Bitmap(PatternPath);
                 Pattern = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format24bppRgb);
                 using (Graphics g = Graphics.FromImage(Pattern))
                     g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);

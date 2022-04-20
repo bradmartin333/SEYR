@@ -1,5 +1,4 @@
-﻿using Accord.Imaging;
-using SEYR.ImageProcessing;
+﻿using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -129,9 +128,9 @@ namespace SEYR.Session
 
         public int PatternDeltaMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public float PatternScore { get => Channel.Project.PatternScore; set => Channel.Project.PatternScore = value; }
+        public float PatternScore { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public List<Point> PatternLocations { get => Channel.Project.PatternLocations; set => Channel.Project.PatternLocations = value; }
+        public List<Point> PatternLocations { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion
 
@@ -295,10 +294,10 @@ namespace SEYR.Session
         /// </returns>
         private Point ZoomMousePos(Point click, Size pbxSize, Size imgSize)
         {
-            float ImageAspect = imgSize.Width / (float)imgSize.Height;
+            float imageAspect = imgSize.Width / (float)imgSize.Height;
             float controlAspect = pbxSize.Width / (float)pbxSize.Height;
             PointF pos = new PointF(click.X, click.Y);
-            if (ImageAspect > controlAspect)
+            if (imageAspect > controlAspect)
             {
                 float ratioWidth = imgSize.Width / (float)pbxSize.Width;
                 pos.X *= ratioWidth;
@@ -560,34 +559,12 @@ namespace SEYR.Session
             ClickGrid = true;
         }
 
-        private void TrainLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PatternWizardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ToolsToolStripMenuItem.Text = "Working...";
-            Application.DoEvents();
-            if (Channel.Pattern != null)
+            using (PatternWizard w = new PatternWizard((Bitmap)InputImage.Clone()))
             {
-                PatternLocations = new List<Point>();
-                Bitmap sourceImage = (Bitmap)InputImage.Clone();
-                BitmapFunctions.ResizeAndRotate(ref sourceImage);
-                var tm = new ExhaustiveTemplateMatching(PatternScore);
-                TemplateMatch[] matchings = tm.ProcessImage(sourceImage, Channel.Pattern);
-                foreach (TemplateMatch m in matchings)
-                {
-                    Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
-                    PatternLocations.Add(m.Rectangle.Center());
-                    using (Graphics g = Graphics.FromImage(sourceImage))
-                    {
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.HotPink)), m.Rectangle);
-                    }
-                }
-                PbxGrid.Image = sourceImage;
+                _ = w.ShowDialog();
             }
-            ToolsToolStripMenuItem.Text = "Tools";
-        }
-
-        private void HideLocationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PbxGrid.Image = null;
         }
 
         #endregion

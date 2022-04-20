@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.PbxGrid = new System.Windows.Forms.PictureBox();
-            this.PbxTile = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.NumOriginX = new System.Windows.Forms.NumericUpDown();
@@ -98,15 +96,13 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FollowerPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TrainLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HideLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.PatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PbxGrid = new System.Windows.Forms.PictureBox();
+            this.PbxTile = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).BeginInit();
@@ -138,6 +134,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -167,28 +165,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(884, 537);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // PbxGrid
-            // 
-            this.PbxGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PbxGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PbxGrid.Location = new System.Drawing.Point(3, 3);
-            this.PbxGrid.Name = "PbxGrid";
-            this.PbxGrid.Size = new System.Drawing.Size(436, 341);
-            this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PbxGrid.TabIndex = 1;
-            this.PbxGrid.TabStop = false;
-            // 
-            // PbxTile
-            // 
-            this.PbxTile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PbxTile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PbxTile.Location = new System.Drawing.Point(445, 3);
-            this.PbxTile.Name = "PbxTile";
-            this.PbxTile.Size = new System.Drawing.Size(436, 341);
-            this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PbxTile.TabIndex = 2;
-            this.PbxTile.TabStop = false;
             // 
             // flowLayoutPanel2
             // 
@@ -1121,7 +1097,7 @@
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
-            this.FollowerPatternToolStripMenuItem});
+            this.PatternWizardToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1129,7 +1105,7 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
@@ -1137,33 +1113,9 @@
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
             this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
-            // 
-            // FollowerPatternToolStripMenuItem
-            // 
-            this.FollowerPatternToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TrainLocationsToolStripMenuItem,
-            this.HideLocationsToolStripMenuItem});
-            this.FollowerPatternToolStripMenuItem.Name = "FollowerPatternToolStripMenuItem";
-            this.FollowerPatternToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.FollowerPatternToolStripMenuItem.Text = "Follower Pattern";
-            // 
-            // TrainLocationsToolStripMenuItem
-            // 
-            this.TrainLocationsToolStripMenuItem.Name = "TrainLocationsToolStripMenuItem";
-            this.TrainLocationsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.TrainLocationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.TrainLocationsToolStripMenuItem.Text = "Train Locations";
-            this.TrainLocationsToolStripMenuItem.Click += new System.EventHandler(this.TrainLocationsToolStripMenuItem_Click);
-            // 
-            // HideLocationsToolStripMenuItem
-            // 
-            this.HideLocationsToolStripMenuItem.Name = "HideLocationsToolStripMenuItem";
-            this.HideLocationsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.HideLocationsToolStripMenuItem.Text = "Hide Locations";
-            this.HideLocationsToolStripMenuItem.Click += new System.EventHandler(this.HideLocationsToolStripMenuItem_Click);
             // 
             // olvColumn1
             // 
@@ -1184,6 +1136,35 @@
             this.olvColumn3.Text = "Null Detection";
             this.olvColumn3.Width = 100;
             // 
+            // PatternWizardToolStripMenuItem
+            // 
+            this.PatternWizardToolStripMenuItem.Name = "PatternWizardToolStripMenuItem";
+            this.PatternWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PatternWizardToolStripMenuItem.Text = "Pattern Wizard";
+            this.PatternWizardToolStripMenuItem.Click += new System.EventHandler(this.PatternWizardToolStripMenuItem_Click);
+            // 
+            // PbxGrid
+            // 
+            this.PbxGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PbxGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PbxGrid.Location = new System.Drawing.Point(3, 3);
+            this.PbxGrid.Name = "PbxGrid";
+            this.PbxGrid.Size = new System.Drawing.Size(436, 341);
+            this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PbxGrid.TabIndex = 1;
+            this.PbxGrid.TabStop = false;
+            // 
+            // PbxTile
+            // 
+            this.PbxTile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PbxTile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PbxTile.Location = new System.Drawing.Point(445, 3);
+            this.PbxTile.Name = "PbxTile";
+            this.PbxTile.Size = new System.Drawing.Size(436, 341);
+            this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PbxTile.TabIndex = 2;
+            this.PbxTile.TabStop = false;
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1199,8 +1180,6 @@
             this.Text = "Composer";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).EndInit();
@@ -1236,6 +1215,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1310,13 +1291,11 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label LabelThreshold;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
-        private System.Windows.Forms.ToolStripMenuItem FollowerPatternToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem TrainLocationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem HideLocationsToolStripMenuItem;
         private System.Windows.Forms.HScrollBar ThresholdScrollBar;
         private BrightIdeasSoftware.FastObjectListView OLV;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private System.Windows.Forms.ToolStripMenuItem PatternWizardToolStripMenuItem;
     }
 }
