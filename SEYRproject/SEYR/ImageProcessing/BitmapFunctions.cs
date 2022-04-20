@@ -214,7 +214,7 @@ namespace SEYR.ImageProcessing
                                 if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
                                     {
-                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {Channel.OutputData}");
+                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {Channel.OutputData}", false);
                                         return await FindPattern(bmp);
                                     }
                 }
@@ -232,10 +232,12 @@ namespace SEYR.ImageProcessing
             foreach (Point point in Channel.Project.PatternLocations)
             {
                 Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
-                int deltaH = (int)Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
+                double deltaH = Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
                 if (deltaH <= Channel.Project.PatternDeltaMax)
                 {
-                    await Channel.DebugStream.WriteAsync($"Pattern follower delta = {deltaH}", showInViewer: true);
+                    await Channel.DebugStream.WriteAsync(
+                        $"Pattern follower delta = {Math.Round(deltaH, 2):F2} px, " +
+                        $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
                     return delta;
                 }    
             }

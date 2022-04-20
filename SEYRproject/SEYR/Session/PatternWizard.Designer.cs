@@ -43,12 +43,17 @@
             this.NumPatternScore = new System.Windows.Forms.NumericUpDown();
             this.BtnFindPatterns = new System.Windows.Forms.Button();
             this.RTB = new System.Windows.Forms.RichTextBox();
+            this.FlowDelta = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.NumPatternDeltaMax = new System.Windows.Forms.NumericUpDown();
             this.TLP.SuspendLayout();
             this.FlowInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPatternInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             this.FlowScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPatternScore)).BeginInit();
+            this.FlowDelta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPatternDeltaMax)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP
@@ -56,18 +61,20 @@
             this.TLP.ColumnCount = 2;
             this.TLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TLP.Controls.Add(this.FlowDelta, 0, 4);
             this.TLP.Controls.Add(this.FlowInterval, 0, 3);
             this.TLP.Controls.Add(this.WizardLabel, 0, 0);
             this.TLP.Controls.Add(this.PBX, 0, 1);
-            this.TLP.Controls.Add(this.BtnContinue, 0, 4);
+            this.TLP.Controls.Add(this.BtnContinue, 0, 5);
             this.TLP.Controls.Add(this.FlowScore, 0, 2);
             this.TLP.Controls.Add(this.RTB, 1, 1);
             this.TLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP.Location = new System.Drawing.Point(0, 0);
             this.TLP.Name = "TLP";
-            this.TLP.RowCount = 6;
+            this.TLP.RowCount = 7;
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -83,7 +90,7 @@
             this.FlowInterval.Controls.Add(this.ComboPatternInterval);
             this.FlowInterval.Controls.Add(this.label3);
             this.FlowInterval.Controls.Add(this.NumPatternInterval);
-            this.FlowInterval.Location = new System.Drawing.Point(29, 602);
+            this.FlowInterval.Location = new System.Drawing.Point(29, 570);
             this.FlowInterval.Name = "FlowInterval";
             this.FlowInterval.Size = new System.Drawing.Size(419, 27);
             this.FlowInterval.TabIndex = 4;
@@ -148,7 +155,7 @@
             this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PBX.Location = new System.Drawing.Point(3, 33);
             this.PBX.Name = "PBX";
-            this.PBX.Size = new System.Drawing.Size(472, 526);
+            this.PBX.Size = new System.Drawing.Size(472, 494);
             this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBX.TabIndex = 1;
             this.PBX.TabStop = false;
@@ -173,7 +180,7 @@
             this.FlowScore.Controls.Add(this.label1);
             this.FlowScore.Controls.Add(this.NumPatternScore);
             this.FlowScore.Controls.Add(this.BtnFindPatterns);
-            this.FlowScore.Location = new System.Drawing.Point(88, 565);
+            this.FlowScore.Location = new System.Drawing.Point(88, 533);
             this.FlowScore.Name = "FlowScore";
             this.FlowScore.Size = new System.Drawing.Size(301, 31);
             this.FlowScore.TabIndex = 3;
@@ -238,10 +245,46 @@
             this.RTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RTB.Location = new System.Drawing.Point(481, 33);
             this.RTB.Name = "RTB";
-            this.RTB.Size = new System.Drawing.Size(200, 526);
+            this.RTB.Size = new System.Drawing.Size(200, 494);
             this.RTB.TabIndex = 5;
             this.RTB.Text = "";
             this.RTB.Visible = false;
+            // 
+            // FlowDelta
+            // 
+            this.FlowDelta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.FlowDelta.AutoSize = true;
+            this.FlowDelta.Controls.Add(this.label5);
+            this.FlowDelta.Controls.Add(this.NumPatternDeltaMax);
+            this.FlowDelta.Location = new System.Drawing.Point(131, 603);
+            this.FlowDelta.Name = "FlowDelta";
+            this.FlowDelta.Size = new System.Drawing.Size(215, 26);
+            this.FlowDelta.TabIndex = 6;
+            this.FlowDelta.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Pattern Delta Max (µm)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // NumPatternDeltaMax
+            // 
+            this.NumPatternDeltaMax.Location = new System.Drawing.Point(124, 3);
+            this.NumPatternDeltaMax.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumPatternDeltaMax.Name = "NumPatternDeltaMax";
+            this.NumPatternDeltaMax.Size = new System.Drawing.Size(88, 20);
+            this.NumPatternDeltaMax.TabIndex = 3;
+            this.NumPatternDeltaMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PatternWizard
             // 
@@ -262,6 +305,9 @@
             this.FlowScore.ResumeLayout(false);
             this.FlowScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPatternScore)).EndInit();
+            this.FlowDelta.ResumeLayout(false);
+            this.FlowDelta.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPatternDeltaMax)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -282,5 +328,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown NumPatternInterval;
         private System.Windows.Forms.RichTextBox RTB;
+        private System.Windows.Forms.FlowLayoutPanel FlowDelta;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown NumPatternDeltaMax;
     }
 }

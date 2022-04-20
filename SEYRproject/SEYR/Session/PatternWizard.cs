@@ -34,6 +34,7 @@ namespace SEYR.Session
             ComboPatternInterval.Items.AddRange(DataStream.Header.Split('\t'));
             ComboPatternInterval.Text = Channel.Project.PatternIntervalString;
             NumPatternInterval.Value = Channel.Project.PatternIntervalValue;
+            NumPatternDeltaMax.Value = Channel.Project.PatternDeltaMax;
 
             CropUtility();
         }
@@ -153,6 +154,7 @@ namespace SEYR.Session
             RTB.Text = "Score\tCount\n";
             FlowScore.Visible = true;
             BtnFindPatterns.BackColor = Color.Gold;
+            Cursor = Cursors.WaitCursor;
             Application.DoEvents();
             if (Channel.Pattern != null)
             {
@@ -172,6 +174,7 @@ namespace SEYR.Session
                 UpdateRTB(matchings);
                 PBX.Image = sourceImage;
             }
+            Cursor = Cursors.Default;
             BtnFindPatterns.BackColor = Color.White;
         }
 
@@ -203,12 +206,14 @@ namespace SEYR.Session
             RTB.Visible = false;
             FlowScore.Visible = false;
             FlowInterval.Visible = true;
+            FlowDelta.Visible = true;
         }
 
         private void SaveInterval()
         {
             Channel.Project.PatternIntervalString = ComboPatternInterval.Text;
             Channel.Project.PatternIntervalValue = (int)NumPatternInterval.Value;
+            Channel.Project.PatternDeltaMax = (int)NumPatternDeltaMax.Value;
         }
 
         #endregion
