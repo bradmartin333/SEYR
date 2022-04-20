@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace SEYR.Session
@@ -24,7 +23,17 @@ namespace SEYR.Session
             } 
         }
 
-        public async Task Write(string value, bool addNewLine = true, bool addDT = false, bool showInViewer = false)
+        public void Write(string value, bool addNewLine = true, bool addDT = false)
+        {
+            try
+            {
+                using (StreamWriter file = new StreamWriter(Path, append: true))
+                    file.WriteAsync($"{(addDT ? $"{System.DateTime.Now}\t" : "")}{value}{(addNewLine ? "\n" : "")}");
+            }
+            catch (System.Exception) { }
+        }
+
+        public async Task WriteAsync(string value, bool addNewLine = true, bool addDT = false, bool showInViewer = false)
         {
             using (StreamWriter file = new StreamWriter(Path, append: true))
                 await file.WriteAsync($"{(addDT ? $"{System.DateTime.Now}\t" : "")}{value}{(addNewLine ? "\n" : "")}");

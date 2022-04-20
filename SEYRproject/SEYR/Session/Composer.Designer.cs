@@ -61,25 +61,24 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnAddFeature = new System.Windows.Forms.Button();
             this.BtnCopyFeature = new System.Windows.Forms.Button();
             this.BtnDeleteFeature = new System.Windows.Forms.Button();
-            this.ComboFeatures = new System.Windows.Forms.ComboBox();
-            this.BtnAddFeature = new System.Windows.Forms.Button();
+            this.OLV = new BrightIdeasSoftware.FastObjectListView();
             this.tabPageGeometry = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
-            this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.NumFeatureX = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label19 = new System.Windows.Forms.Label();
-            this.NumFeatureThreshold = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
+            this.LabelThreshold = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -87,6 +86,7 @@
             this.LabelCurrentFeatureScore = new System.Windows.Forms.Label();
             this.BtnResetScoreHistory = new System.Windows.Forms.Button();
             this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
+            this.ThresholdScrollBar = new System.Windows.Forms.HScrollBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -101,6 +101,9 @@
             this.FollowerPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TrainLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HideLocationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -122,15 +125,15 @@
             this.tabControl.SuspendLayout();
             this.tabPageFeatures.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OLV)).BeginInit();
             this.tabPageGeometry.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
@@ -610,31 +613,41 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.ComboFeatures, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.BtnAddFeature, 0, 1);
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.BtnAddFeature, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.OLV, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 114);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // BtnAddFeature
+            // 
+            this.BtnAddFeature.BackColor = System.Drawing.Color.White;
+            this.BtnAddFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddFeature.Location = new System.Drawing.Point(344, 3);
+            this.BtnAddFeature.Name = "BtnAddFeature";
+            this.BtnAddFeature.Size = new System.Drawing.Size(75, 31);
+            this.BtnAddFeature.TabIndex = 1;
+            this.BtnAddFeature.Text = "Add";
+            this.BtnAddFeature.UseVisualStyleBackColor = false;
+            this.BtnAddFeature.Click += new System.EventHandler(this.BtnAddFeature_Click);
+            // 
             // BtnCopyFeature
             // 
-            this.BtnCopyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
             this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(313, 23);
+            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 40);
             this.BtnCopyFeature.Name = "BtnCopyFeature";
             this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnCopyFeature.TabIndex = 3;
@@ -644,10 +657,9 @@
             // 
             // BtnDeleteFeature
             // 
-            this.BtnDeleteFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
             this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDeleteFeature.Location = new System.Drawing.Point(172, 23);
+            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 77);
             this.BtnDeleteFeature.Name = "BtnDeleteFeature";
             this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnDeleteFeature.TabIndex = 2;
@@ -655,29 +667,30 @@
             this.BtnDeleteFeature.UseVisualStyleBackColor = false;
             this.BtnDeleteFeature.Click += new System.EventHandler(this.BtnDeleteFeature_Click);
             // 
-            // ComboFeatures
+            // OLV
             // 
-            this.ComboFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.SetColumnSpan(this.ComboFeatures, 3);
-            this.ComboFeatures.FormattingEnabled = true;
-            this.ComboFeatures.Location = new System.Drawing.Point(3, 65);
-            this.ComboFeatures.Name = "ComboFeatures";
-            this.ComboFeatures.Size = new System.Drawing.Size(416, 21);
-            this.ComboFeatures.TabIndex = 0;
-            this.ComboFeatures.SelectedIndexChanged += new System.EventHandler(this.ComboFeatures_SelectedIndexChanged);
-            // 
-            // BtnAddFeature
-            // 
-            this.BtnAddFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.BtnAddFeature.BackColor = System.Drawing.Color.White;
-            this.BtnAddFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAddFeature.Location = new System.Drawing.Point(32, 23);
-            this.BtnAddFeature.Name = "BtnAddFeature";
-            this.BtnAddFeature.Size = new System.Drawing.Size(75, 31);
-            this.BtnAddFeature.TabIndex = 1;
-            this.BtnAddFeature.Text = "Add";
-            this.BtnAddFeature.UseVisualStyleBackColor = false;
-            this.BtnAddFeature.Click += new System.EventHandler(this.BtnAddFeature_Click);
+            this.OLV.AllColumns.Add(this.olvColumn1);
+            this.OLV.AllColumns.Add(this.olvColumn2);
+            this.OLV.AllColumns.Add(this.olvColumn3);
+            this.OLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3});
+            this.OLV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.OLV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OLV.FullRowSelect = true;
+            this.OLV.HideSelection = false;
+            this.OLV.Location = new System.Drawing.Point(3, 3);
+            this.OLV.MultiSelect = false;
+            this.OLV.Name = "OLV";
+            this.tableLayoutPanel2.SetRowSpan(this.OLV, 3);
+            this.OLV.ShowGroups = false;
+            this.OLV.Size = new System.Drawing.Size(335, 108);
+            this.OLV.TabIndex = 4;
+            this.OLV.UseCompatibleStateImageBehavior = false;
+            this.OLV.View = System.Windows.Forms.View.Details;
+            this.OLV.VirtualMode = true;
+            this.OLV.SelectedIndexChanged += new System.EventHandler(this.OLV_SelectedIndexChanged);
             // 
             // tabPageGeometry
             // 
@@ -691,32 +704,34 @@
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnCount = 5;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.NumFeatureHeight, 3, 1);
-            this.tableLayoutPanel4.Controls.Add(this.NumFeatureY, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.NumFeatureWidth, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.NumFeatureHeight, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.label14, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label15, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label16, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label17, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label17, 3, 1);
             this.tableLayoutPanel4.Controls.Add(this.NumFeatureX, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label16, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.NumFeatureWidth, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label15, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.NumFeatureY, 4, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(428, 120);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // NumFeatureHeight
             // 
-            this.NumFeatureHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureHeight.Location = new System.Drawing.Point(272, 80);
+            this.NumFeatureHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumFeatureHeight.Location = new System.Drawing.Point(307, 29);
             this.NumFeatureHeight.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -728,7 +743,7 @@
             0,
             0});
             this.NumFeatureHeight.Name = "NumFeatureHeight";
-            this.NumFeatureHeight.Size = new System.Drawing.Size(91, 20);
+            this.NumFeatureHeight.Size = new System.Drawing.Size(118, 20);
             this.NumFeatureHeight.TabIndex = 7;
             this.NumFeatureHeight.Value = new decimal(new int[] {
             1,
@@ -737,24 +752,57 @@
             0});
             this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
-            // NumFeatureY
+            // label14
             // 
-            this.NumFeatureY.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureY.Location = new System.Drawing.Point(46, 80);
-            this.NumFeatureY.Maximum = new decimal(new int[] {
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "X (μm)";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(240, 32);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Height (μm)";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // NumFeatureX
+            // 
+            this.NumFeatureX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumFeatureX.Location = new System.Drawing.Point(67, 3);
+            this.NumFeatureX.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.NumFeatureY.Name = "NumFeatureY";
-            this.NumFeatureY.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureY.TabIndex = 6;
-            this.NumFeatureY.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
+            this.NumFeatureX.Name = "NumFeatureX";
+            this.NumFeatureX.Size = new System.Drawing.Size(117, 20);
+            this.NumFeatureX.TabIndex = 4;
+            this.NumFeatureX.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 32);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(58, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Width (μm)";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // NumFeatureWidth
             // 
-            this.NumFeatureWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureWidth.Location = new System.Drawing.Point(272, 20);
+            this.NumFeatureWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumFeatureWidth.Location = new System.Drawing.Point(67, 29);
             this.NumFeatureWidth.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -766,7 +814,7 @@
             0,
             0});
             this.NumFeatureWidth.Name = "NumFeatureWidth";
-            this.NumFeatureWidth.Size = new System.Drawing.Size(91, 20);
+            this.NumFeatureWidth.Size = new System.Drawing.Size(117, 20);
             this.NumFeatureWidth.TabIndex = 5;
             this.NumFeatureWidth.Value = new decimal(new int[] {
             1,
@@ -775,63 +823,30 @@
             0});
             this.NumFeatureWidth.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(3, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(37, 60);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "X (μm)";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label15
             // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(3, 60);
+            this.label15.Location = new System.Drawing.Point(240, 6);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(37, 60);
+            this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 1;
             this.label15.Text = "Y (μm)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label16
+            // NumFeatureY
             // 
-            this.label16.AutoSize = true;
-            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(205, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(61, 60);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "Width (μm)";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(205, 60);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 60);
-            this.label17.TabIndex = 3;
-            this.label17.Text = "Height (μm)";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // NumFeatureX
-            // 
-            this.NumFeatureX.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureX.Location = new System.Drawing.Point(46, 20);
-            this.NumFeatureX.Maximum = new decimal(new int[] {
+            this.NumFeatureY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumFeatureY.Location = new System.Drawing.Point(307, 3);
+            this.NumFeatureY.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.NumFeatureX.Name = "NumFeatureX";
-            this.NumFeatureX.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureX.TabIndex = 4;
-            this.NumFeatureX.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
+            this.NumFeatureY.Name = "NumFeatureY";
+            this.NumFeatureY.Size = new System.Drawing.Size(118, 20);
+            this.NumFeatureY.TabIndex = 6;
+            this.NumFeatureY.ValueChanged += new System.EventHandler(this.FeatureRectangle_ValueChanged);
             // 
             // tabPageInfo
             // 
@@ -852,8 +867,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.label19, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.NumFeatureThreshold, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label18, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.LabelThreshold, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label20, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
@@ -861,6 +875,7 @@
             this.tableLayoutPanel3.Controls.Add(this.LabelCurrentFeatureScore, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.BtnResetScoreHistory, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.ComboFeatureNullDetection, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ThresholdScrollBar, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -874,107 +889,87 @@
             // 
             // label19
             // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(3, 84);
+            this.label19.Location = new System.Drawing.Point(3, 92);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(101, 30);
+            this.label19.Size = new System.Drawing.Size(101, 13);
             this.label19.TabIndex = 8;
             this.label19.Text = "Null Detection Type";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // NumFeatureThreshold
+            // LabelThreshold
             // 
-            this.NumFeatureThreshold.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumFeatureThreshold.DecimalPlaces = 3;
-            this.NumFeatureThreshold.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.NumFeatureThreshold.Location = new System.Drawing.Point(110, 60);
-            this.NumFeatureThreshold.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumFeatureThreshold.Name = "NumFeatureThreshold";
-            this.NumFeatureThreshold.Size = new System.Drawing.Size(91, 20);
-            this.NumFeatureThreshold.TabIndex = 7;
-            this.NumFeatureThreshold.ValueChanged += new System.EventHandler(this.NumFeatureThreshold_ValueChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(3, 56);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(101, 28);
-            this.label18.TabIndex = 6;
-            this.label18.Text = "Threshold";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LabelThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelThreshold.AutoSize = true;
+            this.LabelThreshold.Location = new System.Drawing.Point(3, 63);
+            this.LabelThreshold.Name = "LabelThreshold";
+            this.LabelThreshold.Size = new System.Drawing.Size(101, 13);
+            this.LabelThreshold.TabIndex = 6;
+            this.LabelThreshold.Text = "Threshold: N/A";
+            this.LabelThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label20
             // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(229, 28);
+            this.label20.Location = new System.Drawing.Point(229, 35);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(70, 28);
+            this.label20.Size = new System.Drawing.Size(70, 13);
             this.label20.TabIndex = 5;
             this.label20.Text = "Score History";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(3, 0);
+            this.label10.Location = new System.Drawing.Point(3, 7);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 28);
+            this.label10.Size = new System.Drawing.Size(101, 13);
             this.label10.TabIndex = 0;
             this.label10.Text = "Name";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 28);
+            this.label11.Location = new System.Drawing.Point(3, 35);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 28);
+            this.label11.Size = new System.Drawing.Size(101, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "Current Score";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TxtFeatureName
             // 
-            this.TxtFeatureName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.TxtFeatureName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtFeatureName.Location = new System.Drawing.Point(110, 4);
             this.TxtFeatureName.Name = "TxtFeatureName";
-            this.TxtFeatureName.Size = new System.Drawing.Size(91, 20);
+            this.TxtFeatureName.Size = new System.Drawing.Size(113, 20);
             this.TxtFeatureName.TabIndex = 2;
             this.TxtFeatureName.TextChanged += new System.EventHandler(this.TxtFeatureName_TextChanged);
             // 
             // LabelCurrentFeatureScore
             // 
+            this.LabelCurrentFeatureScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelCurrentFeatureScore.AutoSize = true;
-            this.LabelCurrentFeatureScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(110, 28);
+            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(110, 35);
             this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
-            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(113, 28);
+            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(113, 13);
             this.LabelCurrentFeatureScore.TabIndex = 3;
             this.LabelCurrentFeatureScore.Text = "N/A";
             this.LabelCurrentFeatureScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BtnResetScoreHistory
             // 
-            this.BtnResetScoreHistory.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnResetScoreHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnResetScoreHistory.BackColor = System.Drawing.Color.White;
             this.BtnResetScoreHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnResetScoreHistory.Location = new System.Drawing.Point(305, 31);
             this.BtnResetScoreHistory.Name = "BtnResetScoreHistory";
-            this.BtnResetScoreHistory.Size = new System.Drawing.Size(75, 22);
+            this.BtnResetScoreHistory.Size = new System.Drawing.Size(114, 22);
             this.BtnResetScoreHistory.TabIndex = 4;
             this.BtnResetScoreHistory.Text = "Reset";
             this.BtnResetScoreHistory.UseVisualStyleBackColor = false;
@@ -982,13 +977,24 @@
             // 
             // ComboFeatureNullDetection
             // 
-            this.ComboFeatureNullDetection.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ComboFeatureNullDetection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ComboFeatureNullDetection.FormattingEnabled = true;
             this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 88);
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
-            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(91, 21);
+            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(113, 21);
             this.ComboFeatureNullDetection.TabIndex = 9;
             this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
+            // 
+            // ThresholdScrollBar
+            // 
+            this.ThresholdScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdScrollBar, 3);
+            this.ThresholdScrollBar.Location = new System.Drawing.Point(110, 61);
+            this.ThresholdScrollBar.Margin = new System.Windows.Forms.Padding(3);
+            this.ThresholdScrollBar.Name = "ThresholdScrollBar";
+            this.ThresholdScrollBar.Size = new System.Drawing.Size(309, 17);
+            this.ThresholdScrollBar.TabIndex = 10;
+            this.ThresholdScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ThresholdScrollBar_Scroll);
             // 
             // flowLayoutPanel1
             // 
@@ -1159,6 +1165,25 @@
             this.HideLocationsToolStripMenuItem.Text = "Hide Locations";
             this.HideLocationsToolStripMenuItem.Click += new System.EventHandler(this.HideLocationsToolStripMenuItem_Click);
             // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Name";
+            this.olvColumn1.FillsFreeSpace = true;
+            this.olvColumn1.Text = "Name";
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Threshold";
+            this.olvColumn2.AspectToStringFormat = "{0}";
+            this.olvColumn2.Text = "Threshold";
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "NullDetection";
+            this.olvColumn3.AspectToStringFormat = "{0}";
+            this.olvColumn3.Text = "Null Detection";
+            this.olvColumn3.Width = 100;
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1195,17 +1220,17 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageFeatures.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.OLV)).EndInit();
             this.tabPageGeometry.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFeatureThreshold)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
@@ -1256,7 +1281,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button BtnCopyFeature;
         private System.Windows.Forms.Button BtnDeleteFeature;
-        private System.Windows.Forms.ComboBox ComboFeatures;
         private System.Windows.Forms.Button BtnAddFeature;
         private System.Windows.Forms.TabPage tabPageInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -1284,11 +1308,15 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button BtnResetScoreHistory;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.NumericUpDown NumFeatureThreshold;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label LabelThreshold;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
         private System.Windows.Forms.ToolStripMenuItem FollowerPatternToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TrainLocationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HideLocationsToolStripMenuItem;
+        private System.Windows.Forms.HScrollBar ThresholdScrollBar;
+        private BrightIdeasSoftware.FastObjectListView OLV;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
     }
 }

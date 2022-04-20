@@ -67,7 +67,7 @@ namespace SEYR.ImageProcessing
                 Rectangle cropRect = Channel.Project.GetIndexedGeometry(desiredTile.X, desiredTile.Y, Offset);
                 Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                 await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics);
-                await Channel.DebugStream.Write($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
+                await Channel.DebugStream.WriteAsync($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
                 return crop;
             }
 
@@ -87,7 +87,7 @@ namespace SEYR.ImageProcessing
             }
 
             Channel.Viewer.UpdateImage(bmp);
-            await Channel.DataStream.Write(outputData, false);
+            await Channel.DataStream.WriteAsync(outputData, false);
             return bmp;
         }
 
@@ -214,7 +214,7 @@ namespace SEYR.ImageProcessing
                                 if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
                                     {
-                                        await Channel.DebugStream.Write($"Pattern follower interval hit: {Channel.OutputData}");
+                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {Channel.OutputData}");
                                         return await FindPattern(bmp);
                                     }
                 }
@@ -235,14 +235,14 @@ namespace SEYR.ImageProcessing
                 int deltaH = (int)Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
                 if (deltaH <= Channel.Project.PatternDeltaMax)
                 {
-                    await Channel.DebugStream.Write($"Pattern follower delta = {deltaH}", showInViewer: true);
+                    await Channel.DebugStream.WriteAsync($"Pattern follower delta = {deltaH}", showInViewer: true);
                     return delta;
                 }    
             }
             if (Channel.Project.PatternLocations.Count == 0)
-                await Channel.DebugStream.Write($"Pattern location not taught", showInViewer: true);
+                await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
             else
-                await Channel.DebugStream.Write($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
+                await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
             return NullPoint;
         }
 

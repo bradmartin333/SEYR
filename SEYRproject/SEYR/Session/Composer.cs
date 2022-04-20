@@ -330,25 +330,20 @@ namespace SEYR.Session
 
         private void SetupFeatureUI(bool setNull)
         {
-            ComboFeatures.Items.Clear();
-            ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
+            OLV.ClearObjects();
+            OLV.AddObjects(Features);
             if (setNull)
             {
                 ActiveFeature = null;
-                ComboFeatures.Text = "";
-                ComboFeatures.SelectedIndex = -1;
                 tabControl.SelectedIndex = 0;
             }
+            else
+                OLV.SelectedObject = ActiveFeature;
             LoadingFeature = false;
             UpdateImages();
             Channel.DebugStream.Write($"Load Feature UI");
         }
 
-        private void AddFeature(Feature feature)
-        {
-            Features.Add(feature);
-            SetupFeatureUI(false);
-        }
 
         private void ApplyFeature()
         {
@@ -365,34 +360,36 @@ namespace SEYR.Session
             SetupFeatureUI(false);
         }
 
-        private void ComboFeatures_SelectedIndexChanged(object sender, EventArgs e)
+        private void OLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadingFeature = true;
-            ActiveFeature = Features[ComboFeatures.SelectedIndex];
-            Channel.DebugStream.Write($"Editing {ActiveFeature.Name}");
+            Channel.DebugStream.Write("Selected Feature Changed   ", false);
+            if (OLV.SelectedObject == null) return;
+            Channel.DebugStream.Write("Selected Feature Valid   ", false);
+            ActiveFeature = (Feature)OLV.SelectedObject;
+            Channel.DebugStream.Write($"Editing {ActiveFeature.Name}   ", false);
             NumFeatureX.Value = ActiveFeature.Rectangle.X;
             NumFeatureY.Value = ActiveFeature.Rectangle.Y;
             NumFeatureWidth.Value = ActiveFeature.Rectangle.Width;
             NumFeatureHeight.Value = ActiveFeature.Rectangle.Height;
+            Channel.DebugStream.Write("Loaded Rectangle   ", false);
             TxtFeatureName.Text = ActiveFeature.Name;
-            NumFeatureThreshold.Value = (decimal)ActiveFeature.Threshold;
+            Channel.DebugStream.Write("Loaded Name   ", false);
+            ThresholdScrollBar.Value = (int)(ActiveFeature.Threshold * 100f);
+            LabelThreshold.Text = $"Threshold: {ActiveFeature.Threshold}";
+            Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
+            Channel.DebugStream.Write("Loaded Null Detection   ", false);
             LoadingFeature = false;
-            ApplyFeature();
-        }
-
-        private void BtnAddFeature_Click(object sender, EventArgs e)
-        {
-            Feature feature = new Feature();
-            AddFeature(feature);
-            Channel.DebugStream.Write($"{feature.Name} Added");
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
+            UpdateImages();
         }
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || OLV.SelectedObject == null) return;
             Channel.DebugStream.Write($"{ActiveFeature.Name} Deleted");
-            Features.RemoveAt(ComboFeatures.SelectedIndex);
+            Features.Remove((Feature)OLV.SelectedObject);
             SetupFeatureUI(true);
         }
 
@@ -402,6 +399,20 @@ namespace SEYR.Session
             Feature feature = ActiveFeature.Clone();
             Channel.DebugStream.Write($"{ActiveFeature.Name} Copied To {feature.Name}");
             AddFeature(feature);
+        }
+
+        private void BtnAddFeature_Click(object sender, EventArgs e)
+        {
+            Feature feature = new Feature();
+            AddFeature(feature);
+            Channel.DebugStream.Write($"{feature.Name} Added");
+        }
+
+        private void AddFeature(Feature feature)
+        {
+            Features.Add(feature);
+            ActiveFeature = feature;
+            SetupFeatureUI(false);
         }
 
         private void FeatureRectangle_ValueChanged(object sender, EventArgs e)
@@ -421,25 +432,23 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             if (Features.Where(x => x.Name != ActiveFeature.Name).Select(x => x.Name).Contains(TxtFeatureName.Text))
-                TxtFeatureName.BackColor = Color.LightCoral;
+                TxtFeatureName.BackColor = Color.LightCoral; // Name already taken
             else
             {
                 TxtFeatureName.BackColor = Color.White;
-                Channel.DebugStream.Write($"{ActiveFeature.Name} Renamed To {TxtFeatureName.Text}");
                 ActiveFeature.Name = TxtFeatureName.Text;
-                int lastIndex = ComboFeatures.SelectedIndex;
-                ComboFeatures.Items.Clear();
-                ComboFeatures.Items.AddRange(Features.Select(x => x.Name).ToArray());
-                ComboFeatures.SelectedIndex = lastIndex;
+                Channel.DebugStream.Write($"{ActiveFeature.Name} Renamed To {TxtFeatureName.Text}");
+                ApplyFeature();
             }    
         }
 
-        private void NumFeatureThreshold_ValueChanged(object sender, EventArgs e)
+        private void ThresholdScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
+            ActiveFeature.Threshold = ThresholdScrollBar.Value / 100f;
+            LabelThreshold.Text = $"Thresold: {ActiveFeature.Threshold}";
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Detection Changed");
             ShowThreshold = true;
-            ActiveFeature.Threshold = (float)NumFeatureThreshold.Value;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
             ApplyFeature();
         }
 
@@ -453,8 +462,9 @@ namespace SEYR.Session
 
         private void BtnResetScoreHistory_Click(object sender, EventArgs e)
         {
-            if (ActiveFeature == null) return;
+            if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Scores.Clear();
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Score History Cleared");
             ApplyFeature();
         }
 
