@@ -229,7 +229,7 @@ namespace SEYR.Session
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 Bitmap tile = await BitmapFunctions.GenerateSingleTile(bmp, TileRow, TileColumn, ActiveFeature);
                 PbxTile.BackgroundImage = tile;
-                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = ActiveFeature.GetScoreInfo().Item1.ToString();
+                if (ActiveFeature != null) LabelCurrentFeatureScore.Text = ActiveFeature.LastScore.ToString();
             }
             catch (Exception ex)
             {
@@ -462,7 +462,7 @@ namespace SEYR.Session
         private void BtnResetScoreHistory_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Scores.Clear();
+            ActiveFeature.ClearScore();
             Channel.DebugStream.Write($"{ActiveFeature.Name} Score History Cleared");
             ApplyFeature();
         }

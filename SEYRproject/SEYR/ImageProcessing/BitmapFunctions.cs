@@ -103,7 +103,7 @@ namespace SEYR.ImageProcessing
                     foreach (Feature feature in Channel.Project.Features)
                     {
                         float score = AnalyzeData(tile, feature);
-                        feature.Scores.Add(score);
+                        feature.UpdateScore(score);
                         if (score == 0f) // Special pass
                         {
                             g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
@@ -201,7 +201,7 @@ namespace SEYR.ImageProcessing
 
         private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern)
         {
-            if (Channel.Pattern != null && DataStream.Header != null && Channel.Project.PatternIntervalValue != 0)
+            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && DataStream.Header != null)
             {
                 if (forcePattern)
                     return await FindPattern(bmp);

@@ -75,7 +75,7 @@ namespace SEYR.Session
         public static void ClearAllFeatureScores()
         {
             foreach (Feature feature in Project.Features)
-                feature.Scores.Clear();
+                feature.ClearScore();
             DiscardViewer();
         }
 
@@ -152,7 +152,7 @@ namespace SEYR.Session
         {
             string output = string.Empty;
             foreach (Feature feature in Project.Features)
-                output += $"{feature.Name}\t{feature.GetScoreInfo().Item1}\n";
+                output += $"{feature.Name}\t{feature.LastScore}\n";
             return output;
         }
 

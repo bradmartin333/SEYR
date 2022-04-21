@@ -41,9 +41,36 @@ namespace SEYRDesktop
             Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
+        private async void BtnRestartAndRun_Click(object sender, EventArgs e)
+        {
+            BUSY = true;
+            STOP = false;
+            BtnRunAll.Enabled = false;
+            BtnStop.Enabled = false;
+            BtnStop.Enabled = true;
+            NumFrame.Value = 0;
+            Application.DoEvents();
+            Channel.MakeArchive();
+            SEYR.Session.Channel.ClearLogs();
+            SEYR.Session.Channel.ClearAllFeatureScores();
+            BUSY = false;
+            while (!STOP && NumFrame.Value < NumFrame.Maximum)
+            {
+                Application.DoEvents();
+                await NextImage();
+                NumFrame.Value++;
+            }
+            BtnRunAll.Enabled = true;
+            BtnRestartAndRun.Enabled = true;
+            BtnStop.Enabled = false;
+            if (!STOP) Channel.MakeArchive();
+            STOP = false;
+        }
+
         private async void btnRunAll_Click(object sender, EventArgs e)
         {
             BtnRunAll.Enabled = false;
+            BtnRestartAndRun.Enabled = false;
             BtnStop.Enabled = true;
             while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
@@ -52,6 +79,7 @@ namespace SEYRDesktop
                 NumFrame.Value++;
             }
             BtnRunAll.Enabled = true;
+            BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
             if (!STOP) Channel.MakeArchive();
             STOP = false;
@@ -61,6 +89,7 @@ namespace SEYRDesktop
         {
             STOP = true;
             BtnRunAll.Enabled = true;
+            BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
         }
 
@@ -82,6 +111,7 @@ namespace SEYRDesktop
             BtnOpenComposer.Enabled = true;
             NumFrame.Enabled = true;
             BtnRunAll.Enabled = true;
+            BtnRestartAndRun.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnShowViewer.Enabled = true;
             BtnForcePattern.Enabled = true;

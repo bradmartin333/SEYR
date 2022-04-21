@@ -31,9 +31,15 @@ namespace SEYR.Session
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
-        private List<float> _Scores = new List<float>();
-        internal List<float> Scores { get => _Scores; set => _Scores = value; }
-        
+        private float _MinScore = float.MaxValue;
+        internal float MinScore { get => _MinScore; set => _MinScore = value; }
+
+        private float _MaxScore = float.MinValue;
+        internal float MaxScore { get => _MaxScore; set => _MaxScore = value; }
+
+        private float _LastScore = 0f;
+        internal float LastScore { get => _LastScore; set => _LastScore = value; }
+
         public Feature()
         {
             Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
@@ -75,31 +81,31 @@ namespace SEYR.Session
             return displaynames.ToArray();
         }
 
-        internal (float, float[]) GetScoreInfo()
+        internal void ClearScore()
         {
-            float[] theseScores = (float[])Scores.ToArray().Clone();
-            if (theseScores.Length > 0)
-                return (theseScores.Last(), theseScores);
-            else
-                return (0f, new float[] { 0f });
+            _MinScore = float.MaxValue;
+            _MaxScore = float.MinValue;
+            _LastScore = 0f;
         }
 
-        public Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
+        internal void UpdateScore(float score)
         {
-            (float hueIn, float[] scores) = GetScoreInfo();
-            double fromLow;
-            double fromHigh;
-            float[] cleanScores = scores.Where(x => x > 0f).ToArray();
-            if (cleanScores.Count() > 5)
+            if (score > 0)
             {
-                fromLow = cleanScores.Min();
-                fromHigh = cleanScores.Max();
+                if (score < _MinScore) _MinScore = score;
+                if (score > _MaxScore) _MaxScore = score;
             }
-            else
-                return Color.Black;
-            double toLow = 128;
-            double toHigh = 0;
-            double hue = (double)((hueIn - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
+            _LastScore = score;
+        }
+
+        internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
+        {
+            double fromLow = _MinScore;
+            double fromHigh = _MaxScore;
+            if (_MinScore == float.MaxValue || _MaxScore == float.MinValue || _MinScore == _MaxScore) return Color.Black;
+            double toLow = 0;
+            double toHigh = 128;
+            double hue = (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
             if (hue == 360) return Color.FromArgb(255, Color.White);
             if (hue == 0) return Color.FromArgb(255, Color.Black);
             int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
