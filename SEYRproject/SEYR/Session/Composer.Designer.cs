@@ -103,11 +103,11 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearAllFeatureScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenPatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -161,7 +161,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label18, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label21, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -172,7 +172,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1179, 662);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1179, 660);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // PbxGrid
@@ -182,7 +182,7 @@
             this.PbxGrid.Location = new System.Drawing.Point(4, 34);
             this.PbxGrid.Margin = new System.Windows.Forms.Padding(4);
             this.PbxGrid.Name = "PbxGrid";
-            this.PbxGrid.Size = new System.Drawing.Size(581, 392);
+            this.PbxGrid.Size = new System.Drawing.Size(581, 390);
             this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxGrid.TabIndex = 1;
             this.PbxGrid.TabStop = false;
@@ -194,7 +194,7 @@
             this.PbxTile.Location = new System.Drawing.Point(593, 34);
             this.PbxTile.Margin = new System.Windows.Forms.Padding(4);
             this.PbxTile.Name = "PbxTile";
-            this.PbxTile.Size = new System.Drawing.Size(582, 392);
+            this.PbxTile.Size = new System.Drawing.Size(582, 390);
             this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxTile.TabIndex = 2;
             this.PbxTile.TabStop = false;
@@ -207,7 +207,7 @@
             this.flowLayoutPanel2.Controls.Add(this.NumOriginX);
             this.flowLayoutPanel2.Controls.Add(this.label4);
             this.flowLayoutPanel2.Controls.Add(this.NumOriginY);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(88, 480);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(88, 478);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(4);
@@ -276,7 +276,7 @@
             this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
             this.flowLayoutPanel3.Controls.Add(this.label13);
             this.flowLayoutPanel3.Controls.Add(this.NumPitchY);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(88, 526);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(88, 524);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(4);
@@ -345,7 +345,7 @@
             this.flowLayoutPanel4.Controls.Add(this.NumSizeX);
             this.flowLayoutPanel4.Controls.Add(this.label5);
             this.flowLayoutPanel4.Controls.Add(this.NumSizeY);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(88, 572);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(88, 570);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(4);
@@ -434,7 +434,7 @@
             this.flowLayoutPanel5.Controls.Add(this.NumColumns);
             this.flowLayoutPanel5.Controls.Add(this.LabelScale);
             this.flowLayoutPanel5.Controls.Add(this.NumRows);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(88, 618);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(88, 616);
             this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(4);
@@ -524,7 +524,7 @@
             this.flowLayoutPanel9.Controls.Add(this.label9);
             this.flowLayoutPanel9.Controls.Add(this.NumTileRow);
             this.flowLayoutPanel9.Controls.Add(this.BtnApplyFeature);
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(628, 618);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(628, 616);
             this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Size = new System.Drawing.Size(512, 40);
@@ -630,7 +630,7 @@
             this.tabControl.Controls.Add(this.tabPageFeatures);
             this.tabControl.Controls.Add(this.tabPageGeometry);
             this.tabControl.Controls.Add(this.tabPageInfo);
-            this.tabControl.Location = new System.Drawing.Point(593, 434);
+            this.tabControl.Location = new System.Drawing.Point(593, 432);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tableLayoutPanel1.SetRowSpan(this.tabControl, 4);
@@ -1089,7 +1089,7 @@
             this.flowLayoutPanel1.Controls.Add(this.NumScaling);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.NumAngle);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(88, 434);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(88, 432);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
@@ -1205,10 +1205,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConfirmToolStripMenuItem,
             this.CancelToolStripMenuItem,
+            this.OpenPatternWizardToolStripMenuItem,
             this.ToolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1179, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1179, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1217,7 +1218,7 @@
             this.ConfirmToolStripMenuItem.AutoSize = false;
             this.ConfirmToolStripMenuItem.BackColor = System.Drawing.Color.PaleGreen;
             this.ConfirmToolStripMenuItem.Name = "ConfirmToolStripMenuItem";
-            this.ConfirmToolStripMenuItem.Size = new System.Drawing.Size(150, 20);
+            this.ConfirmToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.ConfirmToolStripMenuItem.Text = "Save All";
             this.ConfirmToolStripMenuItem.Click += new System.EventHandler(this.ConfirmToolStripMenuItem_Click);
             // 
@@ -1225,7 +1226,7 @@
             // 
             this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
             this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
-            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(189, 24);
+            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.CancelToolStripMenuItem.Text = "Close and Reload Project";
             this.CancelToolStripMenuItem.Click += new System.EventHandler(this.CancelToolStripMenuItem_Click);
             // 
@@ -1234,13 +1235,12 @@
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
-            this.PatternWizardToolStripMenuItem,
             this.ClearLogsToolStripMenuItem,
             this.ClearAllFeatureScoresToolStripMenuItem,
             this.OpenFileLocationToolStripMenuItem,
             this.MakeSEYRUPToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
-            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
             this.ToolsToolStripMenuItem.Text = "Tools";
             // 
             // ApplyDeskewToolStripMenuItem
@@ -1257,13 +1257,6 @@
             this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
-            // 
-            // PatternWizardToolStripMenuItem
-            // 
-            this.PatternWizardToolStripMenuItem.Name = "PatternWizardToolStripMenuItem";
-            this.PatternWizardToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
-            this.PatternWizardToolStripMenuItem.Text = "Pattern Wizard";
-            this.PatternWizardToolStripMenuItem.Click += new System.EventHandler(this.PatternWizardToolStripMenuItem_Click);
             // 
             // ClearLogsToolStripMenuItem
             // 
@@ -1292,6 +1285,15 @@
             this.ClearAllFeatureScoresToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
             this.ClearAllFeatureScoresToolStripMenuItem.Text = "Clear All Feature Scores";
             this.ClearAllFeatureScoresToolStripMenuItem.Click += new System.EventHandler(this.ClearAllFeatureScoresToolStripMenuItem_Click);
+            // 
+            // OpenPatternWizardToolStripMenuItem
+            // 
+            this.OpenPatternWizardToolStripMenuItem.AutoSize = false;
+            this.OpenPatternWizardToolStripMenuItem.BackColor = System.Drawing.Color.Thistle;
+            this.OpenPatternWizardToolStripMenuItem.Name = "OpenPatternWizardToolStripMenuItem";
+            this.OpenPatternWizardToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.OpenPatternWizardToolStripMenuItem.Text = "Open Pattern Wizard";
+            this.OpenPatternWizardToolStripMenuItem.Click += new System.EventHandler(this.OpenPatternWizardToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1425,12 +1427,12 @@
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private System.Windows.Forms.ToolStripMenuItem PatternWizardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearLogsToolStripMenuItem;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ToolStripMenuItem OpenFileLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MakeSEYRUPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearAllFeatureScoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenPatternWizardToolStripMenuItem;
     }
 }

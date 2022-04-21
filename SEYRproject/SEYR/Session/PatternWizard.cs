@@ -70,7 +70,7 @@ namespace SEYR.Session
         private void CropUtility()
         {
             State = WizardState.Crop;
-            WizardLabel.Text = "Click then drag mouse to select a crop region. Click again to finish.\nClick continue to save new pattern or to proceed with already saved pattern.";
+            WizardLabel.Text = "Click to create a box around the pattern region. Click again to complete selection.\nClick continue to proceed or load previously saved pattern.";
             PBX.BackgroundImage = InputImage;
         }
 
@@ -151,7 +151,7 @@ namespace SEYR.Session
 
         private void ScoreUtility(float score = -1f)
         {
-            WizardLabel.Text = "Decrease the pattern score as much as possible without allowing false positives.";
+            WizardLabel.Text = "Lower the pattern score as much as possible without allowing false positives.";
             PBX.Image = null;
             RTB.Visible = true;
             RTB.Text = "Score\tCount\n";

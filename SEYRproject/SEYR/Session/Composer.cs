@@ -559,7 +559,7 @@ namespace SEYR.Session
             ClickGrid = true;
         }
 
-        private void PatternWizardToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenPatternWizardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (PatternWizard w = new PatternWizard((Bitmap)InputImage.Clone()))
             {
