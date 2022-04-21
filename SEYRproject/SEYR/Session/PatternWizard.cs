@@ -31,7 +31,8 @@ namespace SEYR.Session
             InputImage = bmp;
 
             NumPatternScore.Value = (decimal)Channel.Project.PatternScore;
-            ComboPatternInterval.Items.AddRange(DataStream.Header.Split('\t'));
+            string[] comboVals = DataStream.Header.Split('\t');
+            ComboPatternInterval.Items.AddRange(comboVals.Take(comboVals.Length - 2).ToArray());
             ComboPatternInterval.Text = Channel.Project.PatternIntervalString;
             NumPatternInterval.Value = Channel.Project.PatternIntervalValue;
             NumPatternDeltaMax.Value = Channel.Project.PatternDeltaMax;
