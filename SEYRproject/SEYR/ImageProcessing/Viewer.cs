@@ -15,6 +15,7 @@ namespace SEYR.ImageProcessing
             else
                 Location = new Point(0, 0);
             Show();
+            BringToFront();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
