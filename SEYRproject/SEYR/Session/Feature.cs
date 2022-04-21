@@ -97,7 +97,7 @@ namespace SEYR.Session
             }
             else
                 return Color.Black;
-            double toLow = 255;
+            double toLow = 128;
             double toHigh = 0;
             double hue = (double)((hueIn - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
             if (hue == 360) return Color.FromArgb(255, Color.White);

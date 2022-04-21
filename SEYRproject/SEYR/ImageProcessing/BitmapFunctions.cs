@@ -110,7 +110,7 @@ namespace SEYR.ImageProcessing
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
                                 g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
                         }
-                        else if (score == -1f) // Special fail
+                        else if (score == -10f) // Special fail
                         {
                             g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
