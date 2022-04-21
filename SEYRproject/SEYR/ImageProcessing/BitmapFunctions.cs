@@ -60,7 +60,7 @@ namespace SEYR.ImageProcessing
         {
             ResizeAndRotate(ref bmp);
 
-            if (desiredTile == NullPoint ) 
+            if (desiredTile == NullPoint) 
                 Offset = await FollowPattern(bmp, forcePattern);
             else
             {
@@ -219,7 +219,7 @@ namespace SEYR.ImageProcessing
                                     }
                 }
             }
-            return NullPoint;
+            return Offset;
         }
 
         private static async Task<Point> FindPattern(Bitmap bmp)

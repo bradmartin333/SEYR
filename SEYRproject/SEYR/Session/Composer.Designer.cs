@@ -1224,9 +1224,10 @@
             // 
             // CancelToolStripMenuItem
             // 
+            this.CancelToolStripMenuItem.AutoSize = false;
             this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
             this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
-            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.CancelToolStripMenuItem.Text = "Close and Reload Project";
             this.CancelToolStripMenuItem.Click += new System.EventHandler(this.CancelToolStripMenuItem_Click);
             // 
