@@ -74,6 +74,7 @@ namespace SEYR.Session
 
         public static void ClearAllFeatureScores()
         {
+            DebugStream.Write($"User Reset Score History");
             foreach (Feature feature in Project.Features)
                 feature.ClearScore();
             DiscardViewer();

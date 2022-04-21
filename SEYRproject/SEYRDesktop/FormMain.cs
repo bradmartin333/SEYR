@@ -34,6 +34,7 @@ namespace SEYRDesktop
             string info = await Channel.NewImage(bmp, forcePattern);
             //System.Diagnostics.Debug.WriteLine(info + '\n');
             BUSY = false;
+            GC.Collect();
         }
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
