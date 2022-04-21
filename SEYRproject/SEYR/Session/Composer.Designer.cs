@@ -106,6 +106,7 @@
             this.PatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1232,7 +1233,8 @@
             this.ClickGridToolStripMenuItem,
             this.PatternWizardToolStripMenuItem,
             this.ClearLogsToolStripMenuItem,
-            this.OpenFileLocationToolStripMenuItem});
+            this.OpenFileLocationToolStripMenuItem,
+            this.MakeSEYRUPToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1272,6 +1274,13 @@
             this.OpenFileLocationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.OpenFileLocationToolStripMenuItem.Text = "Open File Location";
             this.OpenFileLocationToolStripMenuItem.Click += new System.EventHandler(this.OpenFileLocationToolStripMenuItem_Click);
+            // 
+            // MakeSEYRUPToolStripMenuItem
+            // 
+            this.MakeSEYRUPToolStripMenuItem.Name = "MakeSEYRUPToolStripMenuItem";
+            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
+            this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1410,5 +1419,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ToolStripMenuItem OpenFileLocationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MakeSEYRUPToolStripMenuItem;
     }
 }

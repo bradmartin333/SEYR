@@ -577,6 +577,12 @@ namespace SEYR.Session
             System.Diagnostics.Process.Start(Channel.DirPath);
         }
 
+        private void MakeSEYRUPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Retry;
+            Close();
+        }
+
         #endregion
     }
 }

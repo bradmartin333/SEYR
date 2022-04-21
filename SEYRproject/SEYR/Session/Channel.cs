@@ -158,6 +158,8 @@ namespace SEYR.Session
                 var result = w.ShowDialog();
                 if (result == DialogResult.OK)
                     SaveProject();
+                else if (result == DialogResult.Retry)
+                    MakeArchive();
                 else
                     LoadProject();
             }
