@@ -572,6 +572,11 @@ namespace SEYR.Session
             Channel.ClearLogs();
         }
 
+        private void OpenFileLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Channel.DirPath);
+        }
+
         #endregion
     }
 }

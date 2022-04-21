@@ -27,7 +27,7 @@ namespace SEYR.Session
         internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
-        private readonly string DirPath = null;
+        internal static string DirPath = null;
         private readonly string ProjectPath = null;
 
         /// <summary>
