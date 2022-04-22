@@ -28,7 +28,7 @@ namespace SEYR.Session
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
         internal static string DirPath = null;
-        private readonly string ProjectPath = null;
+        private static string ProjectPath = null;
 
         /// <summary>
         /// Create a new SEYR Channel
@@ -77,12 +77,13 @@ namespace SEYR.Session
             DebugStream.Write($"User Reset Score History");
             foreach (Feature feature in Project.Features)
                 feature.ClearScore();
+            SaveProject();
             DiscardViewer();
         }
 
         #region Opening and Closing
 
-        private void SaveProject()
+        private static void SaveProject()
         {
             using (StreamWriter stream = new StreamWriter(ProjectPath))
             {
@@ -124,7 +125,8 @@ namespace SEYR.Session
         /// </summary>
         public void MakeArchive()
         {
-            string zipPath = $@"{DirPath}\{DateTime.Now.ToString("s").Replace(':', '_')}.seyrup";
+            SaveProject();
+            string zipPath = $@"{DirPath}\{DateTime.Now.Ticks}.seyrup";
             DebugStream.Write($"Adding seyrup to {zipPath}");
             Viewer.InfoLabel.Text = "SEYRUP file created";
             // Create and open a new ZIP file

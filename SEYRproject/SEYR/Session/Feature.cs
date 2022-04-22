@@ -32,10 +32,12 @@ namespace SEYR.Session
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
 
         private float _MinScore = float.MaxValue;
-        internal float MinScore { get => _MinScore; set => _MinScore = value; }
+        [XmlElement("MinScore")]
+        public float MinScore { get => _MinScore; set => _MinScore = value; }
 
         private float _MaxScore = float.MinValue;
-        internal float MaxScore { get => _MaxScore; set => _MaxScore = value; }
+        [XmlElement("MaxScore")]
+        public float MaxScore { get => _MaxScore; set => _MaxScore = value; }
 
         private float _LastScore = 0f;
         internal float LastScore { get => _LastScore; set => _LastScore = value; }
