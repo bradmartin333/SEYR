@@ -180,6 +180,7 @@ namespace SEYR.Session
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
             OLV.ButtonClick += OLV_ButtonClick;
+            FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
         }
 
         private void InitializeUI()
@@ -403,6 +404,8 @@ namespace SEYR.Session
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
             LoadingFeature = false;
+            Channel.DebugStream.Write("Loaded Flip Score   ", false);
+            FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             UpdateImages();
         }
@@ -488,6 +491,15 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.ClearScore();
             Channel.DebugStream.Write($"{ActiveFeature.Name} Score History Cleared");
+            ApplyFeature();
+        }
+
+        private void FlipScorePanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            ActiveFeature.FlipScore = !ActiveFeature.FlipScore;
+            FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Flip Score Changed");
             ApplyFeature();
         }
 

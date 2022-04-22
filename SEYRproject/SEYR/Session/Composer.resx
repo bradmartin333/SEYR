@@ -316,6 +316,17 @@
         gSZJyoKBJknKgoEmScpAUfw/xztJu1LDCDQAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="FlipScorePanel.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAAQxJREFUWEftlU0OgjAUhPlLSDwBKw/g0oN4QeMJXBpPwDFYGg7AyoULna8WKMiO
+        ahd2kgmP12bm8fpDEhERETFHnuf7NE2PChvxIT5XEo0GTbQVL6Msy40mnRQuiXgjHngpHmETtehObsWr
+        eF5JNNBytetJEbMvb7MsO1RVlTHmA2ihqXAoxHq+17xPim1RFFvldppw0fsdEpNTvApo6zEUYbwlzoYz
+        Caq0Rl2fc9j5KMJ2wmhab7PbSbS0yn65azzQjq2CXdq+C3gPR43NAmj7xNghYz6AF3p4hy8gxBLcRDSb
+        8JvQHIXR5PfHEMgg3EUEgl/FgMSsE18hHh/mLlgXTfr97zgiIuJPkSQvtbP7k412phcAAAAASUVORK5C
+        YII=
+</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -30,6 +30,8 @@ namespace SEYR.Session
         public float Threshold { get; set; } = 0.2f;
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
+        [XmlElement("FlipScore")]
+        public bool FlipScore { get; set; } = false;
 
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
@@ -105,8 +107,8 @@ namespace SEYR.Session
             double fromLow = _MinScore;
             double fromHigh = _MaxScore;
             if (_MinScore == float.MaxValue || _MaxScore == float.MinValue || _MinScore == _MaxScore) return Color.Black;
-            double toLow = 0;
-            double toHigh = 128;
+            double toLow = FlipScore ? 128 : 0;
+            double toHigh = FlipScore ? 0 : 128;
             double hue = (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
             if (hue == 360) return Color.FromArgb(255, Color.White);
             if (hue == 0) return Color.FromArgb(255, Color.Black);

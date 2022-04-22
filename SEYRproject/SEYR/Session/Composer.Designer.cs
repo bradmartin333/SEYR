@@ -80,6 +80,7 @@
             this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label22 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.LabelThreshold = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -90,6 +91,7 @@
             this.BtnResetScoreHistory = new System.Windows.Forms.Button();
             this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
             this.ThresholdScrollBar = new System.Windows.Forms.HScrollBar();
+            this.FlipScorePanel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -111,6 +113,7 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -684,11 +687,13 @@
             this.OLV.AllColumns.Add(this.olvColumn1);
             this.OLV.AllColumns.Add(this.olvColumn2);
             this.OLV.AllColumns.Add(this.olvColumn3);
+            this.OLV.AllColumns.Add(this.olvColumn4);
             this.OLV.CellEditUseWholeCell = false;
             this.OLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
-            this.olvColumn3});
+            this.olvColumn3,
+            this.olvColumn4});
             this.OLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.OLV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OLV.FullRowSelect = true;
@@ -900,6 +905,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.label22, 2, 3);
             this.tableLayoutPanel3.Controls.Add(this.label19, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.LabelThreshold, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label20, 2, 1);
@@ -910,6 +916,7 @@
             this.tableLayoutPanel3.Controls.Add(this.BtnResetScoreHistory, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.ComboFeatureNullDetection, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.ThresholdScrollBar, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.FlipScorePanel, 3, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -920,6 +927,17 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 114);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(229, 92);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(70, 13);
+            this.label22.TabIndex = 11;
+            this.label22.Text = "Flip Score";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label19
             // 
@@ -1029,6 +1047,18 @@
             this.ThresholdScrollBar.Size = new System.Drawing.Size(309, 17);
             this.ThresholdScrollBar.TabIndex = 10;
             this.ThresholdScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ThresholdScrollBar_Scroll);
+            // 
+            // FlipScorePanel
+            // 
+            this.FlipScorePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
+            this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
+            this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.FlipScorePanel.Location = new System.Drawing.Point(305, 87);
+            this.FlipScorePanel.Name = "FlipScorePanel";
+            this.FlipScorePanel.Size = new System.Drawing.Size(34, 24);
+            this.FlipScorePanel.TabIndex = 12;
             // 
             // flowLayoutPanel1
             // 
@@ -1267,6 +1297,12 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "FlipScore";
+            this.olvColumn4.AspectToStringFormat = "";
+            this.olvColumn4.Text = "Flip Score";
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1408,5 +1444,8 @@
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DebugLogToolStripMenuItem;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Panel FlipScorePanel;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
     }
 }
