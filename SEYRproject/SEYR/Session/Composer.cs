@@ -242,6 +242,8 @@ namespace SEYR.Session
         private void OLV_ButtonClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
         {
             Feature feature = (Feature)e.Model;
+            if (ActiveFeature == null) ActiveFeature = feature;
+            OLV.SelectedObject = feature;
             Channel.DebugStream.Write($"Threshold button clicked for {feature.Name} and has value {feature.Threshold}");
             ForceThreshold = feature.Threshold;
             ShowThreshold = true;
