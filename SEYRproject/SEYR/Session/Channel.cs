@@ -126,7 +126,8 @@ namespace SEYR.Session
         public void MakeArchive()
         {
             SaveProject();
-            string zipPath = $@"{DirPath}\{DateTime.Now.Ticks}.seyrup";
+            string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
+            string zipPath = $@"{DirPath}\{filesFound.Length}.seyrup";
             DebugStream.Write($"Adding seyrup to {zipPath}");
             Viewer.InfoLabel.Text = "SEYRUP file created";
             // Create and open a new ZIP file
