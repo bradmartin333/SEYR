@@ -159,6 +159,7 @@ namespace SEYR.Session
         private Feature ActiveFeature = null;
         private readonly Bitmap InputImage;
         private bool ClickGrid = false;
+        private float ForceThreshold = -1f;
         private bool ShowThreshold = false;
         private bool LoadingFeature = true;
 
@@ -177,6 +178,7 @@ namespace SEYR.Session
             ComboFeatureNullDetection.Items.AddRange(Feature.GetDisplayNames());
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
+            OLV.ButtonClick += OLV_ButtonClick;
         }
 
         private void InitializeUI()
@@ -209,7 +211,7 @@ namespace SEYR.Session
                 if (ShowThreshold)
                 {
                     ImageAttributes imageAttr = new ImageAttributes();
-                    imageAttr.SetThreshold(ActiveFeature.Threshold);
+                    imageAttr.SetThreshold(ForceThreshold > -1 ? ForceThreshold : ActiveFeature.Threshold);
                     using (Graphics g = Graphics.FromImage(bmp))
                         g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
                 }
@@ -235,6 +237,15 @@ namespace SEYR.Session
             {
                 Channel.DebugStream.Write($"Exception in UpdateTile: {ex}");
             }
+        }
+
+        private void OLV_ButtonClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
+        {
+            Feature feature = (Feature)e.Model;
+            Channel.DebugStream.Write($"Threshold button clicked for {feature.Name} and has value {feature.Threshold}");
+            ForceThreshold = feature.Threshold;
+            ShowThreshold = true;
+            ApplyFeature();
         }
 
         private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
@@ -446,7 +457,8 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = ThresholdScrollBar.Value / 100f;
             LabelThreshold.Text = $"Thresold: {ActiveFeature.Threshold}";
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Detection Changed");
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
+            ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
         }

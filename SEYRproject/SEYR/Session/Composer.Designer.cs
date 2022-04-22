@@ -107,10 +107,10 @@
             this.ClearLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearAllFeatureScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -714,6 +714,8 @@
             // 
             this.olvColumn2.AspectName = "Threshold";
             this.olvColumn2.AspectToStringFormat = "{0}";
+            this.olvColumn2.ButtonSizing = BrightIdeasSoftware.OLVColumn.ButtonSizingMode.CellBounds;
+            this.olvColumn2.IsButton = true;
             this.olvColumn2.Text = "Threshold";
             // 
             // olvColumn3
@@ -1234,13 +1236,6 @@
             this.OpenDirectoryToolStripMenuItem.Text = "Open Directory";
             this.OpenDirectoryToolStripMenuItem.Click += new System.EventHandler(this.OpenDirectoryToolStripMenuItem_Click);
             // 
-            // MakeSEYRUPToolStripMenuItem
-            // 
-            this.MakeSEYRUPToolStripMenuItem.Name = "MakeSEYRUPToolStripMenuItem";
-            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
-            this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
-            // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1253,16 +1248,23 @@
             // ReportToolStripMenuItem
             // 
             this.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem";
-            this.ReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReportToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.ReportToolStripMenuItem.Text = "Report";
             this.ReportToolStripMenuItem.Click += new System.EventHandler(this.ReportToolStripMenuItem_Click);
             // 
             // DebugLogToolStripMenuItem
             // 
             this.DebugLogToolStripMenuItem.Name = "DebugLogToolStripMenuItem";
-            this.DebugLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DebugLogToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.DebugLogToolStripMenuItem.Text = "Debug Log";
             this.DebugLogToolStripMenuItem.Click += new System.EventHandler(this.DebugLogToolStripMenuItem_Click);
+            // 
+            // MakeSEYRUPToolStripMenuItem
+            // 
+            this.MakeSEYRUPToolStripMenuItem.Name = "MakeSEYRUPToolStripMenuItem";
+            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
+            this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
             // Composer
             // 
