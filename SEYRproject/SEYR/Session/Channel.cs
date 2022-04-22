@@ -102,7 +102,18 @@ namespace SEYR.Session
             using (StreamReader stream = new StreamReader(ProjectPath))
             {
                 XmlSerializer x = new XmlSerializer(typeof(Project));
-                Project = (Project)x.Deserialize(stream);
+                try
+                {
+                    Project = (Project)x.Deserialize(stream);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Corrupt SEYR Project. Loading default project.", "SEYR");
+                    DebugStream.Write($"Corrupt SEYR Project: {ex}", addDT: true);
+                    Project = new Project();
+                    DebugStream.Write("Default project loaded");
+                    return;
+                }
             }
             DebugStream.Write("Project Loaded", addDT: true);
             LoadPattern();
