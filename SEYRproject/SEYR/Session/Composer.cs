@@ -577,9 +577,19 @@ namespace SEYR.Session
             Channel.ClearAllFeatureScores();
         }
 
-        private void OpenFileLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(Channel.DirPath);
+        }
+
+        private void ReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Channel.DataStream.Path);
+        }
+
+        private void DebugLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Channel.DebugStream.Path);
         }
 
         private void MakeSEYRUPToolStripMenuItem_Click(object sender, EventArgs e)
