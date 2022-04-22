@@ -28,11 +28,12 @@ namespace SEYR.ImageProcessing
         /// </summary>
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
-        public static async Task LoadImage(Bitmap bmp, bool forcePattern)
+        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            await ProcessImage(bmp, forcePattern, NullPoint);
+            var result = await ProcessImage(bmp, forcePattern, NullPoint);
+            return result.Item2; // Percent passing features within image
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<Bitmap> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, Feature desiredFeature = null, bool graphics = true)
+        private static async Task<(Bitmap, double)> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, Feature desiredFeature = null, bool graphics = true)
         {
             ResizeAndRotate(ref bmp);
 
@@ -68,10 +69,11 @@ namespace SEYR.ImageProcessing
                 Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                 await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics);
                 await Channel.DebugStream.WriteAsync($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
-                return crop;
+                return (crop, 0.0);
             }
 
             string outputData = string.Empty;
+            int pass = 0;
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
@@ -81,14 +83,15 @@ namespace SEYR.ImageProcessing
                         Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         outputData += await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics);
+                        if (outputData.EndsWith("True\n")) pass++;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
             }
 
             Channel.Viewer.UpdateImage(bmp);
-            await Channel.DataStream.WriteAsync(outputData, false);
-            return bmp;
+            await Channel.DataStream.WriteAsync(outputData);
+            return (bmp, pass / Channel.Project.GetNumTiles());
         }
 
         private static Task<string> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics)
@@ -122,7 +125,7 @@ namespace SEYR.ImageProcessing
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
                         }
-                        if (desiredFeature == null) outputData += $"{Channel.OutputData}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\n";
+                        if (desiredFeature == null) outputData += $"{Channel.OutputData}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\t{feature.LastPass}\n";
                     }
                 }
             }
@@ -278,7 +281,8 @@ namespace SEYR.ImageProcessing
 
         public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature, bool graphics = true)
         {
-            return await ProcessImage(bmp, false, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature, graphics);
+            var result = await ProcessImage(bmp, false, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature, graphics);
+            return result.Item1;
         }
 
         #endregion

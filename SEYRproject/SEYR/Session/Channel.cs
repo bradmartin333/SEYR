@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using SEYR.ImageProcessing;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 using System.Drawing.Imaging;
 using System.IO.Compression;
 
@@ -160,17 +161,9 @@ namespace SEYR.Session
         public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false)
         {
             Working = true;
-            await BitmapFunctions.LoadImage(bmp, forcePattern);
+            double percentPassing = await BitmapFunctions.LoadImage(bmp, forcePattern);
             Working = false;
-            return CreateStatusString();
-        }
-
-        private string CreateStatusString()
-        {
-            string output = string.Empty;
-            foreach (Feature feature in Project.Features)
-                output += $"{feature.Name}\t{feature.LastScore}\n";
-            return output;
+            return percentPassing.ToString("P");
         }
 
         public void OpenComposer(Bitmap bmp)

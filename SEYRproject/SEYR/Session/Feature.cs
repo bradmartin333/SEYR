@@ -38,6 +38,7 @@ namespace SEYR.Session
 
         private float _LastScore = 0f;
         internal float LastScore { get => _LastScore; set => _LastScore = value; }
+        internal bool LastPass { get => (Map() - 64 > 0) ^ FlipScore; }
 
         public Feature()
         {
@@ -91,12 +92,8 @@ namespace SEYR.Session
 
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
         {
-            double fromLow = _MinScore;
-            double fromHigh = _MaxScore;
             if (_MinScore == float.MaxValue || _MaxScore == float.MinValue || _MinScore == _MaxScore) return Color.Black;
-            double toLow = FlipScore ? 128 : 0;
-            double toHigh = FlipScore ? 0 : 128;
-            double hue = (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
+            double hue = Map();
             if (hue == 360) return Color.FromArgb(255, Color.White);
             if (hue == 0) return Color.FromArgb(255, Color.Black);
             int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
@@ -118,6 +115,15 @@ namespace SEYR.Session
                 return Color.FromArgb(opacity, t, p, v);
             else
                 return Color.FromArgb(opacity, v, p, q);
+        }
+
+        private double Map()
+        {
+            double fromLow = _MinScore;
+            double fromHigh = _MaxScore;
+            double toLow = FlipScore ? 128 : 0;
+            double toHigh = FlipScore ? 0 : 128;
+            return (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
         }
     }
 }
