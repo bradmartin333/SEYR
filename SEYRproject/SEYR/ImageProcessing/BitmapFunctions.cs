@@ -149,13 +149,13 @@ namespace SEYR.ImageProcessing
                 {
                     case Feature.NullDetectionTypes.None:
                         return -10f;
-                    case Feature.NullDetectionTypes.IncludeEmpty:
+                    case Feature.NullDetectionTypes.Include_Empty:
                         if (whiteVals < filterVal) return 0f;
                         else return -10f;
-                    case Feature.NullDetectionTypes.IncludeFilled:
+                    case Feature.NullDetectionTypes.Include_Filled:
                         if (blackVals < filterVal) return 0f;
                         else return -10f;
-                    case Feature.NullDetectionTypes.IncludeBoth:
+                    case Feature.NullDetectionTypes.Include_Both:
                         return 0f;
                     default:
                         return -10f;

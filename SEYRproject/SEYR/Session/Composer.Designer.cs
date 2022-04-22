@@ -68,6 +68,7 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPageGeometry = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
@@ -113,7 +114,6 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -714,22 +714,36 @@
             // 
             this.olvColumn1.AspectName = "Name";
             this.olvColumn1.FillsFreeSpace = true;
+            this.olvColumn1.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn1.Text = "Name";
+            this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Threshold";
             this.olvColumn2.AspectToStringFormat = "{0}";
             this.olvColumn2.ButtonSizing = BrightIdeasSoftware.OLVColumn.ButtonSizingMode.CellBounds;
+            this.olvColumn2.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn2.IsButton = true;
             this.olvColumn2.Text = "Threshold";
+            this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvColumn3
             // 
-            this.olvColumn3.AspectName = "NullDetection";
-            this.olvColumn3.AspectToStringFormat = "{0}";
+            this.olvColumn3.AspectName = "NullDetectionDisplay";
+            this.olvColumn3.AspectToStringFormat = "";
+            this.olvColumn3.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn3.Text = "Null Detection";
-            this.olvColumn3.Width = 100;
+            this.olvColumn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn3.Width = 90;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "FlipScore";
+            this.olvColumn4.AspectToStringFormat = "";
+            this.olvColumn4.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn4.Text = "Flip Score";
+            this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tabPageGeometry
             // 
@@ -1296,12 +1310,6 @@
             this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
-            // 
-            // olvColumn4
-            // 
-            this.olvColumn4.AspectName = "FlipScore";
-            this.olvColumn4.AspectToStringFormat = "";
-            this.olvColumn4.Text = "Flip Score";
             // 
             // Composer
             // 
