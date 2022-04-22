@@ -192,6 +192,7 @@
             // 
             this.PbxTile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PbxTile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PbxTile.Image = ((System.Drawing.Image)(resources.GetObject("PbxTile.Image")));
             this.PbxTile.Location = new System.Drawing.Point(445, 27);
             this.PbxTile.Name = "PbxTile";
             this.PbxTile.Size = new System.Drawing.Size(436, 311);

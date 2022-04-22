@@ -28,6 +28,7 @@ namespace SEYR.Session
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
         internal static string DirPath = null;
+        internal static bool IsNewProject = false;
         private static string ProjectPath = null;
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace SEYR.Session
         /// </param>
         public Channel(string projectDir, float pixelsPerMicron, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
+            IsNewProject = true;
             DirPath = projectDir;
             DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
             DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);

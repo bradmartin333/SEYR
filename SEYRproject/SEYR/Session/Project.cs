@@ -33,9 +33,9 @@ namespace SEYR.Session
         [XmlElement("Columns")]
         public int Columns { get; set; } = 1;
         [XmlElement("SizeX")]
-        public int SizeX { get; set; } = 10;
+        public int SizeX { get; set; } = 50;
         [XmlElement("SizeY")]
-        public int SizeY { get; set; } = 10;
+        public int SizeY { get; set; } = 50;
         [XmlElement("PatternScore")]
         public float PatternScore { get; set; } = 0.95f;
         [XmlElement("PatternIntervalString")]

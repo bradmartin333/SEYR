@@ -171,6 +171,7 @@ namespace SEYR.Session
             InitializeUI();
             SetupFeatureUI(true);
             UpdateImages();
+            if (!Channel.IsNewProject) PbxTile.Image = null;
         }
 
         private void InitializeHandlers()
@@ -216,7 +217,7 @@ namespace SEYR.Session
                         g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
                 }
                 PbxGrid.BackgroundImage = bmp;
-                PbxGrid.Image = await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
+                PbxGrid.Image = Channel.IsNewProject ? null : await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
             catch (Exception ex)
             {
@@ -286,12 +287,21 @@ namespace SEYR.Session
 
         private void PbxGrid_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!ClickGrid) return;
-            Point point = ZoomMousePos(e.Location, PbxGrid.Size, PbxGrid.BackgroundImage.Size);
-            NumOriginX.Value = point.X;
-            NumOriginY.Value = point.Y;
-            ClickGrid = false;
-            ToolsToolStripMenuItem.Text = "Tools";
+            if (Channel.IsNewProject || ClickGrid)
+            {
+                Point point = ZoomMousePos(e.Location, PbxGrid.Size, PbxGrid.BackgroundImage.Size);
+                NumOriginX.Value = point.X;
+                NumOriginY.Value = point.Y;
+                ClickGrid = false;
+                if (Channel.IsNewProject)
+                {
+                    PbxTile.Image = null;
+                    Channel.IsNewProject = false;
+                }
+                else
+                    ToolsToolStripMenuItem.Text = "Tools";
+                UpdateImages();
+            }
         }
 
         /// <summary>
