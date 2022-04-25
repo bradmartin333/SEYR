@@ -29,11 +29,19 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
         /// <param name="imageInfo"></param>
-        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo)
+        /// <param name="customFilter"></param>
+        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo, bool customFilter = false)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            var result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
+            (Bitmap, double) result;
+            if (customFilter)
+            {
+                result = await CustomProcessImage(bmp);
+                Channel.CustomImage = result.Item1;
+            }
+            else
+                result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
             return result.Item2; // Percent passing features within image
         }
 
@@ -255,7 +263,47 @@ namespace SEYR.ImageProcessing
             }
             else
                 await Channel.DebugStream.WriteAsync($"Failed to find pattern.", showInViewer: true);
-            return NullPoint;
+            return Offset;
+        }
+
+        private static async Task<(Bitmap, double)> CustomProcessImage(Bitmap bmp)
+        {
+            int dotSize = 5;
+
+            // Setup Image
+            Accord.Imaging.Filters.Grayscale filter = new Accord.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
+            bmp = filter.Apply(bmp);
+            Accord.Imaging.Filters.Threshold threshold = new Accord.Imaging.Filters.Threshold(220);
+            threshold.ApplyInPlace(bmp);
+
+            // Lock Image
+            BitmapData bitmapData = bmp.LockBits(ImageLockMode.ReadWrite);
+
+            // Find Blobs (with some params - there are a lot more)
+            BlobCounter blobCounter = new BlobCounter
+            {
+                FilterBlobs = true,
+                MinHeight = 2,
+                MinWidth = 2
+            };
+            blobCounter.ProcessImage(bitmapData);
+            Blob[] blobs = blobCounter.GetObjectsInformation();
+            bmp.UnlockBits(bitmapData);
+
+            // Draw Dots
+            Bitmap overlay = new Bitmap(bmp.Width, bmp.Height);
+            using (Graphics g = Graphics.FromImage(overlay))
+            {
+                for (int i = 0; i < blobs.Length; i++)
+                {
+                    g.DrawEllipse(Pens.Red, new Rectangle(
+                        (int)(blobs[i].CenterOfGravity.X - dotSize),
+                        (int)(blobs[i].CenterOfGravity.Y - dotSize),
+                        dotSize * 2, dotSize * 2));
+                }
+            }
+
+            return (overlay, (double)blobs.Length);
         }
 
         #region Composer Functions

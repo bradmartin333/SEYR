@@ -17,6 +17,7 @@ namespace SEYR.Session
         /// Backup for situations where NewImage cannot be awaited
         /// </summary>
         public bool Working { get; set; } = false;
+        public static Bitmap CustomImage { get; set; } = new Bitmap(1, 1);
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
@@ -153,12 +154,12 @@ namespace SEYR.Session
 
         #region Image Processing
 
-        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "")
+        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
         {
             Working = true;
-            double percentPassing = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo);
+            double result = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo, customFilter);
             Working = false;
-            return percentPassing.ToString("P");
+            return customFilter ? result.ToString() : result.ToString("P");
         }
 
         public void OpenComposer(Bitmap bmp)

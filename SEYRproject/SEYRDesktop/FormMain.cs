@@ -115,6 +115,7 @@ namespace SEYRDesktop
             BtnRepeat.Enabled = true;
             BtnShowViewer.Enabled = true;
             BtnForcePattern.Enabled = true;
+            BtnCustomFilter.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
             
             NumFrame.Maximum = IMGS.Length - 1;
@@ -160,6 +161,23 @@ namespace SEYRDesktop
         private async void BtnForcePattern_Click(object sender, EventArgs e)
         {
             await NextImage(true);
+        }
+
+        private async void BtnCustomFilter_Click(object sender, EventArgs e)
+        {
+            BUSY = true;
+            Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
+            string info = await Channel.NewImage(bmp, customFilter: true);
+            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
+            BUSY = false;
+            GC.Collect();
+            Form form = new Form()
+            {
+                BackgroundImage = SEYR.Session.Channel.CustomImage,
+                BackgroundImageLayout = ImageLayout.Zoom,
+                Text = $"{info} Blobs Found",
+            };
+            form.Show();
         }
     }
 }
