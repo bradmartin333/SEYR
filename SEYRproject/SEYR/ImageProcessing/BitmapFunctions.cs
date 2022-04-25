@@ -37,7 +37,7 @@ namespace SEYR.ImageProcessing
             (Bitmap, double) result;
             if (customFilter)
             {
-                result = await CustomProcessImage(bmp);
+                result = CustomProcessImage(bmp);
                 Channel.CustomImage = result.Item1;
             }
             else
@@ -266,7 +266,7 @@ namespace SEYR.ImageProcessing
             return Offset;
         }
 
-        private static async Task<(Bitmap, double)> CustomProcessImage(Bitmap bmp)
+        private static (Bitmap, double) CustomProcessImage(Bitmap bmp)
         {
             int dotSize = 5;
 
@@ -294,21 +294,22 @@ namespace SEYR.ImageProcessing
             Bitmap overlay = new Bitmap(bmp.Width, bmp.Height);
             using (Graphics g = Graphics.FromImage(overlay))
             {
+                g.Clear(Color.Black);
                 for (int i = 0; i < blobs.Length; i++)
                 {
-                    g.DrawEllipse(Pens.Red, new Rectangle(
+                    g.DrawEllipse(new Pen(Brushes.Red, dotSize / 2), new Rectangle(
                         (int)(blobs[i].CenterOfGravity.X - dotSize),
                         (int)(blobs[i].CenterOfGravity.Y - dotSize),
                         dotSize * 2, dotSize * 2));
                 }
             }
 
-            return (overlay, (double)blobs.Length);
+            return (overlay, blobs.Length);
         }
 
         #region Composer Functions
 
-        public static async Task<Bitmap> DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
+        public static Bitmap DrawGrid(Bitmap bmp, int tileRow, int tileColumn)
         {
             bmp = new Bitmap(bmp.Width, bmp.Height);
             Rectangle rectangle = Channel.Project.GetGeometry();

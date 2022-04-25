@@ -218,7 +218,7 @@ namespace SEYR.Session
                         g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
                 }
                 PbxGrid.BackgroundImage = bmp;
-                PbxGrid.Image = Channel.IsNewProject ? null : await BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
+                PbxGrid.Image = Channel.IsNewProject ? null : BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
             catch (Exception ex)
             {

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using SEYR.ImageProcessing;
 using System.Threading.Tasks;
 using System;
-using System.Linq;
 using System.Drawing.Imaging;
 using System.IO.Compression;
 
@@ -17,6 +16,9 @@ namespace SEYR.Session
         /// Backup for situations where NewImage cannot be awaited
         /// </summary>
         public bool Working { get; set; } = false;
+        /// <summary>
+        /// Storage for a filter processed with a custom filter
+        /// </summary>
         public static Bitmap CustomImage { get; set; } = new Bitmap(1, 1);
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
@@ -24,18 +26,16 @@ namespace SEYR.Session
         internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
-        internal static string DirPath = null;
-        internal static bool IsNewProject = false;
-        private static string ProjectPath = null;
+        internal static string DirPath { get; set; } = null;
+        internal static bool IsNewProject { get; set; } = false;
+        private static string ProjectPath { get; set; } = null;
 
         /// <summary>
         /// Create a new SEYR Channel
         /// </summary>
         /// <param name="projectDir"></param>
         /// <param name="pixelsPerMicron"></param>
-        /// <param name="dataHeader">
-        /// Header for OutputData Lines
-        /// </param>
+        /// <param name="dataHeader"></param>
         public Channel(string projectDir, float pixelsPerMicron, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
             IsNewProject = true;
@@ -131,7 +131,7 @@ namespace SEYR.Session
         }
 
         /// <summary>
-        /// Make an archive of all active files
+        /// Make an archive (SEYRUP file) of all active files
         /// </summary>
         public void MakeArchive()
         {
