@@ -3,7 +3,7 @@
 #### SEYR.dll can be added to an existing .NET project for framegrabbers.
 #### SEYRDesktop can be run for existing images.
 
-## How to integrate SEYR.dll into an exiting .NET Framework project (Nuget v1.3.4+)
+## How to integrate SEYR.dll into an existing .NET Framework project (Nuget v1.3.4+)
 ### Channels
 - SEYR's "Session" namespace houses the Channel class. 
 - If a [Channel is constructued with only a directory path](https://github.com/bradmartin333/SEYR/blob/637b27327cb87c60b721c60accababeb3caa84ab/SEYRproject/SEYRDesktop/FormMain.cs#L106), it will open an existing .seyr project.
