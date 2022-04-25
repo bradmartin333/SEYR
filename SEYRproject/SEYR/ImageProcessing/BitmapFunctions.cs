@@ -28,11 +28,12 @@ namespace SEYR.ImageProcessing
         /// </summary>
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
-        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern)
+        /// <param name="imageInfo"></param>
+        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            var result = await ProcessImage(bmp, forcePattern, NullPoint);
+            var result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
             return result.Item2; // Percent passing features within image
         }
 
@@ -48,6 +49,7 @@ namespace SEYR.ImageProcessing
         /// /// <param name="desiredTile">
         /// Desired tile preview for Composer
         /// </param>
+        /// <param name="imageInfo"></param>
         /// <param name="desiredFeature">
         /// Desired feature for Composer
         /// </param>
@@ -57,17 +59,17 @@ namespace SEYR.ImageProcessing
         /// <returns>
         /// Either a tile preview or the entire analyzed image
         /// </returns>
-        private static async Task<(Bitmap, double)> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, Feature desiredFeature = null, bool graphics = true)
+        private static async Task<(Bitmap, double)> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, string imageInfo = "", Feature desiredFeature = null, bool graphics = true)
         {
             ResizeAndRotate(ref bmp);
 
             if (desiredTile == NullPoint) 
-                Offset = await FollowPattern(bmp, forcePattern);
+                Offset = await FollowPattern(bmp, forcePattern, imageInfo);
             else
             {
                 Rectangle cropRect = Channel.Project.GetIndexedGeometry(desiredTile.X, desiredTile.Y, Offset);
                 Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
-                await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics);
+                await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
                 await Channel.DebugStream.WriteAsync($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
                 return (crop, 0.0);
             }
@@ -82,7 +84,7 @@ namespace SEYR.ImageProcessing
                     {
                         Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
-                        outputData += await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics);
+                        outputData += await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
                         if (outputData.EndsWith("True\n")) pass++;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
@@ -94,7 +96,7 @@ namespace SEYR.ImageProcessing
             return (bmp, pass / Channel.Project.GetNumTiles());
         }
 
-        private static Task<string> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics)
+        private static Task<string> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics, string imageInfo)
         {
             string outputData = string.Empty;
             using (Graphics g = Graphics.FromImage(crop))
@@ -125,7 +127,7 @@ namespace SEYR.ImageProcessing
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
                         }
-                        if (desiredFeature == null) outputData += $"{Channel.OutputData}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\t{feature.LastPass}\n";
+                        if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\t{feature.LastPass}\n";
                     }
                 }
             }
@@ -202,7 +204,7 @@ namespace SEYR.ImageProcessing
             return entropy;
         }
 
-        private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern)
+        private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern, string imageInfo)
         {
             if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && DataStream.Header != null)
             {
@@ -214,10 +216,10 @@ namespace SEYR.ImageProcessing
                     for (int i = 0; i < cols.Length; i++)
                         if (!string.IsNullOrEmpty(cols[i]))
                             if (cols[i] == Channel.Project.PatternIntervalString)
-                                if (int.TryParse(Channel.OutputData.Split('\t')[i], out int matchVal))
+                                if (int.TryParse(imageInfo.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
                                     {
-                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {Channel.OutputData}", false);
+                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {imageInfo}", false);
                                         return await FindPattern(bmp);
                                     }
                 }
@@ -281,7 +283,7 @@ namespace SEYR.ImageProcessing
 
         public static async Task<Bitmap> GenerateSingleTile(Bitmap bmp, int tileRow, int tileColumn, Feature feature, bool graphics = true)
         {
-            var result = await ProcessImage(bmp, false, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), feature, graphics);
+            var result = await ProcessImage(bmp, false, new Point(tileColumn - 1, Channel.Project.Rows - tileRow), desiredFeature: feature, graphics: graphics);
             return result.Item1;
         }
 

@@ -17,11 +17,6 @@ namespace SEYR.Session
         /// Backup for situations where NewImage cannot be awaited
         /// </summary>
         public bool Working { get; set; } = false;
-        /// <summary>
-        /// Tab separated data to append to beggining of each data line:
-        /// Img# X Y RR RC R C SR SC
-        /// </summary>
-        public static string OutputData { get; set; }
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
@@ -158,10 +153,10 @@ namespace SEYR.Session
 
         #region Image Processing
 
-        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false)
+        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "")
         {
             Working = true;
-            double percentPassing = await BitmapFunctions.LoadImage(bmp, forcePattern);
+            double percentPassing = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo);
             Working = false;
             return percentPassing.ToString("P");
         }

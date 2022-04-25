@@ -29,9 +29,8 @@ namespace SEYRDesktop
         private async Task NextImage(bool forcePattern = false)
         {
             BUSY = true;
-            SEYR.Session.Channel.OutputData = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            string info = await Channel.NewImage(bmp, forcePattern);
+            string info = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t");
             System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
             BUSY = false;
             GC.Collect();
