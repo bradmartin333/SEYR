@@ -63,7 +63,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
-            if (!STOP) Channel.MakeArchive();
+            if (!STOP) Channel.MakeArchive(true);
             STOP = false;
         }
 
@@ -81,7 +81,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
-            if (!STOP) Channel.MakeArchive();
+            if (!STOP) Channel.MakeArchive(true);
             STOP = false;
         }
 

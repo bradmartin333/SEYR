@@ -133,7 +133,7 @@ namespace SEYR.Session
         /// <summary>
         /// Make an archive (SEYRUP file) of all active files
         /// </summary>
-        public void MakeArchive()
+        public void MakeArchive(bool complete = false)
         {
             SaveProject();
             string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
@@ -148,6 +148,7 @@ namespace SEYR.Session
                 zip.CreateEntryFromFile(ProjectPath, Path.GetFileName(ProjectPath));
                 if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
             }
+            if (complete) Viewer.UpdateImage(Properties.Resources.SEYRdone);
         }
 
         #endregion
