@@ -156,7 +156,15 @@ namespace SEYR.Session
             }
         }
 
-        private Feature ActiveFeature = null;
+        private Feature _ActiveFeature = null;
+        private Feature ActiveFeature {
+            get => _ActiveFeature;
+            set
+            {
+                if (value == null) LoadNullFeature();
+                _ActiveFeature = value;
+            } 
+        }
         private readonly Bitmap InputImage;
         private bool ClickGrid = false;
         private float ForceThreshold = -1f;
@@ -382,11 +390,11 @@ namespace SEYR.Session
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
+            Channel.DebugStream.Write($"User Apply");
+            TabControl.SelectedIndex = 0;
             if (ActiveFeature == null) return;
             ShowThreshold = false;
-            Channel.DebugStream.Write($"User Apply");
             SetupFeatureUI(false);
-            TabControl.SelectedIndex = 0;
         }
 
         private void OLV_SelectedIndexChanged(object sender, EventArgs e)
@@ -409,11 +417,28 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
-            LoadingFeature = false;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
+            LoadingFeature = false;
             UpdateImages();
+        }
+
+        private void LoadNullFeature()
+        {
+            LoadingFeature = true;
+            NumFeatureX.Value = NumFeatureX.Minimum;
+            NumFeatureY.Value = NumFeatureY.Minimum;
+            NumFeatureWidth.Value = NumFeatureWidth.Minimum;
+            NumFeatureHeight.Value = NumFeatureHeight.Minimum;
+            TxtFeatureName.Text = "No Feature Selected";
+            ThresholdTrackBar.Value = ThresholdTrackBar.Minimum;
+            ComboFeatureNullDetection.SelectedIndex = 0;
+            FlipScorePanel.BackgroundImage = Properties.Resources.toggleOff;
+            LabelCurrentFeatureScore.Text = "N/A";
+            LabelThreshold.Text = "N/A";
+            Channel.DebugStream.Write("Null feature loaded");
+            LoadingFeature = false;
         }
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
