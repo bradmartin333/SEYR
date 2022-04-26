@@ -62,6 +62,7 @@ namespace SEYR.Session
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
                 NullDetection = NullDetection,
+                FlipScore = FlipScore,
             };
         }
 
