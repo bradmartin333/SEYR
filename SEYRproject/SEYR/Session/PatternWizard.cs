@@ -154,7 +154,6 @@ namespace SEYR.Session
             WizardLabel.Text = "Lower the pattern score as much as possible without allowing false positives.";
             PBX.Image = null;
             RTB.Visible = true;
-            RTB.Text = "Score\tCount\n";
             FlowScore.Visible = true;
             BtnFindPatterns.BackColor = Color.Gold;
             Cursor = Cursors.WaitCursor;
@@ -164,7 +163,13 @@ namespace SEYR.Session
                 PatternLocations = new List<Point>();
                 Bitmap sourceImage = (Bitmap)InputImage.Clone();
                 var tm = new ExhaustiveTemplateMatching(score == -1 ? (float)NumPatternScore.Value : score);
+
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, Channel.Pattern);
+                Channel.DebugStream.Write($"\t\t");
+                RTB.Text = $"Found in {Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\nScore\tCount\n";
+
                 foreach (TemplateMatch m in matchings)
                 {
                     Channel.DebugStream.Write($"Pattern match: {m.Similarity} {m.Rectangle}");
@@ -174,6 +179,7 @@ namespace SEYR.Session
                         g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.HotPink)), m.Rectangle);
                     }
                 }
+
                 UpdateRTB(matchings);
                 PBX.Image = sourceImage;
             }

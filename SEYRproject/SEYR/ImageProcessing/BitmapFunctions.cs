@@ -239,11 +239,17 @@ namespace SEYR.ImageProcessing
         {
             Bitmap sourceImage = (Bitmap)bmp.Clone();
             Bitmap pattern = (Bitmap)Channel.Pattern.Clone();
+
             var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
+            await Channel.DebugStream.WriteAsync($"\t{Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\t");
+
             if (matchings.Length > 0)
             {
                 TemplateMatch m = matchings[0];
+                double smallestDelta = double.MaxValue;
                 foreach (Point point in Channel.Project.PatternLocations)
                 {
                     Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
@@ -255,11 +261,14 @@ namespace SEYR.ImageProcessing
                             $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
                         return delta;
                     }
+                    if (deltaH < smallestDelta) smallestDelta = deltaH;
                 }
                 if (Channel.Project.PatternLocations.Count == 0)
                     await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
                 else
-                    await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = {m.Similarity}", showInViewer: true);
+                    await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = " +
+                        $"{Math.Round(m.Similarity, 2)}, Smallest delta = {Math.Round(smallestDelta / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", 
+                        showInViewer: true);
             }
             else
                 await Channel.DebugStream.WriteAsync($"Failed to find pattern.", showInViewer: true);
