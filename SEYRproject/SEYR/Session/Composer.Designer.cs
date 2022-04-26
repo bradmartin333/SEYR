@@ -35,8 +35,6 @@
             this.NumSelectedColumn = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.NumSelectedRow = new System.Windows.Forms.NumericUpDown();
-            this.PbxGrid = new System.Windows.Forms.PictureBox();
-            this.PbxTile = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.NumOriginX = new System.Windows.Forms.NumericUpDown();
@@ -81,7 +79,6 @@
             this.LabelCurrentFeatureScore = new System.Windows.Forms.Label();
             this.BtnResetScoreHistory = new System.Windows.Forms.Button();
             this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
-            this.FlipScorePanel = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -89,7 +86,7 @@
             this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
             this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
             this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
-            this.BtnApplyFeature = new System.Windows.Forms.Button();
+            this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -111,13 +108,14 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
+            this.PbxGrid = new System.Windows.Forms.PictureBox();
+            this.PbxTile = new System.Windows.Forms.PictureBox();
+            this.FlipScorePanel = new System.Windows.Forms.Panel();
+            this.BtnApplyFeature = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).BeginInit();
@@ -140,11 +138,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -261,29 +261,6 @@
             0,
             0});
             this.NumSelectedRow.ValueChanged += new System.EventHandler(this.NumSelectedRow_ValueChanged);
-            // 
-            // PbxGrid
-            // 
-            this.PbxGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PbxGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PbxGrid.Location = new System.Drawing.Point(3, 27);
-            this.PbxGrid.Name = "PbxGrid";
-            this.PbxGrid.Size = new System.Drawing.Size(436, 308);
-            this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PbxGrid.TabIndex = 1;
-            this.PbxGrid.TabStop = false;
-            // 
-            // PbxTile
-            // 
-            this.PbxTile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PbxTile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PbxTile.Image = ((System.Drawing.Image)(resources.GetObject("PbxTile.Image")));
-            this.PbxTile.Location = new System.Drawing.Point(445, 27);
-            this.PbxTile.Name = "PbxTile";
-            this.PbxTile.Size = new System.Drawing.Size(436, 308);
-            this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PbxTile.TabIndex = 2;
-            this.PbxTile.TabStop = false;
             // 
             // flowLayoutPanel2
             // 
@@ -900,18 +877,6 @@
             this.ComboFeatureNullDetection.TabIndex = 9;
             this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
             // 
-            // FlipScorePanel
-            // 
-            this.FlipScorePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
-            this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
-            this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.FlipScorePanel.Location = new System.Drawing.Point(372, 96);
-            this.FlipScorePanel.Name = "FlipScorePanel";
-            this.FlipScorePanel.Size = new System.Drawing.Size(34, 25);
-            this.FlipScorePanel.TabIndex = 12;
-            // 
             // label14
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -1021,26 +986,18 @@
             0});
             this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.NumFeatureHeight_ValueChanged);
             // 
-            // BtnApplyFeature
+            // ThresholdTrackBar
             // 
-            this.BtnApplyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnApplyFeature.AutoSize = true;
-            this.BtnApplyFeature.BackColor = System.Drawing.Color.Transparent;
-            this.BtnApplyFeature.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnApplyFeature.BackgroundImage")));
-            this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
-            this.BtnApplyFeature.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
-            this.BtnApplyFeature.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
-            this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApplyFeature.Location = new System.Drawing.Point(372, 127);
-            this.BtnApplyFeature.Name = "BtnApplyFeature";
-            this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
-            this.BtnApplyFeature.Size = new System.Drawing.Size(47, 60);
-            this.BtnApplyFeature.TabIndex = 4;
-            this.BtnApplyFeature.UseVisualStyleBackColor = false;
-            this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
+            this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 4);
+            this.ThresholdTrackBar.LargeChange = 1;
+            this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 65);
+            this.ThresholdTrackBar.Maximum = 100;
+            this.ThresholdTrackBar.Name = "ThresholdTrackBar";
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(309, 25);
+            this.ThresholdTrackBar.TabIndex = 21;
+            this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
             // 
             // flowLayoutPanel1
             // 
@@ -1279,18 +1236,59 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
-            // ThresholdTrackBar
+            // PbxGrid
             // 
-            this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 4);
-            this.ThresholdTrackBar.LargeChange = 1;
-            this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 65);
-            this.ThresholdTrackBar.Maximum = 100;
-            this.ThresholdTrackBar.Name = "ThresholdTrackBar";
-            this.ThresholdTrackBar.Size = new System.Drawing.Size(309, 25);
-            this.ThresholdTrackBar.TabIndex = 21;
-            this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
+            this.PbxGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PbxGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PbxGrid.Location = new System.Drawing.Point(3, 27);
+            this.PbxGrid.Name = "PbxGrid";
+            this.PbxGrid.Size = new System.Drawing.Size(436, 308);
+            this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PbxGrid.TabIndex = 1;
+            this.PbxGrid.TabStop = false;
+            // 
+            // PbxTile
+            // 
+            this.PbxTile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PbxTile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PbxTile.Image = ((System.Drawing.Image)(resources.GetObject("PbxTile.Image")));
+            this.PbxTile.Location = new System.Drawing.Point(445, 27);
+            this.PbxTile.Name = "PbxTile";
+            this.PbxTile.Size = new System.Drawing.Size(436, 308);
+            this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PbxTile.TabIndex = 2;
+            this.PbxTile.TabStop = false;
+            // 
+            // FlipScorePanel
+            // 
+            this.FlipScorePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
+            this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
+            this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.FlipScorePanel.Location = new System.Drawing.Point(372, 96);
+            this.FlipScorePanel.Name = "FlipScorePanel";
+            this.FlipScorePanel.Size = new System.Drawing.Size(34, 25);
+            this.FlipScorePanel.TabIndex = 12;
+            // 
+            // BtnApplyFeature
+            // 
+            this.BtnApplyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnApplyFeature.AutoSize = true;
+            this.BtnApplyFeature.BackColor = System.Drawing.Color.Transparent;
+            this.BtnApplyFeature.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnApplyFeature.BackgroundImage")));
+            this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
+            this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnApplyFeature.Location = new System.Drawing.Point(372, 127);
+            this.BtnApplyFeature.Name = "BtnApplyFeature";
+            this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
+            this.BtnApplyFeature.Size = new System.Drawing.Size(47, 60);
+            this.BtnApplyFeature.TabIndex = 4;
+            this.BtnApplyFeature.UseVisualStyleBackColor = false;
+            this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // Composer
             // 
@@ -1310,8 +1308,6 @@
             this.flowLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).EndInit();
@@ -1335,12 +1331,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

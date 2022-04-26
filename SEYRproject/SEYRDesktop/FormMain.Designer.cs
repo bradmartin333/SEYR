@@ -297,7 +297,7 @@
             this.MinimumSize = new System.Drawing.Size(416, 148);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "v1.3.5";
+            this.Text = "v1.3.6";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();
