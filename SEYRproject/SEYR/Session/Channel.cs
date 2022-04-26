@@ -43,6 +43,7 @@ namespace SEYR.Session
             DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
             DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
+            PatternPath = DirPath + @"\SEYRpattern.png";
             Project = new Project() { PixelsPerMicron = pixelsPerMicron };
             SaveProject();
             Viewer = new Viewer();
@@ -60,6 +61,7 @@ namespace SEYR.Session
             DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
             DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
+            PatternPath = DirPath + @"\SEYRpattern.png";
             LoadProject();
             Viewer = new Viewer();
         }
@@ -118,8 +120,6 @@ namespace SEYR.Session
 
         private void LoadPattern()
         {
-            FileInfo info = new FileInfo(ProjectPath);
-            PatternPath = $@"{info.DirectoryName}\SEYRpattern.png";
             if (File.Exists(PatternPath))
             {
                 Bitmap bmp = new Bitmap(PatternPath);
