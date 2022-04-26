@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnShowViewer = new System.Windows.Forms.Button();
-            this.BtnRepeat = new System.Windows.Forms.Button();
             this.NumPxPerMicron = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnStop = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.NumFrame = new System.Windows.Forms.NumericUpDown();
+            this.BtnRestartAndRun = new System.Windows.Forms.Button();
             this.BtnRunAll = new System.Windows.Forms.Button();
+            this.BtnStop = new System.Windows.Forms.Button();
+            this.BtnRepeat = new System.Windows.Forms.Button();
             this.BtnOpenComposer = new System.Windows.Forms.Button();
+            this.BtnShowViewer = new System.Windows.Forms.Button();
             this.BtnForcePattern = new System.Windows.Forms.Button();
             this.BtnOpenDir = new System.Windows.Forms.Button();
-            this.BtnRestartAndRun = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.BtnCustomFilter = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -84,38 +84,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(435, 122);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // BtnShowViewer
-            // 
-            this.BtnShowViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnShowViewer.AutoSize = true;
-            this.BtnShowViewer.Enabled = false;
-            this.BtnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShowViewer.Location = new System.Drawing.Point(246, 81);
-            this.BtnShowViewer.Name = "BtnShowViewer";
-            this.BtnShowViewer.Size = new System.Drawing.Size(95, 28);
-            this.BtnShowViewer.TabIndex = 18;
-            this.BtnShowViewer.Text = "Show Viewer";
-            this.BtnShowViewer.UseVisualStyleBackColor = true;
-            this.BtnShowViewer.Click += new System.EventHandler(this.BtnShowViewer_Click);
-            // 
-            // BtnRepeat
-            // 
-            this.BtnRepeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnRepeat.AutoSize = true;
-            this.BtnRepeat.Enabled = false;
-            this.BtnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRepeat.Location = new System.Drawing.Point(246, 13);
-            this.BtnRepeat.Name = "BtnRepeat";
-            this.BtnRepeat.Size = new System.Drawing.Size(95, 28);
-            this.BtnRepeat.TabIndex = 17;
-            this.BtnRepeat.Text = "Repeat Image";
-            this.BtnRepeat.UseVisualStyleBackColor = true;
-            this.BtnRepeat.Click += new System.EventHandler(this.BtnRepeat_Click);
-            // 
             // NumPxPerMicron
             // 
             this.NumPxPerMicron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -148,22 +116,6 @@
             this.label1.Text = "Pixels/Micron";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // BtnStop
-            // 
-            this.BtnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnStop.AutoSize = true;
-            this.BtnStop.Enabled = false;
-            this.BtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnStop.Location = new System.Drawing.Point(347, 81);
-            this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(76, 28);
-            this.BtnStop.TabIndex = 13;
-            this.BtnStop.Text = "Stop";
-            this.BtnStop.UseVisualStyleBackColor = true;
-            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -187,6 +139,22 @@
             this.NumFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumFrame.ValueChanged += new System.EventHandler(this.numFrame_ValueChanged);
             // 
+            // BtnRestartAndRun
+            // 
+            this.BtnRestartAndRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRestartAndRun.AutoSize = true;
+            this.BtnRestartAndRun.Enabled = false;
+            this.BtnRestartAndRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRestartAndRun.Location = new System.Drawing.Point(347, 13);
+            this.BtnRestartAndRun.Name = "BtnRestartAndRun";
+            this.BtnRestartAndRun.Size = new System.Drawing.Size(76, 28);
+            this.BtnRestartAndRun.TabIndex = 21;
+            this.BtnRestartAndRun.Text = "Restart Run";
+            this.BtnRestartAndRun.UseVisualStyleBackColor = true;
+            this.BtnRestartAndRun.Click += new System.EventHandler(this.BtnRestartAndRun_Click);
+            // 
             // BtnRunAll
             // 
             this.BtnRunAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -203,6 +171,38 @@
             this.BtnRunAll.UseVisualStyleBackColor = true;
             this.BtnRunAll.Click += new System.EventHandler(this.btnRunAll_Click);
             // 
+            // BtnStop
+            // 
+            this.BtnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnStop.AutoSize = true;
+            this.BtnStop.Enabled = false;
+            this.BtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnStop.Location = new System.Drawing.Point(347, 81);
+            this.BtnStop.Name = "BtnStop";
+            this.BtnStop.Size = new System.Drawing.Size(76, 28);
+            this.BtnStop.TabIndex = 13;
+            this.BtnStop.Text = "Stop";
+            this.BtnStop.UseVisualStyleBackColor = true;
+            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
+            // 
+            // BtnRepeat
+            // 
+            this.BtnRepeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRepeat.AutoSize = true;
+            this.BtnRepeat.Enabled = false;
+            this.BtnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRepeat.Location = new System.Drawing.Point(246, 13);
+            this.BtnRepeat.Name = "BtnRepeat";
+            this.BtnRepeat.Size = new System.Drawing.Size(95, 28);
+            this.BtnRepeat.TabIndex = 17;
+            this.BtnRepeat.Text = "Repeat Image";
+            this.BtnRepeat.UseVisualStyleBackColor = true;
+            this.BtnRepeat.Click += new System.EventHandler(this.BtnRepeat_Click);
+            // 
             // BtnOpenComposer
             // 
             this.BtnOpenComposer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -218,6 +218,22 @@
             this.BtnOpenComposer.Text = "Open Composer";
             this.BtnOpenComposer.UseVisualStyleBackColor = true;
             this.BtnOpenComposer.Click += new System.EventHandler(this.BtnOpenComposer_Click);
+            // 
+            // BtnShowViewer
+            // 
+            this.BtnShowViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnShowViewer.AutoSize = true;
+            this.BtnShowViewer.Enabled = false;
+            this.BtnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnShowViewer.Location = new System.Drawing.Point(246, 81);
+            this.BtnShowViewer.Name = "BtnShowViewer";
+            this.BtnShowViewer.Size = new System.Drawing.Size(95, 28);
+            this.BtnShowViewer.TabIndex = 18;
+            this.BtnShowViewer.Text = "Show Viewer";
+            this.BtnShowViewer.UseVisualStyleBackColor = true;
+            this.BtnShowViewer.Click += new System.EventHandler(this.BtnShowViewer_Click);
             // 
             // BtnForcePattern
             // 
@@ -250,26 +266,6 @@
             this.BtnOpenDir.UseVisualStyleBackColor = true;
             this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
-            // BtnRestartAndRun
-            // 
-            this.BtnRestartAndRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnRestartAndRun.AutoSize = true;
-            this.BtnRestartAndRun.Enabled = false;
-            this.BtnRestartAndRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRestartAndRun.Location = new System.Drawing.Point(347, 13);
-            this.BtnRestartAndRun.Name = "BtnRestartAndRun";
-            this.BtnRestartAndRun.Size = new System.Drawing.Size(76, 28);
-            this.BtnRestartAndRun.TabIndex = 21;
-            this.BtnRestartAndRun.Text = "Restart Run";
-            this.BtnRestartAndRun.UseVisualStyleBackColor = true;
-            this.BtnRestartAndRun.Click += new System.EventHandler(this.BtnRestartAndRun_Click);
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // BtnCustomFilter
             // 
             this.BtnCustomFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -286,6 +282,10 @@
             this.BtnCustomFilter.UseVisualStyleBackColor = true;
             this.BtnCustomFilter.Click += new System.EventHandler(this.BtnCustomFilter_Click);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,7 +297,7 @@
             this.MinimumSize = new System.Drawing.Size(416, 148);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "v1.3.4";
+            this.Text = "v1.3.5";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();

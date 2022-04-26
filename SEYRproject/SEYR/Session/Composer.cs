@@ -180,6 +180,7 @@ namespace SEYR.Session
             PbxGrid.MouseUp += PbxGrid_MouseUp;
             PbxTile.MouseUp += PbxTile_MouseUp;
             OLV.ButtonClick += OLV_ButtonClick;
+            OLV.DoubleClick += OLV_DoubleClick;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
         }
 
@@ -250,6 +251,11 @@ namespace SEYR.Session
             ForceThreshold = feature.Threshold;
             ShowThreshold = true;
             ApplyFeature();
+        }
+
+        private void OLV_DoubleClick(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
         }
 
         private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
@@ -381,6 +387,7 @@ namespace SEYR.Session
             ShowThreshold = false;
             Channel.DebugStream.Write($"User Apply");
             SetupFeatureUI(false);
+            tabControl.SelectedIndex = 0;
         }
 
         private void OLV_SelectedIndexChanged(object sender, EventArgs e)
@@ -440,7 +447,22 @@ namespace SEYR.Session
             SetupFeatureUI(false);
         }
 
-        private void FeatureRectangle_ValueChanged(object sender, EventArgs e)
+        private void NumFeatureX_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateRectangle();
+        }
+
+        private void NumFeatureWidth_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateRectangle();
+        }
+
+        private void NumFeatureY_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateRectangle();
+        }
+
+        private void NumFeatureHeight_ValueChanged(object sender, EventArgs e)
         {
             UpdateRectangle();
         }
@@ -557,14 +579,14 @@ namespace SEYR.Session
             Rows = (int)NumRows.Value;
         }
 
-        private void NumTileColumn_ValueChanged(object sender, EventArgs e)
+        private void NumSelectedColumn_ValueChanged(object sender, EventArgs e)
         {
-            TileColumn = (int)NumTileColumn.Value;
+            TileColumn = (int)NumSelectedColumn.Value;
         }
 
-        private void NumTileRow_ValueChanged(object sender, EventArgs e)
+        private void NumSelectedRow_ValueChanged(object sender, EventArgs e)
         {
-            TileRow = (int)NumTileRow.Value;
+            TileRow = (int)NumSelectedRow.Value;
         }
 
         #endregion
