@@ -205,7 +205,7 @@ namespace SEYR.Session
             UpdateTile();
         }
 
-        private async void UpdateGrid()
+        private void UpdateGrid()
         {
             try
             {
@@ -255,7 +255,7 @@ namespace SEYR.Session
 
         private void OLV_DoubleClick(object sender, EventArgs e)
         {
-            tabControl.SelectedIndex = 1;
+            TabControl.SelectedIndex = 1;
         }
 
         private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
@@ -364,7 +364,7 @@ namespace SEYR.Session
             if (setNull)
             {
                 ActiveFeature = null;
-                tabControl.SelectedIndex = 0;
+                TabControl.SelectedIndex = 0;
             }
             else
                 OLV.SelectedObject = ActiveFeature;
@@ -372,7 +372,6 @@ namespace SEYR.Session
             UpdateImages();
             Channel.DebugStream.Write($"Load Feature UI");
         }
-
 
         private void ApplyFeature()
         {
@@ -387,7 +386,7 @@ namespace SEYR.Session
             ShowThreshold = false;
             Channel.DebugStream.Write($"User Apply");
             SetupFeatureUI(false);
-            tabControl.SelectedIndex = 0;
+            TabControl.SelectedIndex = 0;
         }
 
         private void OLV_SelectedIndexChanged(object sender, EventArgs e)
@@ -405,7 +404,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Rectangle   ", false);
             TxtFeatureName.Text = ActiveFeature.Name;
             Channel.DebugStream.Write("Loaded Name   ", false);
-            ThresholdScrollBar.Value = (int)(ActiveFeature.Threshold * 100f);
+            ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
             LabelThreshold.Text = $"Threshold: {ActiveFeature.Threshold}";
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
@@ -489,10 +488,10 @@ namespace SEYR.Session
             }    
         }
 
-        private void ThresholdScrollBar_Scroll(object sender, ScrollEventArgs e)
+        private void ThresholdTrackBar_Scroll(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Threshold = ThresholdScrollBar.Value / 100f;
+            ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
             LabelThreshold.Text = $"Thresold: {ActiveFeature.Threshold}";
             Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
             ForceThreshold = -1f;

@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.NumSelectedColumn = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.NumSelectedRow = new System.Windows.Forms.NumericUpDown();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
             this.PbxTile = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -52,7 +57,7 @@
             this.NumColumns = new System.Windows.Forms.NumericUpDown();
             this.LabelScale = new System.Windows.Forms.Label();
             this.NumRows = new System.Windows.Forms.NumericUpDown();
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnAddFeature = new System.Windows.Forms.Button();
@@ -65,7 +70,6 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnApplyFeature = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -77,7 +81,6 @@
             this.LabelCurrentFeatureScore = new System.Windows.Forms.Label();
             this.BtnResetScoreHistory = new System.Windows.Forms.Button();
             this.ComboFeatureNullDetection = new System.Windows.Forms.ComboBox();
-            this.ThresholdScrollBar = new System.Windows.Forms.HScrollBar();
             this.FlipScorePanel = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -86,6 +89,7 @@
             this.NumFeatureWidth = new System.Windows.Forms.NumericUpDown();
             this.NumFeatureY = new System.Windows.Forms.NumericUpDown();
             this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
+            this.BtnApplyFeature = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -107,12 +111,11 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.NumSelectedColumn = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.NumSelectedRow = new System.Windows.Forms.NumericUpDown();
+            this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -127,7 +130,7 @@
             this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).BeginInit();
-            this.tabControl.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.tabPageFeatures.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OLV)).BeginInit();
@@ -141,9 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -158,7 +159,7 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.tabControl, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.TabControl, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label18, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label21, 0, 0);
@@ -176,6 +177,90 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(884, 566);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.Controls.Add(this.label8);
+            this.flowLayoutPanel6.Controls.Add(this.NumSelectedColumn);
+            this.flowLayoutPanel6.Controls.Add(this.label9);
+            this.flowLayoutPanel6.Controls.Add(this.NumSelectedRow);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(49, 531);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel6.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Location = new System.Drawing.Point(6, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Selected Column";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSelectedColumn
+            // 
+            this.NumSelectedColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSelectedColumn.Location = new System.Drawing.Point(99, 6);
+            this.NumSelectedColumn.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.Name = "NumSelectedColumn";
+            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 20);
+            this.NumSelectedColumn.TabIndex = 7;
+            this.NumSelectedColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSelectedColumn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.ValueChanged += new System.EventHandler(this.NumSelectedColumn_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Location = new System.Drawing.Point(175, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Selected Row";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSelectedRow
+            // 
+            this.NumSelectedRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSelectedRow.Location = new System.Drawing.Point(268, 6);
+            this.NumSelectedRow.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.Name = "NumSelectedRow";
+            this.NumSelectedRow.Size = new System.Drawing.Size(70, 20);
+            this.NumSelectedRow.TabIndex = 9;
+            this.NumSelectedRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSelectedRow.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.ValueChanged += new System.EventHandler(this.NumSelectedRow_ValueChanged);
             // 
             // PbxGrid
             // 
@@ -496,19 +581,19 @@
             0});
             this.NumRows.ValueChanged += new System.EventHandler(this.NumRows_ValueChanged);
             // 
-            // tabControl
+            // TabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPageFeatures);
-            this.tabControl.Controls.Add(this.tabPageInfo);
-            this.tabControl.Location = new System.Drawing.Point(445, 341);
-            this.tabControl.Name = "tabControl";
-            this.tableLayoutPanel1.SetRowSpan(this.tabControl, 6);
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(436, 222);
-            this.tabControl.TabIndex = 13;
+            this.TabControl.Controls.Add(this.tabPageFeatures);
+            this.TabControl.Controls.Add(this.tabPageInfo);
+            this.TabControl.Location = new System.Drawing.Point(445, 341);
+            this.TabControl.Name = "TabControl";
+            this.tableLayoutPanel1.SetRowSpan(this.TabControl, 6);
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(436, 222);
+            this.TabControl.TabIndex = 13;
             // 
             // tabPageFeatures
             // 
@@ -670,7 +755,6 @@
             this.tableLayoutPanel3.Controls.Add(this.LabelCurrentFeatureScore, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.BtnResetScoreHistory, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.ComboFeatureNullDetection, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ThresholdScrollBar, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.FlipScorePanel, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.label14, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.label15, 2, 4);
@@ -680,6 +764,7 @@
             this.tableLayoutPanel3.Controls.Add(this.NumFeatureY, 3, 4);
             this.tableLayoutPanel3.Controls.Add(this.NumFeatureHeight, 3, 5);
             this.tableLayoutPanel3.Controls.Add(this.BtnApplyFeature, 4, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ThresholdTrackBar, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -692,27 +777,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 190);
             this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // BtnApplyFeature
-            // 
-            this.BtnApplyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnApplyFeature.AutoSize = true;
-            this.BtnApplyFeature.BackColor = System.Drawing.Color.Transparent;
-            this.BtnApplyFeature.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnApplyFeature.BackgroundImage")));
-            this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
-            this.BtnApplyFeature.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
-            this.BtnApplyFeature.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
-            this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApplyFeature.Location = new System.Drawing.Point(372, 127);
-            this.BtnApplyFeature.Name = "BtnApplyFeature";
-            this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
-            this.BtnApplyFeature.Size = new System.Drawing.Size(47, 60);
-            this.BtnApplyFeature.TabIndex = 4;
-            this.BtnApplyFeature.UseVisualStyleBackColor = false;
-            this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // label16
             // 
@@ -836,17 +900,6 @@
             this.ComboFeatureNullDetection.TabIndex = 9;
             this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
             // 
-            // ThresholdScrollBar
-            // 
-            this.ThresholdScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdScrollBar, 4);
-            this.ThresholdScrollBar.Location = new System.Drawing.Point(110, 69);
-            this.ThresholdScrollBar.Margin = new System.Windows.Forms.Padding(3);
-            this.ThresholdScrollBar.Name = "ThresholdScrollBar";
-            this.ThresholdScrollBar.Size = new System.Drawing.Size(309, 17);
-            this.ThresholdScrollBar.TabIndex = 10;
-            this.ThresholdScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ThresholdScrollBar_Scroll);
-            // 
             // FlipScorePanel
             // 
             this.FlipScorePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -967,6 +1020,27 @@
             0,
             0});
             this.NumFeatureHeight.ValueChanged += new System.EventHandler(this.NumFeatureHeight_ValueChanged);
+            // 
+            // BtnApplyFeature
+            // 
+            this.BtnApplyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnApplyFeature.AutoSize = true;
+            this.BtnApplyFeature.BackColor = System.Drawing.Color.Transparent;
+            this.BtnApplyFeature.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnApplyFeature.BackgroundImage")));
+            this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
+            this.BtnApplyFeature.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
+            this.BtnApplyFeature.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
+            this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnApplyFeature.Location = new System.Drawing.Point(372, 127);
+            this.BtnApplyFeature.Name = "BtnApplyFeature";
+            this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
+            this.BtnApplyFeature.Size = new System.Drawing.Size(47, 60);
+            this.BtnApplyFeature.TabIndex = 4;
+            this.BtnApplyFeature.UseVisualStyleBackColor = false;
+            this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -1205,89 +1279,18 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel6
+            // ThresholdTrackBar
             // 
-            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.Controls.Add(this.label8);
-            this.flowLayoutPanel6.Controls.Add(this.NumSelectedColumn);
-            this.flowLayoutPanel6.Controls.Add(this.label9);
-            this.flowLayoutPanel6.Controls.Add(this.NumSelectedRow);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(49, 531);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(344, 32);
-            this.flowLayoutPanel6.TabIndex = 16;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.Location = new System.Drawing.Point(6, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Selected Column";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSelectedColumn
-            // 
-            this.NumSelectedColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedColumn.Location = new System.Drawing.Point(99, 6);
-            this.NumSelectedColumn.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.Name = "NumSelectedColumn";
-            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 20);
-            this.NumSelectedColumn.TabIndex = 7;
-            this.NumSelectedColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSelectedColumn.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.ValueChanged += new System.EventHandler(this.NumSelectedColumn_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Location = new System.Drawing.Point(175, 9);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Selected Row";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSelectedRow
-            // 
-            this.NumSelectedRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedRow.Location = new System.Drawing.Point(268, 6);
-            this.NumSelectedRow.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.Name = "NumSelectedRow";
-            this.NumSelectedRow.Size = new System.Drawing.Size(70, 20);
-            this.NumSelectedRow.TabIndex = 9;
-            this.NumSelectedRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSelectedRow.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.ValueChanged += new System.EventHandler(this.NumSelectedRow_ValueChanged);
+            this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 4);
+            this.ThresholdTrackBar.LargeChange = 1;
+            this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 65);
+            this.ThresholdTrackBar.Maximum = 100;
+            this.ThresholdTrackBar.Name = "ThresholdTrackBar";
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(309, 25);
+            this.ThresholdTrackBar.TabIndex = 21;
+            this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
             // 
             // Composer
             // 
@@ -1304,6 +1307,9 @@
             this.Text = "Composer";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -1318,7 +1324,7 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumRows)).EndInit();
-            this.tabControl.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.tabPageFeatures.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OLV)).EndInit();
@@ -1334,9 +1340,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.flowLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1372,7 +1376,7 @@
         private System.Windows.Forms.NumericUpDown NumRows;
         private System.Windows.Forms.NumericUpDown NumScaling;
         private System.Windows.Forms.NumericUpDown NumAngle;
-        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabPageFeatures;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button BtnCopyFeature;
@@ -1396,7 +1400,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label LabelThreshold;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
-        private System.Windows.Forms.HScrollBar ThresholdScrollBar;
         private BrightIdeasSoftware.FastObjectListView OLV;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
@@ -1427,5 +1430,6 @@
         private System.Windows.Forms.NumericUpDown NumSelectedColumn;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown NumSelectedRow;
+        private System.Windows.Forms.TrackBar ThresholdTrackBar;
     }
 }
