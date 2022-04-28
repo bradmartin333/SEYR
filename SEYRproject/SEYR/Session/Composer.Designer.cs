@@ -115,6 +115,7 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenCriteriaWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
@@ -1212,6 +1213,7 @@
             this.ConfirmToolStripMenuItem,
             this.CancelToolStripMenuItem,
             this.OpenPatternWizardToolStripMenuItem,
+            this.OpenCriteriaWizardToolStripMenuItem,
             this.ToolsToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
@@ -1326,6 +1328,15 @@
             this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
+            // 
+            // OpenCriteriaWizardToolStripMenuItem
+            // 
+            this.OpenCriteriaWizardToolStripMenuItem.AutoSize = false;
+            this.OpenCriteriaWizardToolStripMenuItem.BackColor = System.Drawing.Color.Wheat;
+            this.OpenCriteriaWizardToolStripMenuItem.Name = "OpenCriteriaWizardToolStripMenuItem";
+            this.OpenCriteriaWizardToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.OpenCriteriaWizardToolStripMenuItem.Text = "Open Criteria Wizard";
+            this.OpenCriteriaWizardToolStripMenuItem.Click += new System.EventHandler(this.OpenCriteriaWizardToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1469,5 +1480,6 @@
         private System.Windows.Forms.Panel SaveImagePanel;
         private System.Windows.Forms.Label label23;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private System.Windows.Forms.ToolStripMenuItem OpenCriteriaWizardToolStripMenuItem;
     }
 }
