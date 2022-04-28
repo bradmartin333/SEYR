@@ -70,7 +70,7 @@ namespace SEYR.Session
                 foreach (Feature feature in _Features)
                     if (feature.Rectangle.Contains(point) && (_LastHover != feature || _LastHover.Rectangle.Contains(feature.Rectangle)))
                     {
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(75, Color.Yellow)), feature.Rectangle);
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(25, Color.Yellow)), feature.Rectangle);
                         _LastHover = feature;
                         break;
                     }
