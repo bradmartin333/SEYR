@@ -330,7 +330,7 @@
   <data name="BtnApplyFeature.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAAlpJREFUWEfFVz0vREEUfRa7yEp8NBqtSCj9ATRqhUqhko1CKT6WkEhEFApRiIiI
+        wQAADsEBuJFr7QAAAlpJREFUWEfFVz0vREEUfRa7yEp8NBqtSCj9ATRqhUqhko1CKT6WkEhEFApRiIiI
         RCLiB6hFKRuN2UKrElHJRjbCOXfnyTMu7z1veSc5+zH3zj0zd2buvOdFRa5oOjILZrJh3hx686YEPoFv
         lvxdoo0+9LXdkqNx0fQj8BEEKgHBMFbYh31tmPjILZfzDQtmG8GqTvA4rDIGY9mw0YCR96GzcYIloZGY
         UQDHIXR4dALUg48S+yfYmf+FuE8OQs+ErFN90/4djbon7IbTOtSdohUE0tIPQ5LdHpdV0fRhz7nmmIQv
@@ -343,7 +343,7 @@
         Sv2uXWDfvp7T13YLgee9A3b8JyAEXiSLAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="MenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

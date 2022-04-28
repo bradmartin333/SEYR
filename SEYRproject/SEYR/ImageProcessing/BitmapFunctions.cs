@@ -188,7 +188,7 @@ namespace SEYR.ImageProcessing
         public static string Compress(byte[] data)
         {
             MemoryStream output = new MemoryStream();
-            using (DeflateStream dstream = new DeflateStream(output, CompressionLevel.Optimal))
+            using (DeflateStream dstream = new DeflateStream(output, CompressionLevel.Fastest))
                 dstream.Write(data, 0, data.Length);
             return Convert.ToBase64String(output.ToArray());
         }
