@@ -150,16 +150,16 @@ namespace SEYR.ImageProcessing
 
         private static (float, string) AnalyzeData(Bitmap bmpTile, Feature feature)
         {
-            Rectangle cropRect = feature.GetGeometry();
-            Bitmap bmp = new Bitmap(feature.Rectangle.Width, feature.Rectangle.Height);
+            Rectangle cropRect = feature.GetPaddedGeometry();
+            Bitmap bmp = new Bitmap(cropRect.Width, cropRect.Height, PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(bmp))
-                g.DrawImage(bmpTile, new Rectangle(Point.Empty, cropRect.Size), cropRect, GraphicsUnit.Pixel);
+                g.DrawImage(bmpTile, new Rectangle(0, 0, cropRect.Width, cropRect.Height), cropRect, GraphicsUnit.Pixel);
 
-            (byte[] rVals, byte[] rtVals, Rectangle rect) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
+            (byte[] rVals, byte[] rtVals) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
             int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
-            float entropy = CalculateShannonEntropy(rVals, rect.Size);
+            float entropy = CalculateShannonEntropy(rVals, cropRect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
             string compression = feature.SaveImage ? Compress(rVals) : "";
 
@@ -193,14 +193,13 @@ namespace SEYR.ImageProcessing
             return Convert.ToBase64String(output.ToArray());
         }
 
-        private static (byte[], byte[], Rectangle) GetPixelData(Bitmap bmp, float threshold)
+        private static (byte[], byte[]) GetPixelData(Bitmap bmp, float threshold)
         {
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-            IntPtr ptr = bmpData.Scan0;
-            int bytes = Math.Abs(bmpData.Stride) * bmp.Height;
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
             byte[] rgbValues = new byte[bytes];
-            Marshal.Copy(ptr, rgbValues, 0, bytes);
+            Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
 
             List<byte> rVals = new List<byte>();
             List<byte> rtVals = new List<byte>();
@@ -213,7 +212,7 @@ namespace SEYR.ImageProcessing
             }
 
             bmp.UnlockBits(bmpData);
-            return (rVals.ToArray(), rtVals.ToArray(), rect);
+            return (rVals.ToArray(), rtVals.ToArray());
         }
 
         private static float CalculateShannonEntropy(byte[] data, Size size)

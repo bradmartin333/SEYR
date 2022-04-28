@@ -56,6 +56,12 @@ namespace SEYR.Session
             return new Rectangle(offset.X, offset.Y, size.X, size.Y);
         }
 
+        public Rectangle GetPaddedGeometry()
+        {
+            Rectangle rect = GetGeometry();
+            return new Rectangle(rect.X, rect.Y, rect.Width + (rect.Width * 3 % 4), rect.Height);
+        }
+
         public Feature Clone()
         {
             return new Feature()
