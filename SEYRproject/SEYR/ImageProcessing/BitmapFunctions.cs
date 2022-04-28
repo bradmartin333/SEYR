@@ -254,39 +254,46 @@ namespace SEYR.ImageProcessing
             Bitmap sourceImage = (Bitmap)bmp.Clone();
             Bitmap pattern = (Bitmap)Channel.Pattern.Clone();
 
-            var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
-            TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
-            await Channel.DebugStream.WriteAsync($"\t{Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\t");
-
-            if (matchings.Length > 0)
+            try
             {
-                TemplateMatch m = matchings[0];
-                double smallestDelta = double.MaxValue;
-                foreach (Point point in Channel.Project.PatternLocations)
+                var tm = new ExhaustiveTemplateMatching(Channel.Project.PatternScore);
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
+                await Channel.DebugStream.WriteAsync($"\t{Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\t");
+
+                if (matchings.Length > 0)
                 {
-                    Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
-                    double deltaH = Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
-                    if (deltaH <= Channel.Project.PatternDeltaMax)
+                    TemplateMatch m = matchings[0];
+                    double smallestDelta = double.MaxValue;
+                    foreach (Point point in Channel.Project.PatternLocations)
                     {
-                        await Channel.DebugStream.WriteAsync(
-                            $"Pattern follower delta = {Math.Round(deltaH, 2):F2} px, " +
-                            $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
-                        return delta;
+                        Point delta = new Point(point.X - m.Rectangle.Center().X, point.Y - m.Rectangle.Center().Y);
+                        double deltaH = Math.Sqrt(Math.Abs(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2)));
+                        if (deltaH <= Channel.Project.PatternDeltaMax)
+                        {
+                            await Channel.DebugStream.WriteAsync(
+                                $"Pattern follower delta = {Math.Round(deltaH, 2):F2} px, " +
+                                $"{Math.Round(deltaH / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", showInViewer: true);
+                            return delta;
+                        }
+                        if (deltaH < smallestDelta) smallestDelta = deltaH;
                     }
-                    if (deltaH < smallestDelta) smallestDelta = deltaH;
+                    if (Channel.Project.PatternLocations.Count == 0)
+                        await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
+                    else
+                        await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = " +
+                            $"{Math.Round(m.Similarity, 2)}, Smallest delta = {Math.Round(smallestDelta / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm",
+                            showInViewer: true);
                 }
-                if (Channel.Project.PatternLocations.Count == 0)
-                    await Channel.DebugStream.WriteAsync($"Pattern location not taught", showInViewer: true);
                 else
-                    await Channel.DebugStream.WriteAsync($"Failed to find valid pattern. Best score = " +
-                        $"{Math.Round(m.Similarity, 2)}, Smallest delta = {Math.Round(smallestDelta / Channel.Project.ScaledPixelsPerMicron, 2):F2} µm", 
-                        showInViewer: true);
+                    await Channel.DebugStream.WriteAsync($"Failed to find pattern.", showInViewer: true);
+                return Offset;
             }
-            else
-                await Channel.DebugStream.WriteAsync($"Failed to find pattern.", showInViewer: true);
-            return Offset;
+            catch (Exception)
+            {
+                return Offset;
+            }
         }
 
         private static (Bitmap, double) CustomProcessImage(Bitmap bmp)
