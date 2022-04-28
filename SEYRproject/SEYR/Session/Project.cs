@@ -49,9 +49,9 @@ namespace SEYR.Session
         [XmlArray("Features")]
         public List<Feature> Features { get; set; } = new List<Feature>();
 
-        public double GetNumTiles()
+        public double GetNumTotalFeatures()
         {
-            return Rows * Columns;
+            return Rows * Columns * Features.Count;
         }
 
         public Rectangle GetGeometry()

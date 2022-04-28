@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -92,8 +94,9 @@ namespace SEYR.ImageProcessing
                     {
                         Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
-                        outputData += await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
-                        if (outputData.EndsWith("True\n")) pass++;
+                        (string newData, int numPassing) = await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
+                        outputData += newData;
+                        numPassing += numPassing;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
@@ -101,12 +104,13 @@ namespace SEYR.ImageProcessing
 
             Channel.Viewer.UpdateImage(bmp);
             await Channel.DataStream.WriteAsync(outputData);
-            return (bmp, pass / Channel.Project.GetNumTiles());
+            return (bmp, pass / Channel.Project.GetNumTotalFeatures());
         }
 
-        private static Task<string> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics, string imageInfo)
+        private static Task<(string, int)> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics, string imageInfo)
         {
             string outputData = string.Empty;
+            int numPassing = 0;
             using (Graphics g = Graphics.FromImage(crop))
             {
                 g.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
@@ -115,7 +119,7 @@ namespace SEYR.ImageProcessing
                     Bitmap tile = (Bitmap)crop.Clone();
                     foreach (Feature feature in Channel.Project.Features)
                     {
-                        float score = AnalyzeData(tile, feature);
+                        (float score, string compression) = AnalyzeData(tile, feature);
                         feature.UpdateScore(score);
                         if (score == 0f) // Special pass
                         {
@@ -136,13 +140,14 @@ namespace SEYR.ImageProcessing
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
                         }
                         if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\t{feature.LastPass}\n";
+                        if (feature.LastPass) numPassing++;
                     }
                 }
             }
-            return Task.FromResult(outputData);
+            return Task.FromResult((outputData, numPassing));
         }
 
-        private static float AnalyzeData(Bitmap bmpTile, Feature feature)
+        private static (float, string) AnalyzeData(Bitmap bmpTile, Feature feature)
         {
             Rectangle cropRect = feature.GetGeometry();
             Bitmap bmp = new Bitmap(feature.Rectangle.Width, feature.Rectangle.Height);
@@ -155,27 +160,36 @@ namespace SEYR.ImageProcessing
             int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
             float entropy = CalculateShannonEntropy(rVals, rect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
+            string compression = Compress(rVals);
 
             if (blackVals < filterVal || whiteVals < filterVal)
             {
                 switch (feature.NullDetection)
                 {
                     case Feature.NullDetectionTypes.None:
-                        return -10f;
+                        return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Empty:
-                        if (whiteVals < filterVal) return 0f;
-                        else return -10f;
+                        if (whiteVals < filterVal) return (0f, compression);
+                        else return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Filled:
-                        if (blackVals < filterVal) return 0f;
-                        else return -10f;
+                        if (blackVals < filterVal) return (0f, compression);
+                        else return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Both:
-                        return 0f;
+                        return (0f, compression);
                     default:
-                        return -10f;
+                        return (-10f, compression);
                 }
             }
             else
-                return score;
+                return (score, compression);
+        }
+
+        public static string Compress(byte[] data)
+        {
+            MemoryStream output = new MemoryStream();
+            using (DeflateStream dstream = new DeflateStream(output, CompressionLevel.Optimal))
+                dstream.Write(data, 0, data.Length);
+            return Convert.ToBase64String(output.ToArray());
         }
 
         private static (byte[], byte[], Rectangle) GetPixelData(Bitmap bmp, float threshold)
