@@ -11,6 +11,7 @@ namespace SEYRDesktop
     public partial class FormMain : Form
     {
         private SEYR.Session.Channel Channel;
+        private List<string> Data = new List<string>();
         private string[] IMGS = null;
         private bool STOP;
         private bool BUSY;
@@ -30,7 +31,8 @@ namespace SEYRDesktop
         {
             BUSY = true;
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            string info = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t");
+            string data = (int)NumFrame.Value < Data.Count ? Data[(int)NumFrame.Value] : $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
+            string info = await Channel.NewImage(bmp, forcePattern, data);
             System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
@@ -114,6 +116,17 @@ namespace SEYRDesktop
                 Channel = new SEYR.Session.Channel(path);
             else
                 Channel = new SEYR.Session.Channel(path, (float)NumPxPerMicron.Value);
+
+            files = Directory.GetFiles(path, "Inlinepositions.txt");
+            if (files.Length > 0)
+            {
+                string[] lines = File.ReadAllLines(files[0]);
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    string[] cols = lines[i].Split('\t');
+                    if (cols.Length > 0) Data.Add($"{i - 1}\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
+                }
+            }
 
             NumPxPerMicron.Enabled = false;
             BtnOpenDir.Enabled = false;

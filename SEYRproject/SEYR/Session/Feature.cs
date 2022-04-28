@@ -28,7 +28,7 @@ namespace SEYR.Session
         [XmlElement("FlipScore")]
         public bool FlipScore { get; set; } = false;
         [XmlElement("SaveImage")]
-        public bool SaveImage { get; set; } = true;
+        public bool SaveImage { get; set; } = false;
 
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
