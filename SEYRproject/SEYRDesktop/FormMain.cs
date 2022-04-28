@@ -32,6 +32,7 @@ namespace SEYRDesktop
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
             string info = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t");
             System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
+            ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
             GC.Collect();
         }
@@ -63,7 +64,11 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
-            if (!STOP) Channel.MakeArchive(true);
+            if (!STOP)
+            {
+                Channel.MakeArchive(true);
+                ProgressBar.Value = 0;
+            }
             STOP = false;
         }
 
@@ -81,7 +86,11 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRestartAndRun.Enabled = true;
             BtnStop.Enabled = false;
-            if (!STOP) Channel.MakeArchive(true);
+            if (!STOP)
+            {
+                Channel.MakeArchive(true);
+                ProgressBar.Value = 0;
+            }
             STOP = false;
         }
 
@@ -120,6 +129,7 @@ namespace SEYRDesktop
             
             NumFrame.Maximum = IMGS.Length - 1;
             NumFrame.Value = 0;
+            ProgressBar.Maximum = IMGS.Length - 1;
 
             await NextImage();
         }

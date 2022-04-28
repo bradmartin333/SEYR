@@ -27,6 +27,8 @@ namespace SEYR.Session
         public string NullDetectionDisplay { get => NullDetection.ToString().Replace("_", " "); }
         [XmlElement("FlipScore")]
         public bool FlipScore { get; set; } = false;
+        [XmlElement("SaveImage")]
+        public bool SaveImage { get; set; } = true;
 
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
@@ -38,7 +40,7 @@ namespace SEYR.Session
 
         private float _LastScore = 0f;
         internal float LastScore { get => _LastScore; set => _LastScore = value; }
-        internal bool LastPass { get => (Map() - 64 > 0) ^ FlipScore; }
+        internal bool LastPass { get => Map() - 64 > 0; }
 
         public Feature()
         {
@@ -62,6 +64,7 @@ namespace SEYR.Session
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
                 NullDetection = NullDetection,
+                SaveImage = SaveImage,
                 FlipScore = FlipScore,
             };
         }

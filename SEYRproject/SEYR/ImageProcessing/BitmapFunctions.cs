@@ -96,14 +96,14 @@ namespace SEYR.ImageProcessing
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                         (string newData, int numPassing) = await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
                         outputData += newData;
-                        numPassing += numPassing;
+                        pass += numPassing;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
             }
 
             Channel.Viewer.UpdateImage(bmp);
-            await Channel.DataStream.WriteAsync(outputData);
+            await Channel.DataStream.WriteAsync(outputData, false);
             return (bmp, pass / Channel.Project.GetNumTotalFeatures());
         }
 
@@ -139,8 +139,9 @@ namespace SEYR.ImageProcessing
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
                         }
-                        if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score}\t{feature.LastPass}\n";
-                        if (feature.LastPass) numPassing++;
+                        bool pass = feature.LastPass;
+                        if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score:f3}\t{pass}\t{compression}\n";
+                        numPassing += Convert.ToInt32(pass);
                     }
                 }
             }
@@ -160,7 +161,7 @@ namespace SEYR.ImageProcessing
             int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
             float entropy = CalculateShannonEntropy(rVals, rect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
-            string compression = Compress(rVals);
+            string compression = feature.SaveImage ? Compress(rVals) : "";
 
             if (blackVals < filterVal || whiteVals < filterVal)
             {

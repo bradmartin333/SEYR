@@ -18,7 +18,7 @@ namespace SEYR.Session
             else
             {
                 BaseHeader = header;
-                Header = $"{header}TileRow\tTileCol\tFeature\tScore";
+                Header = $"{header}TileRow\tTileCol\tFeature\tScore\tImageData";
                 Write(Header);
             } 
         }

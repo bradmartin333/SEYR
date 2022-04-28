@@ -189,6 +189,7 @@ namespace SEYR.Session
             PbxTile.MouseUp += PbxTile_MouseUp;
             OLV.ButtonClick += OLV_ButtonClick;
             OLV.DoubleClick += OLV_DoubleClick;
+            SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
         }
 
@@ -417,8 +418,10 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
-            Channel.DebugStream.Write("Loaded Flip Score   ", false);
+            SaveImagePanel.BackgroundImage = ActiveFeature.SaveImage ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
+            Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
+            Channel.DebugStream.Write("Loaded Flip Score   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
             UpdateImages();
@@ -537,6 +540,15 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.ClearScore();
             Channel.DebugStream.Write($"{ActiveFeature.Name} Score History Cleared");
+            ApplyFeature();
+        }
+
+        private void SaveImagePanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            ActiveFeature.SaveImage = !ActiveFeature.SaveImage;
+            SaveImagePanel.BackgroundImage = ActiveFeature.SaveImage ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Save Image Changed");
             ApplyFeature();
         }
 

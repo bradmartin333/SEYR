@@ -44,6 +44,7 @@
             this.BtnOpenDir = new System.Windows.Forms.Button();
             this.BtnCustomFilter = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -72,6 +73,7 @@
             this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnCustomFilter, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ProgressBar, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -286,6 +288,15 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.ProgressBar, 2);
+            this.ProgressBar.Location = new System.Drawing.Point(12, 15);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(139, 23);
+            this.ProgressBar.TabIndex = 23;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +334,7 @@
         private System.Windows.Forms.Button BtnForcePattern;
         private System.Windows.Forms.Button BtnRestartAndRun;
         private System.Windows.Forms.Button BtnCustomFilter;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }
 
