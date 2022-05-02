@@ -122,7 +122,7 @@ namespace SEYR.Session
             }
         }
 
-        public List<Feature[]> Criteria
+        public List<string[]> Criteria
         {
             get => Channel.Project.Criteria;
             set => Channel.Project.Criteria = value;

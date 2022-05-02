@@ -8,15 +8,15 @@ namespace SEYR.Session
 {
     public partial class CriteriaWizard : Form
     {
-        public readonly List<Feature[]> Criteria = new List<Feature[]>();
+        public readonly List<string[]> Criteria = new List<string[]>();
 
         private Size _Size;
         private readonly List<Feature> _Features;
-        private List<Feature> _SelectedFeatures = new List<Feature>();
-        private Feature _LastHover = null;
+        private List<string> _SelectedFeatures = new List<string>();
+        private string _LastHover = string.Empty;
         private bool ADDING = false;
 
-        public CriteriaWizard(Size size, List<Feature> features, List<Feature[]> criteria)
+        public CriteriaWizard(Size size, List<Feature> features, List<string[]> criteria)
         {
             InitializeComponent();
             _Size = size;
@@ -35,8 +35,8 @@ namespace SEYR.Session
             MakeForeground(Point.Empty);
             
             List<string> names = new List<string>();
-            foreach (Feature[] criterion in Criteria)
-                names.Add(string.Join(", ", criterion.Select(x => x.Name).ToArray()));
+            foreach (string[] criterion in Criteria)
+                names.Add(string.Join(", ", criterion));
             ComboSelector.Items.AddRange(names.ToArray());
             if (select) 
                 ComboSelector.SelectedIndex = names.Count - 1;
@@ -65,15 +65,21 @@ namespace SEYR.Session
             Bitmap bitmap = new Bitmap(_Size.Width, _Size.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-                foreach (Feature selectedFeature in _SelectedFeatures)
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(75, Color.Green)), selectedFeature.Rectangle);
+                foreach (string selectedFeature in _SelectedFeatures)
+                {
+                    Feature feature = _Features.Where(x => x.Name == selectedFeature).First();
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(75, Color.Green)), feature.Rectangle);
+                }
+                Feature lastFeature = _LastHover == string.Empty ? _Features[0] : _Features.Where(x => x.Name == _LastHover).First();
                 foreach (Feature feature in _Features)
-                    if (feature.Rectangle.Contains(point) && (_LastHover != feature || _LastHover.Rectangle.Contains(feature.Rectangle)))
+                {
+                    if (feature.Rectangle.Contains(point) && (_LastHover != feature.Name || lastFeature.Rectangle.Contains(feature.Rectangle)))
                     {
                         g.FillRectangle(new SolidBrush(Color.FromArgb(25, Color.Yellow)), feature.Rectangle);
-                        _LastHover = feature;
+                        _LastHover = feature.Name;
                         break;
                     }
+                }
                 PBX.Image = bitmap;
             }
         }
