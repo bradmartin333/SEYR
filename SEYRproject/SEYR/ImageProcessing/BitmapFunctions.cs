@@ -119,7 +119,7 @@ namespace SEYR.ImageProcessing
                     Bitmap tile = (Bitmap)crop.Clone();
                     foreach (Feature feature in Channel.Project.Features)
                     {
-                        (float score, string compression) = AnalyzeData(tile, feature);
+                        (float score, string compression) = AnalyzeData(tile, feature, imageInfo);
                         feature.UpdateScore(score);
                         if (score == 0f) // Special pass
                         {
@@ -148,7 +148,7 @@ namespace SEYR.ImageProcessing
             return Task.FromResult((outputData, numPassing));
         }
 
-        private static (float, string) AnalyzeData(Bitmap bmpTile, Feature feature)
+        private static (float, string) AnalyzeData(Bitmap bmpTile, Feature feature, string imageInfo)
         {
             Rectangle cropRect = feature.GetPaddedGeometry();
             Bitmap bmp = new Bitmap(cropRect.Width, cropRect.Height, PixelFormat.Format24bppRgb);
@@ -156,12 +156,18 @@ namespace SEYR.ImageProcessing
                 g.DrawImage(bmpTile, new Rectangle(0, 0, cropRect.Width, cropRect.Height), cropRect, GraphicsUnit.Pixel);
 
             (byte[] rVals, byte[] rtVals) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
+            string compression = feature.SaveImage ? Compress(rVals) : "";
+            if (rVals.Max() == 0)
+            {
+                Channel.DebugStream.Write($"NULL IMG {imageInfo}");
+                return (-10f, compression);
+            }
+                
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
             int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
             float entropy = CalculateShannonEntropy(rVals, cropRect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
-            string compression = feature.SaveImage ? Compress(rVals) : "";
 
             if (blackVals < filterVal || whiteVals < filterVal)
             {
@@ -196,7 +202,7 @@ namespace SEYR.ImageProcessing
         private static (byte[], byte[]) GetPixelData(Bitmap bmp, float threshold)
         {
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
             int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);

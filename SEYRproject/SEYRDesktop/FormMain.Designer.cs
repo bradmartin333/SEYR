@@ -139,7 +139,7 @@
             this.NumFrame.Size = new System.Drawing.Size(62, 20);
             this.NumFrame.TabIndex = 3;
             this.NumFrame.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumFrame.ValueChanged += new System.EventHandler(this.numFrame_ValueChanged);
+            this.NumFrame.ValueChanged += new System.EventHandler(this.NumFrame_ValueChanged);
             // 
             // BtnRestartAndRun
             // 
@@ -171,7 +171,7 @@
             this.BtnRunAll.TabIndex = 4;
             this.BtnRunAll.Text = "Run";
             this.BtnRunAll.UseVisualStyleBackColor = true;
-            this.BtnRunAll.Click += new System.EventHandler(this.btnRunAll_Click);
+            this.BtnRunAll.Click += new System.EventHandler(this.BtnRunAll_Click);
             // 
             // BtnStop
             // 
@@ -266,7 +266,7 @@
             this.BtnOpenDir.TabIndex = 14;
             this.BtnOpenDir.Text = "Open Dir";
             this.BtnOpenDir.UseVisualStyleBackColor = true;
-            this.BtnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
+            this.BtnOpenDir.Click += new System.EventHandler(this.BtnOpenDir_Click);
             // 
             // BtnCustomFilter
             // 

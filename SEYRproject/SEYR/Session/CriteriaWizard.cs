@@ -25,6 +25,7 @@ namespace SEYR.Session
             PBX.MouseMove += PBX_MouseMove;
             PBX.MouseUp += PBX_MouseUp;
             MakeBackground();
+            RefreshCombo(false);
         }
 
         private void RefreshCombo(bool select)
@@ -67,13 +68,14 @@ namespace SEYR.Session
             {
                 foreach (string selectedFeature in _SelectedFeatures)
                 {
-                    Feature feature = _Features.Where(x => x.Name == selectedFeature).First();
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(75, Color.Green)), feature.Rectangle);
+                    Feature[] features = _Features.Where(x => x.Name == selectedFeature).ToArray();
+                    if (features.Any())
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(75, Color.Green)), features[0].Rectangle);
                 }
                 Feature lastFeature = _LastHover == string.Empty ? _Features[0] : _Features.Where(x => x.Name == _LastHover).First();
-                foreach (Feature feature in _Features)
+                foreach (Feature feature in _Features.OrderBy(x => x.Rectangle.Width * x.Rectangle.Height))
                 {
-                    if (feature.Rectangle.Contains(point) && (_LastHover != feature.Name || lastFeature.Rectangle.Contains(feature.Rectangle)))
+                    if (feature.Rectangle.Contains(point))
                     {
                         g.FillRectangle(new SolidBrush(Color.FromArgb(25, Color.Yellow)), feature.Rectangle);
                         _LastHover = feature.Name;

@@ -11,7 +11,7 @@ namespace SEYRDesktop
     public partial class FormMain : Form
     {
         private SEYR.Session.Channel Channel;
-        private List<string> Data = new List<string>();
+        private readonly List<string> Data = new List<string>();
         private string[] IMGS = null;
         private bool STOP;
         private bool BUSY;
@@ -21,7 +21,7 @@ namespace SEYRDesktop
             InitializeComponent();
         }
 
-        private async void numFrame_ValueChanged(object sender, EventArgs e)
+        private async void NumFrame_ValueChanged(object sender, EventArgs e)
         {
             if (!BtnRunAll.Enabled || BUSY) return;
             await NextImage();
@@ -30,10 +30,17 @@ namespace SEYRDesktop
         private async Task NextImage(bool forcePattern = false)
         {
             BUSY = true;
-            Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            string data = (int)NumFrame.Value < Data.Count ? Data[(int)NumFrame.Value] : $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
+            string imagePath = IMGS[(int)NumFrame.Value];
+            Bitmap bmp = new Bitmap(imagePath);
+
+            string data = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
+            string matchString = imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t");
+            string[] dataMatches = Data.Where(x => 
+                x.Contains(matchString)).ToArray();
+            if (dataMatches.Any())data = dataMatches[0];
+            
             string info = await Channel.NewImage(bmp, forcePattern, data);
-            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
+            //System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
             GC.Collect();
@@ -74,7 +81,7 @@ namespace SEYRDesktop
             STOP = false;
         }
 
-        private async void btnRunAll_Click(object sender, EventArgs e)
+        private async void BtnRunAll_Click(object sender, EventArgs e)
         {
             BtnRunAll.Enabled = false;
             BtnRestartAndRun.Enabled = false;
@@ -104,7 +111,7 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
         }
 
-        private async void btnOpenDir_Click(object sender, EventArgs e)
+        private async void BtnOpenDir_Click(object sender, EventArgs e)
         {
             string path = OpenFolder();
             if (path == null) return;
