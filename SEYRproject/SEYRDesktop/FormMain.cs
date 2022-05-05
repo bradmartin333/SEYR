@@ -34,7 +34,7 @@ namespace SEYRDesktop
             Bitmap bmp = new Bitmap(imagePath);
 
             string data = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
-            string matchString = imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t");
+            string matchString = '\t' + imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t") + '\t';
             string[] dataMatches = Data.Where(x => 
                 x.Contains(matchString)).ToArray();
             if (dataMatches.Any())data = dataMatches[0];
