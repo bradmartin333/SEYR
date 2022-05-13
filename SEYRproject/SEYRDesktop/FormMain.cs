@@ -136,7 +136,7 @@ namespace SEYRDesktop
                 for (int i = 1; i < lines.Length; i++)
                 {
                     string[] cols = lines[i].Split('\t');
-                    if (cols.Length > 0) Data.Add($"\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
+                    if (cols.Length > 0) Data.Add($"\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
                 }
             }
 
