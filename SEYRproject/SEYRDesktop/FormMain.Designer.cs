@@ -39,7 +39,6 @@
             this.BtnStop = new System.Windows.Forms.Button();
             this.BtnRepeat = new System.Windows.Forms.Button();
             this.BtnOpenComposer = new System.Windows.Forms.Button();
-            this.BtnShowViewer = new System.Windows.Forms.Button();
             this.BtnForcePattern = new System.Windows.Forms.Button();
             this.BtnOpenDir = new System.Windows.Forms.Button();
             this.BtnCustomFilter = new System.Windows.Forms.Button();
@@ -68,10 +67,9 @@
             this.tableLayoutPanel1.Controls.Add(this.BtnRunAll, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnStop, 5, 3);
             this.tableLayoutPanel1.Controls.Add(this.BtnRepeat, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnShowViewer, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnCustomFilter, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.ProgressBar, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,29 +211,13 @@
             this.BtnOpenComposer.AutoSize = true;
             this.BtnOpenComposer.Enabled = false;
             this.BtnOpenComposer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenComposer.Location = new System.Drawing.Point(246, 47);
+            this.BtnOpenComposer.Location = new System.Drawing.Point(246, 81);
             this.BtnOpenComposer.Name = "BtnOpenComposer";
             this.BtnOpenComposer.Size = new System.Drawing.Size(95, 28);
             this.BtnOpenComposer.TabIndex = 1;
             this.BtnOpenComposer.Text = "Open Composer";
             this.BtnOpenComposer.UseVisualStyleBackColor = true;
             this.BtnOpenComposer.Click += new System.EventHandler(this.BtnOpenComposer_Click);
-            // 
-            // BtnShowViewer
-            // 
-            this.BtnShowViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnShowViewer.AutoSize = true;
-            this.BtnShowViewer.Enabled = false;
-            this.BtnShowViewer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShowViewer.Location = new System.Drawing.Point(246, 81);
-            this.BtnShowViewer.Name = "BtnShowViewer";
-            this.BtnShowViewer.Size = new System.Drawing.Size(95, 28);
-            this.BtnShowViewer.TabIndex = 18;
-            this.BtnShowViewer.Text = "Show Viewer";
-            this.BtnShowViewer.UseVisualStyleBackColor = true;
-            this.BtnShowViewer.Click += new System.EventHandler(this.BtnShowViewer_Click);
             // 
             // BtnForcePattern
             // 
@@ -245,9 +227,9 @@
             this.BtnForcePattern.AutoSize = true;
             this.BtnForcePattern.Enabled = false;
             this.BtnForcePattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnForcePattern.Location = new System.Drawing.Point(157, 47);
+            this.BtnForcePattern.Location = new System.Drawing.Point(246, 47);
             this.BtnForcePattern.Name = "BtnForcePattern";
-            this.BtnForcePattern.Size = new System.Drawing.Size(83, 28);
+            this.BtnForcePattern.Size = new System.Drawing.Size(95, 28);
             this.BtnForcePattern.TabIndex = 20;
             this.BtnForcePattern.Text = "Force Pattern";
             this.BtnForcePattern.UseVisualStyleBackColor = true;
@@ -260,7 +242,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnOpenDir.AutoSize = true;
             this.BtnOpenDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenDir.Location = new System.Drawing.Point(157, 13);
+            this.BtnOpenDir.Location = new System.Drawing.Point(157, 47);
             this.BtnOpenDir.Name = "BtnOpenDir";
             this.BtnOpenDir.Size = new System.Drawing.Size(83, 28);
             this.BtnOpenDir.TabIndex = 14;
@@ -287,10 +269,10 @@
             // ProgressBar
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.ProgressBar, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.ProgressBar, 3);
             this.ProgressBar.Location = new System.Drawing.Point(12, 15);
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(139, 23);
+            this.ProgressBar.Size = new System.Drawing.Size(228, 23);
             this.ProgressBar.TabIndex = 23;
             // 
             // openFileDialog
@@ -308,7 +290,7 @@
             this.MinimumSize = new System.Drawing.Size(416, 148);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "v1.3.8";
+            this.Text = "v1.3.9";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();
@@ -330,7 +312,6 @@
         private System.Windows.Forms.NumericUpDown NumPxPerMicron;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnRepeat;
-        private System.Windows.Forms.Button BtnShowViewer;
         private System.Windows.Forms.Button BtnForcePattern;
         private System.Windows.Forms.Button BtnRestartAndRun;
         private System.Windows.Forms.Button BtnCustomFilter;

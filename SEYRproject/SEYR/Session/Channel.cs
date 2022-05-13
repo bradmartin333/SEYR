@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System;
 using System.Drawing.Imaging;
 using System.IO.Compression;
+using System.Linq;
 
 namespace SEYR.Session
 {
@@ -66,6 +67,9 @@ namespace SEYR.Session
             Viewer = new Viewer();
         }
 
+        /// <summary>
+        /// Clear the Debug and Report logs
+        /// </summary>
         public static void ClearLogs()
         {
             if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.BaseHeader);
@@ -73,6 +77,9 @@ namespace SEYR.Session
             DiscardViewer();
         }
 
+        /// <summary>
+        /// Clear all score history for all features in project
+        /// </summary>
         public static void ClearAllFeatureScores()
         {
             DebugStream.Write($"User Reset Score History");
@@ -83,6 +90,28 @@ namespace SEYR.Session
         }
 
         #region Opening and Closing
+
+        /// <summary>
+        /// Allow user to chose directory for SEYR operation
+        /// </summary>
+        /// <returns>
+        /// A SEYR channel or null depending on completion of the folder browser dialog
+        /// </returns>
+        public static Channel OpenSEYR()
+        {
+            Channel channel = null;
+            FolderBrowserDialog fbd = new FolderBrowserDialog { Description = "Open a directory for SEYR operations" };
+            DialogResult result = fbd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string[] files = Directory.GetFiles(fbd.SelectedPath, "*.seyr");
+                if (files.Length > 0)
+                    channel= new Channel(fbd.SelectedPath);
+                else
+                    channel = new Channel(fbd.SelectedPath, 1f);
+            }
+            return channel;
+        }
 
         private static void SaveProject()
         {
@@ -135,9 +164,22 @@ namespace SEYR.Session
         /// </summary>
         public void MakeArchive(bool complete = false)
         {
+            Viewer.UpdateImage(Properties.Resources.SEYRworking);
             SaveProject();
             string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
-            string zipPath = $@"{DirPath}\{filesFound.Length}.seyrup";
+            int idx = filesFound.Length;
+            string zipPath = $@"{DirPath}\{idx}.seyrup";
+            while (true)
+            {
+                if (File.Exists(zipPath))
+                {
+                    idx++;
+                    zipPath = $@"{DirPath}\{filesFound.Length}.seyrup";
+                }
+                else
+                    break;
+            }
+            
             DebugStream.Write($"Adding seyrup to {zipPath}");
             Viewer.InfoLabel.Text = "SEYRUP file created";
             // Create and open a new ZIP file
@@ -151,10 +193,34 @@ namespace SEYR.Session
             if (complete) Viewer.UpdateImage(Properties.Resources.SEYRdone);
         }
 
+        /// <summary>
+        /// Make SEYRUP, clear logs, and clear all feature scores
+        /// </summary>
+        public void ResetAll()
+        {
+            MakeArchive();
+            ClearLogs();
+            ClearAllFeatureScores();
+        }
+
         #endregion
 
         #region Image Processing
 
+        /// <summary>
+        /// The core of SEYR
+        /// </summary>
+        /// <param name="bmp">
+        /// Active image
+        /// </param>
+        /// <param name="forcePattern"></param>
+        /// <param name="imageInfo">
+        /// Info that matches dataHeader schema used for channel creation
+        /// </param>
+        /// <param name="customFilter"></param>
+        /// <returns>
+        /// Percentage of passing features in last image
+        /// </returns>
         public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
         {
             Working = true;
@@ -177,14 +243,10 @@ namespace SEYR.Session
             }
         }
 
-        public void ShowViewer()
-        {
-            if (Viewer != null) Viewer.Show();
-        }
-
         private static void DiscardViewer()
         {
-            if (Viewer != null) Viewer.Close();
+            foreach (Viewer v in Application.OpenForms.OfType<Viewer>())
+                v.Close();
             Viewer = new Viewer();
         }
 

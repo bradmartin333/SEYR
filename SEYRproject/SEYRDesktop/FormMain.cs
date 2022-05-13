@@ -37,7 +37,7 @@ namespace SEYRDesktop
             string matchString = '\t' + imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t") + '\t';
             string[] dataMatches = Data.Where(x => 
                 x.Contains(matchString)).ToArray();
-            if (dataMatches.Any())data = dataMatches[0];
+            if (dataMatches.Any()) data = $"{NumFrame.Value}{dataMatches[0]}";
             
             string info = await Channel.NewImage(bmp, forcePattern, data);
             //System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
@@ -131,7 +131,7 @@ namespace SEYRDesktop
                 for (int i = 1; i < lines.Length; i++)
                 {
                     string[] cols = lines[i].Split('\t');
-                    if (cols.Length > 0) Data.Add($"{i - 1}\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
+                    if (cols.Length > 0) Data.Add($"\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
                 }
             }
 
@@ -142,7 +142,6 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = true;
             BtnRestartAndRun.Enabled = true;
             BtnRepeat.Enabled = true;
-            BtnShowViewer.Enabled = true;
             BtnForcePattern.Enabled = true;
             BtnCustomFilter.Enabled = true;
             BtnOpenDir.BackColor = Color.LawnGreen;
@@ -150,8 +149,6 @@ namespace SEYRDesktop
             NumFrame.Maximum = IMGS.Length - 1;
             NumFrame.Value = 0;
             ProgressBar.Maximum = IMGS.Length - 1;
-
-            await NextImage();
         }
 
         private string OpenFolder()
@@ -181,11 +178,6 @@ namespace SEYRDesktop
         private async void BtnRepeat_Click(object sender, EventArgs e)
         {
             await NextImage();
-        }
-
-        private void BtnShowViewer_Click(object sender, EventArgs e)
-        {
-            Channel.ShowViewer();
         }
 
         private async void BtnForcePattern_Click(object sender, EventArgs e)
