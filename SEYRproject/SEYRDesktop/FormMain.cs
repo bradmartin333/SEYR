@@ -19,6 +19,13 @@ namespace SEYRDesktop
         public FormMain()
         {
             InitializeComponent();
+
+            MessageBox.Show("" +
+                "Only use SEYR Desktop if it is absolutely necessary. " +
+                "To deter you, I have added this message to click through " +
+                "as well as dual directory browsers. " +
+                "The dual browsers are also an example of the flexibility " +
+                "of the SEYR file management system.", "Note from bradmartin333");
         }
 
         private async void NumFrame_ValueChanged(object sender, EventArgs e)
@@ -60,9 +67,7 @@ namespace SEYRDesktop
             BtnStop.Enabled = true;
             NumFrame.Value = 0;
             Application.DoEvents();
-            Channel.MakeArchive();
-            SEYR.Session.Channel.ClearLogs();
-            SEYR.Session.Channel.ClearAllFeatureScores();
+            Channel.ResetAll();
             BUSY = false;
             while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
@@ -111,20 +116,20 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
         }
 
-        private async void BtnOpenDir_Click(object sender, EventArgs e)
+        private void BtnOpenDir_Click(object sender, EventArgs e)
         {
             string path = OpenFolder();
             if (path == null) return;
-            
             IMGS = GetSortedPicturesFrom(path).ToArray();
-            
-            string[] files = Directory.GetFiles(path, "*.seyr");
-            if (files.Length > 0)
-                Channel = new SEYR.Session.Channel(path);
-            else
-                Channel = new SEYR.Session.Channel(path, (float)NumPxPerMicron.Value);
 
-            files = Directory.GetFiles(path, "Inlinepositions.txt");
+            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR();
+            if (channel != null)
+            {
+                Channel = channel;
+                Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
+            }
+
+            string[] files = Directory.GetFiles(path, "Inlinepositions.txt");
             if (files.Length > 0)
             {
                 string[] lines = File.ReadAllLines(files[0]);
@@ -155,7 +160,7 @@ namespace SEYRDesktop
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                openFileDialog.Title = "Open a directory containing photos";
+                folderBrowserDialog.Description = "Open a directory containing photos";
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                     return folderBrowserDialog.SelectedPath;
             }

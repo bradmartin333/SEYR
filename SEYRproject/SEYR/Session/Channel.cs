@@ -32,39 +32,37 @@ namespace SEYR.Session
         private static string ProjectPath { get; set; } = null;
 
         /// <summary>
-        /// Create a new SEYR Channel
+        /// Create instance of a SEYR Channel
         /// </summary>
         /// <param name="projectDir"></param>
-        /// <param name="pixelsPerMicron"></param>
         /// <param name="dataHeader"></param>
-        public Channel(string projectDir, float pixelsPerMicron, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
+        /// <param name="isNewProject"></param>
+        public Channel(string projectDir, string dataHeader, bool isNewProject)
         {
-            IsNewProject = true;
+            IsNewProject = isNewProject;
             DirPath = projectDir;
             DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
             DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
             PatternPath = DirPath + @"\SEYRpattern.png";
-            Project = new Project() { PixelsPerMicron = pixelsPerMicron };
-            SaveProject();
+            if (isNewProject)
+            {
+                Project = new Project();
+                SaveProject();
+            }
+            else
+                LoadProject();
             Viewer = new Viewer();
         }
 
         /// <summary>
-        /// Open an existing SEYR Channel
+        /// Override the default value of 2.606 and save the project
         /// </summary>
-        /// <param name="projectDir"></param>
-        /// <param name="dataHeader">
-        /// </param>
-        public Channel(string projectDir, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
+        /// <param name="value"></param>
+        public void SetPixelsPerMicron(float value)
         {
-            DirPath = projectDir;
-            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
-            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
-            ProjectPath = DirPath + @"\project.seyr";
-            PatternPath = DirPath + @"\SEYRpattern.png";
-            LoadProject();
-            Viewer = new Viewer();
+            Project.PixelsPerMicron = value;
+            SaveProject();
         }
 
         /// <summary>
@@ -94,10 +92,13 @@ namespace SEYR.Session
         /// <summary>
         /// Allow user to chose directory for SEYR operation
         /// </summary>
+        /// <param name="dataHeader">
+        /// Tab delimeted header for the imageInfo provided with each image
+        /// </param>
         /// <returns>
         /// A SEYR channel or null depending on completion of the folder browser dialog
         /// </returns>
-        public static Channel OpenSEYR()
+        public static Channel OpenSEYR(string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
             Channel channel = null;
             FolderBrowserDialog fbd = new FolderBrowserDialog { Description = "Open a directory for SEYR operations" };
@@ -106,14 +107,14 @@ namespace SEYR.Session
             {
                 string[] files = Directory.GetFiles(fbd.SelectedPath, "*.seyr");
                 if (files.Length > 0)
-                    channel= new Channel(fbd.SelectedPath);
+                    channel= new Channel(fbd.SelectedPath, dataHeader, false);
                 else
-                    channel = new Channel(fbd.SelectedPath, 1f);
+                    channel = new Channel(fbd.SelectedPath, dataHeader, true);
             }
             return channel;
         }
 
-        private static void SaveProject()
+        private static void SaveProject(bool preserveViewer = false)
         {
             using (StreamWriter stream = new StreamWriter(ProjectPath))
             {
@@ -121,7 +122,7 @@ namespace SEYR.Session
                 x.Serialize(stream, Project);
             }
             DebugStream.Write("Project Saved", addDT: true);
-            DiscardViewer();
+            if (!preserveViewer) DiscardViewer();
         }
 
         private void LoadProject()
@@ -164,8 +165,9 @@ namespace SEYR.Session
         /// </summary>
         public void MakeArchive(bool complete = false)
         {
-            Viewer.UpdateImage(Properties.Resources.SEYRworking);
-            SaveProject();
+            Viewer.UpdateImage(Properties.Resources.SEYRworking, true);
+
+            SaveProject(true);
             string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
             int idx = filesFound.Length;
             string zipPath = $@"{DirPath}\{idx}.seyrup";
