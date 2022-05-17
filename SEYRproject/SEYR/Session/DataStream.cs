@@ -23,12 +23,13 @@ namespace SEYR.Session
             } 
         }
 
-        public void Write(string value, bool addNewLine = true, bool addDT = false)
+        public void Write(string value, bool addNewLine = true, bool addDT = false, bool showInViewer = false)
         {
             try
             {
                 using (StreamWriter file = new StreamWriter(Path, append: true))
                     file.WriteAsync($"{(addDT ? $"{System.DateTime.Now}\t" : "")}{value}{(addNewLine ? "\n" : "")}");
+                if (showInViewer) Channel.Viewer.InfoLabel.Text = $"{System.DateTime.Now}   {value.Replace("\t", "   ")}";
             }
             catch (System.Exception) { }
         }

@@ -165,6 +165,7 @@ namespace SEYR.Session
         /// </summary>
         public void MakeArchive(bool complete = false)
         {
+            DebugStream.Write($"Compressing files", addDT: true, showInViewer: true);
             Viewer.UpdateImage(Properties.Resources.SEYRworking, true);
 
             SaveProject(true);
@@ -182,7 +183,7 @@ namespace SEYR.Session
                     break;
             }
             
-            DebugStream.Write($"Adding seyrup to {zipPath}");
+            DebugStream.Write($"Adding seyrup to {zipPath}", addDT: true);
             Viewer.InfoLabel.Text = "SEYRUP file created";
             // Create and open a new ZIP file
             using (ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
