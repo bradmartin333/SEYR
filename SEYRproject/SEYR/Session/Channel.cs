@@ -236,12 +236,12 @@ namespace SEYR.Session
         /// <returns>
         /// Percentage of passing features in last image or a custom filter result
         /// </returns>
-        public async Task<string> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
+        public async Task<double> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
         {
             Working = true;
             double result = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo, customFilter);
             Working = false;
-            return result.ToString();
+            return result;
         }
 
         public void OpenComposer(Bitmap bmp)

@@ -46,7 +46,7 @@ namespace SEYRDesktop
                 x.Contains(matchString)).ToArray();
             if (dataMatches.Any()) data = $"{NumFrame.Value}{dataMatches[0]}";
             
-            string info = await Channel.NewImage(bmp, forcePattern, data);
+            double info = await Channel.NewImage(bmp, forcePattern, data);
             //System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
@@ -194,7 +194,7 @@ namespace SEYRDesktop
         {
             BUSY = true;
             Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            string info = await Channel.NewImage(bmp, customFilter: true);
+            double info = await Channel.NewImage(bmp, customFilter: true);
             System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
             BUSY = false;
             GC.Collect();
