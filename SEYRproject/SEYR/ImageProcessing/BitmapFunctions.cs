@@ -44,7 +44,7 @@ namespace SEYR.ImageProcessing
             }
             else
                 result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
-            return result.Item2; // Percent passing features within image
+            return result.Item2;
         }
 
         /// <summary>
@@ -67,7 +67,8 @@ namespace SEYR.ImageProcessing
         /// Return image with no added feature graphics
         /// </param>
         /// <returns>
-        /// Either a tile preview or the entire analyzed image
+        /// Either a tile preview or the entire analyzed image and
+        /// the percent null fail features within image as a tuple
         /// </returns>
         private static async Task<(Bitmap, double)> ProcessImage(Bitmap bmp, bool forcePattern, Point desiredTile, string imageInfo = "", Feature desiredFeature = null, bool graphics = true)
         {
