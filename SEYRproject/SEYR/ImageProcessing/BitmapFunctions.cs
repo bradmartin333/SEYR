@@ -247,10 +247,7 @@ namespace SEYR.ImageProcessing
                             if (cols[i] == Channel.Project.PatternIntervalString)
                                 if (int.TryParse(imageInfo.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
-                                    {
-                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {imageInfo}", false, showInViewer: true);
                                         return await FindPattern(bmp);
-                                    }
                 }
             }
             return Offset;
