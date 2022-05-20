@@ -234,7 +234,7 @@ namespace SEYR.Session
         /// </param>
         /// <param name="customFilter"></param>
         /// <returns>
-        /// Percentage of passing features in last image or a custom filter result
+        /// Percentage of null fail features in last image or a custom filter result
         /// </returns>
         public async Task<double> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
         {
