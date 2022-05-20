@@ -85,7 +85,7 @@ namespace SEYR.ImageProcessing
             }
 
             string outputData = string.Empty;
-            int pass = 0;
+            int nullFailTotal = 0;
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 for (int i = 0; i < Channel.Project.Columns; i++)
@@ -94,9 +94,9 @@ namespace SEYR.ImageProcessing
                     {
                         Rectangle cropRect = Channel.Project.GetIndexedGeometry(i, j, Offset);
                         Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
-                        (string newData, int numPassing) = await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
+                        (string newData, int numNullFail) = await ProcessTile(i, j, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
                         outputData += newData;
-                        pass += numPassing;
+                        nullFailTotal += numNullFail;
                         g.DrawImage(crop, cropRect.X, cropRect.Y);
                     }   
                 }
@@ -104,13 +104,13 @@ namespace SEYR.ImageProcessing
 
             Channel.Viewer.UpdateImage(bmp);
             await Channel.DataStream.WriteAsync(outputData, false);
-            return (bmp, pass / Channel.Project.GetNumTotalFeatures());
+            return (bmp, nullFailTotal / Channel.Project.GetNumTotalFeatures());
         }
 
         private static Task<(string, int)> ProcessTile(int i, int j, Bitmap bmp, ref Bitmap crop, Rectangle cropRect, Feature desiredFeature, bool graphics, string imageInfo)
         {
             string outputData = string.Empty;
-            int numPassing = 0;
+            int numNullFail = 0;
             using (Graphics g = Graphics.FromImage(crop))
             {
                 g.DrawImage(bmp, new Rectangle(Point.Empty, crop.Size), cropRect, GraphicsUnit.Pixel);
@@ -132,6 +132,7 @@ namespace SEYR.ImageProcessing
                             g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
                             if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
                                 g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                            numNullFail++;
                         }
                         else // Normal
                         {
@@ -141,11 +142,10 @@ namespace SEYR.ImageProcessing
                         }
                         bool pass = feature.LastPass;
                         if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score:f3}\t{pass}\t{compression}\n";
-                        numPassing += Convert.ToInt32(pass);
                     }
                 }
             }
-            return Task.FromResult((outputData, numPassing));
+            return Task.FromResult((outputData, numNullFail));
         }
 
         private static (float, string) AnalyzeData(Bitmap bmpTile, Feature feature, string imageInfo)
@@ -247,7 +247,7 @@ namespace SEYR.ImageProcessing
                                 if (int.TryParse(imageInfo.Split('\t')[i], out int matchVal))
                                     if (matchVal % Channel.Project.PatternIntervalValue == 0)
                                     {
-                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {imageInfo}", false);
+                                        await Channel.DebugStream.WriteAsync($"Pattern follower interval hit: {imageInfo}", false, showInViewer: true);
                                         return await FindPattern(bmp);
                                     }
                 }

@@ -21,6 +21,10 @@ namespace SEYR.Session
         /// Storage for a filter processed with a custom filter
         /// </summary>
         public static Bitmap CustomImage { get; set; } = new Bitmap(1, 1);
+        /// <summary>
+        /// Directory within project directory for saving images of interest
+        /// </summary>
+        public string ImagesDirectory { get; set; } = null;
         internal static Project Project { get; set; } = null;
         internal static DataStream DataStream { get; set; } = null;
         internal static DataStream DebugStream { get; set; } = null;
@@ -53,6 +57,14 @@ namespace SEYR.Session
             else
                 LoadProject();
             Viewer = new Viewer();
+            InitializePhotosDir();
+        }
+
+        private void InitializePhotosDir()
+        {
+            string testPath = $@"{DirPath}\Images\";
+            if (!Directory.Exists(testPath)) Directory.CreateDirectory(testPath);
+            ImagesDirectory = testPath;
         }
 
         /// <summary>
