@@ -1,7 +1,7 @@
 ![SEYR](https://user-images.githubusercontent.com/19335151/165121032-fe8c9a68-3cf7-4112-8ee5-a5f04922ef1c.png) ![Nuget](https://img.shields.io/nuget/v/SEYR)
 # AOI for present / not-present analysis
 
-### How to integrate SEYR into an existing .NET Framework project (Nuget v1.3.11+)
+### How to integrate SEYR into an existing .NET Framework project (Nuget v1.3.13+)
 Create an instance of a SEYR channel
 
 ```cs
@@ -46,7 +46,7 @@ private async Task<bool> Run()
     for (int i = 0; i < Points.Count; i++)
     {
         ///Do something
-        string info = await SEYRCh.NewImage(LastImage, false, $"{i}\t{Points[i].X}\t{Points[i].Y}\t{Points[i].Info}");
+        double info = await SEYRCh.NewImage(LastImage, false, $"{i}\t{Points[i].X}\t{Points[i].Y}\t{Points[i].Info}");
         GC.Collect();
     }
     
