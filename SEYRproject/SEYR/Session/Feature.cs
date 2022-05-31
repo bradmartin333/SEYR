@@ -22,6 +22,8 @@ namespace SEYR.Session
         public Rectangle Rectangle { get; set; } = new Rectangle(10, 10, 10, 10);
         [XmlElement("Threshold")]
         public float Threshold { get; set; } = 0.2f;
+        [XmlElement("NullFilterPercentage")]
+        public float NullFilterPercentage { get; set; } = 0.1f;
         [XmlElement("NullDetection")]
         public NullDetectionTypes NullDetection { get; set; } = NullDetectionTypes.None;
         public string NullDetectionDisplay { get => NullDetection.ToString().Replace("_", " "); }

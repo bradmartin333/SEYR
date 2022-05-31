@@ -166,7 +166,7 @@ namespace SEYR.ImageProcessing
                 
             int blackVals = rtVals.Where(x => x == 0).Count();
             int whiteVals = rtVals.Where(x => x == 1).Count();
-            int filterVal = (int)(0.1 * (bmp.Width * bmp.Height));
+            int filterVal = (int)(feature.NullFilterPercentage * (bmp.Width * bmp.Height));
             float entropy = CalculateShannonEntropy(rVals, cropRect.Size);
             float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
 

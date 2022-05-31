@@ -424,6 +424,8 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
+            NumNullFilterPercentage.Value = (decimal)ActiveFeature.NullFilterPercentage;
+            Channel.DebugStream.Write("Loaded Null Filter %   ", false);
             SaveImagePanel.BackgroundImage = ActiveFeature.SaveImage ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
@@ -442,6 +444,7 @@ namespace SEYR.Session
             NumFeatureHeight.Value = NumFeatureHeight.Minimum;
             TxtFeatureName.Text = "No Feature Selected";
             ThresholdTrackBar.Value = ThresholdTrackBar.Minimum;
+            NumNullFilterPercentage.Value = 0.1M;
             ComboFeatureNullDetection.SelectedIndex = 0;
             FlipScorePanel.BackgroundImage = Properties.Resources.toggleOff;
             LabelCurrentFeatureScore.Text = "N/A";
@@ -541,11 +544,10 @@ namespace SEYR.Session
             ApplyFeature();
         }
 
-        private void BtnResetScoreHistory_Click(object sender, EventArgs e)
+        private void NumNullFilterPercentage_ValueChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.ClearScore();
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Score History Cleared");
+            ActiveFeature.NullFilterPercentage = (float)NumNullFilterPercentage.Value;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Filter Percentage Changed");
             ApplyFeature();
         }
 
