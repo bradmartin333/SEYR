@@ -112,18 +112,26 @@ namespace SEYR.Session
         /// </returns>
         public static Channel OpenSEYR(string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t")
         {
-            Channel channel = null;
-            FolderBrowserDialog fbd = new FolderBrowserDialog { Description = "Open a directory for SEYR operations" };
-            DialogResult result = fbd.ShowDialog();
-            if (result == DialogResult.OK)
+            try
             {
-                string[] files = Directory.GetFiles(fbd.SelectedPath, "*.seyr");
-                if (files.Length > 0)
-                    channel= new Channel(fbd.SelectedPath, dataHeader, false);
-                else
-                    channel = new Channel(fbd.SelectedPath, dataHeader, true);
+                Channel channel = null;
+                FolderBrowserDialog fbd = new FolderBrowserDialog { Description = "Open a directory for SEYR operations" };
+                DialogResult result = fbd.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string[] files = Directory.GetFiles(fbd.SelectedPath, "*.seyr");
+                    if (files.Length > 0)
+                        channel = new Channel(fbd.SelectedPath, dataHeader, false);
+                    else
+                        channel = new Channel(fbd.SelectedPath, dataHeader, true);
+                }
+                return channel;
             }
-            return channel;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening folder browser dialog -- try again\n\n{ex.Message}");
+                return null;
+            }
         }
 
         private static void SaveProject(bool preserveViewer = false)
