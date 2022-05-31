@@ -12,7 +12,7 @@
 	<PackageIcon>SEYR.png</PackageIcon>
 	<RepositoryUrl>https://github.com/bradmartin333/SEYR</RepositoryUrl>
 	<PackageTags>vision; AOI</PackageTags>
-	<Version>1.3.13</Version>
+	<Version>1.3.14</Version>
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 	<DocumentationFile>\bin\Release\net472\SEYR.xml</DocumentationFile>

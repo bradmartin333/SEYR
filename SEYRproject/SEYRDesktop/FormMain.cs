@@ -120,7 +120,13 @@ namespace SEYRDesktop
         {
             string path = OpenFolder();
             if (path == null) return;
+
             IMGS = GetSortedPicturesFrom(path).ToArray();
+            if (IMGS.Length == 0)
+            {
+                MessageBox.Show("No pictures found -- try again");
+                return;
+            }
 
             SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR();
             if (channel != null)
@@ -139,7 +145,7 @@ namespace SEYRDesktop
                     if (cols.Length > 0) Data.Add($"\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
                 }
             }
-
+            
             NumPxPerMicron.Enabled = false;
             BtnOpenDir.Enabled = false;
             BtnOpenComposer.Enabled = true;
