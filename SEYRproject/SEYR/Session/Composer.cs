@@ -546,7 +546,7 @@ namespace SEYR.Session
 
         private void NumNullFilterPercentage_ValueChanged(object sender, EventArgs e)
         {
-            ActiveFeature.NullFilterPercentage = (float)NumNullFilterPercentage.Value;
+            ActiveFeature.NullFilterPercentage = (float)(NumNullFilterPercentage.Value / 100);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Null Filter Percentage Changed");
             ApplyFeature();
         }

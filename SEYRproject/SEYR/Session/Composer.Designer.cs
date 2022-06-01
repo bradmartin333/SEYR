@@ -71,6 +71,7 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label20 = new System.Windows.Forms.Label();
             this.SaveImagePanel = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -92,6 +93,7 @@
             this.NumFeatureHeight = new System.Windows.Forms.NumericUpDown();
             this.BtnApplyFeature = new System.Windows.Forms.Button();
             this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
+            this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -114,8 +116,6 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label20 = new System.Windows.Forms.Label();
-            this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
@@ -145,11 +145,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.MenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -795,6 +795,17 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 190);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
+            // label20
+            // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(259, 102);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(76, 13);
+            this.label20.TabIndex = 24;
+            this.label20.Text = "Null Filter %";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // SaveImagePanel
             // 
             this.SaveImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1069,6 +1080,25 @@
             this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
             // 
+            // NumNullFilterPercentage
+            // 
+            this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumNullFilterPercentage.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 98);
+            this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
+            this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
+            this.NumNullFilterPercentage.TabIndex = 25;
+            this.NumNullFilterPercentage.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            65536});
+            this.NumNullFilterPercentage.ValueChanged += new System.EventHandler(this.NumNullFilterPercentage_ValueChanged);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -1316,42 +1346,6 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(259, 102);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(76, 13);
-            this.label20.TabIndex = 24;
-            this.label20.Text = "Null Filter %";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // NumNullFilterPercentage
-            // 
-            this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumNullFilterPercentage.DecimalPlaces = 2;
-            this.NumNullFilterPercentage.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 98);
-            this.NumNullFilterPercentage.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
-            this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
-            this.NumNullFilterPercentage.TabIndex = 25;
-            this.NumNullFilterPercentage.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumNullFilterPercentage.ValueChanged += new System.EventHandler(this.NumNullFilterPercentage_ValueChanged);
-            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1396,12 +1390,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
