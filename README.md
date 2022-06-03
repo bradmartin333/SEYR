@@ -60,3 +60,4 @@ private async Task<bool> Run()
 #### Notes
 - Image processing must either be awaited or contain a while loop that waits until Channel.Working == false. 
 - Stamp inspection can be activated by passing `true` for `stamp` in `SEYRCh.NewImage`
+- Set stamp inspection params with `SEYRCh.InputParameters(bmp)`
