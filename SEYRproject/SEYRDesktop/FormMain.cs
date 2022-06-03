@@ -35,12 +35,12 @@ namespace SEYRDesktop
             FileInfo fileInfo = new FileInfo(imagePath);
             string name = fileInfo.Name.Replace(fileInfo.Extension, "");
 
-            if (CbxStampInspection.Checked)
+            if (CbxStampInspection.Checked) // These are all temporary hacks to be able to use SEYR desktop
             {
                 string[] cols = name.Split('_');
                 double.TryParse(cols[0], out double x);
                 double.TryParse(cols[1], out double y);
-                string data = $"{NumFrame.Value}\t{x}\t{y}\t";
+                string data = $"{NumFrame.Value + 1}\t{x}\t{y}\t";
                 _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
             }
             else
@@ -48,7 +48,7 @@ namespace SEYRDesktop
                 string info = name.Split('_').Last();
                 info = info.Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ","");
                 string[] cols = info.Split(',');
-                string data = $"{NumFrame.Value}\t0\t0\t{string.Join("\t", cols)}\t";
+                string data = $"{NumFrame.Value + 1}\t0\t0\t{string.Join("\t", cols)}\t";
                 _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
             }
 
@@ -96,7 +96,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = false;
             BtnRestartAndRun.Enabled = false;
             BtnStop.Enabled = true;
-            while (!STOP && NumFrame.Value < NumFrame.Maximum)
+            while (!STOP && NumFrame.Value <= NumFrame.Maximum)
             {
                 Application.DoEvents();
                 await NextImage();
@@ -134,8 +134,7 @@ namespace SEYRDesktop
                 return;
             }
 
-            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR(
-                CbxStampInspection.Checked ? "ImageNumber\tX\tY\t" : "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
+            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR();
             if (channel != null)
             {
                 Channel = channel;
@@ -152,9 +151,9 @@ namespace SEYRDesktop
             BtnForcePattern.Enabled = true;
             BtnOpenDir.BackColor = Color.LightGreen;
             
-            NumFrame.Maximum = IMGS.Length - 1;
+            NumFrame.Maximum = IMGS.Length;
             NumFrame.Value = 0;
-            ProgressBar.Maximum = IMGS.Length - 1;
+            ProgressBar.Maximum = IMGS.Length;
         }
 
         private string OpenFolder()
