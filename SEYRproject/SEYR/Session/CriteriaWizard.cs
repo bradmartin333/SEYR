@@ -15,6 +15,7 @@ namespace SEYR.Session
         private List<string> _SelectedFeatures = new List<string>();
         private string _LastHover = string.Empty;
         private bool ADDING = false;
+        private bool GROUPING = false;
 
         public CriteriaWizard(Size size, List<Feature> features, List<string[]> criteria)
         {
@@ -30,11 +31,12 @@ namespace SEYR.Session
 
         private void RefreshCombo(bool select)
         {
-            _SelectedFeatures.Clear();
             ComboSelector.Items.Clear();
             ComboSelector.Text = "";
-            MakeForeground(Point.Empty);
-            
+
+            //_SelectedFeatures.Clear();
+            //MakeForeground(Point.Empty); // Clear selections
+
             List<string> names = new List<string>();
             foreach (string[] criterion in Criteria)
                 names.Add(string.Join(", ", criterion));
@@ -63,6 +65,7 @@ namespace SEYR.Session
 
         private void MakeForeground(Point point)
         {
+            if (_Features.Count == 0) return;
             Bitmap bitmap = new Bitmap(_Size.Width, _Size.Height);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
@@ -138,6 +141,12 @@ namespace SEYR.Session
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            if (Criteria.Count == 20)
+            {
+                MessageBox.Show("20 criterion max reached -- Try to consolidate using groups", "Criteria Wizard");
+                return;
+            }
+
             ADDING = true;
             Criteria.Add(_SelectedFeatures.ToArray());
             RefreshCombo(true);
@@ -166,6 +175,47 @@ namespace SEYR.Session
                 _SelectedFeatures = Criteria[ComboSelector.SelectedIndex].ToList();
                 MakeForeground(Point.Empty);
             }
+        }
+
+        private void BtnCreateGroup_Click(object sender, EventArgs e)
+        {
+            ToggleGroupEdit(true);
+        }
+
+        private void BtnFinishGroup_Click(object sender, EventArgs e)
+        {
+            ToggleGroupEdit(false);
+        }
+
+        private void ToggleGroupEdit(bool grouping)
+        {
+            GROUPING = grouping;
+            TxtGroupName.Enabled = grouping;
+            BtnFinishGroup.Enabled = grouping;
+            BtnAdd.Enabled = !grouping;
+            BtnDelete.Enabled = !grouping;
+        }
+
+        // HSL Method adapted from https://stackoverflow.com/a/28760071
+        // Increment hue by 0.05 to change colors
+
+        private Color ColorFromHue(double h)
+        {
+            return Color.FromArgb(255, (int)(255 * ChFromHue(h + 1 / 3d)),
+                                       (int)(255 * ChFromHue(h)),
+                                       (int)(255 * ChFromHue(h - 1 / 3d)));
+        }
+
+        private double ChFromHue(double h)
+        {
+            double m1 = 0.25;
+            double m2 = 0.75;
+            h = (h + 1d) % 1d;
+            if (h < 0) h += 1;
+            if (h * 6 < 1) return m1 + (m2 - m1) * 6 * h;
+            else if (h * 2 < 1) return m2;
+            else if (h * 3 < 2) return m1 + (m2 - m1) * 6 * (2d / 3d - h);
+            else return m1;
         }
     }
 }
