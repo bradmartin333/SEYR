@@ -264,6 +264,7 @@
             this.CbxStampInspection.Appearance = System.Windows.Forms.Appearance.Button;
             this.CbxStampInspection.AutoSize = true;
             this.CbxStampInspection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CbxStampInspection.Enabled = false;
             this.CbxStampInspection.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
             this.CbxStampInspection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CbxStampInspection.Location = new System.Drawing.Point(149, 81);

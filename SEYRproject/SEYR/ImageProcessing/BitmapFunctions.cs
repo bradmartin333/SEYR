@@ -336,6 +336,7 @@ namespace SEYR.ImageProcessing
                 foreach (Blob blob in blobs)
                 {
                     bool drawn = false;
+                    bool masked = false;
                     if (StampPosts.Count > 0)
                     {
                         foreach (Rectangle post in StampPosts)
@@ -354,13 +355,12 @@ namespace SEYR.ImageProcessing
                     if (StampMasks.Count > 0 && !drawn)
                     {
                         foreach (Rectangle mask in StampMasks)
-                            if (!BlobInRegion(blob, mask))
-                            {
-                                debrisOnMesa += HighlightBlob(output, ref overlay, blob);
-                                drawn = true;
-                            }
+                        {
+                            if (!masked && BlobInRegion(blob, mask))
+                                masked = true;
+                        } 
                     }
-                    else if (!drawn) // No masks drawn
+                    if (!masked && !drawn)
                         debrisOnMesa += HighlightBlob(output, ref overlay, blob);
                 }
             }

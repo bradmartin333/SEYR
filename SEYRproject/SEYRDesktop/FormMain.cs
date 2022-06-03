@@ -147,6 +147,8 @@ namespace SEYRDesktop
                 Channel = channel;
                 Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
             }
+            else
+                return;
             
             NumPxPerMicron.Enabled = false;
             BtnOpenDir.Enabled = false;
@@ -156,6 +158,7 @@ namespace SEYRDesktop
             BtnRestartAndRun.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnForcePattern.Enabled = true;
+            CbxStampInspection.Enabled = true;
             BtnOpenDir.BackColor = Color.LightGreen;
             
             NumFrame.Maximum = IMGS.Length;
