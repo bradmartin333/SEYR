@@ -214,6 +214,7 @@ namespace SEYR.Session
                 if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
             }
             if (complete) Viewer.UpdateImage(Properties.Resources.SEYRdone);
+            CustomImage = null;
         }
 
         /// <summary>

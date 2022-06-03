@@ -41,7 +41,7 @@ namespace SEYR.ImageProcessing
             {
                 if (Channel.CustomImage == null)
                 {
-                    using (ParameterEntry parameterEntry = new ParameterEntry())
+                    using (ParameterEntry parameterEntry = new ParameterEntry(bmp))
                     {
                         parameterEntry.ShowDialog();
                     }

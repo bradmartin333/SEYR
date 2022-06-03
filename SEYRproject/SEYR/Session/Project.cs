@@ -48,8 +48,6 @@ namespace SEYR.Session
         public List<Point> PatternLocations { get; set; } = new List<Point>();
         [XmlArray("Features")]
         public List<Feature> Features { get; set; } = new List<Feature>();
-        [XmlArray("Criteria")]
-        public List<string[]> Criteria { get; set; } = new List<string[]>();
 
         public double GetNumTotalFeatures()
         {
