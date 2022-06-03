@@ -134,13 +134,15 @@ namespace SEYR.ImageProcessing
                 Math.Abs(EndPoint.X - StartPoint.X),
                 Math.Abs(EndPoint.Y - StartPoint.Y));
 
-            if (btn == MouseButtons.Left || DrawingPost) CustomPost = rect;
+            if (btn == MouseButtons.Left && !DrawingPost) CustomPosts.Add(rect);
             if (btn == MouseButtons.Right && !DrawingMask) CustomMasks.Add(rect);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), CustomPost);
                 if (DrawingMask) g.FillRectangle(Brushes.LawnGreen, rect);
+                else if (DrawingPost) g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), rect);
+                foreach (Rectangle post in CustomPosts)
+                    g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), post);
                 foreach (Rectangle mask in CustomMasks)
                     g.FillRectangle(Brushes.LawnGreen, mask);
             }

@@ -306,8 +306,8 @@ namespace SEYR.ImageProcessing
 
         internal static double CustomScaling;
         internal static int CustomThreshold;
+        internal static List<Rectangle> CustomPosts = new List<Rectangle>();
         internal static List<Rectangle> CustomMasks = new List<Rectangle>();
-        internal static Rectangle CustomPost = new Rectangle();
 
         internal static async Task<(Bitmap, Bitmap, double)> CustomProcessImage(Bitmap bmp, string imageInfo = "", bool setup = false)
         {
@@ -322,6 +322,11 @@ namespace SEYR.ImageProcessing
             SobelEdgeDetector sobel = new SobelEdgeDetector();
             sobel.ApplyInPlace(output);
 
+            // Init Counters
+            int postsPresent = 0;
+            int debrisInPosts = 0;
+            int debrisOnMesa = 0;
+
             // Process Image
             BitmapData bitmapData = output.LockBits(ImageLockMode.ReadWrite);
             BlobCounter blobCounter = new BlobCounter();
@@ -333,22 +338,33 @@ namespace SEYR.ImageProcessing
             {
                 foreach (Blob blob in blobs)
                 {
-                    double postTol = 50 * CustomScaling;
-                    if (PointDist(CustomPost.Center(), blob.Rectangle.Center()) < postTol && 
-                        SizeDiff(CustomPost.Size, blob.Rectangle.Size) < postTol)
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blob.Rectangle);
-                    else if (!blob.Rectangle.IntersectsWith(CustomPost))
+                    bool drawn = false;
+                    if (CustomPosts.Count > 0)
                     {
-                        if (CustomMasks.Count > 0)
+                        foreach (Rectangle post in CustomPosts)
                         {
-                            foreach (Rectangle mask in CustomMasks)
-                                if (!mask.Contains(new Point(blob.Rectangle.Left, blob.Rectangle.Top)) && 
-                                    !mask.Contains(new Point(blob.Rectangle.Right, blob.Rectangle.Bottom)))
-                                    HighlightBlob(output, ref overlay, blob);
-                        }  
-                        else
-                            HighlightBlob(output, ref overlay, blob);
+                            if (PointDist(post.Center(), blob.Rectangle.Center()) < 50 * CustomScaling &&
+                                SizeDiff(post.Size, blob.Rectangle.Size) < 20 * CustomScaling)
+                            {
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blob.Rectangle);
+                                postsPresent++;
+                                drawn = true;
+                            }
+                            else if (BlobInRegion(blob, post))
+                                debrisInPosts += HighlightBlob(output, ref overlay, blob);
+                        }          
                     }
+                    if (CustomMasks.Count > 0 && !drawn)
+                    {
+                        foreach (Rectangle mask in CustomMasks)
+                            if (!BlobInRegion(blob, mask))
+                            {
+                                debrisOnMesa += HighlightBlob(output, ref overlay, blob);
+                                drawn = true;
+                            }
+                    }
+                    else if (!drawn) // No masks drawn
+                        debrisOnMesa += HighlightBlob(output, ref overlay, blob);
                 }
             }
 
@@ -366,11 +382,23 @@ namespace SEYR.ImageProcessing
             return (PointDist(new Point(B.Width - A.Width, B.Height - A.Height), Point.Empty));
         }
 
-        private static void HighlightBlob(Bitmap a, ref Bitmap b, Blob blob)
+        private static int HighlightBlob(Bitmap a, ref Bitmap b, Blob blob)
         {
+            int count = 0;
             for (int i = blob.Rectangle.Left; i < blob.Rectangle.Right; i++)
                 for (int j = blob.Rectangle.Top; j < blob.Rectangle.Bottom; j++)
-                    if (a.GetPixel(i, j) == Color.FromArgb(255, 255, 255, 255)) b.SetPixel(i, j, Color.Red);
+                    if (a.GetPixel(i, j) == Color.FromArgb(255, 255, 255, 255))
+                    {
+                        b.SetPixel(i, j, Color.Red);
+                        count++;
+                    }
+            return count; // Almost equal to blob.Area
+        }
+
+        private static bool BlobInRegion(Blob blob, Rectangle rect)
+        {
+            return rect.Contains(new Point(blob.Rectangle.Left, blob.Rectangle.Top)) &&
+                rect.Contains(new Point(blob.Rectangle.Right, blob.Rectangle.Bottom));
         }
 
         #endregion
