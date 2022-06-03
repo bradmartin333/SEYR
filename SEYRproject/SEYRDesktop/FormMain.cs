@@ -34,12 +34,23 @@ namespace SEYRDesktop
 
             FileInfo fileInfo = new FileInfo(imagePath);
             string name = fileInfo.Name.Replace(fileInfo.Extension, "");
-            string[] cols = name.Split('_');
-            double.TryParse(cols[0], out double x);
-            double.TryParse(cols[1], out double y);
-            string data = $"{NumFrame.Value}\t{x}\t{y}\t";
-            
-            _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
+
+            if (CbxStampInspection.Checked)
+            {
+                string[] cols = name.Split('_');
+                double.TryParse(cols[0], out double x);
+                double.TryParse(cols[1], out double y);
+                string data = $"{NumFrame.Value}\t{x}\t{y}\t";
+                _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
+            }
+            else
+            {
+                string info = name.Split('_').Last();
+                info = info.Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ","");
+                string[] cols = info.Split(',');
+                string data = $"{NumFrame.Value}\t0\t0\t{string.Join("\t", cols)}\t";
+                _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
+            }
 
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
@@ -123,7 +134,8 @@ namespace SEYRDesktop
                 return;
             }
 
-            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR("ImageNumber\tX\tY\t");
+            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR(
+                CbxStampInspection.Checked ? "ImageNumber\tX\tY\t" : "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t");
             if (channel != null)
             {
                 Channel = channel;
