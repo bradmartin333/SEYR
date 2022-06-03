@@ -29,31 +29,32 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Viewer));
-            this.Pbx = new System.Windows.Forms.PictureBox();
+            this.PBX = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.InfoLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Pbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Pbx
+            // PBX
             // 
-            this.Pbx.BackColor = System.Drawing.Color.Black;
-            this.Pbx.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
-            this.Pbx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Pbx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Pbx.Location = new System.Drawing.Point(3, 3);
-            this.Pbx.Name = "Pbx";
-            this.Pbx.Size = new System.Drawing.Size(478, 435);
-            this.Pbx.TabIndex = 0;
-            this.Pbx.TabStop = false;
+            this.PBX.BackColor = System.Drawing.Color.Black;
+            this.PBX.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
+            this.PBX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PBX.Location = new System.Drawing.Point(3, 3);
+            this.PBX.Name = "PBX";
+            this.PBX.Size = new System.Drawing.Size(478, 435);
+            this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PBX.TabIndex = 0;
+            this.PBX.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.Pbx, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.PBX, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.InfoLabel, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -87,7 +88,7 @@
             this.Name = "Viewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Viewer";
-            ((System.ComponentModel.ISupportInitialize)(this.Pbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -96,7 +97,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox Pbx;
+        private System.Windows.Forms.PictureBox PBX;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public System.Windows.Forms.Label InfoLabel;
     }

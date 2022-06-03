@@ -11,7 +11,6 @@ namespace SEYRDesktop
     public partial class FormMain : Form
     {
         private SEYR.Session.Channel Channel;
-        private readonly List<string> Data = new List<string>();
         private string[] IMGS = null;
         private bool STOP;
         private bool BUSY;
@@ -40,14 +39,26 @@ namespace SEYRDesktop
             string imagePath = IMGS[(int)NumFrame.Value];
             Bitmap bmp = new Bitmap(imagePath);
 
-            string data = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
-            string matchString = '\t' + imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t") + '\t';
-            string[] dataMatches = Data.Where(x => 
-                x.Contains(matchString)).ToArray();
-            if (dataMatches.Any()) data = $"{NumFrame.Value}{dataMatches[0]}";
-            
-            double info = await Channel.NewImage(bmp, forcePattern, data);
-            //System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
+            FileInfo fileInfo = new FileInfo(imagePath);
+            string name = fileInfo.Name.Replace(fileInfo.Extension, "");
+
+            if (CbxStampInspection.Checked) // These are all temporary hacks to be able to use SEYR desktop
+            {
+                string[] cols = name.Split('_');
+                double.TryParse(cols[0], out double x);
+                double.TryParse(cols[1], out double y);
+                string data = $"{NumFrame.Value + 1}\t{x}\t{y}\t";
+                _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
+            }
+            else
+            {
+                string info = name.Split('_').Last();
+                info = info.Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ","");
+                string[] cols = info.Split(',');
+                string data = $"{NumFrame.Value + 1}\t0\t0\t{string.Join("\t", cols)}\t";
+                _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
+            }
+
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
             GC.Collect();
@@ -80,7 +91,8 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
             if (!STOP)
             {
-                Channel.MakeArchive(true);
+                if (!CbxStampInspection.Checked) Channel.MakeArchive();
+                Channel.SignalComplete();
                 ProgressBar.Value = 0;
             }
             STOP = false;
@@ -91,7 +103,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = false;
             BtnRestartAndRun.Enabled = false;
             BtnStop.Enabled = true;
-            while (!STOP && NumFrame.Value < NumFrame.Maximum)
+            while (!STOP && NumFrame.Value <= NumFrame.Maximum)
             {
                 Application.DoEvents();
                 await NextImage();
@@ -102,7 +114,8 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
             if (!STOP)
             {
-                Channel.MakeArchive(true);
+                if (!CbxStampInspection.Checked) Channel.MakeArchive();
+                Channel.SignalComplete();
                 ProgressBar.Value = 0;
             }
             STOP = false;
@@ -134,17 +147,6 @@ namespace SEYRDesktop
                 Channel = channel;
                 Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
             }
-
-            string[] files = Directory.GetFiles(path, "Inlinepositions.txt");
-            if (files.Length > 0)
-            {
-                string[] lines = File.ReadAllLines(files[0]);
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] cols = lines[i].Split('\t');
-                    if (cols.Length > 0) Data.Add($"\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
-                }
-            }
             
             NumPxPerMicron.Enabled = false;
             BtnOpenDir.Enabled = false;
@@ -154,12 +156,11 @@ namespace SEYRDesktop
             BtnRestartAndRun.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnForcePattern.Enabled = true;
-            BtnCustomFilter.Enabled = true;
-            BtnOpenDir.BackColor = Color.LawnGreen;
+            BtnOpenDir.BackColor = Color.LightGreen;
             
-            NumFrame.Maximum = IMGS.Length - 1;
+            NumFrame.Maximum = IMGS.Length;
             NumFrame.Value = 0;
-            ProgressBar.Maximum = IMGS.Length - 1;
+            ProgressBar.Maximum = IMGS.Length;
         }
 
         private string OpenFolder()
@@ -196,21 +197,9 @@ namespace SEYRDesktop
             await NextImage(true);
         }
 
-        private async void BtnCustomFilter_Click(object sender, EventArgs e)
+        private void CbxStampInspection_CheckedChanged(object sender, EventArgs e)
         {
-            BUSY = true;
-            Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            double info = await Channel.NewImage(bmp, customFilter: true);
-            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
-            BUSY = false;
-            GC.Collect();
-            Form form = new Form()
-            {
-                BackgroundImage = SEYR.Session.Channel.CustomImage,
-                BackgroundImageLayout = ImageLayout.Zoom,
-                Text = $"{info} Blobs Found",
-            };
-            form.Show();
+            if (CbxStampInspection.Checked) Channel.InputParameters(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
     }
 }
