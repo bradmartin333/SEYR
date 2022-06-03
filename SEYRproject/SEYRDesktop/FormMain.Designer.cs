@@ -42,8 +42,8 @@
             this.BtnForcePattern = new System.Windows.Forms.Button();
             this.BtnOpenDir = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.CbxCustomFilter = new System.Windows.Forms.CheckBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -259,10 +259,6 @@
             this.ProgressBar.Size = new System.Drawing.Size(228, 23);
             this.ProgressBar.TabIndex = 23;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // CbxCustomFilter
             // 
             this.CbxCustomFilter.Appearance = System.Windows.Forms.Appearance.Button;
@@ -277,6 +273,11 @@
             this.CbxCustomFilter.Text = "Custom Filter";
             this.CbxCustomFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.CbxCustomFilter.UseVisualStyleBackColor = true;
+            this.CbxCustomFilter.CheckedChanged += new System.EventHandler(this.CbxCustomFilter_CheckedChanged);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // FormMain
             // 

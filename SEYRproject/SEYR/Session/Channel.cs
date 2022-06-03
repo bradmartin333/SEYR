@@ -18,10 +18,6 @@ namespace SEYR.Session
         /// </summary>
         public bool Working { get; set; } = false;
         /// <summary>
-        /// Storage for a filter processed with a custom filter
-        /// </summary>
-        public static Bitmap CustomImage { get; set; } = null;
-        /// <summary>
         /// Directory within project directory for saving images of interest
         /// </summary>
         public string ImagesDirectory { get; set; } = null;
@@ -186,7 +182,7 @@ namespace SEYR.Session
         public void MakeArchive(bool complete = false)
         {
             DebugStream.Write($"Compressing files", addDT: true, showInViewer: true);
-            Viewer.UpdateImage(Properties.Resources.SEYRworking, true);
+            Viewer.UpdateImage(Properties.Resources.SEYRworking, force: true);
 
             SaveProject(true);
             string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
@@ -214,7 +210,6 @@ namespace SEYR.Session
                 if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
             }
             if (complete) Viewer.UpdateImage(Properties.Resources.SEYRdone);
-            CustomImage = null;
         }
 
         /// <summary>
@@ -264,6 +259,14 @@ namespace SEYR.Session
                     MakeArchive();
                 else
                     LoadProject();
+            }
+        }
+
+        public void InputParameters(Bitmap bmp)
+        {
+            using (ParameterEntry parameterEntry = new ParameterEntry(bmp))
+            {
+                parameterEntry.ShowDialog();
             }
         }
 

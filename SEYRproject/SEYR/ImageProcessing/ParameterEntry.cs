@@ -1,15 +1,7 @@
-﻿using Accord.Imaging;
-using Accord.Imaging.Filters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SEYR.ImageProcessing.BitmapFunctions;
 
 namespace SEYR.ImageProcessing
 {
@@ -43,69 +35,13 @@ namespace SEYR.ImageProcessing
 
         private void BtnClearMasks_Click(object sender, EventArgs e)
         {
-            Masks.Clear();
+            CustomMasks.Clear();
             UpdateOverlay();
         }
 
-        private void BtnSaveAndContinue_Click(object sender, EventArgs e)
+        private void BtnContinue_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void ApplyFilters()
-        {
-            // Setup Image
-            Bitmap output = new Bitmap(Train, 
-                new Size((int)(Train.Width * (double)NumScaling.Value), (int)(Train.Height * (double)NumScaling.Value)));
-            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
-            output = filter.Apply(output);
-            Threshold threshold = new Threshold(TrackbarThreshold.Value);
-            threshold.ApplyInPlace(output);
-            SobelEdgeDetector sobel = new SobelEdgeDetector();
-            sobel.ApplyInPlace(output);
-
-            // Lock Image
-            BitmapData bitmapData = output.LockBits(ImageLockMode.ReadWrite);
-
-            // Find Blobs (with some params - there are a lot more)
-            BlobCounter blobCounter = new BlobCounter
-            {
-
-            };
-            blobCounter.ProcessImage(bitmapData);
-            Blob[] blobs = blobCounter.GetObjectsInformation();
-            output.UnlockBits(bitmapData);
-
-            Bitmap overlay = new Bitmap(output.Width, output.Height);
-            using (Graphics g = Graphics.FromImage(overlay))
-            {
-                for (int i = 0; i < blobs.Length; i++)
-                {
-                    Rectangle blobRect = blobs[i].Rectangle;
-                    double postTol = 50 * (double)NumScaling.Value;
-                    if (PointDist(Post.Center(), blobRect.Center()) < postTol && SizeDiff(Post.Size, blobRect.Size) < postTol)
-                    {
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blobs[i].Rectangle);
-                    }
-                    else if (Masks.Count > 0)
-                    {
-                        foreach (Rectangle mask in Masks)
-                        {
-                            if (!blobRect.IntersectsWith(mask))
-                            {
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Red)), blobs[i].Rectangle);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Red)), blobs[i].Rectangle);
-                    }
-                }
-            }
-
-            PBX.BackgroundImage = output;
-            PBX.Image = overlay;
+            Close();
         }
 
         private void NumScaling_ValueChanged(object sender, EventArgs e)
@@ -118,24 +54,13 @@ namespace SEYR.ImageProcessing
             if (!LOADING) ApplyFilters();
         }
 
-        private void NumMinWid_ValueChanged(object sender, EventArgs e)
+        private async void ApplyFilters()
         {
-            if (!LOADING) ApplyFilters();
-        }
-
-        private void NumMinHgt_ValueChanged(object sender, EventArgs e)
-        {
-            if (!LOADING) ApplyFilters();
-        }
-
-        private void NumMaxWid_ValueChanged(object sender, EventArgs e)
-        {
-            if (!LOADING) ApplyFilters();
-        }
-
-        private void NumMaxHgt_ValueChanged(object sender, EventArgs e)
-        {
-            if (!LOADING) ApplyFilters();
+            CustomScaling = (double)NumScaling.Value;
+            CustomThreshold = TrackbarThreshold.Value;
+            (Bitmap, Bitmap, double) customResult = await CustomProcessImage(Train, setup: true);
+            PBX.BackgroundImage = customResult.Item1;
+            PBX.Image = customResult.Item2;
         }
 
         #region Crop
@@ -144,8 +69,6 @@ namespace SEYR.ImageProcessing
         private bool DrawingMask = false;
         private Point StartPoint = Point.Empty;
         private Point EndPoint = Point.Empty;
-        private List<Rectangle> Masks = new List<Rectangle>();
-        private Rectangle Post = new Rectangle();
 
         private void PBX_MouseDown(object sender, MouseEventArgs e)
         {
@@ -211,14 +134,14 @@ namespace SEYR.ImageProcessing
                 Math.Abs(EndPoint.X - StartPoint.X),
                 Math.Abs(EndPoint.Y - StartPoint.Y));
 
-            if (btn == MouseButtons.Left || DrawingPost) Post = rect;
-            if (btn == MouseButtons.Right && !DrawingMask) Masks.Add(rect);
+            if (btn == MouseButtons.Left || DrawingPost) CustomPost = rect;
+            if (btn == MouseButtons.Right && !DrawingMask) CustomMasks.Add(rect);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), Post);
+                g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), CustomPost);
                 if (DrawingMask) g.FillRectangle(Brushes.LawnGreen, rect);
-                foreach (Rectangle mask in Masks)
+                foreach (Rectangle mask in CustomMasks)
                     g.FillRectangle(Brushes.LawnGreen, mask);
             }
 
@@ -264,16 +187,6 @@ namespace SEYR.ImageProcessing
                 pos.X /= scale;
             }
             return new Point((int)pos.X, (int)pos.Y);
-        }
-
-        private double PointDist(Point A, Point B)
-        {
-            return Math.Sqrt(Math.Pow(B.X - A.X, 2) + Math.Pow(B.Y - A.Y, 2));
-        }
-
-        private double SizeDiff(Size A, Size B)
-        {
-            return (PointDist(new Point(B.Width - A.Width, B.Height - A.Height), Point.Empty));
         }
 
         #endregion

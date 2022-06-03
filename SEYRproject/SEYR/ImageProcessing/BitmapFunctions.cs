@@ -1,4 +1,5 @@
 ﻿using Accord.Imaging;
+using Accord.Imaging.Filters;
 using SEYR.Session;
 using System;
 using System.Collections.Generic;
@@ -36,22 +37,16 @@ namespace SEYR.ImageProcessing
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            (Bitmap, double) result;
             if (customFilter)
             {
-                if (Channel.CustomImage == null)
-                {
-                    using (ParameterEntry parameterEntry = new ParameterEntry(bmp))
-                    {
-                        parameterEntry.ShowDialog();
-                    }
-                }
-                result = CustomProcessImage(bmp);
-                Channel.CustomImage = result.Item1;
+                (Bitmap, Bitmap, double) customResult = await CustomProcessImage(bmp, imageInfo);
+                return customResult.Item3;
             }
             else
-                result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
-            return result.Item2;
+            {
+                (Bitmap, double) result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
+                return result.Item2;
+            }    
         }
 
         /// <summary>
@@ -307,42 +302,78 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        private static (Bitmap, double) CustomProcessImage(Bitmap bmp)
+        #region Custom Processing
+
+        internal static double CustomScaling;
+        internal static int CustomThreshold;
+        internal static List<Rectangle> CustomMasks = new List<Rectangle>();
+        internal static Rectangle CustomPost = new Rectangle();
+
+        internal static async Task<(Bitmap, Bitmap, double)> CustomProcessImage(Bitmap bmp, string imageInfo = "", bool setup = false)
         {
-            Bitmap output = (Bitmap)bmp.Clone();
+            Bitmap raw = (Bitmap)bmp.Clone();
 
             // Setup Image
-            Accord.Imaging.Filters.Grayscale filter = new Accord.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
-            bmp = filter.Apply(bmp);
-            Accord.Imaging.Filters.Threshold threshold = new Accord.Imaging.Filters.Threshold(170);
-            threshold.ApplyInPlace(bmp);
-            Accord.Imaging.Filters.SobelEdgeDetector sobel = new Accord.Imaging.Filters.SobelEdgeDetector();
-            sobel.ApplyInPlace(bmp);
+            Bitmap output = new Bitmap(raw, new Size((int)(raw.Width * CustomScaling), (int)(raw.Height * CustomScaling)));
+            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+            output = filter.Apply(output);
+            Threshold threshold = new Threshold(CustomThreshold);
+            threshold.ApplyInPlace(output);
+            SobelEdgeDetector sobel = new SobelEdgeDetector();
+            sobel.ApplyInPlace(output);
 
-            // Lock Image
-            BitmapData bitmapData = bmp.LockBits(ImageLockMode.ReadWrite);
-
-            // Find Blobs (with some params - there are a lot more)
-            BlobCounter blobCounter = new BlobCounter
-            {
-
-            };
+            // Process Image
+            BitmapData bitmapData = output.LockBits(ImageLockMode.ReadWrite);
+            BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(bitmapData);
             Blob[] blobs = blobCounter.GetObjectsInformation();
-            bmp.UnlockBits(bitmapData);
-
-            // Draw blob
-            using (Graphics g = Graphics.FromImage(output))
+            output.UnlockBits(bitmapData);
+            Bitmap overlay = new Bitmap(output.Width, output.Height);
+            using (Graphics g = Graphics.FromImage(overlay))
             {
-                for (int i = 0; i < blobs.Length; i++)
+                foreach (Blob blob in blobs)
                 {
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LawnGreen)), blobs[i].Rectangle);
+                    double postTol = 50 * CustomScaling;
+                    if (PointDist(CustomPost.Center(), blob.Rectangle.Center()) < postTol && 
+                        SizeDiff(CustomPost.Size, blob.Rectangle.Size) < postTol)
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blob.Rectangle);
+                    else if (!blob.Rectangle.IntersectsWith(CustomPost))
+                    {
+                        if (CustomMasks.Count > 0)
+                        {
+                            foreach (Rectangle mask in CustomMasks)
+                                if (!mask.Contains(new Point(blob.Rectangle.Left, blob.Rectangle.Top)) && 
+                                    !mask.Contains(new Point(blob.Rectangle.Right, blob.Rectangle.Bottom)))
+                                    HighlightBlob(output, ref overlay, blob);
+                        }  
+                        else
+                            HighlightBlob(output, ref overlay, blob);
+                    }
                 }
             }
 
-            Channel.Viewer.UpdateImage(output);
-            return (output, blobs.Length);
+            if (!setup) Channel.Viewer.UpdateImage(output, overlay);
+            return (output, overlay, blobs.Length);
         }
+
+        private static double PointDist(Point A, Point B)
+        {
+            return Math.Sqrt(Math.Pow(B.X - A.X, 2) + Math.Pow(B.Y - A.Y, 2));
+        }
+
+        private static double SizeDiff(Size A, Size B)
+        {
+            return (PointDist(new Point(B.Width - A.Width, B.Height - A.Height), Point.Empty));
+        }
+
+        private static void HighlightBlob(Bitmap a, ref Bitmap b, Blob blob)
+        {
+            for (int i = blob.Rectangle.Left; i < blob.Rectangle.Right; i++)
+                for (int j = blob.Rectangle.Top; j < blob.Rectangle.Bottom; j++)
+                    if (a.GetPixel(i, j) == Color.FromArgb(255, 255, 255, 255)) b.SetPixel(i, j, Color.Red);
+        }
+
+        #endregion
 
         #region Composer Functions
 

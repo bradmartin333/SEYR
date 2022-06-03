@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAutoSettings = new System.Windows.Forms.Button();
             this.BtnClearMasks = new System.Windows.Forms.Button();
-            this.BtnSaveAndContinue = new System.Windows.Forms.Button();
+            this.BtnContinue = new System.Windows.Forms.Button();
             this.TrackbarThreshold = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -54,7 +54,7 @@
             this.tableLayoutPanel.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel.Controls.Add(this.BtnAutoSettings, 0, 5);
             this.tableLayoutPanel.Controls.Add(this.BtnClearMasks, 1, 5);
-            this.tableLayoutPanel.Controls.Add(this.BtnSaveAndContinue, 2, 5);
+            this.tableLayoutPanel.Controls.Add(this.BtnContinue, 2, 5);
             this.tableLayoutPanel.Controls.Add(this.TrackbarThreshold, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel.Controls.Add(this.NumScaling, 1, 2);
@@ -120,18 +120,18 @@
             this.BtnClearMasks.UseVisualStyleBackColor = false;
             this.BtnClearMasks.Click += new System.EventHandler(this.BtnClearMasks_Click);
             // 
-            // BtnSaveAndContinue
+            // BtnContinue
             // 
-            this.BtnSaveAndContinue.BackColor = System.Drawing.Color.White;
-            this.BtnSaveAndContinue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnSaveAndContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSaveAndContinue.Location = new System.Drawing.Point(291, 435);
-            this.BtnSaveAndContinue.Name = "BtnSaveAndContinue";
-            this.BtnSaveAndContinue.Size = new System.Drawing.Size(140, 23);
-            this.BtnSaveAndContinue.TabIndex = 8;
-            this.BtnSaveAndContinue.Text = "Save and Continue";
-            this.BtnSaveAndContinue.UseVisualStyleBackColor = false;
-            this.BtnSaveAndContinue.Click += new System.EventHandler(this.BtnSaveAndContinue_Click);
+            this.BtnContinue.BackColor = System.Drawing.Color.White;
+            this.BtnContinue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnContinue.Location = new System.Drawing.Point(291, 435);
+            this.BtnContinue.Name = "BtnContinue";
+            this.BtnContinue.Size = new System.Drawing.Size(140, 23);
+            this.BtnContinue.TabIndex = 8;
+            this.BtnContinue.Text = "Continue";
+            this.BtnContinue.UseVisualStyleBackColor = false;
+            this.BtnContinue.Click += new System.EventHandler(this.BtnContinue_Click);
             // 
             // TrackbarThreshold
             // 
@@ -214,7 +214,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnAutoSettings;
         private System.Windows.Forms.Button BtnClearMasks;
-        private System.Windows.Forms.Button BtnSaveAndContinue;
+        private System.Windows.Forms.Button BtnContinue;
         private System.Windows.Forms.TrackBar TrackbarThreshold;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown NumScaling;

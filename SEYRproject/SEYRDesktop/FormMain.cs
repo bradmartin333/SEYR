@@ -176,5 +176,10 @@ namespace SEYRDesktop
         {
             await NextImage(true);
         }
+
+        private void CbxCustomFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CbxCustomFilter.Checked) Channel.InputParameters(new Bitmap(IMGS[(int)NumFrame.Value]));
+        }
     }
 }

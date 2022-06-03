@@ -27,9 +27,10 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        public void UpdateImage(Bitmap bmp, bool force = false)
+        public void UpdateImage(Bitmap bmp, Bitmap overlay = null, bool force = false)
         {
-            Pbx.BackgroundImage = bmp;
+            PBX.BackgroundImage = bmp;
+            PBX.Image = overlay;
             if (force) Application.DoEvents();
         }
     }
