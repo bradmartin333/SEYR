@@ -50,7 +50,8 @@ private async Task<bool> Run()
         GC.Collect();
     }
     
-    SEYRCh.MakeArchive(true);
+    SEYRCh.MakeArchive();
+    SEYRCh.SignalComplete();
 
     bool test = true;
     return test;
