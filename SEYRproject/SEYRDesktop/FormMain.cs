@@ -39,7 +39,7 @@ namespace SEYRDesktop
             double.TryParse(cols[1], out double y);
             string data = $"{NumFrame.Value}\t{x}\t{y}\t";
             
-            _ = await Channel.NewImage(bmp, forcePattern, data, CbxCustomFilter.Checked);
+            _ = await Channel.NewImage(bmp, forcePattern, data, CbxStampInspection.Checked);
 
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
@@ -73,7 +73,8 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
             if (!STOP)
             {
-                Channel.MakeArchive(true);
+                if (!CbxStampInspection.Checked) Channel.MakeArchive();
+                Channel.SignalComplete();
                 ProgressBar.Value = 0;
             }
             STOP = false;
@@ -95,7 +96,8 @@ namespace SEYRDesktop
             BtnStop.Enabled = false;
             if (!STOP)
             {
-                Channel.MakeArchive(true);
+                if (!CbxStampInspection.Checked) Channel.MakeArchive();
+                Channel.SignalComplete();
                 ProgressBar.Value = 0;
             }
             STOP = false;
@@ -177,9 +179,9 @@ namespace SEYRDesktop
             await NextImage(true);
         }
 
-        private void CbxCustomFilter_CheckedChanged(object sender, EventArgs e)
+        private void CbxStampInspection_CheckedChanged(object sender, EventArgs e)
         {
-            if (CbxCustomFilter.Checked) Channel.InputParameters(new Bitmap(IMGS[(int)NumFrame.Value]));
+            if (CbxStampInspection.Checked) Channel.InputParameters(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
     }
 }

@@ -22,8 +22,9 @@ namespace SEYR.Session
         /// </summary>
         public string ImagesDirectory { get; set; } = null;
         internal static Project Project { get; set; } = null;
-        internal static DataStream DataStream { get; set; } = null;
-        internal static DataStream DebugStream { get; set; } = null;
+        internal static LogStream DataStream { get; set; } = null;
+        internal static LogStream DebugStream { get; set; } = null;
+        internal static LogStream StampStream { get; set; } = null;
         internal static Viewer Viewer { get; set; }
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
@@ -41,8 +42,8 @@ namespace SEYR.Session
         {
             IsNewProject = isNewProject;
             DirPath = projectDir;
-            DataStream = new DataStream(DirPath + @"\SEYRreport.txt", dataHeader);
-            DebugStream = new DataStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
+            DataStream = new LogStream(DirPath + @"\SEYRreport.txt", dataHeader);
+            DebugStream = new LogStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
             PatternPath = DirPath + @"\SEYRpattern.png";
             if (isNewProject)
@@ -78,8 +79,8 @@ namespace SEYR.Session
         /// </summary>
         public static void ClearLogs()
         {
-            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new DataStream(DataStream.Path, DataStream.BaseHeader);
-            if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new DataStream(DebugStream.Path, isDebug: true);
+            if (!string.IsNullOrEmpty(DataStream.Path)) DataStream = new LogStream(DataStream.Path, LogStream.BaseHeader);
+            if (!string.IsNullOrEmpty(DebugStream.Path)) DebugStream = new LogStream(DebugStream.Path, isDebug: true);
             DiscardViewer();
         }
 
@@ -179,7 +180,7 @@ namespace SEYR.Session
         /// <summary>
         /// Make an archive (SEYRUP file) of all active files
         /// </summary>
-        public void MakeArchive(bool complete = false)
+        public void MakeArchive()
         {
             DebugStream.Write($"Compressing files", addDT: true, showInViewer: true);
             Viewer.UpdateImage(Properties.Resources.SEYRworking, force: true);
@@ -209,7 +210,11 @@ namespace SEYR.Session
                 zip.CreateEntryFromFile(ProjectPath, Path.GetFileName(ProjectPath));
                 if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
             }
-            if (complete) Viewer.UpdateImage(Properties.Resources.SEYRdone);
+        }
+
+        public void SignalComplete()
+        {
+            Viewer.UpdateImage(Properties.Resources.SEYRdone);
         }
 
         /// <summary>
@@ -236,14 +241,16 @@ namespace SEYR.Session
         /// <param name="imageInfo">
         /// Info that matches dataHeader schema used for channel creation
         /// </param>
-        /// <param name="customFilter"></param>
+        /// <param name="stamp">
+        /// Whether or not to perform stamp inspection routine
+        /// </param>
         /// <returns>
-        /// Percentage of null fail features in last image or a custom filter result
+        /// Percentage of null fail features in last image or a number of posts in last stamp image
         /// </returns>
-        public async Task<double> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool customFilter = false)
+        public async Task<double> NewImage(Bitmap bmp, bool forcePattern = false, string imageInfo = "", bool stamp = false)
         {
             Working = true;
-            double result = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo, customFilter);
+            double result = await BitmapFunctions.LoadImage(bmp, forcePattern, imageInfo, stamp);
             Working = false;
             return result;
         }
@@ -264,7 +271,8 @@ namespace SEYR.Session
 
         public void InputParameters(Bitmap bmp)
         {
-            using (ParameterEntry parameterEntry = new ParameterEntry(bmp))
+            StampStream = new LogStream(DirPath + @"\StampInspection.txt", LogStream.BaseHeader, true, true);
+            using (StampParameterEntry parameterEntry = new StampParameterEntry(bmp))
             {
                 parameterEntry.ShowDialog();
             }

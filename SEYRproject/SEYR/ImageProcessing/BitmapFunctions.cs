@@ -32,15 +32,15 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
         /// <param name="imageInfo"></param>
-        /// <param name="customFilter"></param>
-        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo, bool customFilter = false)
+        /// <param name="stamp"></param>
+        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo, bool stamp = false)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            if (customFilter)
+            if (stamp)
             {
-                (Bitmap, Bitmap, double) customResult = await CustomProcessImage(bmp, imageInfo);
-                return customResult.Item3;
+                (Bitmap, Bitmap, double) stampResult = await ProcessStampImage(bmp, imageInfo);
+                return stampResult.Item3;
             }
             else
             {
@@ -237,13 +237,13 @@ namespace SEYR.ImageProcessing
 
         private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern, string imageInfo)
         {
-            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && DataStream.Header != null)
+            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && LogStream.Header != null)
             {
                 if (forcePattern)
                     return await FindPattern(bmp);
                 else
                 {
-                    string[] cols = DataStream.Header.Split('\t');
+                    string[] cols = LogStream.Header.Split('\t');
                     for (int i = 0; i < cols.Length; i++)
                         if (!string.IsNullOrEmpty(cols[i]))
                             if (cols[i] == Channel.Project.PatternIntervalString)
@@ -266,7 +266,6 @@ namespace SEYR.ImageProcessing
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
-                await Channel.DebugStream.WriteAsync($"\t{Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\t");
 
                 if (matchings.Length > 0)
                 {
@@ -302,22 +301,20 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        #region Custom Processing
+        #region Stamp Functions
 
-        internal static double CustomScaling;
-        internal static int CustomThreshold;
-        internal static List<Rectangle> CustomPosts = new List<Rectangle>();
-        internal static List<Rectangle> CustomMasks = new List<Rectangle>();
+        internal static double StampScaling;
+        internal static int StampThreshold;
+        internal static List<Rectangle> StampPosts = new List<Rectangle>();
+        internal static List<Rectangle> StampMasks = new List<Rectangle>();
 
-        internal static async Task<(Bitmap, Bitmap, double)> CustomProcessImage(Bitmap bmp, string imageInfo = "", bool setup = false)
+        internal static async Task<(Bitmap, Bitmap, double)> ProcessStampImage(Bitmap bmp, string imageInfo = "", bool setup = false)
         {
-            Bitmap raw = (Bitmap)bmp.Clone();
-
             // Setup Image
-            Bitmap output = new Bitmap(raw, new Size((int)(raw.Width * CustomScaling), (int)(raw.Height * CustomScaling)));
+            Bitmap output = new Bitmap(bmp, new Size((int)(bmp.Width * StampScaling), (int)(bmp.Height * StampScaling)));
             Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
             output = filter.Apply(output);
-            Threshold threshold = new Threshold(CustomThreshold);
+            Threshold threshold = new Threshold(StampThreshold);
             threshold.ApplyInPlace(output);
             SobelEdgeDetector sobel = new SobelEdgeDetector();
             sobel.ApplyInPlace(output);
@@ -339,12 +336,12 @@ namespace SEYR.ImageProcessing
                 foreach (Blob blob in blobs)
                 {
                     bool drawn = false;
-                    if (CustomPosts.Count > 0)
+                    if (StampPosts.Count > 0)
                     {
-                        foreach (Rectangle post in CustomPosts)
+                        foreach (Rectangle post in StampPosts)
                         {
-                            if (PointDist(post.Center(), blob.Rectangle.Center()) < 50 * CustomScaling &&
-                                SizeDiff(post.Size, blob.Rectangle.Size) < 20 * CustomScaling)
+                            if (PointDist(post.Center(), blob.Rectangle.Center()) < 75 * StampScaling &&
+                                SizeDiff(post.Size, blob.Rectangle.Size) < 25 * StampScaling)
                             {
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blob.Rectangle);
                                 postsPresent++;
@@ -354,9 +351,9 @@ namespace SEYR.ImageProcessing
                                 debrisInPosts += HighlightBlob(output, ref overlay, blob);
                         }          
                     }
-                    if (CustomMasks.Count > 0 && !drawn)
+                    if (StampMasks.Count > 0 && !drawn)
                     {
-                        foreach (Rectangle mask in CustomMasks)
+                        foreach (Rectangle mask in StampMasks)
                             if (!BlobInRegion(blob, mask))
                             {
                                 debrisOnMesa += HighlightBlob(output, ref overlay, blob);
@@ -369,6 +366,7 @@ namespace SEYR.ImageProcessing
             }
 
             if (!setup) Channel.Viewer.UpdateImage(output, overlay);
+            if (!string.IsNullOrEmpty(imageInfo)) await Channel.StampStream.WriteAsync($"{imageInfo}{postsPresent}\t{debrisInPosts}\t{debrisOnMesa}");
             return (output, overlay, blobs.Length);
         }
 

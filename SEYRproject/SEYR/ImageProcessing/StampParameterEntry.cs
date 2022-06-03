@@ -5,37 +5,32 @@ using static SEYR.ImageProcessing.BitmapFunctions;
 
 namespace SEYR.ImageProcessing
 {
-    public partial class ParameterEntry : Form
+    public partial class StampParameterEntry : Form
     {
-        private Bitmap Train = null;
-        private readonly double DefaultScaling = 0.5;
-        private readonly int DefaultThreshold = 170;
-        private bool LOADING = false;
+        private readonly Bitmap Train = null;
+        private readonly bool LOADING = false;
+        private static bool FirstOpen = true;
 
-        public ParameterEntry(Bitmap bmp)
+        public StampParameterEntry(Bitmap bmp)
         {
             InitializeComponent();
-            NumScaling.Value = (decimal)DefaultScaling;
-            TrackbarThreshold.Value = DefaultThreshold;
             Train = bmp;
+            if (!FirstOpen)
+            {
+                NumScaling.Value = (decimal)StampScaling;
+                TrackbarThreshold.Value = StampThreshold;
+            }
             ApplyFilters();
             PBX.MouseDown += PBX_MouseDown;
             PBX.MouseMove += PBX_MouseMove;
             PBX.MouseLeave += PBX_MouseLeave;
-        }
-
-        private void BtnAutoSettings_Click(object sender, EventArgs e)
-        {
-            LOADING = true;
-            NumScaling.Value = (decimal)DefaultScaling;
-            TrackbarThreshold.Value = DefaultThreshold;
-            LOADING = false;
-            ApplyFilters();
+            FirstOpen = false;
         }
 
         private void BtnClearMasks_Click(object sender, EventArgs e)
         {
-            CustomMasks.Clear();
+            StampPosts.Clear();
+            StampMasks.Clear();
             UpdateOverlay();
         }
 
@@ -56,14 +51,13 @@ namespace SEYR.ImageProcessing
 
         private async void ApplyFilters()
         {
-            CustomScaling = (double)NumScaling.Value;
-            CustomThreshold = TrackbarThreshold.Value;
-            (Bitmap, Bitmap, double) customResult = await CustomProcessImage(Train, setup: true);
-            PBX.BackgroundImage = customResult.Item1;
-            PBX.Image = customResult.Item2;
+            StampScaling = (double)NumScaling.Value;
+            StampThreshold = TrackbarThreshold.Value;
+            LblThreshold.Text = StampThreshold.ToString();
+            (Bitmap, Bitmap, double) stampResult = await ProcessStampImage(Train, setup: true);
+            PBX.BackgroundImage = stampResult.Item1;
+            PBX.Image = stampResult.Item2;
         }
-
-        #region Crop
 
         private bool DrawingPost = false;
         private bool DrawingMask = false;
@@ -134,16 +128,16 @@ namespace SEYR.ImageProcessing
                 Math.Abs(EndPoint.X - StartPoint.X),
                 Math.Abs(EndPoint.Y - StartPoint.Y));
 
-            if (btn == MouseButtons.Left && !DrawingPost) CustomPosts.Add(rect);
-            if (btn == MouseButtons.Right && !DrawingMask) CustomMasks.Add(rect);
+            if (btn == MouseButtons.Left && !DrawingPost) StampPosts.Add(rect);
+            if (btn == MouseButtons.Right && !DrawingMask) StampMasks.Add(rect);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 if (DrawingMask) g.FillRectangle(Brushes.LawnGreen, rect);
                 else if (DrawingPost) g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), rect);
-                foreach (Rectangle post in CustomPosts)
+                foreach (Rectangle post in StampPosts)
                     g.DrawRectangle(new Pen(Brushes.HotPink, (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)), post);
-                foreach (Rectangle mask in CustomMasks)
+                foreach (Rectangle mask in StampMasks)
                     g.FillRectangle(Brushes.LawnGreen, mask);
             }
 
@@ -190,7 +184,5 @@ namespace SEYR.ImageProcessing
             }
             return new Point((int)pos.X, (int)pos.Y);
         }
-
-        #endregion
     }
 }

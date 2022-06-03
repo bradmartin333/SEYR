@@ -1,6 +1,6 @@
 ﻿namespace SEYR.ImageProcessing
 {
-    partial class ParameterEntry
+    partial class StampParameterEntry
     {
         /// <summary>
         /// Required designer variable.
@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ParameterEntry));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StampParameterEntry));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.PBX = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnAutoSettings = new System.Windows.Forms.Button();
-            this.BtnClearMasks = new System.Windows.Forms.Button();
+            this.BtnClearAllFeatures = new System.Windows.Forms.Button();
             this.BtnContinue = new System.Windows.Forms.Button();
             this.TrackbarThreshold = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
+            this.LblThreshold = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackbarThreshold)).BeginInit();
@@ -47,17 +47,17 @@
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.Controls.Add(this.PBX, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.label1, 0, 3);
-            this.tableLayoutPanel.Controls.Add(this.BtnAutoSettings, 0, 5);
-            this.tableLayoutPanel.Controls.Add(this.BtnClearMasks, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.BtnClearAllFeatures, 1, 5);
             this.tableLayoutPanel.Controls.Add(this.BtnContinue, 2, 5);
             this.tableLayoutPanel.Controls.Add(this.TrackbarThreshold, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel.Controls.Add(this.NumScaling, 1, 2);
+            this.tableLayoutPanel.Controls.Add(this.LblThreshold, 2, 2);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -89,45 +89,32 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 394);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 28);
+            this.label1.Size = new System.Drawing.Size(54, 28);
             this.label1.TabIndex = 1;
             this.label1.Text = "Threshold";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // BtnAutoSettings
+            // BtnClearAllFeatures
             // 
-            this.BtnAutoSettings.BackColor = System.Drawing.Color.White;
-            this.BtnAutoSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnAutoSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAutoSettings.Location = new System.Drawing.Point(3, 435);
-            this.BtnAutoSettings.Name = "BtnAutoSettings";
-            this.BtnAutoSettings.Size = new System.Drawing.Size(138, 23);
-            this.BtnAutoSettings.TabIndex = 6;
-            this.BtnAutoSettings.Text = "Auto Settings";
-            this.BtnAutoSettings.UseVisualStyleBackColor = false;
-            this.BtnAutoSettings.Click += new System.EventHandler(this.BtnAutoSettings_Click);
-            // 
-            // BtnClearMasks
-            // 
-            this.BtnClearMasks.BackColor = System.Drawing.Color.White;
-            this.BtnClearMasks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnClearMasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClearMasks.Location = new System.Drawing.Point(147, 435);
-            this.BtnClearMasks.Name = "BtnClearMasks";
-            this.BtnClearMasks.Size = new System.Drawing.Size(138, 23);
-            this.BtnClearMasks.TabIndex = 7;
-            this.BtnClearMasks.Text = "Clear Masks";
-            this.BtnClearMasks.UseVisualStyleBackColor = false;
-            this.BtnClearMasks.Click += new System.EventHandler(this.BtnClearMasks_Click);
+            this.BtnClearAllFeatures.BackColor = System.Drawing.Color.White;
+            this.BtnClearAllFeatures.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnClearAllFeatures.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClearAllFeatures.Location = new System.Drawing.Point(63, 435);
+            this.BtnClearAllFeatures.Name = "BtnClearAllFeatures";
+            this.BtnClearAllFeatures.Size = new System.Drawing.Size(181, 23);
+            this.BtnClearAllFeatures.TabIndex = 7;
+            this.BtnClearAllFeatures.Text = "Clear All Features";
+            this.BtnClearAllFeatures.UseVisualStyleBackColor = false;
+            this.BtnClearAllFeatures.Click += new System.EventHandler(this.BtnClearMasks_Click);
             // 
             // BtnContinue
             // 
             this.BtnContinue.BackColor = System.Drawing.Color.White;
             this.BtnContinue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnContinue.Location = new System.Drawing.Point(291, 435);
+            this.BtnContinue.Location = new System.Drawing.Point(250, 435);
             this.BtnContinue.Name = "BtnContinue";
-            this.BtnContinue.Size = new System.Drawing.Size(140, 23);
+            this.BtnContinue.Size = new System.Drawing.Size(181, 23);
             this.BtnContinue.TabIndex = 8;
             this.BtnContinue.Text = "Continue";
             this.BtnContinue.UseVisualStyleBackColor = false;
@@ -137,10 +124,10 @@
             // 
             this.tableLayoutPanel.SetColumnSpan(this.TrackbarThreshold, 2);
             this.TrackbarThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TrackbarThreshold.Location = new System.Drawing.Point(147, 397);
+            this.TrackbarThreshold.Location = new System.Drawing.Point(63, 397);
             this.TrackbarThreshold.Maximum = 255;
             this.TrackbarThreshold.Name = "TrackbarThreshold";
-            this.TrackbarThreshold.Size = new System.Drawing.Size(284, 22);
+            this.TrackbarThreshold.Size = new System.Drawing.Size(368, 22);
             this.TrackbarThreshold.TabIndex = 9;
             this.TrackbarThreshold.TickStyle = System.Windows.Forms.TickStyle.None;
             this.TrackbarThreshold.Value = 170;
@@ -152,7 +139,7 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(3, 366);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 28);
+            this.label6.Size = new System.Drawing.Size(54, 28);
             this.label6.TabIndex = 14;
             this.label6.Text = "Scaling";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,7 +153,7 @@
             0,
             0,
             65536});
-            this.NumScaling.Location = new System.Drawing.Point(147, 369);
+            this.NumScaling.Location = new System.Drawing.Point(63, 369);
             this.NumScaling.Maximum = new decimal(new int[] {
             1,
             0,
@@ -178,7 +165,7 @@
             0,
             131072});
             this.NumScaling.Name = "NumScaling";
-            this.NumScaling.Size = new System.Drawing.Size(138, 20);
+            this.NumScaling.Size = new System.Drawing.Size(181, 20);
             this.NumScaling.TabIndex = 15;
             this.NumScaling.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumScaling.Value = new decimal(new int[] {
@@ -188,7 +175,18 @@
             65536});
             this.NumScaling.ValueChanged += new System.EventHandler(this.NumScaling_ValueChanged);
             // 
-            // ParameterEntry
+            // LblThreshold
+            // 
+            this.LblThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblThreshold.AutoSize = true;
+            this.LblThreshold.Location = new System.Drawing.Point(406, 381);
+            this.LblThreshold.Name = "LblThreshold";
+            this.LblThreshold.Size = new System.Drawing.Size(25, 13);
+            this.LblThreshold.TabIndex = 16;
+            this.LblThreshold.Text = "170";
+            this.LblThreshold.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // StampParameterEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -196,8 +194,8 @@
             this.Controls.Add(this.tableLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(450, 500);
-            this.Name = "ParameterEntry";
-            this.Text = "Custom Filter Parameter Entry";
+            this.Name = "StampParameterEntry";
+            this.Text = "Stamp Parameter Entry";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
@@ -212,11 +210,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.PictureBox PBX;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button BtnAutoSettings;
-        private System.Windows.Forms.Button BtnClearMasks;
+        private System.Windows.Forms.Button BtnClearAllFeatures;
         private System.Windows.Forms.Button BtnContinue;
         private System.Windows.Forms.TrackBar TrackbarThreshold;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown NumScaling;
+        private System.Windows.Forms.Label LblThreshold;
     }
 }
