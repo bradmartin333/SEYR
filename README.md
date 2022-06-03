@@ -58,4 +58,4 @@ private async Task<bool> Run()
 ```
 #### Notes
 - Image processing must either be awaited or contain a while loop that waits until Channel.Working == false. 
-- Custom filters can be created by building a local copy of SEYR. The v1.3.4 default custom feature is copied from [this repository](https://github.com/bradmartin333/GridImaging).
+- Stamp inspection can be activated by passing `true` for `stamp` in `SEYRCh.NewImage`
