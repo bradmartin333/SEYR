@@ -3,24 +3,28 @@ using System.Threading.Tasks;
 
 namespace SEYR.Session
 {
-    internal class DataStream
+    internal class LogStream
     {
         public string Path { get; set; } = null;
         internal static string BaseHeader = null;
         internal static string Header = null;
 
-        public DataStream(string path, string header = "", bool isDebug = false)
+        public LogStream(string path, string header = "", bool isDebug = false, bool isStamp = false)
         {
             if (File.Exists(path)) File.Delete(path);
             Path = path;
-            if (isDebug)
-                Write("Stream Opened", addDT: true);
-            else
+            if (!isDebug)
             {
                 BaseHeader = header;
                 Header = $"{header}TileRow\tTileCol\tFeature\tScore\tState\tImageData";
                 Write(Header);
             } 
+            else if (isStamp)
+            {
+                BaseHeader = header;
+                Header = $"{header}NumPosts\tPxPostDebris\tPxMesaDebris";
+                Write(Header);
+            }
         }
 
         public void Write(string value, bool addNewLine = true, bool addDT = false, bool showInViewer = false)

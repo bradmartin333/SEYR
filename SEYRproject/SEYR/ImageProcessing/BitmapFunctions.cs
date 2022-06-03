@@ -1,4 +1,5 @@
 ﻿using Accord.Imaging;
+using Accord.Imaging.Filters;
 using SEYR.Session;
 using System;
 using System.Collections.Generic;
@@ -31,20 +32,21 @@ namespace SEYR.ImageProcessing
         /// <param name="bmp"></param>
         /// <param name="forcePattern"></param>
         /// <param name="imageInfo"></param>
-        /// <param name="customFilter"></param>
-        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo, bool customFilter = false)
+        /// <param name="stamp"></param>
+        public static async Task<double> LoadImage(Bitmap bmp, bool forcePattern, string imageInfo, bool stamp = false)
         {
             Channel.Project.ImageHeight = bmp.Height;
             Channel.Project.ImageWidth = bmp.Width;
-            (Bitmap, double) result;
-            if (customFilter)
+            if (stamp)
             {
-                result = CustomProcessImage(bmp);
-                Channel.CustomImage = result.Item1;
+                (Bitmap, Bitmap, double) stampResult = await ProcessStampImage(bmp, imageInfo);
+                return stampResult.Item3;
             }
             else
-                result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
-            return result.Item2;
+            {
+                (Bitmap, double) result = await ProcessImage(bmp, forcePattern, NullPoint, imageInfo);
+                return result.Item2;
+            }    
         }
 
         /// <summary>
@@ -235,13 +237,13 @@ namespace SEYR.ImageProcessing
 
         private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern, string imageInfo)
         {
-            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && DataStream.Header != null)
+            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && LogStream.Header != null)
             {
                 if (forcePattern)
                     return await FindPattern(bmp);
                 else
                 {
-                    string[] cols = DataStream.Header.Split('\t');
+                    string[] cols = LogStream.Header.Split('\t');
                     for (int i = 0; i < cols.Length; i++)
                         if (!string.IsNullOrEmpty(cols[i]))
                             if (cols[i] == Channel.Project.PatternIntervalString)
@@ -264,7 +266,6 @@ namespace SEYR.ImageProcessing
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, pattern);
-                await Channel.DebugStream.WriteAsync($"\t{Math.Round(sw.Elapsed.TotalSeconds, 3)} seconds\t");
 
                 if (matchings.Length > 0)
                 {
@@ -300,46 +301,105 @@ namespace SEYR.ImageProcessing
             }
         }
 
-        private static (Bitmap, double) CustomProcessImage(Bitmap bmp)
+        #region Stamp Functions
+
+        internal static double StampScaling;
+        internal static int StampThreshold;
+        internal static List<Rectangle> StampPosts = new List<Rectangle>();
+        internal static List<Rectangle> StampMasks = new List<Rectangle>();
+
+        internal static async Task<(Bitmap, Bitmap, double)> ProcessStampImage(Bitmap bmp, string imageInfo = "", bool setup = false)
         {
-            int dotSize = 5;
-
             // Setup Image
-            Accord.Imaging.Filters.Grayscale filter = new Accord.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
-            bmp = filter.Apply(bmp);
-            Accord.Imaging.Filters.Threshold threshold = new Accord.Imaging.Filters.Threshold(220);
-            threshold.ApplyInPlace(bmp);
+            Bitmap output = new Bitmap(bmp, new Size((int)(bmp.Width * StampScaling), (int)(bmp.Height * StampScaling)));
+            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+            output = filter.Apply(output);
+            Threshold threshold = new Threshold(StampThreshold);
+            threshold.ApplyInPlace(output);
+            SobelEdgeDetector sobel = new SobelEdgeDetector();
+            sobel.ApplyInPlace(output);
 
-            // Lock Image
-            BitmapData bitmapData = bmp.LockBits(ImageLockMode.ReadWrite);
+            // Init Counters
+            int postsPresent = 0;
+            int debrisInPosts = 0;
+            int debrisOnMesa = 0;
 
-            // Find Blobs (with some params - there are a lot more)
-            BlobCounter blobCounter = new BlobCounter
-            {
-                FilterBlobs = true,
-                MinHeight = 2,
-                MinWidth = 2
-            };
+            // Process Image
+            BitmapData bitmapData = output.LockBits(ImageLockMode.ReadWrite);
+            BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(bitmapData);
             Blob[] blobs = blobCounter.GetObjectsInformation();
-            bmp.UnlockBits(bitmapData);
-
-            // Draw Dots
-            Bitmap overlay = new Bitmap(bmp.Width, bmp.Height);
+            output.UnlockBits(bitmapData);
+            Bitmap overlay = new Bitmap(output.Width, output.Height);
             using (Graphics g = Graphics.FromImage(overlay))
             {
-                g.Clear(Color.Black);
-                for (int i = 0; i < blobs.Length; i++)
+                foreach (Blob blob in blobs)
                 {
-                    g.DrawEllipse(new Pen(Brushes.Red, dotSize / 2), new Rectangle(
-                        (int)(blobs[i].CenterOfGravity.X - dotSize),
-                        (int)(blobs[i].CenterOfGravity.Y - dotSize),
-                        dotSize * 2, dotSize * 2));
+                    bool drawn = false;
+                    if (StampPosts.Count > 0)
+                    {
+                        foreach (Rectangle post in StampPosts)
+                        {
+                            if (PointDist(post.Center(), blob.Rectangle.Center()) < 75 * StampScaling &&
+                                SizeDiff(post.Size, blob.Rectangle.Size) < 25 * StampScaling)
+                            {
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Green)), blob.Rectangle);
+                                postsPresent++;
+                                drawn = true;
+                            }
+                            else if (BlobInRegion(blob, post))
+                                debrisInPosts += HighlightBlob(output, ref overlay, blob);
+                        }          
+                    }
+                    if (StampMasks.Count > 0 && !drawn)
+                    {
+                        foreach (Rectangle mask in StampMasks)
+                            if (!BlobInRegion(blob, mask))
+                            {
+                                debrisOnMesa += HighlightBlob(output, ref overlay, blob);
+                                drawn = true;
+                            }
+                    }
+                    else if (!drawn) // No masks drawn
+                        debrisOnMesa += HighlightBlob(output, ref overlay, blob);
                 }
             }
 
-            return (overlay, blobs.Length);
+            if (!setup) Channel.Viewer.UpdateImage(output, overlay);
+            if (!string.IsNullOrEmpty(imageInfo)) await Channel.StampStream.WriteAsync($"{imageInfo}{postsPresent}\t{debrisInPosts}\t{debrisOnMesa}");
+            return (output, overlay, blobs.Length);
         }
+
+        private static double PointDist(Point A, Point B)
+        {
+            return Math.Sqrt(Math.Pow(B.X - A.X, 2) + Math.Pow(B.Y - A.Y, 2));
+        }
+
+        private static double SizeDiff(Size A, Size B)
+        {
+            return (PointDist(new Point(B.Width - A.Width, B.Height - A.Height), Point.Empty));
+        }
+
+        private static int HighlightBlob(Bitmap a, ref Bitmap b, Blob blob)
+        {
+            int count = 0;
+            for (int i = blob.Rectangle.Left; i < blob.Rectangle.Right; i++)
+                for (int j = blob.Rectangle.Top; j < blob.Rectangle.Bottom; j++)
+                    if (a.GetPixel(i, j) == Color.FromArgb(255, 255, 255, 255))
+                    {
+                        b.SetPixel(i, j, Color.Red);
+                        count++;
+                    }
+            return count; // Almost equal to blob.Area
+        }
+
+        private static bool BlobInRegion(Blob blob, Rectangle rect)
+        {
+            return rect.Contains(new Point(blob.Rectangle.Left, blob.Rectangle.Top)) &&
+                rect.Contains(new Point(blob.Rectangle.Right, blob.Rectangle.Bottom));
+        }
+
+        #endregion
 
         #region Composer Functions
 

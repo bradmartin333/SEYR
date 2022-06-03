@@ -122,12 +122,6 @@ namespace SEYR.Session
             }
         }
 
-        public List<string[]> Criteria
-        {
-            get => Channel.Project.Criteria;
-            set => Channel.Project.Criteria = value;
-        }
-
         public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int PatternIntervalValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -546,6 +540,7 @@ namespace SEYR.Session
 
         private void NumNullFilterPercentage_ValueChanged(object sender, EventArgs e)
         {
+            if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.NullFilterPercentage = (float)(NumNullFilterPercentage.Value / 100);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Null Filter Percentage Changed");
             ApplyFeature();
@@ -666,15 +661,6 @@ namespace SEYR.Session
             using (PatternWizard w = new PatternWizard((Bitmap)InputImage.Clone()))
             {
                 _ = w.ShowDialog();
-            }
-        }
-
-        private void OpenCriteriaWizardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (CriteriaWizard w = new CriteriaWizard(new Size(SizeX, SizeY), Features, Criteria))
-            {
-                _ = w.ShowDialog();
-                Criteria = w.Criteria;
             }
         }
 

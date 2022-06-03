@@ -21,6 +21,5 @@ namespace SEYR.Session
         int PatternDeltaMax { get; set; }
         List<Point> PatternLocations { get; set; }
         List<Feature> Features { get; set; }
-        List<string[]> Criteria { get; set; }
     }
 }

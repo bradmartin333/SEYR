@@ -105,7 +105,6 @@
             this.ConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenPatternWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenCriteriaWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ApplyDeskewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClickGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -791,7 +790,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 190);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -1221,7 +1219,6 @@
             this.ConfirmToolStripMenuItem,
             this.CancelToolStripMenuItem,
             this.OpenPatternWizardToolStripMenuItem,
-            this.OpenCriteriaWizardToolStripMenuItem,
             this.ToolsToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
@@ -1257,17 +1254,10 @@
             this.OpenPatternWizardToolStripMenuItem.Text = "Open Pattern Wizard";
             this.OpenPatternWizardToolStripMenuItem.Click += new System.EventHandler(this.OpenPatternWizardToolStripMenuItem_Click);
             // 
-            // OpenCriteriaWizardToolStripMenuItem
-            // 
-            this.OpenCriteriaWizardToolStripMenuItem.AutoSize = false;
-            this.OpenCriteriaWizardToolStripMenuItem.BackColor = System.Drawing.Color.Wheat;
-            this.OpenCriteriaWizardToolStripMenuItem.Name = "OpenCriteriaWizardToolStripMenuItem";
-            this.OpenCriteriaWizardToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
-            this.OpenCriteriaWizardToolStripMenuItem.Text = "Open Criteria Wizard";
-            this.OpenCriteriaWizardToolStripMenuItem.Click += new System.EventHandler(this.OpenCriteriaWizardToolStripMenuItem_Click);
-            // 
             // ToolsToolStripMenuItem
             // 
+            this.ToolsToolStripMenuItem.AutoSize = false;
+            this.ToolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ApplyDeskewToolStripMenuItem,
             this.ClickGridToolStripMenuItem,
@@ -1277,7 +1267,7 @@
             this.openFileToolStripMenuItem,
             this.MakeSEYRUPToolStripMenuItem});
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
-            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.ToolsToolStripMenuItem.Text = "Tools";
             // 
             // ApplyDeskewToolStripMenuItem
@@ -1487,7 +1477,6 @@
         private System.Windows.Forms.Panel SaveImagePanel;
         private System.Windows.Forms.Label label23;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private System.Windows.Forms.ToolStripMenuItem OpenCriteriaWizardToolStripMenuItem;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown NumNullFilterPercentage;
     }
