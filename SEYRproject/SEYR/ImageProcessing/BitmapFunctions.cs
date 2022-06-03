@@ -39,6 +39,13 @@ namespace SEYR.ImageProcessing
             (Bitmap, double) result;
             if (customFilter)
             {
+                if (Channel.CustomImage == null)
+                {
+                    using (ParameterEntry parameterEntry = new ParameterEntry())
+                    {
+                        parameterEntry.ShowDialog();
+                    }
+                }
                 result = CustomProcessImage(bmp);
                 Channel.CustomImage = result.Item1;
             }
@@ -302,13 +309,15 @@ namespace SEYR.ImageProcessing
 
         private static (Bitmap, double) CustomProcessImage(Bitmap bmp)
         {
-            int dotSize = 5;
+            Bitmap output = (Bitmap)bmp.Clone();
 
             // Setup Image
             Accord.Imaging.Filters.Grayscale filter = new Accord.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
             bmp = filter.Apply(bmp);
-            Accord.Imaging.Filters.Threshold threshold = new Accord.Imaging.Filters.Threshold(220);
+            Accord.Imaging.Filters.Threshold threshold = new Accord.Imaging.Filters.Threshold(170);
             threshold.ApplyInPlace(bmp);
+            Accord.Imaging.Filters.SobelEdgeDetector sobel = new Accord.Imaging.Filters.SobelEdgeDetector();
+            sobel.ApplyInPlace(bmp);
 
             // Lock Image
             BitmapData bitmapData = bmp.LockBits(ImageLockMode.ReadWrite);
@@ -316,29 +325,23 @@ namespace SEYR.ImageProcessing
             // Find Blobs (with some params - there are a lot more)
             BlobCounter blobCounter = new BlobCounter
             {
-                FilterBlobs = true,
-                MinHeight = 2,
-                MinWidth = 2
+
             };
             blobCounter.ProcessImage(bitmapData);
             Blob[] blobs = blobCounter.GetObjectsInformation();
             bmp.UnlockBits(bitmapData);
 
-            // Draw Dots
-            Bitmap overlay = new Bitmap(bmp.Width, bmp.Height);
-            using (Graphics g = Graphics.FromImage(overlay))
+            // Draw blob
+            using (Graphics g = Graphics.FromImage(output))
             {
-                g.Clear(Color.Black);
                 for (int i = 0; i < blobs.Length; i++)
                 {
-                    g.DrawEllipse(new Pen(Brushes.Red, dotSize / 2), new Rectangle(
-                        (int)(blobs[i].CenterOfGravity.X - dotSize),
-                        (int)(blobs[i].CenterOfGravity.Y - dotSize),
-                        dotSize * 2, dotSize * 2));
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LawnGreen)), blobs[i].Rectangle);
                 }
             }
 
-            return (overlay, blobs.Length);
+            Channel.Viewer.UpdateImage(output);
+            return (output, blobs.Length);
         }
 
         #region Composer Functions

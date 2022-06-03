@@ -11,7 +11,6 @@ namespace SEYRDesktop
     public partial class FormMain : Form
     {
         private SEYR.Session.Channel Channel;
-        private readonly List<string> Data = new List<string>();
         private string[] IMGS = null;
         private bool STOP;
         private bool BUSY;
@@ -19,13 +18,6 @@ namespace SEYRDesktop
         public FormMain()
         {
             InitializeComponent();
-
-            MessageBox.Show("" +
-                "Only use SEYR Desktop if it is absolutely necessary. " +
-                "To deter you, I have added this message to click through " +
-                "as well as dual directory browsers. " +
-                "The dual browsers are also an example of the flexibility " +
-                "of the SEYR file management system.", "Note from bradmartin333");
         }
 
         private async void NumFrame_ValueChanged(object sender, EventArgs e)
@@ -40,14 +32,15 @@ namespace SEYRDesktop
             string imagePath = IMGS[(int)NumFrame.Value];
             Bitmap bmp = new Bitmap(imagePath);
 
-            string data = $"{NumFrame.Value}\t0\t0\t0\t0\t0\t0\t0\t0\t";
-            string matchString = '\t' + imagePath.Split('_').Last().Replace(".png", "").Replace("R", "").Replace("C", "").Replace("S", "").Replace(" ", "").Replace(",", "\t") + '\t';
-            string[] dataMatches = Data.Where(x => 
-                x.Contains(matchString)).ToArray();
-            if (dataMatches.Any()) data = $"{NumFrame.Value}{dataMatches[0]}";
+            FileInfo fileInfo = new FileInfo(imagePath);
+            string name = fileInfo.Name.Replace(fileInfo.Extension, "");
+            string[] cols = name.Split('_');
+            double.TryParse(cols[0], out double x);
+            double.TryParse(cols[1], out double y);
+            string data = $"{NumFrame.Value}\t{x}\t{y}\t";
             
-            double info = await Channel.NewImage(bmp, forcePattern, data);
-            //System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
+            _ = await Channel.NewImage(bmp, forcePattern, data, CbxCustomFilter.Checked);
+
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
             GC.Collect();
@@ -128,22 +121,11 @@ namespace SEYRDesktop
                 return;
             }
 
-            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR();
+            SEYR.Session.Channel channel = SEYR.Session.Channel.OpenSEYR("ImageNumber\tX\tY\t");
             if (channel != null)
             {
                 Channel = channel;
                 Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
-            }
-
-            string[] files = Directory.GetFiles(path, "Inlinepositions.txt");
-            if (files.Length > 0)
-            {
-                string[] lines = File.ReadAllLines(files[0]);
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] cols = lines[i].Split('\t');
-                    if (cols.Length > 0) Data.Add($"\t{cols[2]}\t{cols[3]}\t{cols[4]}\t{cols[5]}\t{cols[6]}\t{cols[7]}\t{cols[8]}\t{cols[9]}\t");
-                }
             }
             
             NumPxPerMicron.Enabled = false;
@@ -154,8 +136,7 @@ namespace SEYRDesktop
             BtnRestartAndRun.Enabled = true;
             BtnRepeat.Enabled = true;
             BtnForcePattern.Enabled = true;
-            BtnCustomFilter.Enabled = true;
-            BtnOpenDir.BackColor = Color.LawnGreen;
+            BtnOpenDir.BackColor = Color.LightGreen;
             
             NumFrame.Maximum = IMGS.Length - 1;
             NumFrame.Value = 0;
@@ -194,23 +175,6 @@ namespace SEYRDesktop
         private async void BtnForcePattern_Click(object sender, EventArgs e)
         {
             await NextImage(true);
-        }
-
-        private async void BtnCustomFilter_Click(object sender, EventArgs e)
-        {
-            BUSY = true;
-            Bitmap bmp = new Bitmap(IMGS[(int)NumFrame.Value]);
-            double info = await Channel.NewImage(bmp, customFilter: true);
-            System.Diagnostics.Debug.WriteLine($"{NumFrame.Value}\t{info}");
-            BUSY = false;
-            GC.Collect();
-            Form form = new Form()
-            {
-                BackgroundImage = SEYR.Session.Channel.CustomImage,
-                BackgroundImageLayout = ImageLayout.Zoom,
-                Text = $"{info} Blobs Found",
-            };
-            form.Show();
         }
     }
 }

@@ -41,9 +41,9 @@
             this.BtnOpenComposer = new System.Windows.Forms.Button();
             this.BtnForcePattern = new System.Windows.Forms.Button();
             this.BtnOpenDir = new System.Windows.Forms.Button();
-            this.BtnCustomFilter = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.CbxCustomFilter = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFrame)).BeginInit();
@@ -70,8 +70,8 @@
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenComposer, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.BtnForcePattern, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnOpenDir, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnCustomFilter, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.ProgressBar, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.CbxCustomFilter, 3, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -250,22 +250,6 @@
             this.BtnOpenDir.UseVisualStyleBackColor = true;
             this.BtnOpenDir.Click += new System.EventHandler(this.BtnOpenDir_Click);
             // 
-            // BtnCustomFilter
-            // 
-            this.BtnCustomFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCustomFilter.AutoSize = true;
-            this.BtnCustomFilter.Enabled = false;
-            this.BtnCustomFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCustomFilter.Location = new System.Drawing.Point(157, 81);
-            this.BtnCustomFilter.Name = "BtnCustomFilter";
-            this.BtnCustomFilter.Size = new System.Drawing.Size(83, 28);
-            this.BtnCustomFilter.TabIndex = 22;
-            this.BtnCustomFilter.Text = "Custom Filter";
-            this.BtnCustomFilter.UseVisualStyleBackColor = true;
-            this.BtnCustomFilter.Click += new System.EventHandler(this.BtnCustomFilter_Click);
-            // 
             // ProgressBar
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -278,6 +262,21 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // CbxCustomFilter
+            // 
+            this.CbxCustomFilter.Appearance = System.Windows.Forms.Appearance.Button;
+            this.CbxCustomFilter.AutoSize = true;
+            this.CbxCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CbxCustomFilter.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.CbxCustomFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CbxCustomFilter.Location = new System.Drawing.Point(157, 81);
+            this.CbxCustomFilter.Name = "CbxCustomFilter";
+            this.CbxCustomFilter.Size = new System.Drawing.Size(83, 28);
+            this.CbxCustomFilter.TabIndex = 24;
+            this.CbxCustomFilter.Text = "Custom Filter";
+            this.CbxCustomFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CbxCustomFilter.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -314,8 +313,8 @@
         private System.Windows.Forms.Button BtnRepeat;
         private System.Windows.Forms.Button BtnForcePattern;
         private System.Windows.Forms.Button BtnRestartAndRun;
-        private System.Windows.Forms.Button BtnCustomFilter;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.CheckBox CbxCustomFilter;
     }
 }
 

@@ -20,7 +20,7 @@ namespace SEYR.Session
         /// <summary>
         /// Storage for a filter processed with a custom filter
         /// </summary>
-        public static Bitmap CustomImage { get; set; } = new Bitmap(1, 1);
+        public static Bitmap CustomImage { get; set; } = null;
         /// <summary>
         /// Directory within project directory for saving images of interest
         /// </summary>
