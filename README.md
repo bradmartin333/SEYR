@@ -1,6 +1,6 @@
 ![SEYR](https://user-images.githubusercontent.com/19335151/165121032-fe8c9a68-3cf7-4112-8ee5-a5f04922ef1c.png) ![Nuget](https://img.shields.io/nuget/v/SEYR)
 # AOI for present / not-present analysis
-# **[User Guide](https://github.com/bradmartin333/SEYR/wiki)**
+# **[User Guide](https://github.com/bradmartin333/SEYR/wiki/User-Guide)**
 
 ### How to integrate SEYR into an existing .NET Framework project (Nuget v1.3.13+)
 Create an instance of a SEYR channel
