@@ -418,7 +418,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
-            NumNullFilterPercentage.Value = (decimal)ActiveFeature.NullFilterPercentage;
+            NumNullFilterPercentage.Value = (decimal)ActiveFeature.NullFilterPercentage * 100M;
             Channel.DebugStream.Write("Loaded Null Filter %   ", false);
             SaveImagePanel.BackgroundImage = ActiveFeature.SaveImage ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Save Image   ", false);

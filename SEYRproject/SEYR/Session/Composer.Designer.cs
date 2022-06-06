@@ -1081,11 +1081,6 @@
             // NumNullFilterPercentage
             // 
             this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumNullFilterPercentage.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 98);
             this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
             this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
