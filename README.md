@@ -2,7 +2,7 @@
 # AOI for present / not-present analysis
 # **[User Guide](https://github.com/bradmartin333/SEYR/wiki/User-Guide)**
 
-### How to integrate SEYR into an existing .NET Framework project (Nuget v1.3.13+)
+### How to integrate SEYR into an existing .NET Framework project
 Create an instance of a SEYR channel
 
 ```cs
