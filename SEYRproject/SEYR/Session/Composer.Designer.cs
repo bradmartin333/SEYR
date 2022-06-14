@@ -115,6 +115,7 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
@@ -149,6 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.MenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -780,6 +782,7 @@
             this.tableLayoutPanel3.Controls.Add(this.BtnApplyFeature, 4, 4);
             this.tableLayoutPanel3.Controls.Add(this.ThresholdTrackBar, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.NumNullFilterPercentage, 4, 3);
+            this.tableLayoutPanel3.Controls.Add(this.NumThreshold, 4, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -868,7 +871,7 @@
             this.LabelThreshold.Name = "LabelThreshold";
             this.LabelThreshold.Size = new System.Drawing.Size(101, 13);
             this.LabelThreshold.TabIndex = 6;
-            this.LabelThreshold.Text = "Threshold: N/A";
+            this.LabelThreshold.Text = "Threshold";
             this.LabelThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
@@ -1068,12 +1071,12 @@
             // ThresholdTrackBar
             // 
             this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 4);
+            this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 3);
             this.ThresholdTrackBar.LargeChange = 1;
             this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 65);
             this.ThresholdTrackBar.Maximum = 100;
             this.ThresholdTrackBar.Name = "ThresholdTrackBar";
-            this.ThresholdTrackBar.Size = new System.Drawing.Size(309, 25);
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(225, 25);
             this.ThresholdTrackBar.TabIndex = 21;
             this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
@@ -1331,6 +1334,26 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
+            // NumThreshold
+            // 
+            this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumThreshold.DecimalPlaces = 2;
+            this.NumThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.NumThreshold.Location = new System.Drawing.Point(341, 67);
+            this.NumThreshold.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumThreshold.Name = "NumThreshold";
+            this.NumThreshold.Size = new System.Drawing.Size(78, 20);
+            this.NumThreshold.TabIndex = 26;
+            this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1381,6 +1404,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1474,5 +1498,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown NumNullFilterPercentage;
+        private System.Windows.Forms.NumericUpDown NumThreshold;
     }
 }

@@ -414,7 +414,7 @@ namespace SEYR.Session
             TxtFeatureName.Text = ActiveFeature.Name;
             Channel.DebugStream.Write("Loaded Name   ", false);
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
-            LabelThreshold.Text = $"Threshold: {ActiveFeature.Threshold}";
+            NumThreshold.Value = (decimal)ActiveFeature.Threshold;
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
@@ -438,11 +438,11 @@ namespace SEYR.Session
             NumFeatureHeight.Value = NumFeatureHeight.Minimum;
             TxtFeatureName.Text = "No Feature Selected";
             ThresholdTrackBar.Value = ThresholdTrackBar.Minimum;
+            NumThreshold.Value = NumThreshold.Minimum;
             NumNullFilterPercentage.Value = 0.1M;
             ComboFeatureNullDetection.SelectedIndex = 0;
             FlipScorePanel.BackgroundImage = Properties.Resources.toggleOff;
             LabelCurrentFeatureScore.Text = "N/A";
-            LabelThreshold.Text = "N/A";
             Channel.DebugStream.Write("Null feature loaded");
             LoadingFeature = false;
         }
@@ -523,8 +523,19 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
-            LabelThreshold.Text = $"Thresold: {ActiveFeature.Threshold}";
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Threshold Changed");
+            NumThreshold.Value = (decimal)ActiveFeature.Threshold;
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Trackbar Threshold Changed");
+            ForceThreshold = -1f;
+            ShowThreshold = true;
+            ApplyFeature();
+        }
+
+        private void NumThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            ActiveFeature.Threshold = (float)NumThreshold.Value;
+            ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
+            Channel.DebugStream.Write($"{ActiveFeature.Name} Num Threshold Changed");
             ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
