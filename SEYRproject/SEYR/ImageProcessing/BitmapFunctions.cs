@@ -237,11 +237,11 @@ namespace SEYR.ImageProcessing
 
         private static async Task<Point> FollowPattern(Bitmap bmp, bool forcePattern, string imageInfo)
         {
-            if (Channel.Project.PatternIntervalValue != 0 && Channel.Pattern != null && LogStream.Header != null)
+            if (Channel.Pattern != null && LogStream.Header != null)
             {
                 if (forcePattern)
                     return await FindPattern(bmp);
-                else
+                else if (Channel.Project.PatternIntervalValue != 0)
                 {
                     string[] cols = LogStream.Header.Split('\t');
                     for (int i = 0; i < cols.Length; i++)
