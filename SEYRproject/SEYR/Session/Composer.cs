@@ -385,7 +385,6 @@ namespace SEYR.Session
         private void ApplyFeature()
         {
             if (LoadingFeature) return;
-            Channel.DebugStream.Write($"Apply {ActiveFeature.Name}");
             UpdateImages();
         }
 
@@ -501,7 +500,6 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Rectangle = new Rectangle((int)NumFeatureX.Value, (int)NumFeatureY.Value, (int)NumFeatureWidth.Value, (int)NumFeatureHeight.Value);
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Rectangle Changed");
             ApplyFeature();
         }
 
@@ -514,7 +512,6 @@ namespace SEYR.Session
             {
                 TxtFeatureName.BackColor = Color.White;
                 ActiveFeature.Name = TxtFeatureName.Text;
-                Channel.DebugStream.Write($"{ActiveFeature.Name} Renamed To {TxtFeatureName.Text}");
                 ApplyFeature();
             }    
         }
@@ -524,7 +521,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
             NumThreshold.Value = (decimal)ActiveFeature.Threshold;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Trackbar Threshold Changed");
             ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
@@ -535,7 +531,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = (float)NumThreshold.Value;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Num Threshold Changed");
             ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
@@ -545,7 +540,6 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.NullDetection = (Feature.NullDetectionTypes)ComboFeatureNullDetection.SelectedIndex;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Detection Changed");
             ApplyFeature();
         }
 
@@ -553,7 +547,6 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.NullFilterPercentage = (float)(NumNullFilterPercentage.Value / 100);
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Null Filter Percentage Changed");
             ApplyFeature();
         }
 
@@ -562,7 +555,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.SaveImage = !ActiveFeature.SaveImage;
             SaveImagePanel.BackgroundImage = ActiveFeature.SaveImage ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Save Image Changed");
             ApplyFeature();
         }
 
@@ -571,7 +563,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.FlipScore = !ActiveFeature.FlipScore;
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Flip Score Changed");
             ApplyFeature();
         }
 

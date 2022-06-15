@@ -83,7 +83,6 @@ namespace SEYR.ImageProcessing
                 Rectangle cropRect = Channel.Project.GetIndexedGeometry(desiredTile.X, desiredTile.Y, Offset);
                 Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
                 await ProcessTile(desiredTile.X, desiredTile.Y, bmp, ref crop, cropRect, desiredFeature, graphics, imageInfo);
-                await Channel.DebugStream.WriteAsync($"Get tile: {desiredTile} and feature: {(desiredFeature == null ? "null" : desiredFeature.Name)}");
                 return (crop, 0.0);
             }
 
