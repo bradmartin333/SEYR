@@ -77,7 +77,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.LabelThreshold = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.TxtFeatureName = new System.Windows.Forms.TextBox();
@@ -94,6 +93,7 @@
             this.BtnApplyFeature = new System.Windows.Forms.Button();
             this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
             this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
+            this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -115,7 +115,7 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.NumThreshold = new System.Windows.Forms.NumericUpDown();
+            this.BtnInfoThreshold = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
@@ -146,11 +146,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
             this.MenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -708,8 +708,8 @@
             // 
             // olvColumn2
             // 
-            this.olvColumn2.AspectName = "Threshold";
-            this.olvColumn2.AspectToStringFormat = "{0}";
+            this.olvColumn2.AspectName = "ThresholdString";
+            this.olvColumn2.AspectToStringFormat = "";
             this.olvColumn2.ButtonSizing = BrightIdeasSoftware.OLVColumn.ButtonSizingMode.CellBounds;
             this.olvColumn2.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn2.IsButton = true;
@@ -765,7 +765,6 @@
             this.tableLayoutPanel3.Controls.Add(this.label16, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.label22, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.label19, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.LabelThreshold, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.TxtFeatureName, 1, 0);
@@ -783,6 +782,7 @@
             this.tableLayoutPanel3.Controls.Add(this.ThresholdTrackBar, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.NumNullFilterPercentage, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.NumThreshold, 4, 2);
+            this.tableLayoutPanel3.Controls.Add(this.BtnInfoThreshold, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -862,17 +862,6 @@
             this.label19.TabIndex = 8;
             this.label19.Text = "Null Detection Type";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LabelThreshold
-            // 
-            this.LabelThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelThreshold.AutoSize = true;
-            this.LabelThreshold.Location = new System.Drawing.Point(3, 71);
-            this.LabelThreshold.Name = "LabelThreshold";
-            this.LabelThreshold.Size = new System.Drawing.Size(101, 13);
-            this.LabelThreshold.TabIndex = 6;
-            this.LabelThreshold.Text = "Threshold";
-            this.LabelThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -1094,6 +1083,15 @@
             0,
             65536});
             this.NumNullFilterPercentage.ValueChanged += new System.EventHandler(this.NumNullFilterPercentage_ValueChanged);
+            // 
+            // NumThreshold
+            // 
+            this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumThreshold.Location = new System.Drawing.Point(341, 67);
+            this.NumThreshold.Name = "NumThreshold";
+            this.NumThreshold.Size = new System.Drawing.Size(78, 20);
+            this.NumThreshold.TabIndex = 26;
+            this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
             // flowLayoutPanel1
             // 
@@ -1334,25 +1332,18 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
-            // NumThreshold
+            // BtnInfoThreshold
             // 
-            this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumThreshold.DecimalPlaces = 2;
-            this.NumThreshold.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.NumThreshold.Location = new System.Drawing.Point(341, 67);
-            this.NumThreshold.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumThreshold.Name = "NumThreshold";
-            this.NumThreshold.Size = new System.Drawing.Size(78, 20);
-            this.NumThreshold.TabIndex = 26;
-            this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
+            this.BtnInfoThreshold.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.BtnInfoThreshold.BackColor = System.Drawing.Color.White;
+            this.BtnInfoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInfoThreshold.Location = new System.Drawing.Point(29, 66);
+            this.BtnInfoThreshold.Name = "BtnInfoThreshold";
+            this.BtnInfoThreshold.Size = new System.Drawing.Size(75, 23);
+            this.BtnInfoThreshold.TabIndex = 27;
+            this.BtnInfoThreshold.Text = "Threshold";
+            this.BtnInfoThreshold.UseVisualStyleBackColor = false;
+            this.BtnInfoThreshold.Click += new System.EventHandler(this.BtnInfoThreshold_Click);
             // 
             // Composer
             // 
@@ -1399,12 +1390,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumFeatureHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1460,7 +1451,6 @@
         private System.Windows.Forms.ToolStripMenuItem ApplyDeskewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClickGridToolStripMenuItem;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label LabelThreshold;
         private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
         private BrightIdeasSoftware.FastObjectListView OLV;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
@@ -1499,5 +1489,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown NumNullFilterPercentage;
         private System.Windows.Forms.NumericUpDown NumThreshold;
+        private System.Windows.Forms.Button BtnInfoThreshold;
     }
 }

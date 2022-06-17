@@ -19,12 +19,13 @@ namespace SEYRDesktop
         {
             InitializeComponent();
 
-            MessageBox.Show("" +
-                "Only use SEYR Desktop if it is absolutely necessary. " +
-                "To deter you, I have added this message to click through " +
-                "as well as dual directory browsers. " +
-                "The dual browsers are also an example of the flexibility " +
-                "of the SEYR file management system.", "Note from bradmartin333");
+            if (!System.Diagnostics.Debugger.IsAttached)
+                MessageBox.Show("" +
+                    "Only use SEYR Desktop if it is absolutely necessary. " +
+                    "To deter you, I have added this message to click through " +
+                    "as well as dual directory browsers. " +
+                    "The dual browsers are also an example of the flexibility " +
+                    "of the SEYR file management system.", "Note from bradmartin333");
         }
 
         private async void NumFrame_ValueChanged(object sender, EventArgs e)

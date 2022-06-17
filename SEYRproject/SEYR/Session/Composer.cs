@@ -262,6 +262,25 @@ namespace SEYR.Session
             ApplyFeature();
         }
 
+        private void BtnInfoThreshold_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null) return;
+            if (ShowThreshold)
+            {
+                Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} to turn off preview");
+                ForceThreshold = -1;
+                ShowThreshold = false;
+                ApplyFeature();
+            }
+            else
+            {
+                Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} and has value {ActiveFeature.Threshold}");
+                ForceThreshold = ActiveFeature.Threshold;
+                ShowThreshold = true;
+                ApplyFeature();
+            }
+        }
+
         private void OLV_DoubleClick(object sender, EventArgs e)
         {
             TabControl.SelectedIndex = 1;
@@ -413,7 +432,7 @@ namespace SEYR.Session
             TxtFeatureName.Text = ActiveFeature.Name;
             Channel.DebugStream.Write("Loaded Name   ", false);
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
-            NumThreshold.Value = (decimal)ActiveFeature.Threshold;
+            NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
             Channel.DebugStream.Write("Loaded Threshold   ", false);
             ComboFeatureNullDetection.SelectedIndex = (int)ActiveFeature.NullDetection;
             Channel.DebugStream.Write("Loaded Null Detection   ", false);
@@ -520,7 +539,7 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
-            NumThreshold.Value = (decimal)ActiveFeature.Threshold;
+            NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
             ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
@@ -529,7 +548,7 @@ namespace SEYR.Session
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Threshold = (float)NumThreshold.Value;
+            ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
             ForceThreshold = -1f;
             ShowThreshold = true;

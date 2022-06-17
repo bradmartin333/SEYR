@@ -43,6 +43,7 @@ namespace SEYR.Session
         private float _LastScore = 0f;
         internal float LastScore { get => _LastScore; set => _LastScore = value; }
         internal bool LastPass { get => Map() - 64 > 0; }
+        public string ThresholdString { get => (Threshold * 100f).ToString(); }
 
         public Feature()
         {
