@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatternWizard));
             this.TLP = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnCloseAndReopen = new System.Windows.Forms.Button();
             this.FlowDelta = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.NumPatternDeltaMax = new System.Windows.Forms.NumericUpDown();
@@ -46,7 +47,6 @@
             this.NumPatternScore = new System.Windows.Forms.NumericUpDown();
             this.BtnFindPatterns = new System.Windows.Forms.Button();
             this.RTB = new System.Windows.Forms.RichTextBox();
-            this.BtnCloseAndReopen = new System.Windows.Forms.Button();
             this.TLP.SuspendLayout();
             this.FlowDelta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPatternDeltaMax)).BeginInit();
@@ -66,24 +66,39 @@
             this.TLP.Controls.Add(this.BtnCloseAndReopen, 1, 5);
             this.TLP.Controls.Add(this.FlowDelta, 0, 4);
             this.TLP.Controls.Add(this.FlowInterval, 0, 3);
-            this.TLP.Controls.Add(this.WizardLabel, 0, 0);
-            this.TLP.Controls.Add(this.PBX, 0, 1);
+            this.TLP.Controls.Add(this.WizardLabel, 0, 1);
+            this.TLP.Controls.Add(this.PBX, 0, 0);
             this.TLP.Controls.Add(this.BtnContinue, 0, 5);
             this.TLP.Controls.Add(this.FlowScore, 0, 2);
-            this.TLP.Controls.Add(this.RTB, 2, 1);
+            this.TLP.Controls.Add(this.RTB, 2, 0);
             this.TLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP.Location = new System.Drawing.Point(0, 0);
             this.TLP.Name = "TLP";
             this.TLP.RowCount = 7;
-            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TLP.Size = new System.Drawing.Size(684, 661);
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TLP.Size = new System.Drawing.Size(684, 611);
             this.TLP.TabIndex = 0;
+            // 
+            // BtnCloseAndReopen
+            // 
+            this.BtnCloseAndReopen.AutoSize = true;
+            this.BtnCloseAndReopen.BackColor = System.Drawing.Color.LightCoral;
+            this.BtnCloseAndReopen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnCloseAndReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCloseAndReopen.Location = new System.Drawing.Point(361, 583);
+            this.BtnCloseAndReopen.Name = "BtnCloseAndReopen";
+            this.BtnCloseAndReopen.Size = new System.Drawing.Size(114, 25);
+            this.BtnCloseAndReopen.TabIndex = 7;
+            this.BtnCloseAndReopen.Text = "Cancel and Reopen";
+            this.BtnCloseAndReopen.UseVisualStyleBackColor = false;
+            this.BtnCloseAndReopen.Click += new System.EventHandler(this.BtnCloseAndReopen_Click);
             // 
             // FlowDelta
             // 
@@ -92,7 +107,7 @@
             this.TLP.SetColumnSpan(this.FlowDelta, 2);
             this.FlowDelta.Controls.Add(this.label5);
             this.FlowDelta.Controls.Add(this.NumPatternDeltaMax);
-            this.FlowDelta.Location = new System.Drawing.Point(131, 601);
+            this.FlowDelta.Location = new System.Drawing.Point(131, 551);
             this.FlowDelta.Name = "FlowDelta";
             this.FlowDelta.Size = new System.Drawing.Size(215, 26);
             this.FlowDelta.TabIndex = 6;
@@ -131,7 +146,7 @@
             this.FlowInterval.Controls.Add(this.ComboPatternInterval);
             this.FlowInterval.Controls.Add(this.label3);
             this.FlowInterval.Controls.Add(this.NumPatternInterval);
-            this.FlowInterval.Location = new System.Drawing.Point(41, 568);
+            this.FlowInterval.Location = new System.Drawing.Point(41, 518);
             this.FlowInterval.Name = "FlowInterval";
             this.FlowInterval.Size = new System.Drawing.Size(395, 27);
             this.FlowInterval.TabIndex = 4;
@@ -183,11 +198,12 @@
             // WizardLabel
             // 
             this.WizardLabel.AutoSize = true;
+            this.TLP.SetColumnSpan(this.WizardLabel, 2);
             this.WizardLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WizardLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WizardLabel.Location = new System.Drawing.Point(3, 0);
+            this.WizardLabel.Location = new System.Drawing.Point(3, 445);
             this.WizardLabel.Name = "WizardLabel";
-            this.WizardLabel.Size = new System.Drawing.Size(352, 30);
+            this.WizardLabel.Size = new System.Drawing.Size(472, 30);
             this.WizardLabel.TabIndex = 0;
             // 
             // PBX
@@ -195,9 +211,9 @@
             this.PBX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.TLP.SetColumnSpan(this.PBX, 2);
             this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PBX.Location = new System.Drawing.Point(3, 33);
+            this.PBX.Location = new System.Drawing.Point(3, 3);
             this.PBX.Name = "PBX";
-            this.PBX.Size = new System.Drawing.Size(472, 489);
+            this.PBX.Size = new System.Drawing.Size(472, 439);
             this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBX.TabIndex = 1;
             this.PBX.TabStop = false;
@@ -208,7 +224,7 @@
             this.BtnContinue.BackColor = System.Drawing.Color.LightGreen;
             this.BtnContinue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnContinue.Location = new System.Drawing.Point(3, 633);
+            this.BtnContinue.Location = new System.Drawing.Point(3, 583);
             this.BtnContinue.Name = "BtnContinue";
             this.BtnContinue.Size = new System.Drawing.Size(352, 25);
             this.BtnContinue.TabIndex = 2;
@@ -224,7 +240,7 @@
             this.FlowScore.Controls.Add(this.label1);
             this.FlowScore.Controls.Add(this.NumPatternScore);
             this.FlowScore.Controls.Add(this.BtnFindPatterns);
-            this.FlowScore.Location = new System.Drawing.Point(80, 528);
+            this.FlowScore.Location = new System.Drawing.Point(80, 478);
             this.FlowScore.Name = "FlowScore";
             this.FlowScore.Size = new System.Drawing.Size(317, 34);
             this.FlowScore.TabIndex = 3;
@@ -287,35 +303,21 @@
             // RTB
             // 
             this.RTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RTB.Location = new System.Drawing.Point(481, 33);
+            this.RTB.Location = new System.Drawing.Point(481, 3);
             this.RTB.Name = "RTB";
-            this.RTB.Size = new System.Drawing.Size(200, 489);
+            this.RTB.Size = new System.Drawing.Size(200, 439);
             this.RTB.TabIndex = 5;
             this.RTB.Text = "";
             this.RTB.Visible = false;
-            // 
-            // BtnCloseAndReopen
-            // 
-            this.BtnCloseAndReopen.AutoSize = true;
-            this.BtnCloseAndReopen.BackColor = System.Drawing.Color.LightCoral;
-            this.BtnCloseAndReopen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnCloseAndReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCloseAndReopen.Location = new System.Drawing.Point(361, 633);
-            this.BtnCloseAndReopen.Name = "BtnCloseAndReopen";
-            this.BtnCloseAndReopen.Size = new System.Drawing.Size(114, 25);
-            this.BtnCloseAndReopen.TabIndex = 7;
-            this.BtnCloseAndReopen.Text = "Cancel and Reopen";
-            this.BtnCloseAndReopen.UseVisualStyleBackColor = false;
-            this.BtnCloseAndReopen.Click += new System.EventHandler(this.BtnCloseAndReopen_Click);
             // 
             // PatternWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 661);
+            this.ClientSize = new System.Drawing.Size(684, 611);
             this.Controls.Add(this.TLP);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(450, 449);
+            this.MinimumSize = new System.Drawing.Size(450, 450);
             this.Name = "PatternWizard";
             this.Text = "Pattern Wizard";
             this.TLP.ResumeLayout(false);

@@ -212,7 +212,7 @@ namespace SEYR.Session
 
         private void IntervalUtility()
         {
-            WizardLabel.Text = "Configure the pattern follow criteria.";
+            WizardLabel.Text = "Configure the pattern follow interval. If using callbacks to trigger the pattern interval, leave the internal inactive and click continue.";
             RTB.Visible = false;
             FlowScore.Visible = false;
             FlowInterval.Visible = true;
