@@ -652,7 +652,7 @@
             this.BtnCopyFeature.Name = "BtnCopyFeature";
             this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnCopyFeature.TabIndex = 3;
-            this.BtnCopyFeature.Text = "Copy";
+            this.BtnCopyFeature.Text = "Duplicate";
             this.BtnCopyFeature.UseVisualStyleBackColor = false;
             this.BtnCopyFeature.Click += new System.EventHandler(this.BtnCopyFeature_Click);
             // 
