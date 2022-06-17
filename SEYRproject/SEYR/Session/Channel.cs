@@ -257,15 +257,30 @@ namespace SEYR.Session
 
         public void OpenComposer(Bitmap bmp)
         {
-            using (Composer w = new Composer((Bitmap)bmp.Clone()))
+            while (true)
             {
-                var result = w.ShowDialog();
-                if (result == DialogResult.OK)
-                    SaveProject();
-                else if (result == DialogResult.Retry)
-                    MakeArchive();
-                else
-                    LoadProject();
+                using (Composer w = new Composer((Bitmap)bmp.Clone()))
+                {
+                    var result = w.ShowDialog();
+                    if (result == DialogResult.Yes)
+                    {
+                        SaveProject();
+                        break;
+                    }    
+                    else if (result == DialogResult.OK)
+                    {
+                        MakeArchive();
+                        SignalComplete();
+                        break;
+                    }    
+                    else if (result == DialogResult.Retry)
+                        LoadProject();
+                    else
+                    {
+                        LoadProject();
+                        break;
+                    }
+                }
             }
         }
 

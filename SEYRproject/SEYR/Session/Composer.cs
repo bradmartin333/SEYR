@@ -288,13 +288,13 @@ namespace SEYR.Session
 
         private void ConfirmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.Yes;
             Close();
         }
 
         private void CancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Retry;
             Close();
         }
 
@@ -679,9 +679,12 @@ namespace SEYR.Session
 
         private void OpenPatternWizardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PatternWizard w = new PatternWizard((Bitmap)InputImage.Clone()))
+            while (true)
             {
-                _ = w.ShowDialog();
+                using (PatternWizard w = new PatternWizard((Bitmap)InputImage.Clone()))
+                {
+                    if (w.ShowDialog() != DialogResult.Retry) break;
+                }
             }
         }
 
@@ -712,7 +715,7 @@ namespace SEYR.Session
 
         private void MakeSEYRUPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Retry;
+            DialogResult = DialogResult.OK;
             Close();
         }
 

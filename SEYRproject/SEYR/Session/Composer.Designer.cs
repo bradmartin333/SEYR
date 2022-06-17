@@ -94,6 +94,7 @@
             this.ThresholdTrackBar = new System.Windows.Forms.TrackBar();
             this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
             this.NumThreshold = new System.Windows.Forms.NumericUpDown();
+            this.BtnInfoThreshold = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -115,7 +116,6 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnInfoThreshold = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
@@ -1093,6 +1093,19 @@
             this.NumThreshold.TabIndex = 26;
             this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
+            // BtnInfoThreshold
+            // 
+            this.BtnInfoThreshold.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.BtnInfoThreshold.BackColor = System.Drawing.Color.White;
+            this.BtnInfoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInfoThreshold.Location = new System.Drawing.Point(29, 66);
+            this.BtnInfoThreshold.Name = "BtnInfoThreshold";
+            this.BtnInfoThreshold.Size = new System.Drawing.Size(75, 23);
+            this.BtnInfoThreshold.TabIndex = 27;
+            this.BtnInfoThreshold.Text = "Threshold";
+            this.BtnInfoThreshold.UseVisualStyleBackColor = false;
+            this.BtnInfoThreshold.Click += new System.EventHandler(this.BtnInfoThreshold_Click);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -1235,16 +1248,16 @@
             // CancelToolStripMenuItem
             // 
             this.CancelToolStripMenuItem.AutoSize = false;
-            this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
+            this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightCoral;
             this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
             this.CancelToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
-            this.CancelToolStripMenuItem.Text = "Close and Reload Project";
+            this.CancelToolStripMenuItem.Text = "Cancel and Reopen";
             this.CancelToolStripMenuItem.Click += new System.EventHandler(this.CancelToolStripMenuItem_Click);
             // 
             // OpenPatternWizardToolStripMenuItem
             // 
             this.OpenPatternWizardToolStripMenuItem.AutoSize = false;
-            this.OpenPatternWizardToolStripMenuItem.BackColor = System.Drawing.Color.Thistle;
+            this.OpenPatternWizardToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
             this.OpenPatternWizardToolStripMenuItem.Name = "OpenPatternWizardToolStripMenuItem";
             this.OpenPatternWizardToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.OpenPatternWizardToolStripMenuItem.Text = "Open Pattern Wizard";
@@ -1331,19 +1344,6 @@
             this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
-            // 
-            // BtnInfoThreshold
-            // 
-            this.BtnInfoThreshold.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.BtnInfoThreshold.BackColor = System.Drawing.Color.White;
-            this.BtnInfoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnInfoThreshold.Location = new System.Drawing.Point(29, 66);
-            this.BtnInfoThreshold.Name = "BtnInfoThreshold";
-            this.BtnInfoThreshold.Size = new System.Drawing.Size(75, 23);
-            this.BtnInfoThreshold.TabIndex = 27;
-            this.BtnInfoThreshold.Text = "Threshold";
-            this.BtnInfoThreshold.UseVisualStyleBackColor = false;
-            this.BtnInfoThreshold.Click += new System.EventHandler(this.BtnInfoThreshold_Click);
             // 
             // Composer
             // 

@@ -251,5 +251,11 @@ namespace SEYR.Session
                     break;
             }
         }
+
+        private void BtnCloseAndReopen_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Retry;
+            Close();
+        }
     }
 }
