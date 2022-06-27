@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SEYR.ImageProcessing
@@ -14,6 +15,7 @@ namespace SEYR.ImageProcessing
                 Location = new Point(screen.X - Width, 0);
             else
                 Location = new Point(0, 0);
+            CheckForImageFeature();
             Show();
             BringToFront();
         }
@@ -24,6 +26,15 @@ namespace SEYR.ImageProcessing
             {
                 e.Cancel = true;
                 Hide();
+            }
+        }
+
+        private void CheckForImageFeature()
+        {
+            if (Session.Channel.Project.Features.Count > 0 && !Session.Channel.Project.Features.Where(x => x.SaveImage).Any())
+            {
+                PBX.BackgroundImage = Properties.Resources.NoImage;
+                InfoLabel.Text = "No features are saving images.";
             }
         }
 
