@@ -25,7 +25,7 @@ namespace SEYR.Session
         internal static LogStream DataStream { get; set; } = null;
         internal static LogStream DebugStream { get; set; } = null;
         internal static LogStream StampStream { get; set; } = null;
-        internal static Viewer Viewer { get; set; }
+        internal static Viewer Viewer { get; set; } = null;
         internal static Bitmap Pattern { get; set; } = null;
         internal static string PatternPath { get; set; } = null;
         internal static string DirPath { get; set; } = null;
