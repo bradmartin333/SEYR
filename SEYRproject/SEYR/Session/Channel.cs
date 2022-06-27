@@ -293,6 +293,15 @@ namespace SEYR.Session
             }
         }
 
+        public void ShowViewer()
+        {
+            if (Viewer != null)
+            {
+                Viewer.Show();
+                Viewer.BringToFront();
+            }
+        }
+
         private static void DiscardViewer()
         {
             foreach (Viewer v in Application.OpenForms.OfType<Viewer>())

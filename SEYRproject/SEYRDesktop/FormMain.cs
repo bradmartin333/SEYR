@@ -193,11 +193,13 @@ namespace SEYRDesktop
         private async void BtnRepeat_Click(object sender, EventArgs e)
         {
             await NextImage();
+            Channel.ShowViewer();
         }
 
         private async void BtnForcePattern_Click(object sender, EventArgs e)
         {
             await NextImage(true);
+            Channel.ShowViewer();
         }
 
         private void CbxStampInspection_CheckedChanged(object sender, EventArgs e)
