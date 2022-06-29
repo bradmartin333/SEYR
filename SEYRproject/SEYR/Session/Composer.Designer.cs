@@ -193,18 +193,21 @@
             this.flowLayoutPanel6.Controls.Add(this.NumSelectedColumn);
             this.flowLayoutPanel6.Controls.Add(this.label9);
             this.flowLayoutPanel6.Controls.Add(this.NumSelectedRow);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(49, 531);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(18, 529);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel6.TabIndex = 16;
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.Location = new System.Drawing.Point(6, 9);
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(6, 3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.Size = new System.Drawing.Size(118, 28);
             this.label8.TabIndex = 6;
             this.label8.Text = "Selected Column";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -212,7 +215,8 @@
             // NumSelectedColumn
             // 
             this.NumSelectedColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedColumn.Location = new System.Drawing.Point(99, 6);
+            this.NumSelectedColumn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSelectedColumn.Location = new System.Drawing.Point(130, 6);
             this.NumSelectedColumn.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -224,7 +228,7 @@
             0,
             0});
             this.NumSelectedColumn.Name = "NumSelectedColumn";
-            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 20);
+            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 22);
             this.NumSelectedColumn.TabIndex = 7;
             this.NumSelectedColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumSelectedColumn.Value = new decimal(new int[] {
@@ -236,10 +240,13 @@
             // 
             // label9
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Location = new System.Drawing.Point(175, 9);
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(206, 3);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.Size = new System.Drawing.Size(118, 28);
             this.label9.TabIndex = 8;
             this.label9.Text = "Selected Row";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -247,7 +254,8 @@
             // NumSelectedRow
             // 
             this.NumSelectedRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedRow.Location = new System.Drawing.Point(268, 6);
+            this.NumSelectedRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSelectedRow.Location = new System.Drawing.Point(330, 6);
             this.NumSelectedRow.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -259,7 +267,7 @@
             0,
             0});
             this.NumSelectedRow.Name = "NumSelectedRow";
-            this.NumSelectedRow.Size = new System.Drawing.Size(70, 20);
+            this.NumSelectedRow.Size = new System.Drawing.Size(70, 22);
             this.NumSelectedRow.TabIndex = 9;
             this.NumSelectedRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumSelectedRow.Value = new decimal(new int[] {
@@ -275,7 +283,7 @@
             this.PbxGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PbxGrid.Location = new System.Drawing.Point(3, 27);
             this.PbxGrid.Name = "PbxGrid";
-            this.PbxGrid.Size = new System.Drawing.Size(436, 308);
+            this.PbxGrid.Size = new System.Drawing.Size(436, 296);
             this.PbxGrid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxGrid.TabIndex = 1;
             this.PbxGrid.TabStop = false;
@@ -287,7 +295,7 @@
             this.PbxTile.Image = ((System.Drawing.Image)(resources.GetObject("PbxTile.Image")));
             this.PbxTile.Location = new System.Drawing.Point(445, 27);
             this.PbxTile.Name = "PbxTile";
-            this.PbxTile.Size = new System.Drawing.Size(436, 308);
+            this.PbxTile.Size = new System.Drawing.Size(436, 296);
             this.PbxTile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxTile.TabIndex = 2;
             this.PbxTile.TabStop = false;
@@ -300,18 +308,21 @@
             this.flowLayoutPanel2.Controls.Add(this.NumOriginX);
             this.flowLayoutPanel2.Controls.Add(this.label4);
             this.flowLayoutPanel2.Controls.Add(this.NumOriginY);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(49, 379);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(18, 369);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.Size = new System.Drawing.Size(118, 28);
             this.label3.TabIndex = 6;
             this.label3.Text = "Origin X (μm)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -319,24 +330,28 @@
             // NumOriginX
             // 
             this.NumOriginX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumOriginX.Location = new System.Drawing.Point(99, 6);
+            this.NumOriginX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumOriginX.Location = new System.Drawing.Point(130, 6);
             this.NumOriginX.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
             this.NumOriginX.Name = "NumOriginX";
-            this.NumOriginX.Size = new System.Drawing.Size(70, 20);
+            this.NumOriginX.Size = new System.Drawing.Size(70, 22);
             this.NumOriginX.TabIndex = 7;
             this.NumOriginX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumOriginX.ValueChanged += new System.EventHandler(this.NumOriginX_ValueChanged);
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(175, 9);
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(206, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.Size = new System.Drawing.Size(118, 28);
             this.label4.TabIndex = 4;
             this.label4.Text = "Origin Y (μm)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -344,14 +359,15 @@
             // NumOriginY
             // 
             this.NumOriginY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumOriginY.Location = new System.Drawing.Point(268, 6);
+            this.NumOriginY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumOriginY.Location = new System.Drawing.Point(330, 6);
             this.NumOriginY.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
             this.NumOriginY.Name = "NumOriginY";
-            this.NumOriginY.Size = new System.Drawing.Size(70, 20);
+            this.NumOriginY.Size = new System.Drawing.Size(70, 22);
             this.NumOriginY.TabIndex = 5;
             this.NumOriginY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumOriginY.ValueChanged += new System.EventHandler(this.NumOriginY_ValueChanged);
@@ -364,18 +380,21 @@
             this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
             this.flowLayoutPanel3.Controls.Add(this.label13);
             this.flowLayoutPanel3.Controls.Add(this.NumPitchY);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(49, 493);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(18, 489);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel3.TabIndex = 5;
             // 
             // label12
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.Location = new System.Drawing.Point(6, 9);
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(6, 3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(87, 13);
+            this.label12.Size = new System.Drawing.Size(118, 28);
             this.label12.TabIndex = 8;
             this.label12.Text = "Pitch X (μm)";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -383,24 +402,28 @@
             // NumPitchX
             // 
             this.NumPitchX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchX.Location = new System.Drawing.Point(99, 6);
+            this.NumPitchX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumPitchX.Location = new System.Drawing.Point(130, 6);
             this.NumPitchX.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
             this.NumPitchX.Name = "NumPitchX";
-            this.NumPitchX.Size = new System.Drawing.Size(70, 20);
+            this.NumPitchX.Size = new System.Drawing.Size(70, 22);
             this.NumPitchX.TabIndex = 9;
             this.NumPitchX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumPitchX.ValueChanged += new System.EventHandler(this.NumPitchX_ValueChanged);
             // 
             // label13
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Location = new System.Drawing.Point(175, 9);
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(206, 3);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.Size = new System.Drawing.Size(118, 28);
             this.label13.TabIndex = 6;
             this.label13.Text = "Pitch Y (μm)";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -408,14 +431,15 @@
             // NumPitchY
             // 
             this.NumPitchY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchY.Location = new System.Drawing.Point(268, 6);
+            this.NumPitchY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumPitchY.Location = new System.Drawing.Point(330, 6);
             this.NumPitchY.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
             this.NumPitchY.Name = "NumPitchY";
-            this.NumPitchY.Size = new System.Drawing.Size(70, 20);
+            this.NumPitchY.Size = new System.Drawing.Size(70, 22);
             this.NumPitchY.TabIndex = 7;
             this.NumPitchY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumPitchY.ValueChanged += new System.EventHandler(this.NumPitchY_ValueChanged);
@@ -428,18 +452,21 @@
             this.flowLayoutPanel4.Controls.Add(this.NumSizeX);
             this.flowLayoutPanel4.Controls.Add(this.label5);
             this.flowLayoutPanel4.Controls.Add(this.NumSizeY);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(49, 417);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(18, 409);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel4.TabIndex = 6;
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Location = new System.Drawing.Point(6, 9);
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 13);
+            this.label6.Size = new System.Drawing.Size(118, 28);
             this.label6.TabIndex = 6;
             this.label6.Text = "Size X (μm)";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -447,7 +474,8 @@
             // NumSizeX
             // 
             this.NumSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSizeX.Location = new System.Drawing.Point(99, 6);
+            this.NumSizeX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSizeX.Location = new System.Drawing.Point(130, 6);
             this.NumSizeX.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -459,7 +487,7 @@
             0,
             0});
             this.NumSizeX.Name = "NumSizeX";
-            this.NumSizeX.Size = new System.Drawing.Size(70, 20);
+            this.NumSizeX.Size = new System.Drawing.Size(70, 22);
             this.NumSizeX.TabIndex = 7;
             this.NumSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumSizeX.Value = new decimal(new int[] {
@@ -471,10 +499,13 @@
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(175, 9);
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(206, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 13);
+            this.label5.Size = new System.Drawing.Size(118, 28);
             this.label5.TabIndex = 8;
             this.label5.Text = "Size Y (μm)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -482,7 +513,8 @@
             // NumSizeY
             // 
             this.NumSizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSizeY.Location = new System.Drawing.Point(268, 6);
+            this.NumSizeY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSizeY.Location = new System.Drawing.Point(330, 6);
             this.NumSizeY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -494,7 +526,7 @@
             0,
             0});
             this.NumSizeY.Name = "NumSizeY";
-            this.NumSizeY.Size = new System.Drawing.Size(70, 20);
+            this.NumSizeY.Size = new System.Drawing.Size(70, 22);
             this.NumSizeY.TabIndex = 9;
             this.NumSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumSizeY.Value = new decimal(new int[] {
@@ -512,18 +544,21 @@
             this.flowLayoutPanel5.Controls.Add(this.NumColumns);
             this.flowLayoutPanel5.Controls.Add(this.LabelScale);
             this.flowLayoutPanel5.Controls.Add(this.NumRows);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(49, 455);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(18, 449);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel5.TabIndex = 7;
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Location = new System.Drawing.Point(6, 9);
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 13);
+            this.label7.Size = new System.Drawing.Size(118, 28);
             this.label7.TabIndex = 6;
             this.label7.Text = "Columns";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -531,7 +566,8 @@
             // NumColumns
             // 
             this.NumColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumColumns.Location = new System.Drawing.Point(99, 6);
+            this.NumColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumColumns.Location = new System.Drawing.Point(130, 6);
             this.NumColumns.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -543,7 +579,7 @@
             0,
             0});
             this.NumColumns.Name = "NumColumns";
-            this.NumColumns.Size = new System.Drawing.Size(70, 20);
+            this.NumColumns.Size = new System.Drawing.Size(70, 22);
             this.NumColumns.TabIndex = 7;
             this.NumColumns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumColumns.Value = new decimal(new int[] {
@@ -555,10 +591,13 @@
             // 
             // LabelScale
             // 
-            this.LabelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelScale.Location = new System.Drawing.Point(175, 9);
+            this.LabelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelScale.Location = new System.Drawing.Point(206, 3);
             this.LabelScale.Name = "LabelScale";
-            this.LabelScale.Size = new System.Drawing.Size(87, 13);
+            this.LabelScale.Size = new System.Drawing.Size(118, 28);
             this.LabelScale.TabIndex = 8;
             this.LabelScale.Text = "Rows";
             this.LabelScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -566,7 +605,8 @@
             // NumRows
             // 
             this.NumRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumRows.Location = new System.Drawing.Point(268, 6);
+            this.NumRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumRows.Location = new System.Drawing.Point(330, 6);
             this.NumRows.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -578,7 +618,7 @@
             0,
             0});
             this.NumRows.Name = "NumRows";
-            this.NumRows.Size = new System.Drawing.Size(70, 20);
+            this.NumRows.Size = new System.Drawing.Size(70, 22);
             this.NumRows.TabIndex = 9;
             this.NumRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumRows.Value = new decimal(new int[] {
@@ -595,21 +635,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabControl.Controls.Add(this.tabPageFeatures);
             this.TabControl.Controls.Add(this.tabPageInfo);
-            this.TabControl.Location = new System.Drawing.Point(445, 341);
+            this.TabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabControl.Location = new System.Drawing.Point(445, 329);
             this.TabControl.Name = "TabControl";
             this.tableLayoutPanel1.SetRowSpan(this.TabControl, 6);
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(436, 222);
+            this.TabControl.Size = new System.Drawing.Size(436, 234);
             this.TabControl.TabIndex = 13;
             // 
             // tabPageFeatures
             // 
             this.tabPageFeatures.BackColor = System.Drawing.Color.LightGray;
             this.tabPageFeatures.Controls.Add(this.tableLayoutPanel2);
-            this.tabPageFeatures.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFeatures.Location = new System.Drawing.Point(4, 25);
             this.tabPageFeatures.Name = "tabPageFeatures";
             this.tabPageFeatures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFeatures.Size = new System.Drawing.Size(428, 196);
+            this.tabPageFeatures.Size = new System.Drawing.Size(428, 205);
             this.tabPageFeatures.TabIndex = 0;
             this.tabPageFeatures.Text = "Selector";
             // 
@@ -630,7 +671,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 190);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 199);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // BtnAddFeature
@@ -649,7 +690,7 @@
             // 
             this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
             this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 66);
+            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 69);
             this.BtnCopyFeature.Name = "BtnCopyFeature";
             this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnCopyFeature.TabIndex = 3;
@@ -661,7 +702,7 @@
             // 
             this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
             this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 129);
+            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 135);
             this.BtnDeleteFeature.Name = "BtnDeleteFeature";
             this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnDeleteFeature.TabIndex = 2;
@@ -685,6 +726,7 @@
             this.olvColumn4});
             this.OLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.OLV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OLV.FullRowSelect = true;
             this.OLV.HideSelection = false;
             this.OLV.Location = new System.Drawing.Point(3, 3);
@@ -692,7 +734,7 @@
             this.OLV.Name = "OLV";
             this.tableLayoutPanel2.SetRowSpan(this.OLV, 3);
             this.OLV.ShowGroups = false;
-            this.OLV.Size = new System.Drawing.Size(335, 184);
+            this.OLV.Size = new System.Drawing.Size(335, 193);
             this.OLV.TabIndex = 4;
             this.OLV.UseCompatibleStateImageBehavior = false;
             this.OLV.View = System.Windows.Forms.View.Details;
@@ -745,10 +787,11 @@
             // 
             this.tabPageInfo.BackColor = System.Drawing.Color.Honeydew;
             this.tabPageInfo.Controls.Add(this.tableLayoutPanel3);
-            this.tabPageInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabPageInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPageInfo.Location = new System.Drawing.Point(4, 25);
             this.tabPageInfo.Name = "tabPageInfo";
             this.tabPageInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInfo.Size = new System.Drawing.Size(428, 196);
+            this.tabPageInfo.Size = new System.Drawing.Size(428, 205);
             this.tabPageInfo.TabIndex = 1;
             this.tabPageInfo.Text = "Information";
             // 
@@ -794,14 +837,14 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 190);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 199);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label20
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(259, 102);
+            this.label20.Location = new System.Drawing.Point(259, 109);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(76, 13);
             this.label20.TabIndex = 24;
@@ -817,14 +860,14 @@
             this.SaveImagePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.SaveImagePanel.Location = new System.Drawing.Point(341, 3);
             this.SaveImagePanel.Name = "SaveImagePanel";
-            this.SaveImagePanel.Size = new System.Drawing.Size(34, 25);
+            this.SaveImagePanel.Size = new System.Drawing.Size(34, 27);
             this.SaveImagePanel.TabIndex = 23;
             // 
             // label23
             // 
             this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(259, 9);
+            this.label23.Location = new System.Drawing.Point(259, 10);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(76, 13);
             this.label23.TabIndex = 22;
@@ -835,7 +878,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 166);
+            this.label16.Location = new System.Drawing.Point(3, 175);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(101, 13);
             this.label16.TabIndex = 14;
@@ -846,7 +889,7 @@
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(259, 40);
+            this.label22.Location = new System.Drawing.Point(259, 43);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(76, 13);
             this.label22.TabIndex = 11;
@@ -857,7 +900,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(3, 102);
+            this.label19.Location = new System.Drawing.Point(3, 109);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(101, 13);
             this.label19.TabIndex = 8;
@@ -868,7 +911,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 9);
+            this.label10.Location = new System.Drawing.Point(3, 10);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(101, 13);
             this.label10.TabIndex = 0;
@@ -879,7 +922,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 40);
+            this.label11.Location = new System.Drawing.Point(3, 43);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(101, 13);
             this.label11.TabIndex = 1;
@@ -890,7 +933,7 @@
             // 
             this.TxtFeatureName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.TxtFeatureName, 2);
-            this.TxtFeatureName.Location = new System.Drawing.Point(110, 5);
+            this.TxtFeatureName.Location = new System.Drawing.Point(110, 6);
             this.TxtFeatureName.Name = "TxtFeatureName";
             this.TxtFeatureName.Size = new System.Drawing.Size(143, 20);
             this.TxtFeatureName.TabIndex = 2;
@@ -900,7 +943,7 @@
             // 
             this.LabelCurrentFeatureScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelCurrentFeatureScore.AutoSize = true;
-            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(110, 40);
+            this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(110, 43);
             this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
             this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(76, 13);
             this.LabelCurrentFeatureScore.TabIndex = 3;
@@ -912,7 +955,7 @@
             this.ComboFeatureNullDetection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.ComboFeatureNullDetection, 2);
             this.ComboFeatureNullDetection.FormattingEnabled = true;
-            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 98);
+            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 103);
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
             this.ComboFeatureNullDetection.Size = new System.Drawing.Size(143, 21);
             this.ComboFeatureNullDetection.TabIndex = 9;
@@ -925,16 +968,16 @@
             this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
             this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
             this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.FlipScorePanel.Location = new System.Drawing.Point(341, 34);
+            this.FlipScorePanel.Location = new System.Drawing.Point(341, 36);
             this.FlipScorePanel.Name = "FlipScorePanel";
-            this.FlipScorePanel.Size = new System.Drawing.Size(34, 25);
+            this.FlipScorePanel.Size = new System.Drawing.Size(34, 27);
             this.FlipScorePanel.TabIndex = 12;
             // 
             // label14
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 133);
+            this.label14.Location = new System.Drawing.Point(3, 142);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(101, 13);
             this.label14.TabIndex = 13;
@@ -945,7 +988,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(192, 133);
+            this.label15.Location = new System.Drawing.Point(192, 142);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 15;
@@ -956,7 +999,7 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(192, 166);
+            this.label17.Location = new System.Drawing.Point(192, 175);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 13);
             this.label17.TabIndex = 16;
@@ -966,7 +1009,7 @@
             // NumFeatureX
             // 
             this.NumFeatureX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureX.Location = new System.Drawing.Point(110, 129);
+            this.NumFeatureX.Location = new System.Drawing.Point(110, 138);
             this.NumFeatureX.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -980,7 +1023,7 @@
             // NumFeatureWidth
             // 
             this.NumFeatureWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureWidth.Location = new System.Drawing.Point(110, 162);
+            this.NumFeatureWidth.Location = new System.Drawing.Point(110, 172);
             this.NumFeatureWidth.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -1004,7 +1047,7 @@
             // NumFeatureY
             // 
             this.NumFeatureY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureY.Location = new System.Drawing.Point(259, 129);
+            this.NumFeatureY.Location = new System.Drawing.Point(259, 138);
             this.NumFeatureY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -1018,7 +1061,7 @@
             // NumFeatureHeight
             // 
             this.NumFeatureHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureHeight.Location = new System.Drawing.Point(259, 162);
+            this.NumFeatureHeight.Location = new System.Drawing.Point(259, 172);
             this.NumFeatureHeight.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -1050,10 +1093,10 @@
             this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
             this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApplyFeature.Location = new System.Drawing.Point(341, 127);
+            this.BtnApplyFeature.Location = new System.Drawing.Point(341, 135);
             this.BtnApplyFeature.Name = "BtnApplyFeature";
             this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
-            this.BtnApplyFeature.Size = new System.Drawing.Size(78, 60);
+            this.BtnApplyFeature.Size = new System.Drawing.Size(78, 61);
             this.BtnApplyFeature.TabIndex = 4;
             this.BtnApplyFeature.UseVisualStyleBackColor = false;
             this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
@@ -1063,10 +1106,10 @@
             this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 3);
             this.ThresholdTrackBar.LargeChange = 1;
-            this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 65);
+            this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 69);
             this.ThresholdTrackBar.Maximum = 100;
             this.ThresholdTrackBar.Name = "ThresholdTrackBar";
-            this.ThresholdTrackBar.Size = new System.Drawing.Size(225, 25);
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(225, 27);
             this.ThresholdTrackBar.TabIndex = 21;
             this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
@@ -1074,7 +1117,7 @@
             // NumNullFilterPercentage
             // 
             this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 98);
+            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 105);
             this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
             this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
             this.NumNullFilterPercentage.TabIndex = 25;
@@ -1088,7 +1131,7 @@
             // NumThreshold
             // 
             this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumThreshold.Location = new System.Drawing.Point(341, 67);
+            this.NumThreshold.Location = new System.Drawing.Point(341, 72);
             this.NumThreshold.Name = "NumThreshold";
             this.NumThreshold.Size = new System.Drawing.Size(78, 20);
             this.NumThreshold.TabIndex = 26;
@@ -1099,7 +1142,7 @@
             this.BtnInfoThreshold.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.BtnInfoThreshold.BackColor = System.Drawing.Color.White;
             this.BtnInfoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnInfoThreshold.Location = new System.Drawing.Point(29, 66);
+            this.BtnInfoThreshold.Location = new System.Drawing.Point(29, 71);
             this.BtnInfoThreshold.Name = "BtnInfoThreshold";
             this.BtnInfoThreshold.Size = new System.Drawing.Size(75, 23);
             this.BtnInfoThreshold.TabIndex = 27;
@@ -1115,18 +1158,21 @@
             this.flowLayoutPanel1.Controls.Add(this.NumScaling);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.NumAngle);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(49, 341);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 329);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 32);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(406, 34);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Location = new System.Drawing.Point(6, 9);
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.Size = new System.Drawing.Size(118, 28);
             this.label2.TabIndex = 2;
             this.label2.Text = "Scaling (%)";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1135,12 +1181,13 @@
             // 
             this.NumScaling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NumScaling.DecimalPlaces = 2;
+            this.NumScaling.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumScaling.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.NumScaling.Location = new System.Drawing.Point(99, 6);
+            this.NumScaling.Location = new System.Drawing.Point(130, 6);
             this.NumScaling.Maximum = new decimal(new int[] {
             1,
             0,
@@ -1152,7 +1199,7 @@
             0,
             131072});
             this.NumScaling.Name = "NumScaling";
-            this.NumScaling.Size = new System.Drawing.Size(70, 20);
+            this.NumScaling.Size = new System.Drawing.Size(70, 22);
             this.NumScaling.TabIndex = 4;
             this.NumScaling.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumScaling.Value = new decimal(new int[] {
@@ -1164,10 +1211,13 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(175, 9);
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(206, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.Size = new System.Drawing.Size(118, 28);
             this.label1.TabIndex = 2;
             this.label1.Text = "Angle";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1176,12 +1226,13 @@
             // 
             this.NumAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NumAngle.DecimalPlaces = 2;
+            this.NumAngle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumAngle.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.NumAngle.Location = new System.Drawing.Point(268, 6);
+            this.NumAngle.Location = new System.Drawing.Point(330, 6);
             this.NumAngle.Maximum = new decimal(new int[] {
             360,
             0,
@@ -1193,7 +1244,7 @@
             0,
             -2147483648});
             this.NumAngle.Name = "NumAngle";
-            this.NumAngle.Size = new System.Drawing.Size(70, 20);
+            this.NumAngle.Size = new System.Drawing.Size(70, 22);
             this.NumAngle.TabIndex = 6;
             this.NumAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumAngle.ValueChanged += new System.EventHandler(this.NumAngle_ValueChanged);
@@ -1202,6 +1253,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(444, 0);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
@@ -1214,6 +1266,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(2, 0);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
@@ -1241,6 +1294,7 @@
             // 
             this.ConfirmToolStripMenuItem.AutoSize = false;
             this.ConfirmToolStripMenuItem.BackColor = System.Drawing.Color.PaleGreen;
+            this.ConfirmToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmToolStripMenuItem.Name = "ConfirmToolStripMenuItem";
             this.ConfirmToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.ConfirmToolStripMenuItem.Text = "Save All";
@@ -1250,6 +1304,7 @@
             // 
             this.CancelToolStripMenuItem.AutoSize = false;
             this.CancelToolStripMenuItem.BackColor = System.Drawing.Color.LightCoral;
+            this.CancelToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
             this.CancelToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.CancelToolStripMenuItem.Text = "Cancel and Reopen";
@@ -1259,6 +1314,7 @@
             // 
             this.OpenPatternWizardToolStripMenuItem.AutoSize = false;
             this.OpenPatternWizardToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
+            this.OpenPatternWizardToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OpenPatternWizardToolStripMenuItem.Name = "OpenPatternWizardToolStripMenuItem";
             this.OpenPatternWizardToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.OpenPatternWizardToolStripMenuItem.Text = "Open Pattern Wizard";
@@ -1276,6 +1332,7 @@
             this.OpenDirectoryToolStripMenuItem,
             this.openFileToolStripMenuItem,
             this.MakeSEYRUPToolStripMenuItem});
+            this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.ToolsToolStripMenuItem.Text = "Tools";
@@ -1283,7 +1340,7 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
@@ -1291,28 +1348,28 @@
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
             this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
             // ClearLogsToolStripMenuItem
             // 
             this.ClearLogsToolStripMenuItem.Name = "ClearLogsToolStripMenuItem";
-            this.ClearLogsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ClearLogsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ClearLogsToolStripMenuItem.Text = "Clear Logs";
             this.ClearLogsToolStripMenuItem.Click += new System.EventHandler(this.ClearLogsToolStripMenuItem_Click);
             // 
             // ClearAllFeatureScoresToolStripMenuItem
             // 
             this.ClearAllFeatureScoresToolStripMenuItem.Name = "ClearAllFeatureScoresToolStripMenuItem";
-            this.ClearAllFeatureScoresToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ClearAllFeatureScoresToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ClearAllFeatureScoresToolStripMenuItem.Text = "Clear All Feature Scores";
             this.ClearAllFeatureScoresToolStripMenuItem.Click += new System.EventHandler(this.ClearAllFeatureScoresToolStripMenuItem_Click);
             // 
             // OpenDirectoryToolStripMenuItem
             // 
             this.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem";
-            this.OpenDirectoryToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.OpenDirectoryToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.OpenDirectoryToolStripMenuItem.Text = "Open Directory";
             this.OpenDirectoryToolStripMenuItem.Click += new System.EventHandler(this.OpenDirectoryToolStripMenuItem_Click);
             // 
@@ -1322,27 +1379,27 @@
             this.ReportToolStripMenuItem,
             this.DebugLogToolStripMenuItem});
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.openFileToolStripMenuItem.Text = "Open File";
             // 
             // ReportToolStripMenuItem
             // 
             this.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem";
-            this.ReportToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.ReportToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.ReportToolStripMenuItem.Text = "Report";
             this.ReportToolStripMenuItem.Click += new System.EventHandler(this.ReportToolStripMenuItem_Click);
             // 
             // DebugLogToolStripMenuItem
             // 
             this.DebugLogToolStripMenuItem.Name = "DebugLogToolStripMenuItem";
-            this.DebugLogToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.DebugLogToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.DebugLogToolStripMenuItem.Text = "Debug Log";
             this.DebugLogToolStripMenuItem.Click += new System.EventHandler(this.DebugLogToolStripMenuItem_Click);
             // 
             // MakeSEYRUPToolStripMenuItem
             // 
             this.MakeSEYRUPToolStripMenuItem.Name = "MakeSEYRUPToolStripMenuItem";
-            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
