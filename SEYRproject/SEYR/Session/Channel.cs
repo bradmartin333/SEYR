@@ -199,13 +199,14 @@ namespace SEYR.Session
             SaveProject(true);
             string[] filesFound = Directory.GetFiles(DirPath, string.Format("*.{0}", "seyrup"), SearchOption.AllDirectories);
             int idx = filesFound.Length;
-            string zipPath = $@"{DirPath}\{idx}.seyrup";
+            string projectName = DirPath.Split('\\').Last();
+            string zipPath = $@"{DirPath}\{projectName}_{idx}.seyrup";
             while (true)
             {
                 if (File.Exists(zipPath))
                 {
                     idx++;
-                    zipPath = $@"{DirPath}\{filesFound.Length}.seyrup";
+                    zipPath = $@"{DirPath}\{projectName}_{idx}.seyrup";
                 }
                 else
                     break;
