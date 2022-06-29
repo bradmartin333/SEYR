@@ -112,7 +112,12 @@ namespace SEYR.Session
             try
             {
                 Channel channel = null;
-                FolderBrowserDialog fbd = new FolderBrowserDialog { Description = "Open a directory for SEYR operations" };
+                FolderBrowserDialog fbd = new FolderBrowserDialog
+                {
+                    Description = "Open a directory for SEYR operations",
+                    ShowNewFolderButton = true,
+                    SelectedPath = Properties.Settings.Default.Folder_Path,
+                };
                 DialogResult result = fbd.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -121,6 +126,8 @@ namespace SEYR.Session
                         channel = new Channel(fbd.SelectedPath, dataHeader, false);
                     else
                         channel = new Channel(fbd.SelectedPath, dataHeader, true);
+                    Properties.Settings.Default.Folder_Path = fbd.SelectedPath;
+                    Properties.Settings.Default.Save();
                 }
                 return channel;
             }
