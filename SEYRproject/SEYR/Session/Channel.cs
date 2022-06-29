@@ -21,6 +21,10 @@ namespace SEYR.Session
         /// Directory within project directory for saving images of interest
         /// </summary>
         public string ImagesDirectory { get; set; } = null;
+        /// <summary>
+        /// SEYR Project's current PxPerMicron value
+        /// </summary>
+        public float PxPerMicron { get => Project.PixelsPerMicron; }
         internal static Project Project { get; set; } = null;
         internal static LogStream DataStream { get; set; } = null;
         internal static LogStream DebugStream { get; set; } = null;

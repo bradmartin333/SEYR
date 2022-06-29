@@ -80,6 +80,7 @@ namespace SEYRDesktop
             Application.DoEvents();
             Channel.ResetAll();
             BUSY = false;
+            NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
             while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
                 Application.DoEvents();
@@ -103,6 +104,7 @@ namespace SEYRDesktop
             BtnRunAll.Enabled = false;
             BtnRestartAndRun.Enabled = false;
             BtnStop.Enabled = true;
+            NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
             while (!STOP && NumFrame.Value <= NumFrame.Maximum)
             {
                 Application.DoEvents();
