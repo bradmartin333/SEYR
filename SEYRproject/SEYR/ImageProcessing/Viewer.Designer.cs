@@ -88,6 +88,7 @@
             this.Name = "Viewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Viewer";
+            this.Load += new System.EventHandler(this.Viewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

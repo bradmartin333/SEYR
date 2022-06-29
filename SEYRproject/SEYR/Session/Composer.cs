@@ -180,6 +180,58 @@ namespace SEYR.Session
             SetupFeatureUI(true);
             UpdateImages();
             if (!Channel.IsNewProject) PbxTile.Image = null;
+            FormClosing += Composer_FormClosing;
+        }
+
+        private void Composer_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.Composer_Valid)
+            {
+                if (Properties.Settings.Default.Composer_Maximized)
+                {
+                    Location = Properties.Settings.Default.Composer_Location;
+                    WindowState = FormWindowState.Maximized;
+                    Size = Properties.Settings.Default.Composer_Size;
+                }
+                else if (Properties.Settings.Default.Composer_Minimized)
+                {
+                    Location = Properties.Settings.Default.Composer_Location;
+                    WindowState = FormWindowState.Minimized;
+                    Size = Properties.Settings.Default.Composer_Size;
+                }
+                else
+                {
+                    Location = Properties.Settings.Default.Composer_Location;
+                    Size = Properties.Settings.Default.Composer_Size;
+                }
+            }
+            Properties.Settings.Default.Composer_Valid = true;
+        }
+
+        private void Composer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                Properties.Settings.Default.Composer_Location = RestoreBounds.Location;
+                Properties.Settings.Default.Composer_Size = RestoreBounds.Size;
+                Properties.Settings.Default.Composer_Maximized = true;
+                Properties.Settings.Default.Composer_Minimized = false;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.Composer_Location = Location;
+                Properties.Settings.Default.Composer_Size = Size;
+                Properties.Settings.Default.Composer_Maximized = false;
+                Properties.Settings.Default.Composer_Minimized = false;
+            }
+            else
+            {
+                Properties.Settings.Default.Composer_Location = RestoreBounds.Location;
+                Properties.Settings.Default.Composer_Size = RestoreBounds.Size;
+                Properties.Settings.Default.Composer_Maximized = false;
+                Properties.Settings.Default.Composer_Minimized = true;
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void InitializeHandlers()
@@ -717,6 +769,12 @@ namespace SEYR.Session
         {
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void ResetWindowLayoutsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Composer_Valid = false;
+            Properties.Settings.Default.Viewer_Valid = false;
         }
 
         #endregion

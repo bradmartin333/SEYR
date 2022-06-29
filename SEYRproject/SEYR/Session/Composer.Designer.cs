@@ -30,11 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.NumSelectedColumn = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.NumSelectedRow = new System.Windows.Forms.NumericUpDown();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
             this.PbxTile = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -42,21 +37,6 @@
             this.NumOriginX = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.NumOriginY = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.NumPitchX = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.NumPitchY = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.NumSizeX = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.NumSizeY = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.NumColumns = new System.Windows.Forms.NumericUpDown();
-            this.LabelScale = new System.Windows.Forms.Label();
-            this.NumRows = new System.Windows.Forms.NumericUpDown();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -102,6 +82,26 @@
             this.NumAngle = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.NumSizeX = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.NumSizeY = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.NumColumns = new System.Windows.Forms.NumericUpDown();
+            this.LabelScale = new System.Windows.Forms.Label();
+            this.NumRows = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.NumPitchX = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.NumPitchY = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.NumSelectedColumn = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.NumSelectedRow = new System.Windows.Forms.NumericUpDown();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.ConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,24 +116,13 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).BeginInit();
-            this.flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPitchX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPitchY)).BeginInit();
-            this.flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSizeX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSizeY)).BeginInit();
-            this.flowLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumRows)).BeginInit();
             this.TabControl.SuspendLayout();
             this.tabPageFeatures.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -150,6 +139,18 @@
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSizeX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSizeY)).BeginInit();
+            this.flowLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumRows)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPitchX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPitchY)).BeginInit();
+            this.flowLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -184,98 +185,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(884, 566);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel6.AutoSize = true;
-            this.flowLayoutPanel6.Controls.Add(this.label8);
-            this.flowLayoutPanel6.Controls.Add(this.NumSelectedColumn);
-            this.flowLayoutPanel6.Controls.Add(this.label9);
-            this.flowLayoutPanel6.Controls.Add(this.NumSelectedRow);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(18, 529);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(406, 34);
-            this.flowLayoutPanel6.TabIndex = 16;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 28);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Selected Column";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSelectedColumn
-            // 
-            this.NumSelectedColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedColumn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumSelectedColumn.Location = new System.Drawing.Point(130, 6);
-            this.NumSelectedColumn.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.Name = "NumSelectedColumn";
-            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 22);
-            this.NumSelectedColumn.TabIndex = 7;
-            this.NumSelectedColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSelectedColumn.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedColumn.ValueChanged += new System.EventHandler(this.NumSelectedColumn_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(206, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(118, 28);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Selected Row";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSelectedRow
-            // 
-            this.NumSelectedRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSelectedRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumSelectedRow.Location = new System.Drawing.Point(330, 6);
-            this.NumSelectedRow.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.Name = "NumSelectedRow";
-            this.NumSelectedRow.Size = new System.Drawing.Size(70, 22);
-            this.NumSelectedRow.TabIndex = 9;
-            this.NumSelectedRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSelectedRow.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSelectedRow.ValueChanged += new System.EventHandler(this.NumSelectedRow_ValueChanged);
             // 
             // PbxGrid
             // 
@@ -371,262 +280,6 @@
             this.NumOriginY.TabIndex = 5;
             this.NumOriginY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumOriginY.ValueChanged += new System.EventHandler(this.NumOriginY_ValueChanged);
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel3.AutoSize = true;
-            this.flowLayoutPanel3.Controls.Add(this.label12);
-            this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
-            this.flowLayoutPanel3.Controls.Add(this.label13);
-            this.flowLayoutPanel3.Controls.Add(this.NumPitchY);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(18, 489);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(406, 34);
-            this.flowLayoutPanel3.TabIndex = 5;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(118, 28);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "Pitch X (μm)";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumPitchX
-            // 
-            this.NumPitchX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumPitchX.Location = new System.Drawing.Point(130, 6);
-            this.NumPitchX.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumPitchX.Name = "NumPitchX";
-            this.NumPitchX.Size = new System.Drawing.Size(70, 22);
-            this.NumPitchX.TabIndex = 9;
-            this.NumPitchX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumPitchX.ValueChanged += new System.EventHandler(this.NumPitchX_ValueChanged);
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(206, 3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(118, 28);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Pitch Y (μm)";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumPitchY
-            // 
-            this.NumPitchY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumPitchY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumPitchY.Location = new System.Drawing.Point(330, 6);
-            this.NumPitchY.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumPitchY.Name = "NumPitchY";
-            this.NumPitchY.Size = new System.Drawing.Size(70, 22);
-            this.NumPitchY.TabIndex = 7;
-            this.NumPitchY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumPitchY.ValueChanged += new System.EventHandler(this.NumPitchY_ValueChanged);
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel4.AutoSize = true;
-            this.flowLayoutPanel4.Controls.Add(this.label6);
-            this.flowLayoutPanel4.Controls.Add(this.NumSizeX);
-            this.flowLayoutPanel4.Controls.Add(this.label5);
-            this.flowLayoutPanel4.Controls.Add(this.NumSizeY);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(18, 409);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(406, 34);
-            this.flowLayoutPanel4.TabIndex = 6;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(118, 28);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Size X (μm)";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSizeX
-            // 
-            this.NumSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSizeX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumSizeX.Location = new System.Drawing.Point(130, 6);
-            this.NumSizeX.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSizeX.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSizeX.Name = "NumSizeX";
-            this.NumSizeX.Size = new System.Drawing.Size(70, 22);
-            this.NumSizeX.TabIndex = 7;
-            this.NumSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSizeX.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSizeX.ValueChanged += new System.EventHandler(this.NumSizeX_ValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(206, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 28);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Size Y (μm)";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumSizeY
-            // 
-            this.NumSizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumSizeY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumSizeY.Location = new System.Drawing.Point(330, 6);
-            this.NumSizeY.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumSizeY.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSizeY.Name = "NumSizeY";
-            this.NumSizeY.Size = new System.Drawing.Size(70, 22);
-            this.NumSizeY.TabIndex = 9;
-            this.NumSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumSizeY.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSizeY.ValueChanged += new System.EventHandler(this.NumSizeY_ValueChanged);
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanel5.AutoSize = true;
-            this.flowLayoutPanel5.Controls.Add(this.label7);
-            this.flowLayoutPanel5.Controls.Add(this.NumColumns);
-            this.flowLayoutPanel5.Controls.Add(this.LabelScale);
-            this.flowLayoutPanel5.Controls.Add(this.NumRows);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(18, 449);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(406, 34);
-            this.flowLayoutPanel5.TabIndex = 7;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 28);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Columns";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumColumns
-            // 
-            this.NumColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumColumns.Location = new System.Drawing.Point(130, 6);
-            this.NumColumns.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumColumns.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumColumns.Name = "NumColumns";
-            this.NumColumns.Size = new System.Drawing.Size(70, 22);
-            this.NumColumns.TabIndex = 7;
-            this.NumColumns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumColumns.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumColumns.ValueChanged += new System.EventHandler(this.NumColumns_ValueChanged);
-            // 
-            // LabelScale
-            // 
-            this.LabelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelScale.Location = new System.Drawing.Point(206, 3);
-            this.LabelScale.Name = "LabelScale";
-            this.LabelScale.Size = new System.Drawing.Size(118, 28);
-            this.LabelScale.TabIndex = 8;
-            this.LabelScale.Text = "Rows";
-            this.LabelScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumRows
-            // 
-            this.NumRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumRows.Location = new System.Drawing.Point(330, 6);
-            this.NumRows.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.NumRows.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumRows.Name = "NumRows";
-            this.NumRows.Size = new System.Drawing.Size(70, 22);
-            this.NumRows.TabIndex = 9;
-            this.NumRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumRows.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumRows.ValueChanged += new System.EventHandler(this.NumRows_ValueChanged);
             // 
             // TabControl
             // 
@@ -955,7 +608,7 @@
             this.ComboFeatureNullDetection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.ComboFeatureNullDetection, 2);
             this.ComboFeatureNullDetection.FormattingEnabled = true;
-            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 103);
+            this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 105);
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
             this.ComboFeatureNullDetection.Size = new System.Drawing.Size(143, 21);
             this.ComboFeatureNullDetection.TabIndex = 9;
@@ -1275,6 +928,354 @@
             this.label21.Text = "Feature Grid";
             this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel4.AutoSize = true;
+            this.flowLayoutPanel4.Controls.Add(this.label6);
+            this.flowLayoutPanel4.Controls.Add(this.NumSizeX);
+            this.flowLayoutPanel4.Controls.Add(this.label5);
+            this.flowLayoutPanel4.Controls.Add(this.NumSizeY);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(18, 409);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(406, 34);
+            this.flowLayoutPanel4.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(118, 28);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Size X (μm)";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSizeX
+            // 
+            this.NumSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSizeX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSizeX.Location = new System.Drawing.Point(130, 6);
+            this.NumSizeX.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSizeX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSizeX.Name = "NumSizeX";
+            this.NumSizeX.Size = new System.Drawing.Size(70, 22);
+            this.NumSizeX.TabIndex = 7;
+            this.NumSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSizeX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSizeX.ValueChanged += new System.EventHandler(this.NumSizeX_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(206, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(118, 28);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Size Y (μm)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSizeY
+            // 
+            this.NumSizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSizeY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSizeY.Location = new System.Drawing.Point(330, 6);
+            this.NumSizeY.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSizeY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSizeY.Name = "NumSizeY";
+            this.NumSizeY.Size = new System.Drawing.Size(70, 22);
+            this.NumSizeY.TabIndex = 9;
+            this.NumSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSizeY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSizeY.ValueChanged += new System.EventHandler(this.NumSizeY_ValueChanged);
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.Controls.Add(this.label7);
+            this.flowLayoutPanel5.Controls.Add(this.NumColumns);
+            this.flowLayoutPanel5.Controls.Add(this.LabelScale);
+            this.flowLayoutPanel5.Controls.Add(this.NumRows);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(18, 449);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(406, 34);
+            this.flowLayoutPanel5.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(118, 28);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Columns";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumColumns
+            // 
+            this.NumColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumColumns.Location = new System.Drawing.Point(130, 6);
+            this.NumColumns.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumColumns.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumColumns.Name = "NumColumns";
+            this.NumColumns.Size = new System.Drawing.Size(70, 22);
+            this.NumColumns.TabIndex = 7;
+            this.NumColumns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumColumns.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumColumns.ValueChanged += new System.EventHandler(this.NumColumns_ValueChanged);
+            // 
+            // LabelScale
+            // 
+            this.LabelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelScale.Location = new System.Drawing.Point(206, 3);
+            this.LabelScale.Name = "LabelScale";
+            this.LabelScale.Size = new System.Drawing.Size(118, 28);
+            this.LabelScale.TabIndex = 8;
+            this.LabelScale.Text = "Rows";
+            this.LabelScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumRows
+            // 
+            this.NumRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumRows.Location = new System.Drawing.Point(330, 6);
+            this.NumRows.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumRows.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumRows.Name = "NumRows";
+            this.NumRows.Size = new System.Drawing.Size(70, 22);
+            this.NumRows.TabIndex = 9;
+            this.NumRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumRows.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumRows.ValueChanged += new System.EventHandler(this.NumRows_ValueChanged);
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.Controls.Add(this.label12);
+            this.flowLayoutPanel3.Controls.Add(this.NumPitchX);
+            this.flowLayoutPanel3.Controls.Add(this.label13);
+            this.flowLayoutPanel3.Controls.Add(this.NumPitchY);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(18, 489);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(406, 34);
+            this.flowLayoutPanel3.TabIndex = 5;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(6, 3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 28);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "Pitch X (μm)";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumPitchX
+            // 
+            this.NumPitchX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumPitchX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumPitchX.Location = new System.Drawing.Point(130, 6);
+            this.NumPitchX.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumPitchX.Name = "NumPitchX";
+            this.NumPitchX.Size = new System.Drawing.Size(70, 22);
+            this.NumPitchX.TabIndex = 9;
+            this.NumPitchX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumPitchX.ValueChanged += new System.EventHandler(this.NumPitchX_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(206, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(118, 28);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Pitch Y (μm)";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumPitchY
+            // 
+            this.NumPitchY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumPitchY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumPitchY.Location = new System.Drawing.Point(330, 6);
+            this.NumPitchY.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumPitchY.Name = "NumPitchY";
+            this.NumPitchY.Size = new System.Drawing.Size(70, 22);
+            this.NumPitchY.TabIndex = 7;
+            this.NumPitchY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumPitchY.ValueChanged += new System.EventHandler(this.NumPitchY_ValueChanged);
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.flowLayoutPanel6.AutoSize = true;
+            this.flowLayoutPanel6.Controls.Add(this.label8);
+            this.flowLayoutPanel6.Controls.Add(this.NumSelectedColumn);
+            this.flowLayoutPanel6.Controls.Add(this.label9);
+            this.flowLayoutPanel6.Controls.Add(this.NumSelectedRow);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(18, 529);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(406, 34);
+            this.flowLayoutPanel6.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(6, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(118, 28);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Selected Column";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSelectedColumn
+            // 
+            this.NumSelectedColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSelectedColumn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSelectedColumn.Location = new System.Drawing.Point(130, 6);
+            this.NumSelectedColumn.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.Name = "NumSelectedColumn";
+            this.NumSelectedColumn.Size = new System.Drawing.Size(70, 22);
+            this.NumSelectedColumn.TabIndex = 7;
+            this.NumSelectedColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSelectedColumn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedColumn.ValueChanged += new System.EventHandler(this.NumSelectedColumn_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(206, 3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(118, 28);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Selected Row";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumSelectedRow
+            // 
+            this.NumSelectedRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumSelectedRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumSelectedRow.Location = new System.Drawing.Point(330, 6);
+            this.NumSelectedRow.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.Name = "NumSelectedRow";
+            this.NumSelectedRow.Size = new System.Drawing.Size(70, 22);
+            this.NumSelectedRow.TabIndex = 9;
+            this.NumSelectedRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumSelectedRow.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSelectedRow.ValueChanged += new System.EventHandler(this.NumSelectedRow_ValueChanged);
+            // 
             // MenuStrip
             // 
             this.MenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1331,7 +1332,8 @@
             this.ClearAllFeatureScoresToolStripMenuItem,
             this.OpenDirectoryToolStripMenuItem,
             this.openFileToolStripMenuItem,
-            this.MakeSEYRUPToolStripMenuItem});
+            this.MakeSEYRUPToolStripMenuItem,
+            this.ResetWindowLayoutsToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1403,6 +1405,13 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
+            // ResetWindowLayoutsToolStripMenuItem
+            // 
+            this.ResetWindowLayoutsToolStripMenuItem.Name = "ResetWindowLayoutsToolStripMenuItem";
+            this.ResetWindowLayoutsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
+            this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1416,25 +1425,14 @@
             this.Name = "Composer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Composer";
+            this.Load += new System.EventHandler(this.Composer_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOriginY)).EndInit();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumPitchX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPitchY)).EndInit();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSizeX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSizeY)).EndInit();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumRows)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.tabPageFeatures.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1452,6 +1450,18 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumSizeX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSizeY)).EndInit();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumColumns)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumRows)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumPitchX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPitchY)).EndInit();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -1548,5 +1558,6 @@
         private System.Windows.Forms.NumericUpDown NumNullFilterPercentage;
         private System.Windows.Forms.NumericUpDown NumThreshold;
         private System.Windows.Forms.Button BtnInfoThreshold;
+        private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
     }
 }
