@@ -34,5 +34,125 @@ namespace SEYR.Properties {
                 this["Folder_Path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point Composer_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["Composer_Location"]));
+            }
+            set {
+                this["Composer_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point Viewer_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["Viewer_Location"]));
+            }
+            set {
+                this["Viewer_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size Composer_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["Composer_Size"]));
+            }
+            set {
+                this["Composer_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size Viewer_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["Viewer_Size"]));
+            }
+            set {
+                this["Viewer_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Composer_Maximized {
+            get {
+                return ((bool)(this["Composer_Maximized"]));
+            }
+            set {
+                this["Composer_Maximized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Viewer_Maximized {
+            get {
+                return ((bool)(this["Viewer_Maximized"]));
+            }
+            set {
+                this["Viewer_Maximized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Composer_Minimized {
+            get {
+                return ((bool)(this["Composer_Minimized"]));
+            }
+            set {
+                this["Composer_Minimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Viewer_Minimized {
+            get {
+                return ((bool)(this["Viewer_Minimized"]));
+            }
+            set {
+                this["Viewer_Minimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Composer_Valid {
+            get {
+                return ((bool)(this["Composer_Valid"]));
+            }
+            set {
+                this["Composer_Valid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Viewer_Valid {
+            get {
+                return ((bool)(this["Viewer_Valid"]));
+            }
+            set {
+                this["Viewer_Valid"] = value;
+            }
+        }
     }
 }
