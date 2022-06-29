@@ -324,7 +324,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 28);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Origin X (μm)";
+            this.label3.Text = "Position X (μm)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumOriginX
@@ -353,7 +353,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(118, 28);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Origin Y (μm)";
+            this.label4.Text = "Position Y (μm)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumOriginY
