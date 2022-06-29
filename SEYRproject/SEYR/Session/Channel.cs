@@ -155,11 +155,14 @@ namespace SEYR.Session
 
         public void SaveProjectTo(string path)
         {
-            using (StreamWriter stream = new StreamWriter(path))
+            if (File.Exists(PatternPath)) File.Copy(PatternPath, path + @"\SEYRpattern.png");
+            using (StreamWriter stream = new StreamWriter(path + @"\project.seyr"))
             {
                 XmlSerializer x = new XmlSerializer(typeof(Project));
                 x.Serialize(stream, Project);
             }
+            Properties.Settings.Default.Folder_Path = path;
+            Properties.Settings.Default.Save();
             DiscardViewer();
         }
 
@@ -201,7 +204,10 @@ namespace SEYR.Session
         /// <summary>
         /// Make an archive (SEYRUP file) of all active files
         /// </summary>
-        public void MakeArchive()
+        /// <param name="signalComplete">
+        /// Show big green eye when done archiving
+        /// </param>
+        public void MakeArchive(bool signalComplete = true)
         {
             DebugStream.Write($"Compressing files", addDT: true, showInViewer: true);
             Viewer.UpdateImage(Properties.Resources.SEYRworking, force: true);
@@ -232,6 +238,8 @@ namespace SEYR.Session
                 zip.CreateEntryFromFile(ProjectPath, Path.GetFileName(ProjectPath));
                 if (Pattern != null) zip.CreateEntryFromFile(DirPath + @"\SEYRpattern.png", "SEYRpattern.png");
             }
+
+            if (signalComplete) SignalComplete();
         }
 
         public void SignalComplete()
@@ -246,7 +254,6 @@ namespace SEYR.Session
         {
             MakeArchive();
             ClearLogs();
-            ClearAllFeatureScores();
         }
 
         #endregion
@@ -292,7 +299,6 @@ namespace SEYR.Session
                     else if (result == DialogResult.OK)
                     {
                         MakeArchive();
-                        SignalComplete();
                         break;
                     }    
                     else if (result == DialogResult.Retry)
