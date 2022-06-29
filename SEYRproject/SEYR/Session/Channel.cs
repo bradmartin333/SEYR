@@ -42,7 +42,7 @@ namespace SEYR.Session
         /// <param name="projectDir"></param>
         /// <param name="dataHeader"></param>
         /// <param name="isNewProject"></param>
-        public Channel(string projectDir, string dataHeader, bool isNewProject)
+        public Channel(string projectDir, string dataHeader = "ImageNumber\tX\tY\tRR\tRC\tR\tC\tSR\tSC\t", bool isNewProject = false)
         {
             IsNewProject = isNewProject;
             DirPath = projectDir;
@@ -151,6 +151,16 @@ namespace SEYR.Session
             }
             DebugStream.Write("Project Saved", addDT: true);
             if (!preserveViewer) DiscardViewer();
+        }
+
+        public void SaveProjectTo(string path)
+        {
+            using (StreamWriter stream = new StreamWriter(path))
+            {
+                XmlSerializer x = new XmlSerializer(typeof(Project));
+                x.Serialize(stream, Project);
+            }
+            DiscardViewer();
         }
 
         private void LoadProject()
@@ -314,7 +324,7 @@ namespace SEYR.Session
             }
         }
 
-        private static void DiscardViewer()
+        public static void DiscardViewer()
         {
             foreach (Viewer v in Application.OpenForms.OfType<Viewer>())
                 v.Close();
