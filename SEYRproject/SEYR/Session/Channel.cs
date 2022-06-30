@@ -50,6 +50,7 @@ namespace SEYR.Session
             DebugStream = new LogStream(DirPath + @"\SEYRdebug.txt", isDebug: true);
             ProjectPath = DirPath + @"\project.seyr";
             PatternPath = DirPath + @"\SEYRpattern.png";
+            Pattern = null;
             if (isNewProject)
             {
                 Project = new Project();
