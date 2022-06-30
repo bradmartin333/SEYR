@@ -37,11 +37,12 @@
             this.TrackbarThreshold = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
-            this.LblThreshold = new System.Windows.Forms.Label();
+            this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackbarThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -57,7 +58,7 @@
             this.tableLayoutPanel.Controls.Add(this.TrackbarThreshold, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel.Controls.Add(this.NumScaling, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.LblThreshold, 2, 2);
+            this.tableLayoutPanel.Controls.Add(this.NumThreshold, 2, 2);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -175,16 +176,25 @@
             65536});
             this.NumScaling.ValueChanged += new System.EventHandler(this.NumScaling_ValueChanged);
             // 
-            // LblThreshold
+            // NumThreshold
             // 
-            this.LblThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblThreshold.AutoSize = true;
-            this.LblThreshold.Location = new System.Drawing.Point(406, 381);
-            this.LblThreshold.Name = "LblThreshold";
-            this.LblThreshold.Size = new System.Drawing.Size(25, 13);
-            this.LblThreshold.TabIndex = 16;
-            this.LblThreshold.Text = "170";
-            this.LblThreshold.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumThreshold.Location = new System.Drawing.Point(366, 371);
+            this.NumThreshold.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumThreshold.Name = "NumThreshold";
+            this.NumThreshold.Size = new System.Drawing.Size(65, 20);
+            this.NumThreshold.TabIndex = 16;
+            this.NumThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumThreshold.Value = new decimal(new int[] {
+            170,
+            0,
+            0,
+            0});
+            this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
             // StampParameterEntry
             // 
@@ -201,6 +211,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackbarThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -215,6 +226,6 @@
         private System.Windows.Forms.TrackBar TrackbarThreshold;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown NumScaling;
-        private System.Windows.Forms.Label LblThreshold;
+        private System.Windows.Forms.NumericUpDown NumThreshold;
     }
 }

@@ -49,11 +49,17 @@ namespace SEYR.ImageProcessing
             if (!LOADING) ApplyFilters();
         }
 
-        private async void ApplyFilters()
+        private void NumThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            if (!LOADING) ApplyFilters(false);
+        }
+
+        private async void ApplyFilters(bool trackbar = true)
         {
             StampScaling = (double)NumScaling.Value;
-            StampThreshold = TrackbarThreshold.Value;
-            LblThreshold.Text = StampThreshold.ToString();
+            StampThreshold = (int)(trackbar ? TrackbarThreshold.Value : NumThreshold.Value);
+            TrackbarThreshold.Value = StampThreshold;
+            NumThreshold.Value = StampThreshold;
             (Bitmap, Bitmap, double) stampResult = await ProcessStampImage(Train, setup: true);
             PBX.BackgroundImage = stampResult.Item1;
             PBX.Image = stampResult.Item2;
