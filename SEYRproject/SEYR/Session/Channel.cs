@@ -98,7 +98,6 @@ namespace SEYR.Session
             foreach (Feature feature in Project.Features)
                 feature.ClearScore();
             SaveProject();
-            DiscardViewer();
         }
 
         #region Opening and Closing

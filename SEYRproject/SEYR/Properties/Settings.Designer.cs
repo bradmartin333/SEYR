@@ -61,7 +61,7 @@ namespace SEYR.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("900, 635")]
         public global::System.Drawing.Size Composer_Size {
             get {
                 return ((global::System.Drawing.Size)(this["Composer_Size"]));
@@ -73,7 +73,7 @@ namespace SEYR.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("500, 500")]
         public global::System.Drawing.Size Viewer_Size {
             get {
                 return ((global::System.Drawing.Size)(this["Viewer_Size"]));
