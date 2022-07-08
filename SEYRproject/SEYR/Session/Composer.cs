@@ -180,6 +180,7 @@ namespace SEYR.Session
             SetupFeatureUI(true);
             UpdateImages();
             if (!Channel.IsNewProject) PbxTile.Image = null;
+            BtnAddImageFeature.Visible = !Channel.Project.HasImageFeature();
             FormClosing += Composer_FormClosing;
         }
 
@@ -538,6 +539,27 @@ namespace SEYR.Session
             Feature feature = new Feature();
             AddFeature(feature);
             Channel.DebugStream.Write($"{feature.Name} Added");
+        }
+
+        private void BtnAddImageFeature_Click(object sender, EventArgs e)
+        {
+            if (Features.Where(x => x.Name.ToLower().Contains("img")).Any())
+            {
+                MessageBox.Show("Feature with name that contains \"img\" already exists. Edit that feature name then try again.", "SEYR Composer");
+                return;
+            }
+
+            Feature feature = new Feature()
+            {
+                Name = "IMG",
+                Rectangle = Channel.Project.GetTileRectangle(),
+                SaveImage = true,
+                NullFilterPercentage = 0.0f,
+                Threshold = 0.5f,
+            };
+            AddFeature(feature);
+            Channel.DebugStream.Write($"{feature.Name} Added (Auto Image)");
+            BtnAddImageFeature.Visible = false;
         }
 
         private void AddFeature(Feature feature)

@@ -71,6 +71,8 @@ namespace SEYR.Session
             return new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
         }
 
+        public Rectangle GetTileRectangle() => new Rectangle(0, 0, SizeX - 1, SizeY - 1);
+
         public bool HasImageFeature()
         {
             foreach (Feature feature in Features)

@@ -49,6 +49,7 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.BtnAddImageFeature = new System.Windows.Forms.Button();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
@@ -312,18 +313,20 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.BtnAddFeature, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.OLV, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.OLV, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnAddImageFeature, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 199);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -343,7 +346,7 @@
             // 
             this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
             this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 69);
+            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 40);
             this.BtnCopyFeature.Name = "BtnCopyFeature";
             this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnCopyFeature.TabIndex = 3;
@@ -355,7 +358,7 @@
             // 
             this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
             this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 135);
+            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 77);
             this.BtnDeleteFeature.Name = "BtnDeleteFeature";
             this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
             this.BtnDeleteFeature.TabIndex = 2;
@@ -385,7 +388,7 @@
             this.OLV.Location = new System.Drawing.Point(3, 3);
             this.OLV.MultiSelect = false;
             this.OLV.Name = "OLV";
-            this.tableLayoutPanel2.SetRowSpan(this.OLV, 3);
+            this.tableLayoutPanel2.SetRowSpan(this.OLV, 5);
             this.OLV.ShowGroups = false;
             this.OLV.Size = new System.Drawing.Size(335, 193);
             this.OLV.TabIndex = 4;
@@ -435,6 +438,19 @@
             this.olvColumn4.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn4.Text = "Flip Score";
             this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // BtnAddImageFeature
+            // 
+            this.BtnAddImageFeature.BackColor = System.Drawing.Color.White;
+            this.BtnAddImageFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddImageFeature.Location = new System.Drawing.Point(344, 114);
+            this.BtnAddImageFeature.Name = "BtnAddImageFeature";
+            this.BtnAddImageFeature.Size = new System.Drawing.Size(75, 63);
+            this.BtnAddImageFeature.TabIndex = 5;
+            this.BtnAddImageFeature.Text = "Add Image Feature";
+            this.BtnAddImageFeature.UseVisualStyleBackColor = false;
+            this.BtnAddImageFeature.Visible = false;
+            this.BtnAddImageFeature.Click += new System.EventHandler(this.BtnAddImageFeature_Click);
             // 
             // tabPageInfo
             // 
@@ -1559,5 +1575,6 @@
         private System.Windows.Forms.NumericUpDown NumThreshold;
         private System.Windows.Forms.Button BtnInfoThreshold;
         private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
+        private System.Windows.Forms.Button BtnAddImageFeature;
     }
 }
