@@ -79,7 +79,7 @@ namespace SEYR.ImageProcessing
 
         private void CheckForImageFeature()
         {
-            if (Session.Channel.Project.Features.Count > 0 && !Session.Channel.Project.Features.Where(x => x.SaveImage).Any())
+            if (!Session.Channel.Project.HasImageFeature())
             {
                 PBX.BackgroundImage = Properties.Resources.NoImage;
                 InfoLabel.Text = "No features are saving images.";

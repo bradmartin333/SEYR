@@ -70,5 +70,13 @@ namespace SEYR.Session
             int thisY = rectangle.Y + (int)(j * ScaledPixelsPerMicron * PitchY) - offset.Y;
             return new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
         }
+
+        public bool HasImageFeature()
+        {
+            foreach (Feature feature in Features)
+                if (feature.SaveImage) 
+                    return true;
+            return false;
+        }
     }
 }
