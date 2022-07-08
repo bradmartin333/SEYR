@@ -1343,7 +1343,7 @@
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
             this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.ApplyDeskewToolStripMenuItem.Text = "Apply Deskew";
+            this.ApplyDeskewToolStripMenuItem.Text = "Find Grid Angle";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
             // ClickGridToolStripMenuItem
