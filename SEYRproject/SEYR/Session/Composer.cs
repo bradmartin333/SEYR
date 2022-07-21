@@ -364,8 +364,8 @@ namespace SEYR.Session
             Point point = ZoomMousePos(e.Location, PbxTile.Size, PbxTile.BackgroundImage.Size);
             if (ActiveFeature != null)
             {
-                NumFeatureX.Value = point.X;
-                NumFeatureY.Value = point.Y;
+                NumFeatureX.Value = point.X - (NumFeatureWidth.Value / 2);
+                NumFeatureY.Value = point.Y - (NumFeatureHeight.Value / 2);
             }
             ClickGrid = false;
             ToolsToolStripMenuItem.Text = "Tools";
@@ -378,8 +378,8 @@ namespace SEYR.Session
             if (Channel.IsNewProject || ClickGrid)
             {
                 Point point = ZoomMousePos(e.Location, PbxGrid.Size, PbxGrid.BackgroundImage.Size);
-                NumOriginX.Value = point.X;
-                NumOriginY.Value = point.Y;
+                NumOriginX.Value = point.X - (NumSizeX.Value / 2);
+                NumOriginY.Value = point.Y - (NumSizeY.Value / 2);
                 ClickGrid = false;
                 if (Channel.IsNewProject)
                 {

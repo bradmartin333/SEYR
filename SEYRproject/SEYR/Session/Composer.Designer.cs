@@ -41,14 +41,14 @@
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnAddFeature = new System.Windows.Forms.Button();
-            this.BtnCopyFeature = new System.Windows.Forms.Button();
-            this.BtnDeleteFeature = new System.Windows.Forms.Button();
             this.OLV = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.BtnCopyFeature = new System.Windows.Forms.Button();
+            this.BtnDeleteFeature = new System.Windows.Forms.Button();
             this.BtnAddImageFeature = new System.Windows.Forms.Button();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -247,6 +247,11 @@
             0,
             0,
             0});
+            this.NumOriginX.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
             this.NumOriginX.Name = "NumOriginX";
             this.NumOriginX.Size = new System.Drawing.Size(70, 22);
             this.NumOriginX.TabIndex = 7;
@@ -276,6 +281,11 @@
             0,
             0,
             0});
+            this.NumOriginY.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
             this.NumOriginY.Name = "NumOriginY";
             this.NumOriginY.Size = new System.Drawing.Size(70, 22);
             this.NumOriginY.TabIndex = 5;
@@ -341,30 +351,6 @@
             this.BtnAddFeature.Text = "Add";
             this.BtnAddFeature.UseVisualStyleBackColor = false;
             this.BtnAddFeature.Click += new System.EventHandler(this.BtnAddFeature_Click);
-            // 
-            // BtnCopyFeature
-            // 
-            this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
-            this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 40);
-            this.BtnCopyFeature.Name = "BtnCopyFeature";
-            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
-            this.BtnCopyFeature.TabIndex = 3;
-            this.BtnCopyFeature.Text = "Duplicate";
-            this.BtnCopyFeature.UseVisualStyleBackColor = false;
-            this.BtnCopyFeature.Click += new System.EventHandler(this.BtnCopyFeature_Click);
-            // 
-            // BtnDeleteFeature
-            // 
-            this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
-            this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 77);
-            this.BtnDeleteFeature.Name = "BtnDeleteFeature";
-            this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
-            this.BtnDeleteFeature.TabIndex = 2;
-            this.BtnDeleteFeature.Text = "Delete";
-            this.BtnDeleteFeature.UseVisualStyleBackColor = false;
-            this.BtnDeleteFeature.Click += new System.EventHandler(this.BtnDeleteFeature_Click);
             // 
             // OLV
             // 
@@ -438,6 +424,30 @@
             this.olvColumn4.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn4.Text = "Flip Score";
             this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // BtnCopyFeature
+            // 
+            this.BtnCopyFeature.BackColor = System.Drawing.Color.White;
+            this.BtnCopyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCopyFeature.Location = new System.Drawing.Point(344, 40);
+            this.BtnCopyFeature.Name = "BtnCopyFeature";
+            this.BtnCopyFeature.Size = new System.Drawing.Size(75, 31);
+            this.BtnCopyFeature.TabIndex = 3;
+            this.BtnCopyFeature.Text = "Duplicate";
+            this.BtnCopyFeature.UseVisualStyleBackColor = false;
+            this.BtnCopyFeature.Click += new System.EventHandler(this.BtnCopyFeature_Click);
+            // 
+            // BtnDeleteFeature
+            // 
+            this.BtnDeleteFeature.BackColor = System.Drawing.Color.White;
+            this.BtnDeleteFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDeleteFeature.Location = new System.Drawing.Point(344, 77);
+            this.BtnDeleteFeature.Name = "BtnDeleteFeature";
+            this.BtnDeleteFeature.Size = new System.Drawing.Size(75, 31);
+            this.BtnDeleteFeature.TabIndex = 2;
+            this.BtnDeleteFeature.Text = "Delete";
+            this.BtnDeleteFeature.UseVisualStyleBackColor = false;
+            this.BtnDeleteFeature.Click += new System.EventHandler(this.BtnDeleteFeature_Click);
             // 
             // BtnAddImageFeature
             // 
@@ -684,6 +694,11 @@
             0,
             0,
             0});
+            this.NumFeatureX.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
             this.NumFeatureX.Name = "NumFeatureX";
             this.NumFeatureX.Size = new System.Drawing.Size(76, 20);
             this.NumFeatureX.TabIndex = 17;
@@ -722,6 +737,11 @@
             0,
             0,
             0});
+            this.NumFeatureY.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
             this.NumFeatureY.Name = "NumFeatureY";
             this.NumFeatureY.Size = new System.Drawing.Size(76, 20);
             this.NumFeatureY.TabIndex = 19;
