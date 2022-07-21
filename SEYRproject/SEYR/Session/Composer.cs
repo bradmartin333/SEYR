@@ -390,6 +390,33 @@ namespace SEYR.Session
                     ToolsToolStripMenuItem.Text = "Tools";
                 UpdateImages();
             }
+            else
+            {
+                Point pointRaw = ZoomMousePos(e.Location, PbxGrid.Size, PbxGrid.BackgroundImage.Size, true);
+                Point hit = HitTest(pointRaw);
+                if (hit != Point.Empty)
+                {
+                    NumSelectedColumn.Value = hit.X;
+                    NumSelectedRow.Value = hit.Y;
+                    UpdateImages();
+                }
+            }
+        }
+
+        private Point HitTest(Point point)
+        {
+            Rectangle rectangle = Channel.Project.GetGeometry();
+            for (int i = 0; i < Columns; i++)
+            {
+                for (int j = Rows - 1; j >= 0; j--)
+                {
+                    int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
+                    int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                    Rectangle rect = new Rectangle(thisX, thisY, rectangle.Width, rectangle.Height);
+                    if (rect.Contains(point)) return new Point(i + 1, Rows - j);
+                }
+            }
+            return Point.Empty;
         }
 
         /// <summary>
@@ -400,10 +427,11 @@ namespace SEYR.Session
         /// </param>
         /// <param name="pbxSize"></param>
         /// <param name="imgSize"></param>
+        /// <param name="raw"></param>
         /// <returns>
         /// Pixel coordinates
         /// </returns>
-        private Point ZoomMousePos(Point click, Size pbxSize, Size imgSize)
+        private Point ZoomMousePos(Point click, Size pbxSize, Size imgSize, bool raw = false)
         {
             float imageAspect = imgSize.Width / (float)imgSize.Height;
             float controlAspect = pbxSize.Width / (float)pbxSize.Height;
@@ -430,8 +458,8 @@ namespace SEYR.Session
                 pos.X -= diffWidth;
                 pos.X /= scale;
             }
-            return new Point((int)(pos.X / Channel.Project.ScaledPixelsPerMicron), 
-                (int)(pos.Y / Channel.Project.ScaledPixelsPerMicron));
+            return new Point((int)(pos.X / (raw ? 1 : Channel.Project.ScaledPixelsPerMicron)), 
+                (int)(pos.Y / (raw ? 1 : Channel.Project.ScaledPixelsPerMicron)));
         }
 
         #endregion
