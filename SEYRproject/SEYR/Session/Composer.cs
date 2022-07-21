@@ -170,6 +170,9 @@ namespace SEYR.Session
         private float ForceThreshold = -1f;
         private bool ShowThreshold = false;
         private bool LoadingFeature = true;
+        private Control[] TabOrder;
+        private int TabOrderIndex = -1; // Initial override
+        private const int TabOrderMidline = 12; // Where tab flows over to the feature panel
 
         public Composer(Bitmap bitmap)
         {
@@ -177,11 +180,26 @@ namespace SEYR.Session
             InputImage = bitmap;
             InitializeHandlers();
             InitializeUI();
+            InitializeTabOrder();
             SetupFeatureUI(true);
             UpdateImages();
             if (!Channel.IsNewProject) PbxTile.Image = null;
             BtnAddImageFeature.Visible = !Channel.Project.HasImageFeature();
             FormClosing += Composer_FormClosing;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Tab:
+                    TabOrderIndex++;
+                    if (TabOrderIndex > TabOrder.Length - 1) TabOrderIndex = 0;
+                    if (TabControl.SelectedIndex == 0 && TabOrderIndex >= TabOrderMidline) TabOrderIndex = 0;
+                    TabOrder[TabOrderIndex].Focus();
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void Composer_Load(object sender, EventArgs e)
@@ -258,6 +276,41 @@ namespace SEYR.Session
             NumSizeY.Value = SizeY;
             NumColumns.Value = Columns;
             NumRows.Value = Rows;
+        }
+
+        private void InitializeTabOrder()
+        {
+            TabOrder = new Control[]
+            {
+                NumScaling, NumAngle, NumOriginX, NumOriginY, NumSizeX, NumSizeY,
+                NumColumns, NumRows, NumPitchX, NumPitchY, NumSelectedColumn, NumSelectedRow,
+                NumThreshold, NumNullFilterPercentage, NumFeatureX, NumFeatureY, NumFeatureWidth, NumFeatureHeight,
+            };
+
+            foreach (Control item in TabOrder)
+            {
+                item.GotFocus += Item_GotFocus;
+                item.Click += Item_Click;
+            }
+        }
+
+        private void Item_GotFocus(object sender, EventArgs e)
+        {
+            SelectNum(sender);
+        }
+
+        private void Item_Click(object sender, EventArgs e)
+        {
+            if (TabOrderIndex == -1) TabOrderIndex = 0; // Override return in SelectNum
+            SelectNum(sender);
+        }
+
+        private void SelectNum(object sender)
+        {
+            if (TabOrderIndex == -1) return;
+            NumericUpDown num = (NumericUpDown)sender;
+            num.Select(0, num.Text.Length);
+            TabOrderIndex = TabOrder.ToList().IndexOf((Control)sender);
         }
 
         private void UpdateImages()
@@ -531,8 +584,8 @@ namespace SEYR.Session
         private void LoadNullFeature()
         {
             LoadingFeature = true;
-            NumFeatureX.Value = NumFeatureX.Minimum;
-            NumFeatureY.Value = NumFeatureY.Minimum;
+            NumFeatureX.Value = 0;
+            NumFeatureY.Value = 0;
             NumFeatureWidth.Value = NumFeatureWidth.Minimum;
             NumFeatureHeight.Value = NumFeatureHeight.Minimum;
             TxtFeatureName.Text = "No Feature Selected";
