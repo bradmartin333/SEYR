@@ -34,7 +34,7 @@ namespace SEYR.Session
         internal static string PatternPath { get; set; } = null;
         internal static string DirPath { get; set; } = null;
         internal static bool IsNewProject { get; set; } = false;
-        private static string ProjectPath { get; set; } = null;
+        internal static string ProjectPath { get; set; } = null;
 
         /// <summary>
         /// Create instance of a SEYR Channel
@@ -166,10 +166,29 @@ namespace SEYR.Session
             DiscardViewer();
         }
 
-        private void LoadProject()
+        /// <summary>
+        /// Used when importing project.seyr
+        /// </summary>
+        /// <param name="path"></param>
+        public void SetAndLoadProject(string path)
         {
-            DebugStream.Write($"Loading Project\t{ProjectPath}", addDT: true);
-            using (StreamReader stream = new StreamReader(ProjectPath))
+            IsNewProject = false;
+            LoadProject(path);
+            string testPattern = path.Replace("project.seyr", "SEYRpattern.png");
+            if (File.Exists(testPattern)) File.Copy(testPattern, PatternPath, true);
+            using (StreamWriter stream = new StreamWriter(ProjectPath))
+            {
+                XmlSerializer x = new XmlSerializer(typeof(Project));
+                x.Serialize(stream, Project);
+            }
+            DiscardViewer();
+        }
+
+        private void LoadProject(string path = null)
+        {
+            string thisPath = string.IsNullOrEmpty(path) ? ProjectPath : path;
+            DebugStream.Write($"Loading Project\t{thisPath}", addDT: true);
+            using (StreamReader stream = new StreamReader(thisPath))
             {
                 XmlSerializer x = new XmlSerializer(typeof(Project));
                 try
@@ -288,19 +307,19 @@ namespace SEYR.Session
         {
             while (true)
             {
-                using (Composer w = new Composer((Bitmap)bmp.Clone()))
+                using (Composer w = new Composer((Bitmap)bmp.Clone(), this))
                 {
                     var result = w.ShowDialog();
                     if (result == DialogResult.Yes)
                     {
                         SaveProject();
                         break;
-                    }    
+                    }
                     else if (result == DialogResult.OK)
                     {
                         MakeArchive();
                         break;
-                    }    
+                    }
                     else if (result == DialogResult.Retry)
                         LoadProject();
                     else

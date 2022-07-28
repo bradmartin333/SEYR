@@ -166,6 +166,7 @@ namespace SEYR.Session
             } 
         }
         private readonly Bitmap InputImage;
+        private readonly Channel HostChannel; // Really ugly, but easiest way to import project.seyr
         private bool ClickGrid = false;
         private float ForceThreshold = -1f;
         private bool ShowThreshold = false;
@@ -174,10 +175,11 @@ namespace SEYR.Session
         private int TabOrderIndex = -1; // Initial override
         private const int TabOrderMidline = 12; // Where tab flows over to the feature panel
 
-        public Composer(Bitmap bitmap)
+        public Composer(Bitmap bitmap, Channel channel)
         {
             InitializeComponent();
             InputImage = bitmap;
+            HostChannel = channel;
             InitializeHandlers();
             InitializeUI();
             InitializeTabOrder();
@@ -876,7 +878,33 @@ namespace SEYR.Session
 
         private void ImportProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Title = "Import a project.seyr file",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "seyr",
+                Filter = "seyr files (*.seyr)|*.seyr",
+                FilterIndex = 2,
+                RestoreDirectory = false,
+                InitialDirectory = Properties.Settings.Default.Folder_Path,
+            };
 
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (ofd.FileName == Channel.ProjectPath)
+                {
+                    MessageBox.Show("Cannot import active project.", "SEYR");
+                    return;
+                }
+                HostChannel.SetAndLoadProject(ofd.FileName);
+                ClickGrid = false;
+                PbxTile.Image = null;
+                UpdateImages();
+                InitializeUI();
+                SetupFeatureUI(true);
+                BringToFront();
+            }
         }
 
         private void ResetWindowLayoutsToolStripMenuItem_Click(object sender, EventArgs e)

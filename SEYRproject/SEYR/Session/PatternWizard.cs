@@ -92,14 +92,21 @@ namespace SEYR.Session
 
         private void SavePattern()
         {
-            if (CropRectangle == Rectangle.Empty) return;
-            Bitmap crop = new Bitmap(CropRectangle.Width, CropRectangle.Height, PixelFormat.Format24bppRgb);
-            using (Graphics g = Graphics.FromImage(crop))
+            try
             {
-                g.DrawImage(InputImage, new Rectangle(Point.Empty, CropRectangle.Size), CropRectangle, GraphicsUnit.Pixel);
+                if (CropRectangle == Rectangle.Empty) return;
+                Bitmap crop = new Bitmap(CropRectangle.Width, CropRectangle.Height, PixelFormat.Format24bppRgb);
+                using (Graphics g = Graphics.FromImage(crop))
+                {
+                    g.DrawImage(InputImage, new Rectangle(Point.Empty, CropRectangle.Size), CropRectangle, GraphicsUnit.Pixel);
+                }
+                crop.Save(Channel.PatternPath);
+                Channel.Pattern = crop;
             }
-            crop.Save(Channel.PatternPath);
-            Channel.Pattern = crop;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to save pattern: {ex}", "SEYR");
+            }  
         }
 
         /// <summary>
