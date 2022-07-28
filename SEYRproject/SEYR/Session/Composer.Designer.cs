@@ -118,6 +118,7 @@
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1369,6 +1370,7 @@
             this.OpenDirectoryToolStripMenuItem,
             this.openFileToolStripMenuItem,
             this.MakeSEYRUPToolStripMenuItem,
+            this.ImportProjectToolStripMenuItem,
             this.ResetWindowLayoutsToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
@@ -1447,6 +1449,13 @@
             this.ResetWindowLayoutsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
+            // 
+            // ImportProjectToolStripMenuItem
+            // 
+            this.ImportProjectToolStripMenuItem.Name = "ImportProjectToolStripMenuItem";
+            this.ImportProjectToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ImportProjectToolStripMenuItem.Text = "Import \"project.seyr\"";
+            this.ImportProjectToolStripMenuItem.Click += new System.EventHandler(this.ImportProjectToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1596,5 +1605,6 @@
         private System.Windows.Forms.Button BtnInfoThreshold;
         private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
         private System.Windows.Forms.Button BtnAddImageFeature;
+        private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
     }
 }

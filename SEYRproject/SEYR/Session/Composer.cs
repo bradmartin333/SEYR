@@ -874,6 +874,11 @@ namespace SEYR.Session
             Close();
         }
 
+        private void ImportProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ResetWindowLayoutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Composer_Valid = false;
