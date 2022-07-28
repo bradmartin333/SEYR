@@ -415,8 +415,8 @@ namespace SEYR.ImageProcessing
                 {
                     for (int j = Channel.Project.Rows - 1; j >= 0; j--)
                     {
-                        int thisX = rectangle.X + (int)(i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX);
-                        int thisY = rectangle.Y + (int)(j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY);
+                        int thisX = (int)(rectangle.X + (i * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchX) - Offset.X);
+                        int thisY = (int)(rectangle.Y + (j * Channel.Project.ScaledPixelsPerMicron * Channel.Project.PitchY) - Offset.Y);
                         g.DrawRectangle(new Pen((i == tileColumn - 1 && Channel.Project.Rows - tileRow == j) ? Brushes.HotPink : Brushes.LawnGreen,
                             (float)(Math.Min(bmp.Height, bmp.Width) * 0.005)),
                             thisX, thisY, rectangle.Width, rectangle.Height);
