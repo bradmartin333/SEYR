@@ -432,6 +432,8 @@ namespace SEYR.ImageProcessing
             return result.Item1;
         }
 
+        public static void ResetOffset() => Offset = Point.Empty;
+
         #endregion
 
         #region Boilerplate Methods

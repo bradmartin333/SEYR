@@ -913,6 +913,12 @@ namespace SEYR.Session
             Properties.Settings.Default.Viewer_Valid = false;
         }
 
+        private void ResetPatternOffsetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BitmapFunctions.ResetOffset();
+            UpdateImages();
+        }
+
         #endregion
     }
 }

@@ -117,8 +117,9 @@
             this.ReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeSEYRUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1371,6 +1372,7 @@
             this.openFileToolStripMenuItem,
             this.MakeSEYRUPToolStripMenuItem,
             this.ImportProjectToolStripMenuItem,
+            this.ResetPatternOffsetToolStripMenuItem,
             this.ResetWindowLayoutsToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
@@ -1443,6 +1445,13 @@
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
+            // ImportProjectToolStripMenuItem
+            // 
+            this.ImportProjectToolStripMenuItem.Name = "ImportProjectToolStripMenuItem";
+            this.ImportProjectToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ImportProjectToolStripMenuItem.Text = "Import \"project.seyr\"";
+            this.ImportProjectToolStripMenuItem.Click += new System.EventHandler(this.ImportProjectToolStripMenuItem_Click);
+            // 
             // ResetWindowLayoutsToolStripMenuItem
             // 
             this.ResetWindowLayoutsToolStripMenuItem.Name = "ResetWindowLayoutsToolStripMenuItem";
@@ -1450,12 +1459,12 @@
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
             // 
-            // ImportProjectToolStripMenuItem
+            // ResetPatternOffsetToolStripMenuItem
             // 
-            this.ImportProjectToolStripMenuItem.Name = "ImportProjectToolStripMenuItem";
-            this.ImportProjectToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.ImportProjectToolStripMenuItem.Text = "Import \"project.seyr\"";
-            this.ImportProjectToolStripMenuItem.Click += new System.EventHandler(this.ImportProjectToolStripMenuItem_Click);
+            this.ResetPatternOffsetToolStripMenuItem.Name = "ResetPatternOffsetToolStripMenuItem";
+            this.ResetPatternOffsetToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ResetPatternOffsetToolStripMenuItem.Text = "Reset Pattern Offset";
+            this.ResetPatternOffsetToolStripMenuItem.Click += new System.EventHandler(this.ResetPatternOffsetToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1606,5 +1615,6 @@
         private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
         private System.Windows.Forms.Button BtnAddImageFeature;
         private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
     }
 }
