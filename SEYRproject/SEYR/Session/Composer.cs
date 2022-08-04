@@ -810,9 +810,20 @@ namespace SEYR.Session
 
         #region Tools
 
+        private void BtnDeskewWand_Click(object sender, EventArgs e)
+        {
+            Deskew();
+        }
+
         private void ApplyDeskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Deskew();
+        }
+
+        private void Deskew()
+        {
             ToolsToolStripMenuItem.Text = "Working...";
+            BtnDeskewWand.BackColor = Color.LightGreen;
             Application.DoEvents();
             try
             {
@@ -826,6 +837,7 @@ namespace SEYR.Session
                 Channel.DebugStream.Write($"Deskew Failed: {ex}");
             }
             ToolsToolStripMenuItem.Text = "Tools";
+            BtnDeskewWand.BackColor = SystemColors.Control;
         }
 
         private void ClickGridToolStripMenuItem_Click(object sender, EventArgs e)

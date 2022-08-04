@@ -19,6 +19,8 @@
 	<SignAssembly>False</SignAssembly>
 	<EnableNETAnalyzers>False</EnableNETAnalyzers>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageReleaseNotes>Add magic wand for deskew</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\..\SEYR.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
