@@ -82,7 +82,7 @@ namespace SEYR.ImageProcessing
             if (!Session.Channel.Project.HasImageFeature())
             {
                 PBX.BackgroundImage = Properties.Resources.NoImage;
-                InfoLabel.Text = "No features are saving images.";
+                InfoLabel.Text = "No features are saving images. Continue if desired.";
             }
         }
 
