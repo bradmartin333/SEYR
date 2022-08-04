@@ -123,24 +123,27 @@ namespace SEYR.ImageProcessing
                     {
                         (float score, string compression) = AnalyzeData(tile, feature, imageInfo);
                         feature.UpdateScore(score);
-                        if (score == 0f) // Special pass
+                        if (feature.Name != "IMG")
                         {
-                            g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
-                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
-                                g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                        }
-                        else if (score == -10f) // Special fail
-                        {
-                            g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
-                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
-                                g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                            numNullFail++;
-                        }
-                        else // Normal
-                        {
-                            g.DrawRectangle(new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
-                            if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                            if (score == 0f) // Special pass
+                            {
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.LawnGreen)), feature.GetGeometry());
+                                if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special pass selected
+                                    g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                            }
+                            else if (score == -10f) // Special fail
+                            {
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Firebrick)), feature.GetGeometry());
+                                if (desiredFeature != null && feature.Name == desiredFeature.Name) // Special fail selected
+                                    g.DrawRectangle(new Pen(Color.Black, Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                                numNullFail++;
+                            }
+                            else // Normal
+                            {
+                                g.DrawRectangle(new Pen(feature.ColorFromScore(), Channel.Project.ScaledPixelsPerMicron), feature.GetGeometry());
+                                if (desiredFeature != null && feature.Name == desiredFeature.Name) // Normal Selected
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gold)), feature.GetGeometry());
+                            }
                         }
                         bool pass = feature.LastPass;
                         if (desiredFeature == null) outputData += $"{imageInfo}{Channel.Project.Rows - j}\t{i + 1}\t{feature.Name}\t{score:f3}\t{pass}\t{compression}\n";

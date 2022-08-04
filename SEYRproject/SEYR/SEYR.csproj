@@ -20,7 +20,7 @@
 	<EnableNETAnalyzers>False</EnableNETAnalyzers>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<PackageReleaseNotes>Add magic wand for deskew, updated the NoImg status</PackageReleaseNotes>
+	<PackageReleaseNotes>Add magic wand for deskew, updated the NoImg status, hide IMG features from being drawn</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
