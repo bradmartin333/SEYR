@@ -121,6 +121,7 @@
             this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnDeleteDisablePattern = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1389,7 +1390,8 @@
             this.MakeSEYRUPToolStripMenuItem,
             this.ImportProjectToolStripMenuItem,
             this.ResetPatternOffsetToolStripMenuItem,
-            this.ResetWindowLayoutsToolStripMenuItem});
+            this.ResetWindowLayoutsToolStripMenuItem,
+            this.BtnDeleteDisablePattern});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1481,6 +1483,13 @@
             this.ResetWindowLayoutsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
+            // 
+            // BtnDeleteDisablePattern
+            // 
+            this.BtnDeleteDisablePattern.Name = "BtnDeleteDisablePattern";
+            this.BtnDeleteDisablePattern.Size = new System.Drawing.Size(235, 22);
+            this.BtnDeleteDisablePattern.Text = "Delete and Disable Pattern";
+            this.BtnDeleteDisablePattern.Click += new System.EventHandler(this.BtnDeleteDisablePattern_Click);
             // 
             // Composer
             // 
@@ -1633,5 +1642,6 @@
         private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
+        private System.Windows.Forms.ToolStripMenuItem BtnDeleteDisablePattern;
     }
 }

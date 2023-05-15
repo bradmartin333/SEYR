@@ -356,6 +356,12 @@ namespace SEYR.Session
             Viewer = new Viewer();
         }
 
+        public static void DeleteDisablePattern()
+        {
+            Pattern = null;
+            if (File.Exists(PatternPath)) File.Delete(PatternPath);
+        }
+
         #endregion
     }
 }

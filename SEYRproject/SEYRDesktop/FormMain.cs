@@ -78,26 +78,33 @@ namespace SEYRDesktop
 
         private async void BtnRunAll_Click(object sender, EventArgs e)
         {
-            BtnRunAll.Enabled = false;
-            BtnRestartAndRun.Enabled = false;
-            BtnStop.Enabled = true;
-            NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
-            while (!STOP && NumFrame.Value <= NumFrame.Maximum)
+            try
             {
-                Application.DoEvents();
-                await NextImage();
-                NumFrame.Value++;
+                BtnRunAll.Enabled = false;
+                BtnRestartAndRun.Enabled = false;
+                BtnStop.Enabled = true;
+                NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
+                while (!STOP && NumFrame.Value <= NumFrame.Maximum)
+                {
+                    Application.DoEvents();
+                    await NextImage();
+                    NumFrame.Value++;
+                }
+                BtnRunAll.Enabled = true;
+                BtnRestartAndRun.Enabled = true;
+                BtnStop.Enabled = false;
+                if (!STOP)
+                {
+                    Channel.MakeArchive();
+                    Channel.SignalComplete();
+                    ProgressBar.Value = 0;
+                }
+                STOP = false;
             }
-            BtnRunAll.Enabled = true;
-            BtnRestartAndRun.Enabled = true;
-            BtnStop.Enabled = false;
-            if (!STOP)
+            catch (Exception)
             {
-                Channel.MakeArchive();
-                Channel.SignalComplete();
-                ProgressBar.Value = 0;
+                // Lol, SEYRdesktop is a mess
             }
-            STOP = false;
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
