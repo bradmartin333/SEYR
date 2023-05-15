@@ -174,10 +174,17 @@ namespace SEYR.Session
         private Control[] TabOrder;
         private int TabOrderIndex = -1; // Initial override
         private const int TabOrderMidline = 12; // Where tab flows over to the feature panel
+        private static int[] CustomColors = null;
 
         public Composer(Bitmap bitmap, Channel channel)
         {
             InitializeComponent();
+            if (CustomColors == null)
+            {
+                CustomColors = new int[16];
+                for (int i = 0; i < 16; i++)
+                     CustomColors[i] = BitConverter.ToInt32(new byte[] { 255, 255, 255, 0x00 }, 0);
+            }
             InputImage = bitmap;
             HostChannel = channel;
             InitializeHandlers();
@@ -752,10 +759,13 @@ namespace SEYR.Session
                 AllowFullOpen = true,
                 AnyColor = true,
                 SolidColorOnly = true,
+                FullOpen = true,
                 Color = ActiveFeature.EntropyBalance,
+                CustomColors = CustomColors,
             };
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
+                CustomColors = colorDialog.CustomColors;
                 Color c = colorDialog.Color;
                 ActiveFeature.RedFactor = c.R / 255f;
                 ActiveFeature.GreenFactor = c.G / 255f;
