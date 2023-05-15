@@ -39,8 +39,8 @@
             this.BtnStop = new System.Windows.Forms.Button();
             this.BtnOpenComposer = new System.Windows.Forms.Button();
             this.BtnForcePattern = new System.Windows.Forms.Button();
-            this.BtnOpenDir = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.BtnOpenDir = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).BeginInit();
@@ -96,7 +96,7 @@
             this.NumPxPerMicron.TabIndex = 16;
             this.NumPxPerMicron.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumPxPerMicron.Value = new decimal(new int[] {
-            2606,
+            1000,
             0,
             0,
             196608});
@@ -215,6 +215,15 @@
             this.BtnForcePattern.UseVisualStyleBackColor = true;
             this.BtnForcePattern.Click += new System.EventHandler(this.BtnForcePattern_Click);
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.ProgressBar, 2);
+            this.ProgressBar.Location = new System.Drawing.Point(2, 15);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(244, 23);
+            this.ProgressBar.TabIndex = 23;
+            // 
             // BtnOpenDir
             // 
             this.BtnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -229,15 +238,6 @@
             this.BtnOpenDir.Text = "Open Dir";
             this.BtnOpenDir.UseVisualStyleBackColor = true;
             this.BtnOpenDir.Click += new System.EventHandler(this.BtnOpenDir_Click);
-            // 
-            // ProgressBar
-            // 
-            this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.ProgressBar, 2);
-            this.ProgressBar.Location = new System.Drawing.Point(2, 15);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(244, 23);
-            this.ProgressBar.TabIndex = 23;
             // 
             // openFileDialog
             // 

@@ -578,6 +578,8 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
+            BtnEntropyBalance.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+            Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
             UpdateImages();
@@ -740,6 +742,27 @@ namespace SEYR.Session
             ActiveFeature.FlipScore = !ActiveFeature.FlipScore;
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             ApplyFeature();
+        }
+
+        private void BtnEntropyBalance_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            ColorDialog colorDialog = new ColorDialog()
+            {
+                AllowFullOpen = true,
+                AnyColor = true,
+                SolidColorOnly = true,
+                Color = ActiveFeature.EntropyBalance,
+            };
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color c = colorDialog.Color;
+                ActiveFeature.RedFactor = c.R / 255f;
+                ActiveFeature.GreenFactor = c.G / 255f;
+                ActiveFeature.BlueFactor = c.B / 255f;
+                BtnEntropyBalance.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+                ApplyFeature();
+            }
         }
 
         #endregion
@@ -932,11 +955,6 @@ namespace SEYR.Session
         }
 
         private void DeleteDisablePatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.DeleteDisablePattern();
-
-        private void EntropyBalancerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         #endregion
     }

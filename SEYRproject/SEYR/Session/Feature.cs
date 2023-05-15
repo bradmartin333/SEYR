@@ -32,6 +32,14 @@ namespace SEYR.Session
         [XmlElement("SaveImage")]
         public bool SaveImage { get; set; } = false;
 
+        [XmlElement("RedFactor")]
+        public float RedFactor { get; set; } = 1f;
+        [XmlElement("GreenFactor")]
+        public float GreenFactor { get; set; } = 0f;
+        [XmlElement("BlueFactor")]
+        public float BlueFactor { get; set; } = 0f;
+        public Color EntropyBalance => Color.FromArgb((int)(255 * RedFactor), (int)(255 * GreenFactor), (int)(255 * BlueFactor));
+
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
         public float MinScore { get => _MinScore; set => _MinScore = value; }
@@ -69,9 +77,10 @@ namespace SEYR.Session
         {
             return new Feature()
             {
-                Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(),
+                Name = $"{Name}_{Guid.NewGuid().ToString().Substring(0, 3).ToUpper()}",
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
+                NullFilterPercentage = NullFilterPercentage,
                 NullDetection = NullDetection,
                 SaveImage = SaveImage,
                 FlipScore = FlipScore,

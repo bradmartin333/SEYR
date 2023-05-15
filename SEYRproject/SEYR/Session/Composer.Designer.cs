@@ -122,7 +122,7 @@
             this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteDisablePatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EntropyBalancerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnEntropyBalance = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -511,6 +511,7 @@
             this.tableLayoutPanel3.Controls.Add(this.NumNullFilterPercentage, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.NumThreshold, 4, 2);
             this.tableLayoutPanel3.Controls.Add(this.BtnInfoThreshold, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.BtnEntropyBalance, 2, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -528,7 +529,7 @@
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(259, 125);
+            this.label20.Location = new System.Drawing.Point(261, 125);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(76, 13);
             this.label20.TabIndex = 24;
@@ -542,7 +543,7 @@
             this.SaveImagePanel.BackColor = System.Drawing.Color.Transparent;
             this.SaveImagePanel.BackgroundImage = global::SEYR.Properties.Resources.toggleOn;
             this.SaveImagePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SaveImagePanel.Location = new System.Drawing.Point(341, 3);
+            this.SaveImagePanel.Location = new System.Drawing.Point(343, 3);
             this.SaveImagePanel.Name = "SaveImagePanel";
             this.SaveImagePanel.Size = new System.Drawing.Size(34, 31);
             this.SaveImagePanel.TabIndex = 23;
@@ -551,7 +552,7 @@
             // 
             this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(259, 12);
+            this.label23.Location = new System.Drawing.Point(261, 12);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(76, 13);
             this.label23.TabIndex = 22;
@@ -573,7 +574,7 @@
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(259, 49);
+            this.label22.Location = new System.Drawing.Point(261, 49);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(76, 13);
             this.label22.TabIndex = 11;
@@ -619,7 +620,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.TxtFeatureName, 2);
             this.TxtFeatureName.Location = new System.Drawing.Point(110, 8);
             this.TxtFeatureName.Name = "TxtFeatureName";
-            this.TxtFeatureName.Size = new System.Drawing.Size(143, 20);
+            this.TxtFeatureName.Size = new System.Drawing.Size(145, 20);
             this.TxtFeatureName.TabIndex = 2;
             this.TxtFeatureName.TextChanged += new System.EventHandler(this.TxtFeatureName_TextChanged);
             // 
@@ -641,7 +642,7 @@
             this.ComboFeatureNullDetection.FormattingEnabled = true;
             this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 121);
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
-            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(143, 21);
+            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(145, 21);
             this.ComboFeatureNullDetection.TabIndex = 9;
             this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
             // 
@@ -652,7 +653,7 @@
             this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
             this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
             this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.FlipScorePanel.Location = new System.Drawing.Point(341, 40);
+            this.FlipScorePanel.Location = new System.Drawing.Point(343, 40);
             this.FlipScorePanel.Name = "FlipScorePanel";
             this.FlipScorePanel.Size = new System.Drawing.Size(34, 32);
             this.FlipScorePanel.TabIndex = 12;
@@ -674,7 +675,7 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(192, 163);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.Size = new System.Drawing.Size(63, 13);
             this.label15.TabIndex = 15;
             this.label15.Text = "Y (μm)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -685,7 +686,7 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(192, 202);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.Size = new System.Drawing.Size(63, 13);
             this.label17.TabIndex = 16;
             this.label17.Text = "Height (μm)";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -736,7 +737,7 @@
             // NumFeatureY
             // 
             this.NumFeatureY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureY.Location = new System.Drawing.Point(259, 160);
+            this.NumFeatureY.Location = new System.Drawing.Point(261, 160);
             this.NumFeatureY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -755,7 +756,7 @@
             // NumFeatureHeight
             // 
             this.NumFeatureHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureHeight.Location = new System.Drawing.Point(259, 198);
+            this.NumFeatureHeight.Location = new System.Drawing.Point(261, 198);
             this.NumFeatureHeight.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -787,10 +788,10 @@
             this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
             this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApplyFeature.Location = new System.Drawing.Point(341, 154);
+            this.BtnApplyFeature.Location = new System.Drawing.Point(343, 154);
             this.BtnApplyFeature.Name = "BtnApplyFeature";
             this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
-            this.BtnApplyFeature.Size = new System.Drawing.Size(78, 71);
+            this.BtnApplyFeature.Size = new System.Drawing.Size(76, 71);
             this.BtnApplyFeature.TabIndex = 4;
             this.BtnApplyFeature.UseVisualStyleBackColor = false;
             this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
@@ -803,7 +804,7 @@
             this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 78);
             this.ThresholdTrackBar.Maximum = 100;
             this.ThresholdTrackBar.Name = "ThresholdTrackBar";
-            this.ThresholdTrackBar.Size = new System.Drawing.Size(225, 32);
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(227, 32);
             this.ThresholdTrackBar.TabIndex = 21;
             this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
@@ -811,9 +812,9 @@
             // NumNullFilterPercentage
             // 
             this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 122);
+            this.NumNullFilterPercentage.Location = new System.Drawing.Point(343, 122);
             this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
-            this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
+            this.NumNullFilterPercentage.Size = new System.Drawing.Size(76, 20);
             this.NumNullFilterPercentage.TabIndex = 25;
             this.NumNullFilterPercentage.Value = new decimal(new int[] {
             100,
@@ -825,9 +826,9 @@
             // NumThreshold
             // 
             this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumThreshold.Location = new System.Drawing.Point(341, 84);
+            this.NumThreshold.Location = new System.Drawing.Point(343, 84);
             this.NumThreshold.Name = "NumThreshold";
-            this.NumThreshold.Size = new System.Drawing.Size(78, 20);
+            this.NumThreshold.Size = new System.Drawing.Size(76, 20);
             this.NumThreshold.TabIndex = 26;
             this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
@@ -1392,8 +1393,7 @@
             this.ImportProjectToolStripMenuItem,
             this.ResetPatternOffsetToolStripMenuItem,
             this.ResetWindowLayoutsToolStripMenuItem,
-            this.DeleteDisablePatternToolStripMenuItem,
-            this.EntropyBalancerToolStripMenuItem});
+            this.DeleteDisablePatternToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1493,12 +1493,22 @@
             this.DeleteDisablePatternToolStripMenuItem.Text = "Delete and Disable Pattern";
             this.DeleteDisablePatternToolStripMenuItem.Click += new System.EventHandler(this.DeleteDisablePatternToolStripMenuItem_Click);
             // 
-            // EntropyBalancerToolStripMenuItem
+            // BtnEntropyBalance
             // 
-            this.EntropyBalancerToolStripMenuItem.Name = "EntropyBalancerToolStripMenuItem";
-            this.EntropyBalancerToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.EntropyBalancerToolStripMenuItem.Text = "Entropy Balancer";
-            this.EntropyBalancerToolStripMenuItem.Click += new System.EventHandler(this.EntropyBalancerToolStripMenuItem_Click);
+            this.BtnEntropyBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnEntropyBalance.AutoSize = true;
+            this.BtnEntropyBalance.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.BtnEntropyBalance.FlatAppearance.BorderSize = 5;
+            this.BtnEntropyBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEntropyBalance.Location = new System.Drawing.Point(192, 40);
+            this.BtnEntropyBalance.Name = "BtnEntropyBalance";
+            this.BtnEntropyBalance.Size = new System.Drawing.Size(63, 32);
+            this.BtnEntropyBalance.TabIndex = 28;
+            this.BtnEntropyBalance.Text = "Chroma";
+            this.BtnEntropyBalance.UseVisualStyleBackColor = true;
+            this.BtnEntropyBalance.Click += new System.EventHandler(this.BtnEntropyBalance_Click);
             // 
             // Composer
             // 
@@ -1652,6 +1662,6 @@
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
         private System.Windows.Forms.ToolStripMenuItem DeleteDisablePatternToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem EntropyBalancerToolStripMenuItem;
+        private System.Windows.Forms.Button BtnEntropyBalance;
     }
 }
