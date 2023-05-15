@@ -73,11 +73,20 @@ namespace SEYR.Session
             return new Rectangle(rect.X, rect.Y, rect.Width + (rect.Width * 3 % 4), rect.Height);
         }
 
-        public Feature Clone()
+        public Feature Clone(List<Feature> features)
         {
+            int i = 2;
+            string newName = $"{Name}_{i}";
+            while (true)
+            {
+                if (features.Find(f => f.Name == newName) == null)
+                    break;
+                newName = $"{Name}_{++i}";
+            }
+
             return new Feature()
             {
-                Name = $"{Name}_{Guid.NewGuid().ToString().Substring(0, 3).ToUpper()}",
+                Name = newName,
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
                 NullFilterPercentage = NullFilterPercentage,

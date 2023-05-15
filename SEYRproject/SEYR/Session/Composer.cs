@@ -621,7 +621,7 @@ namespace SEYR.Session
         private void BtnCopyFeature_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
-            Feature feature = ActiveFeature.Clone();
+            Feature feature = ActiveFeature.Clone(Features);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Copied To {feature.Name}");
             AddFeature(feature);
         }
