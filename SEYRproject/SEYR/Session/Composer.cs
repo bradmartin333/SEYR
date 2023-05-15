@@ -931,7 +931,12 @@ namespace SEYR.Session
             UpdateImages();
         }
 
-        private void BtnDeleteDisablePattern_Click(object sender, EventArgs e) => Channel.DeleteDisablePattern();
+        private void DeleteDisablePatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.DeleteDisablePattern();
+
+        private void EntropyBalancerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion
     }

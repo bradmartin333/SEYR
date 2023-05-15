@@ -121,7 +121,8 @@
             this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnDeleteDisablePattern = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteDisablePatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EntropyBalancerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1391,7 +1392,8 @@
             this.ImportProjectToolStripMenuItem,
             this.ResetPatternOffsetToolStripMenuItem,
             this.ResetWindowLayoutsToolStripMenuItem,
-            this.BtnDeleteDisablePattern});
+            this.DeleteDisablePatternToolStripMenuItem,
+            this.EntropyBalancerToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1400,7 +1402,7 @@
             // ApplyDeskewToolStripMenuItem
             // 
             this.ApplyDeskewToolStripMenuItem.Name = "ApplyDeskewToolStripMenuItem";
-            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ApplyDeskewToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ApplyDeskewToolStripMenuItem.Text = "Find Grid Angle";
             this.ApplyDeskewToolStripMenuItem.Click += new System.EventHandler(this.ApplyDeskewToolStripMenuItem_Click);
             // 
@@ -1408,28 +1410,28 @@
             // 
             this.ClickGridToolStripMenuItem.Name = "ClickGridToolStripMenuItem";
             this.ClickGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ClickGridToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ClickGridToolStripMenuItem.Text = "Click Grid";
             this.ClickGridToolStripMenuItem.Click += new System.EventHandler(this.ClickGridToolStripMenuItem_Click);
             // 
             // ClearLogsToolStripMenuItem
             // 
             this.ClearLogsToolStripMenuItem.Name = "ClearLogsToolStripMenuItem";
-            this.ClearLogsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ClearLogsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ClearLogsToolStripMenuItem.Text = "Clear Logs";
             this.ClearLogsToolStripMenuItem.Click += new System.EventHandler(this.ClearLogsToolStripMenuItem_Click);
             // 
             // ClearAllFeatureScoresToolStripMenuItem
             // 
             this.ClearAllFeatureScoresToolStripMenuItem.Name = "ClearAllFeatureScoresToolStripMenuItem";
-            this.ClearAllFeatureScoresToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ClearAllFeatureScoresToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ClearAllFeatureScoresToolStripMenuItem.Text = "Clear All Feature Scores";
             this.ClearAllFeatureScoresToolStripMenuItem.Click += new System.EventHandler(this.ClearAllFeatureScoresToolStripMenuItem_Click);
             // 
             // OpenDirectoryToolStripMenuItem
             // 
             this.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem";
-            this.OpenDirectoryToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.OpenDirectoryToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.OpenDirectoryToolStripMenuItem.Text = "Open Directory";
             this.OpenDirectoryToolStripMenuItem.Click += new System.EventHandler(this.OpenDirectoryToolStripMenuItem_Click);
             // 
@@ -1439,7 +1441,7 @@
             this.ReportToolStripMenuItem,
             this.DebugLogToolStripMenuItem});
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.openFileToolStripMenuItem.Text = "Open File";
             // 
             // ReportToolStripMenuItem
@@ -1459,37 +1461,44 @@
             // MakeSEYRUPToolStripMenuItem
             // 
             this.MakeSEYRUPToolStripMenuItem.Name = "MakeSEYRUPToolStripMenuItem";
-            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.MakeSEYRUPToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.MakeSEYRUPToolStripMenuItem.Text = "Make SEYRUP";
             this.MakeSEYRUPToolStripMenuItem.Click += new System.EventHandler(this.MakeSEYRUPToolStripMenuItem_Click);
             // 
             // ImportProjectToolStripMenuItem
             // 
             this.ImportProjectToolStripMenuItem.Name = "ImportProjectToolStripMenuItem";
-            this.ImportProjectToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ImportProjectToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ImportProjectToolStripMenuItem.Text = "Import \"project.seyr\"";
             this.ImportProjectToolStripMenuItem.Click += new System.EventHandler(this.ImportProjectToolStripMenuItem_Click);
             // 
             // ResetPatternOffsetToolStripMenuItem
             // 
             this.ResetPatternOffsetToolStripMenuItem.Name = "ResetPatternOffsetToolStripMenuItem";
-            this.ResetPatternOffsetToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ResetPatternOffsetToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ResetPatternOffsetToolStripMenuItem.Text = "Reset Pattern Offset";
             this.ResetPatternOffsetToolStripMenuItem.Click += new System.EventHandler(this.ResetPatternOffsetToolStripMenuItem_Click);
             // 
             // ResetWindowLayoutsToolStripMenuItem
             // 
             this.ResetWindowLayoutsToolStripMenuItem.Name = "ResetWindowLayoutsToolStripMenuItem";
-            this.ResetWindowLayoutsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ResetWindowLayoutsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
             // 
-            // BtnDeleteDisablePattern
+            // DeleteDisablePatternToolStripMenuItem
             // 
-            this.BtnDeleteDisablePattern.Name = "BtnDeleteDisablePattern";
-            this.BtnDeleteDisablePattern.Size = new System.Drawing.Size(235, 22);
-            this.BtnDeleteDisablePattern.Text = "Delete and Disable Pattern";
-            this.BtnDeleteDisablePattern.Click += new System.EventHandler(this.BtnDeleteDisablePattern_Click);
+            this.DeleteDisablePatternToolStripMenuItem.Name = "DeleteDisablePatternToolStripMenuItem";
+            this.DeleteDisablePatternToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.DeleteDisablePatternToolStripMenuItem.Text = "Delete and Disable Pattern";
+            this.DeleteDisablePatternToolStripMenuItem.Click += new System.EventHandler(this.DeleteDisablePatternToolStripMenuItem_Click);
+            // 
+            // EntropyBalancerToolStripMenuItem
+            // 
+            this.EntropyBalancerToolStripMenuItem.Name = "EntropyBalancerToolStripMenuItem";
+            this.EntropyBalancerToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.EntropyBalancerToolStripMenuItem.Text = "Entropy Balancer";
+            this.EntropyBalancerToolStripMenuItem.Click += new System.EventHandler(this.EntropyBalancerToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1642,6 +1651,7 @@
         private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
-        private System.Windows.Forms.ToolStripMenuItem BtnDeleteDisablePattern;
+        private System.Windows.Forms.ToolStripMenuItem DeleteDisablePatternToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EntropyBalancerToolStripMenuItem;
     }
 }
