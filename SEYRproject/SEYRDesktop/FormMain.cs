@@ -84,7 +84,7 @@ namespace SEYRDesktop
                 BtnRestartAndRun.Enabled = false;
                 BtnStop.Enabled = true;
                 NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
-                while (!STOP && NumFrame.Value <= NumFrame.Maximum)
+                while (!STOP && NumFrame.Value < NumFrame.Maximum)
                 {
                     Application.DoEvents();
                     await NextImage();
@@ -101,9 +101,9 @@ namespace SEYRDesktop
                 }
                 STOP = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Lol, SEYRdesktop is a mess
+                MessageBox.Show(ex.Message);
             }
         }
 

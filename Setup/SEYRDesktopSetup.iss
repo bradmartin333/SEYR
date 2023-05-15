@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SEYRDesktop"
-#define MyAppVersion "1.3.26"
+#define MyAppVersion "1.3.28"
 #define MyAppPublisher "bradmartin333"
 #define MyAppURL "https://github.com/bradmartin333/SEYR"
 #define MyAppExeName "SEYRDesktop.exe"

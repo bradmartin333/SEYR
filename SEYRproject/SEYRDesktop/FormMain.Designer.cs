@@ -96,10 +96,10 @@
             this.NumPxPerMicron.TabIndex = 16;
             this.NumPxPerMicron.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NumPxPerMicron.Value = new decimal(new int[] {
-            1000,
+            1,
             0,
             0,
-            196608});
+            0});
             // 
             // label1
             // 
@@ -254,7 +254,7 @@
             this.MinimumSize = new System.Drawing.Size(416, 148);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "v1.3.26";
+            this.Text = "v1.3.28";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumPxPerMicron)).EndInit();
