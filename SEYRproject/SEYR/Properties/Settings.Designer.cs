@@ -12,7 +12,7 @@ namespace SEYR.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -152,6 +152,66 @@ namespace SEYR.Properties {
             }
             set {
                 this["Viewer_Valid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point PatternWizard_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["PatternWizard_Location"]));
+            }
+            set {
+                this["PatternWizard_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700, 650")]
+        public global::System.Drawing.Size PatternWizard_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["PatternWizard_Size"]));
+            }
+            set {
+                this["PatternWizard_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PatternWizard_Maximized {
+            get {
+                return ((bool)(this["PatternWizard_Maximized"]));
+            }
+            set {
+                this["PatternWizard_Maximized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PatternWizard_Minimized {
+            get {
+                return ((bool)(this["PatternWizard_Minimized"]));
+            }
+            set {
+                this["PatternWizard_Minimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PatternWizard_Valid {
+            get {
+                return ((bool)(this["PatternWizard_Valid"]));
+            }
+            set {
+                this["PatternWizard_Valid"] = value;
             }
         }
     }
