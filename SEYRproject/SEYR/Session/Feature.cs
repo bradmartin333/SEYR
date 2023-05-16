@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace SEYR.Session
@@ -51,8 +52,8 @@ namespace SEYR.Session
         [XmlElement("MaxScore")]
         public float MaxScore { get => _MaxScore; set => _MaxScore = value; }
 
-        private float _LastScore = 0f;
-        internal float LastScore { get => _LastScore; set => _LastScore = value; }
+        internal List<float> ScoreHistory { get; set; } = new List<float>() { 0f };
+        internal float LastScore { get => ScoreHistory.Last(); }
         internal bool LastPass { get => Map() - 64 > 0; }
         public string ThresholdString { get => (Threshold * 100f).ToString(); }
 
@@ -114,7 +115,7 @@ namespace SEYR.Session
         {
             _MinScore = float.MaxValue;
             _MaxScore = float.MinValue;
-            _LastScore = 0f;
+            ScoreHistory.Clear();
         }
 
         internal void UpdateScore(float score)
@@ -124,7 +125,8 @@ namespace SEYR.Session
                 if (score < _MinScore) _MinScore = score;
                 if (score > _MaxScore) _MaxScore = score;
             }
-            _LastScore = score;
+            ScoreHistory.Add(score);
+            if (ScoreHistory.Count > 100) ScoreHistory.Remove(ScoreHistory.First());
         }
 
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
@@ -160,7 +162,7 @@ namespace SEYR.Session
             double fromHigh = _MaxScore;
             double toLow = FlipScore ? 128 : 0;
             double toHigh = FlipScore ? 0 : 128;
-            return (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
+            return (double)((ScoreHistory.Last() - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
         }
     }
 }

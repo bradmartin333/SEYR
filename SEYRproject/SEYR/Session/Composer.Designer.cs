@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
             this.PbxTile = new System.Windows.Forms.PictureBox();
@@ -78,6 +82,8 @@
             this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.BtnInfoThreshold = new System.Windows.Forms.Button();
             this.BtnChroma = new System.Windows.Forms.Button();
+            this.tabPageDiagnostics = new System.Windows.Forms.TabPage();
+            this.FeatureDiagnosticsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -145,6 +151,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).BeginInit();
+            this.tabPageDiagnostics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FeatureDiagnosticsChart)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).BeginInit();
@@ -308,6 +316,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabControl.Controls.Add(this.tabPageFeatures);
             this.TabControl.Controls.Add(this.tabPageInfo);
+            this.TabControl.Controls.Add(this.tabPageDiagnostics);
             this.TabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TabControl.Location = new System.Drawing.Point(445, 300);
             this.TabControl.Name = "TabControl";
@@ -865,6 +874,47 @@
             this.BtnChroma.Text = "Chroma";
             this.BtnChroma.UseVisualStyleBackColor = true;
             this.BtnChroma.Click += new System.EventHandler(this.BtnChroma_Click);
+            // 
+            // tabPageDiagnostics
+            // 
+            this.tabPageDiagnostics.BackColor = System.Drawing.Color.White;
+            this.tabPageDiagnostics.Controls.Add(this.FeatureDiagnosticsChart);
+            this.tabPageDiagnostics.Location = new System.Drawing.Point(4, 25);
+            this.tabPageDiagnostics.Name = "tabPageDiagnostics";
+            this.tabPageDiagnostics.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDiagnostics.Size = new System.Drawing.Size(428, 234);
+            this.tabPageDiagnostics.TabIndex = 2;
+            this.tabPageDiagnostics.Text = "Diagnostics";
+            // 
+            // FeatureDiagnosticsChart
+            // 
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.Title = "Score";
+            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MajorTickMark.Enabled = false;
+            chartArea1.AxisY.Title = "Count";
+            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.Name = "ChartArea1";
+            this.FeatureDiagnosticsChart.ChartAreas.Add(chartArea1);
+            this.FeatureDiagnosticsChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FeatureDiagnosticsChart.Location = new System.Drawing.Point(3, 3);
+            this.FeatureDiagnosticsChart.Name = "FeatureDiagnosticsChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.Black;
+            series1.MarkerBorderColor = System.Drawing.Color.Black;
+            series1.MarkerColor = System.Drawing.Color.Black;
+            series1.Name = "Series1";
+            this.FeatureDiagnosticsChart.Series.Add(series1);
+            this.FeatureDiagnosticsChart.Size = new System.Drawing.Size(422, 228);
+            this.FeatureDiagnosticsChart.TabIndex = 0;
+            this.FeatureDiagnosticsChart.Text = "chart1";
+            title1.Name = "ChartTitle";
+            title1.Text = "No Feature Selected";
+            title2.Name = "SubTitle";
+            title2.Text = "Last 100 Scores";
+            this.FeatureDiagnosticsChart.Titles.Add(title1);
+            this.FeatureDiagnosticsChart.Titles.Add(title2);
             // 
             // flowLayoutPanel1
             // 
@@ -1563,6 +1613,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ThresholdTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumNullFilterPercentage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumThreshold)).EndInit();
+            this.tabPageDiagnostics.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FeatureDiagnosticsChart)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumScaling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumAngle)).EndInit();
@@ -1684,5 +1736,7 @@
         private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem CopyThresholdToAllSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PatternControlToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageDiagnostics;
+        private System.Windows.Forms.DataVisualization.Charting.Chart FeatureDiagnosticsChart;
     }
 }

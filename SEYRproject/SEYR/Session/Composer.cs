@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SEYR.Session
 {
@@ -275,6 +276,7 @@ namespace SEYR.Session
             OLV.MouseUp += OLV_MouseUp;
             SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
+            TabControl.Selecting += TabControl_Selecting;
             OLV.HotItemStyle = new HotItemStyle
             {
                 Decoration = new RowBorderDecoration
@@ -379,7 +381,7 @@ namespace SEYR.Session
             }
         }
 
-        private void OLV_ButtonClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
+        private void OLV_ButtonClick(object sender, CellClickEventArgs e)
         {
             Feature feature = (Feature)e.Model;
             if (ActiveFeature == null) ActiveFeature = feature;
@@ -597,6 +599,12 @@ namespace SEYR.Session
                     FeatureSelectorContextMenuStrip.Tag = originFeature.Threshold;
                     FeatureSelectorContextMenuStrip.Show(OLV, e.Location);
                 }
+            }
+            else if (OLV.SelectedIndices.Count == 0)
+            {
+                ActiveFeature = null;
+                LoadNullFeature();
+                UpdateImages();
             }
         }
 
@@ -819,6 +827,31 @@ namespace SEYR.Session
                 ActiveFeature.BlueChroma = c.B / 255f;
                 BtnChroma.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
                 ApplyFeature();
+            }
+        }
+
+        private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (TabControl.SelectedTab == tabPageDiagnostics && ActiveFeature != null)
+            {
+                int nullCount = ActiveFeature.ScoreHistory.Where(x => x < 0).Count();
+                FeatureDiagnosticsChart.Titles[0].Text = $"{ActiveFeature.Name} (Null Count: {nullCount})";
+                double[] scores = ActiveFeature.ScoreHistory.Where(x => x >= 0).Select(x => Math.Round(x)).Distinct().ToArray();
+                int[] counts = new int[scores.Length];
+                for (int i = 0; i < scores.Length; i++)
+                    counts[i] = ActiveFeature.ScoreHistory.Count(x => Math.Round(x) == scores[i]);
+                FeatureDiagnosticsChart.Series[0].Points.Clear();
+                for (int i = 0; i < scores.Length; i++)
+                {
+                    DataPoint dataPoint = new DataPoint(scores[i], counts[i]);
+                    //dataPoint.Label = counts[i].ToString();
+                    FeatureDiagnosticsChart.Series[0].Points.Add(dataPoint);
+                }
+            }
+            else
+            {
+                FeatureDiagnosticsChart.Titles[0].Text = "No Feature Selected";
+                FeatureDiagnosticsChart.Series[0].Points.Clear();
             }
         }
 
