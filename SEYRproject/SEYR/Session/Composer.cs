@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -171,7 +172,6 @@ namespace SEYR.Session
         private readonly Bitmap InputImage;
         private readonly Channel HostChannel; // Really ugly, but easiest way to import project.seyr
         private bool ClickGrid = false;
-        private float ForceThreshold = -1f;
         private bool ShowThreshold = false;
         private bool LoadingFeature = true;
         private Control[] TabOrder;
@@ -277,15 +277,6 @@ namespace SEYR.Session
             SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
             TabControl.Selecting += TabControl_Selecting;
-            OLV.HotItemStyle = new HotItemStyle
-            {
-                Decoration = new RowBorderDecoration
-                {
-                    BorderPen = new Pen(Color.FromArgb(128, Color.DarkBlue), 2),
-                    BoundsPadding = new Size(1, 1),
-                    CornerRounding = 4.0f
-                }
-            };
         }
 
         private void InitializeUI()
@@ -352,10 +343,23 @@ namespace SEYR.Session
                 BitmapFunctions.ResizeAndRotate(ref bmp);
                 if (ShowThreshold)
                 {
-                    ImageAttributes imageAttr = new ImageAttributes();
-                    imageAttr.SetThreshold(ForceThreshold > -1 ? ForceThreshold : ActiveFeature.Threshold);
-                    using (Graphics g = Graphics.FromImage(bmp))
-                        g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
+                    Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                    BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                    int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
+                    byte[] rgbValues = new byte[bytes];
+                    Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
+                    for (int counter = 0; counter < rgbValues.Length; counter += 3)
+                    {
+                        byte b = rgbValues[counter];
+                        byte g = rgbValues[counter + 1];
+                        byte r = rgbValues[counter + 2];
+                        float val = (ActiveFeature.RedChroma * r + ActiveFeature.GreenChroma * g + ActiveFeature.BlueChroma * b) / 255f;
+                        rgbValues[counter] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
+                        rgbValues[counter + 1] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
+                        rgbValues[counter + 2] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
+                    }
+                    Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
+                    bmp.UnlockBits(bmpData);
                 }
                 PbxGrid.BackgroundImage = bmp;
                 PbxGrid.Image = Channel.IsNewProject ? null : BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
@@ -387,7 +391,6 @@ namespace SEYR.Session
             if (ActiveFeature == null) ActiveFeature = feature;
             OLV.SelectedObject = feature;
             Channel.DebugStream.Write($"Threshold button clicked for {feature.Name} and has value {feature.Threshold}");
-            ForceThreshold = feature.Threshold;
             ShowThreshold = true;
             ApplyFeature();
         }
@@ -398,14 +401,12 @@ namespace SEYR.Session
             if (ShowThreshold)
             {
                 Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} to turn off preview");
-                ForceThreshold = -1;
                 ShowThreshold = false;
                 ApplyFeature();
             }
             else
             {
                 Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} and has value {ActiveFeature.Threshold}");
-                ForceThreshold = ActiveFeature.Threshold;
                 ShowThreshold = true;
                 ApplyFeature();
             }
@@ -576,10 +577,37 @@ namespace SEYR.Session
 
         private void CopyThresholdToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
             {
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
-                feature.Threshold = (float)FeatureSelectorContextMenuStrip.Tag;
+                feature.Threshold = originFeature.Threshold;
+            }
+        }
+
+        private void CopyChromaToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.RedChroma = originFeature.RedChroma;
+                feature.GreenChroma = originFeature.GreenChroma;
+                feature.BlueChroma = originFeature.BlueChroma;
+            }
+        }
+
+
+        private void CopyBothToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.Threshold = originFeature.Threshold;
+                feature.RedChroma = originFeature.RedChroma;
+                feature.GreenChroma = originFeature.GreenChroma;
+                feature.BlueChroma = originFeature.BlueChroma;
             }
         }
 
@@ -587,6 +615,7 @@ namespace SEYR.Session
         {
             if (OLV.SelectedIndices.Count > 1)
             {
+                ShowThreshold = false;
                 ActiveFeature = null;
                 LoadNullFeature();
                 UpdateImages();
@@ -594,9 +623,10 @@ namespace SEYR.Session
                 if (e.Button == MouseButtons.Right)
                 {
                     if (OLV.HotRowIndex < 0) return;
-                    Feature originFeature = (Feature)OLV.GetModelObject(OLV.HotRowIndex);
-                    CopyThresholdToAllSelectedToolStripMenuItem.Text = $"Make all selected feature thresholds {originFeature.Threshold * 100}";
-                    FeatureSelectorContextMenuStrip.Tag = originFeature.Threshold;
+                    FeatureSelectorContextMenuStrip.Tag = OLV.HotRowIndex;
+                    Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+                    CopyThresholdToAllSelectedToolStripMenuItem.Text = $"Make all selected feature Thresholds {originFeature.Threshold * 100}";
+                    CopyChromaToAllSelectedToolStripMenuItem.Text = $"Make all selected feature Chromas ({originFeature.ChromaString})";
                     FeatureSelectorContextMenuStrip.Show(OLV, e.Location);
                 }
             }
@@ -634,7 +664,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
-            BtnChroma.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+            BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
             Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
@@ -761,7 +791,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
             NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
-            ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
         }
@@ -771,7 +800,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
-            ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
         }
@@ -815,7 +843,7 @@ namespace SEYR.Session
                 AnyColor = true,
                 SolidColorOnly = true,
                 FullOpen = true,
-                Color = ActiveFeature.EntropyBalance,
+                Color = ActiveFeature.Chroma,
                 CustomColors = CustomColors,
             };
             if (colorDialog.ShowDialog() == DialogResult.OK)
@@ -825,7 +853,7 @@ namespace SEYR.Session
                 ActiveFeature.RedChroma = c.R / 255f;
                 ActiveFeature.GreenChroma = c.G / 255f;
                 ActiveFeature.BlueChroma = c.B / 255f;
-                BtnChroma.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+                BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
                 ApplyFeature();
             }
         }

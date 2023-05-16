@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
             this.PbxTile = new System.Windows.Forms.PictureBox();
@@ -132,6 +132,8 @@
             this.PatternControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FeatureSelectorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyThresholdToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyChromaToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyBothToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -888,33 +890,33 @@
             // 
             // FeatureDiagnosticsChart
             // 
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX.Title = "Score";
-            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY.MajorGrid.Enabled = false;
-            chartArea1.AxisY.MajorTickMark.Enabled = false;
-            chartArea1.AxisY.Title = "Count";
-            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.Name = "ChartArea1";
-            this.FeatureDiagnosticsChart.ChartAreas.Add(chartArea1);
+            chartArea4.AxisX.MajorGrid.Enabled = false;
+            chartArea4.AxisX.Title = "Score";
+            chartArea4.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea4.AxisY.MajorGrid.Enabled = false;
+            chartArea4.AxisY.MajorTickMark.Enabled = false;
+            chartArea4.AxisY.Title = "Count";
+            chartArea4.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea4.Name = "ChartArea1";
+            this.FeatureDiagnosticsChart.ChartAreas.Add(chartArea4);
             this.FeatureDiagnosticsChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FeatureDiagnosticsChart.Location = new System.Drawing.Point(3, 3);
             this.FeatureDiagnosticsChart.Name = "FeatureDiagnosticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Color = System.Drawing.Color.Black;
-            series1.MarkerBorderColor = System.Drawing.Color.Black;
-            series1.MarkerColor = System.Drawing.Color.Black;
-            series1.Name = "Series1";
-            this.FeatureDiagnosticsChart.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Color = System.Drawing.Color.Black;
+            series4.MarkerBorderColor = System.Drawing.Color.Black;
+            series4.MarkerColor = System.Drawing.Color.Black;
+            series4.Name = "Series1";
+            this.FeatureDiagnosticsChart.Series.Add(series4);
             this.FeatureDiagnosticsChart.Size = new System.Drawing.Size(422, 228);
             this.FeatureDiagnosticsChart.TabIndex = 0;
             this.FeatureDiagnosticsChart.Text = "chart1";
-            title1.Name = "ChartTitle";
-            title1.Text = "No Feature Selected";
-            title2.Name = "SubTitle";
-            title2.Text = "Last 100 Scores";
-            this.FeatureDiagnosticsChart.Titles.Add(title1);
-            this.FeatureDiagnosticsChart.Titles.Add(title2);
+            title7.Name = "ChartTitle";
+            title7.Text = "No Feature Selected";
+            title8.Name = "SubTitle";
+            title8.Text = "Last 100 Scores";
+            this.FeatureDiagnosticsChart.Titles.Add(title7);
+            this.FeatureDiagnosticsChart.Titles.Add(title8);
             // 
             // flowLayoutPanel1
             // 
@@ -1567,9 +1569,11 @@
             // FeatureSelectorContextMenuStrip
             // 
             this.FeatureSelectorContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CopyThresholdToAllSelectedToolStripMenuItem});
+            this.CopyThresholdToAllSelectedToolStripMenuItem,
+            this.CopyChromaToAllSelectedToolStripMenuItem,
+            this.CopyBothToAllSelectedToolStripMenuItem});
             this.FeatureSelectorContextMenuStrip.Name = "FeatureSelectorContextMenuStrip";
-            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(236, 26);
+            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(236, 70);
             // 
             // CopyThresholdToAllSelectedToolStripMenuItem
             // 
@@ -1577,6 +1581,20 @@
             this.CopyThresholdToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.CopyThresholdToAllSelectedToolStripMenuItem.Text = "Copy Threshold to All Selected";
             this.CopyThresholdToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdToAllSelectedToolStripMenuItem_Click);
+            // 
+            // CopyChromaToAllSelectedToolStripMenuItem
+            // 
+            this.CopyChromaToAllSelectedToolStripMenuItem.Name = "CopyChromaToAllSelectedToolStripMenuItem";
+            this.CopyChromaToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.CopyChromaToAllSelectedToolStripMenuItem.Text = "Copy Chroma to All Selected";
+            this.CopyChromaToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyChromaToAllSelectedToolStripMenuItem_Click);
+            // 
+            // CopyBothToAllSelectedToolStripMenuItem
+            // 
+            this.CopyBothToAllSelectedToolStripMenuItem.Name = "CopyBothToAllSelectedToolStripMenuItem";
+            this.CopyBothToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.CopyBothToAllSelectedToolStripMenuItem.Text = "Copy Both to All Selected";
+            this.CopyBothToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyBothToAllSelectedToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1738,5 +1756,7 @@
         private System.Windows.Forms.ToolStripMenuItem PatternControlToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageDiagnostics;
         private System.Windows.Forms.DataVisualization.Charting.Chart FeatureDiagnosticsChart;
+        private System.Windows.Forms.ToolStripMenuItem CopyChromaToAllSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyBothToAllSelectedToolStripMenuItem;
     }
 }

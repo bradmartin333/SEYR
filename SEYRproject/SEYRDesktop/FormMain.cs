@@ -43,8 +43,9 @@ namespace SEYRDesktop
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
         {
-            if (NumFrame.Value < NumFrame.Maximum)
-                Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
+            if (NumFrame.Value >= IMGS.Length)
+                NumFrame.Value = 0;
+            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
         private async void BtnRestartAndRun_Click(object sender, EventArgs e)
@@ -133,7 +134,7 @@ namespace SEYRDesktop
             {
                 Channel = channel;
                 Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
-                Channel.SetDefaultChroma(Color.Magenta);
+                Channel.SetDefaultChroma(Color.Red);
             }
             else
                 return;

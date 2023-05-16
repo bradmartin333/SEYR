@@ -42,7 +42,8 @@ namespace SEYR.Session
         public static float DefaultBlueChroma = 0f;
         [XmlElement("BlueChroma")]
         public float BlueChroma { get; set; } = DefaultBlueChroma;
-        public Color EntropyBalance => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
+        public Color Chroma => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
+        public string ChromaString => $"{Chroma.R},{Chroma.G},{Chroma.B}";
 
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
