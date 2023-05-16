@@ -339,7 +339,7 @@ namespace SEYR.Session
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 BitmapFunctions.ResizeAndRotate(ref bmp);
-                if (ShowThreshold)
+                if (ShowThreshold && ActiveFeature != null)
                 {
                     Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
                     BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -627,6 +627,7 @@ namespace SEYR.Session
             }
             else if (OLV.SelectedIndices.Count == 0)
             {
+                ShowThreshold = false;
                 ActiveFeature = null;
                 LoadNullFeature();
                 UpdateImages();
@@ -659,7 +660,8 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
-            BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
+            BtnChroma.BackColor = ActiveFeature.Chroma;
+            BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
             Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
@@ -680,6 +682,8 @@ namespace SEYR.Session
             ComboFeatureNullDetection.SelectedIndex = 0;
             FlipScorePanel.BackgroundImage = Properties.Resources.toggleOff;
             LabelCurrentFeatureScore.Text = "N/A";
+            BtnChroma.BackColor = Color.Transparent;
+            BtnChroma.ForeColor = Color.Black;
             Channel.DebugStream.Write("Null feature loaded");
             LoadingFeature = false;
         }
@@ -829,6 +833,18 @@ namespace SEYR.Session
             ApplyFeature();
         }
 
+        private void BtnChromaWand_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            Bitmap bitmap = (Bitmap)PbxTile.BackgroundImage.Clone();
+            Rectangle rect = ActiveFeature.GetGeometry();
+            Color c = bitmap.GetPixel(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+            c = Color.FromArgb(Math.Min(255, c.R + c.B), Math.Min(255, c.G + c.B), 0);
+            ActiveFeature.UpdateChroma(c);
+            BtnChroma.BackColor = ActiveFeature.Chroma;
+            BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
+        }
+
         private void BtnChroma_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
@@ -845,7 +861,8 @@ namespace SEYR.Session
             {
                 CustomColors = colorDialog.CustomColors;
                 ActiveFeature.UpdateChroma(colorDialog.Color);
-                BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
+                BtnChroma.BackColor = ActiveFeature.Chroma;
+                BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
                 ApplyFeature();
             }
         }

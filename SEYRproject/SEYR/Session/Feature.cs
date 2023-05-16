@@ -43,6 +43,7 @@ namespace SEYR.Session
         [XmlElement("BlueChroma")]
         public float BlueChroma { get; set; } = DefaultBlueChroma;
         public Color Chroma => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
+        public Color ChromaContrast => Color.FromArgb(Chroma.R > 127 ? 0 : 255, Chroma.G > 127 ? 0 : 255, Chroma.B > 127 ? 0 : 255);
         public string ChromaString => $"{Chroma.R},{Chroma.G},{Chroma.B}";
 
         private float _MinScore = float.MaxValue;
