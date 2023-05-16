@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SEYR.ImageProcessing

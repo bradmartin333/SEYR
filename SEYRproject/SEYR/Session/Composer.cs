@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -123,9 +124,9 @@ namespace SEYR.Session
             }
         }
 
-        public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PatternIntervalString { get => Channel.Project.PatternIntervalString; set => throw new NotImplementedException(); }
 
-        public int PatternIntervalValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int PatternIntervalValue { get => Channel.Project.PatternIntervalValue; set => throw new NotImplementedException(); }
 
         public int PatternDeltaMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -192,6 +193,7 @@ namespace SEYR.Session
             InitializeUI();
             InitializeTabOrder();
             SetupFeatureUI(true);
+            LoadPatternControlState();
             UpdateImages();
             if (!Channel.IsNewProject) PbxTile.Image = null;
             BtnAddImageFeature.Visible = !Channel.Project.HasImageFeature();
@@ -933,6 +935,7 @@ namespace SEYR.Session
                     if (w.ShowDialog() != DialogResult.Retry) break;
                 }
             }
+            LoadPatternControlState();
         }
 
         private void ClearLogsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1012,6 +1015,45 @@ namespace SEYR.Session
         private void ForceUnloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.Pattern = null;
 
         private void TryReloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.LoadPattern();
+
+        private void LoadPatternControlState()
+        {
+            bool patternExists = File.Exists(Channel.PatternPath);
+            bool enabled = PatternIntervalString != null && PatternIntervalValue != 0 && Channel.Pattern != null;
+            if (!patternExists)
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Unavailable";
+                PatternControlToolStripMenuItem.Checked = false;
+                PatternControlToolStripMenuItem.Enabled = false;
+            }
+            else if (enabled)
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Enabled";
+                PatternControlToolStripMenuItem.Checked = true;
+                PatternControlToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Disabled";
+                PatternControlToolStripMenuItem.Checked = false;
+                PatternControlToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void PatternControlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PatternControlToolStripMenuItem.Checked)
+            {
+                Channel.Pattern = null;
+                PatternControlToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                Channel.LoadPattern();
+                PatternControlToolStripMenuItem.Checked = true;
+            }
+            LoadPatternControlState();
+        }
 
         #endregion
     }

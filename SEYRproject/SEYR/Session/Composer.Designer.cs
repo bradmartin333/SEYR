@@ -123,8 +123,7 @@
             this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ForceUnloadPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TryReloadPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PatternControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FeatureSelectorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyThresholdToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1415,8 +1414,7 @@
             this.ImportProjectToolStripMenuItem,
             this.ResetPatternOffsetToolStripMenuItem,
             this.ResetWindowLayoutsToolStripMenuItem,
-            this.ForceUnloadPatternToolStripMenuItem,
-            this.TryReloadPatternToolStripMenuItem});
+            this.PatternControlToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1509,19 +1507,12 @@
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
             // 
-            // ForceUnloadPatternToolStripMenuItem
+            // PatternControlToolStripMenuItem
             // 
-            this.ForceUnloadPatternToolStripMenuItem.Name = "ForceUnloadPatternToolStripMenuItem";
-            this.ForceUnloadPatternToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.ForceUnloadPatternToolStripMenuItem.Text = "Force Unload Pattern";
-            this.ForceUnloadPatternToolStripMenuItem.Click += new System.EventHandler(this.ForceUnloadPatternToolStripMenuItem_Click);
-            // 
-            // TryReloadPatternToolStripMenuItem
-            // 
-            this.TryReloadPatternToolStripMenuItem.Name = "TryReloadPatternToolStripMenuItem";
-            this.TryReloadPatternToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.TryReloadPatternToolStripMenuItem.Text = "Try Reload Pattern";
-            this.TryReloadPatternToolStripMenuItem.Click += new System.EventHandler(this.TryReloadPatternToolStripMenuItem_Click);
+            this.PatternControlToolStripMenuItem.Name = "PatternControlToolStripMenuItem";
+            this.PatternControlToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.PatternControlToolStripMenuItem.Text = "Pattern Control";
+            this.PatternControlToolStripMenuItem.Click += new System.EventHandler(this.PatternControlToolStripMenuItem_Click);
             // 
             // FeatureSelectorContextMenuStrip
             // 
@@ -1689,10 +1680,9 @@
         private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
-        private System.Windows.Forms.ToolStripMenuItem ForceUnloadPatternToolStripMenuItem;
         private System.Windows.Forms.Button BtnChroma;
-        private System.Windows.Forms.ToolStripMenuItem TryReloadPatternToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem CopyThresholdToAllSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PatternControlToolStripMenuItem;
     }
 }
