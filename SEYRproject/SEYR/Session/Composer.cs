@@ -1,4 +1,5 @@
-﻿using BrightIdeasSoftware;
+﻿using Accord.Imaging;
+using BrightIdeasSoftware;
 using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
@@ -351,7 +352,7 @@ namespace SEYR.Session
                         byte b = rgbValues[counter];
                         byte g = rgbValues[counter + 1];
                         byte r = rgbValues[counter + 2];
-                        float val = (ActiveFeature.RedChroma * r + ActiveFeature.GreenChroma * g + ActiveFeature.BlueChroma * b) / 255f;
+                        float val = ((ActiveFeature.RedChroma * r) + (ActiveFeature.GreenChroma * g) + (ActiveFeature.BlueChroma * b)) / 255f;
                         byte grayscaleByte = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
                         rgbValues[counter] = grayscaleByte;
                         rgbValues[counter + 1] = grayscaleByte;
@@ -593,7 +594,6 @@ namespace SEYR.Session
                 feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
             }
         }
-
 
         private void CopyBothToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -837,8 +837,8 @@ namespace SEYR.Session
         {
             if (ActiveFeature == null || LoadingFeature) return;
             Bitmap bitmap = (Bitmap)PbxTile.BackgroundImage.Clone();
-            Rectangle rect = ActiveFeature.GetGeometry();
-            Color c = bitmap.GetPixel(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+            Point center = ActiveFeature.GetGeometry().Center();
+            Color c = bitmap.GetPixel(center.X, center.Y);
             c = Color.FromArgb(Math.Min(255, c.R + c.B), Math.Min(255, c.G + c.B), 0);
             ActiveFeature.UpdateChroma(c);
             BtnChroma.BackColor = ActiveFeature.Chroma;
