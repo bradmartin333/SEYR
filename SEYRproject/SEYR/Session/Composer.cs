@@ -354,9 +354,10 @@ namespace SEYR.Session
                         byte g = rgbValues[counter + 1];
                         byte r = rgbValues[counter + 2];
                         float val = (ActiveFeature.RedChroma * r + ActiveFeature.GreenChroma * g + ActiveFeature.BlueChroma * b) / 255f;
-                        rgbValues[counter] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
-                        rgbValues[counter + 1] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
-                        rgbValues[counter + 2] = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
+                        byte grayscaleByte = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
+                        rgbValues[counter] = grayscaleByte;
+                        rgbValues[counter + 1] = grayscaleByte;
+                        rgbValues[counter + 2] = grayscaleByte;
                     }
                     Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
                     bmp.UnlockBits(bmpData);
@@ -581,7 +582,7 @@ namespace SEYR.Session
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
             {
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
-                feature.Threshold = originFeature.Threshold;
+                feature.UpdateThreshold(originFeature.Threshold);
             }
         }
 
@@ -591,9 +592,7 @@ namespace SEYR.Session
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
             {
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
-                feature.RedChroma = originFeature.RedChroma;
-                feature.GreenChroma = originFeature.GreenChroma;
-                feature.BlueChroma = originFeature.BlueChroma;
+                feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
             }
         }
 
@@ -604,10 +603,8 @@ namespace SEYR.Session
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
             {
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
-                feature.Threshold = originFeature.Threshold;
-                feature.RedChroma = originFeature.RedChroma;
-                feature.GreenChroma = originFeature.GreenChroma;
-                feature.BlueChroma = originFeature.BlueChroma;
+                feature.UpdateThreshold(originFeature.Threshold);
+                feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
             }
         }
 
@@ -789,7 +786,7 @@ namespace SEYR.Session
         private void ThresholdTrackBar_Scroll(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
+            ActiveFeature.UpdateThreshold(ThresholdTrackBar.Value / 100f);
             NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
             ShowThreshold = true;
             ApplyFeature();
@@ -798,7 +795,7 @@ namespace SEYR.Session
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
+            ActiveFeature.UpdateThreshold(ThresholdTrackBar.Value / 100f);
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
             ShowThreshold = true;
             ApplyFeature();
@@ -849,10 +846,7 @@ namespace SEYR.Session
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 CustomColors = colorDialog.CustomColors;
-                Color c = colorDialog.Color;
-                ActiveFeature.RedChroma = c.R / 255f;
-                ActiveFeature.GreenChroma = c.G / 255f;
-                ActiveFeature.BlueChroma = c.B / 255f;
+                ActiveFeature.UpdateChroma(colorDialog.Color);
                 BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
                 ApplyFeature();
             }

@@ -130,6 +130,28 @@ namespace SEYR.Session
             if (ScoreHistory.Count > 100) ScoreHistory.Remove(ScoreHistory.First());
         }
 
+        internal void UpdateThreshold(float threshold)
+        {
+            Threshold = threshold;
+            ScoreHistory.Clear();
+        }
+
+        internal void UpdateChromaFactors(float red, float green, float blue)
+        {
+            RedChroma = red;
+            GreenChroma = green;
+            BlueChroma = blue;
+            ScoreHistory.Clear();
+        }
+
+        internal void UpdateChroma(Color color)
+        {
+            RedChroma = color.R / 255f;
+            GreenChroma = color.G / 255f;
+            BlueChroma = color.B / 255f;
+            ScoreHistory.Clear();
+        }
+
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
         {
             if (_MinScore == float.MaxValue || _MaxScore == float.MinValue || _MinScore == _MaxScore) return Color.Black;
