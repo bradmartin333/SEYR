@@ -104,7 +104,7 @@ namespace SEYR.ImageProcessing
                 }
             }
 
-            Channel.Viewer.UpdateImage(bmp);
+            Channel.Viewer.UpdateImage(bmp, features: Channel.Project.Features);
             await Channel.DataStream.WriteAsync(outputData, false);
             return (bmp, nullFailTotal / Channel.Project.GetNumTotalFeatures());
         }

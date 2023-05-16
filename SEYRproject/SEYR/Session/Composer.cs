@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SEYR.Session
 {
@@ -276,7 +275,6 @@ namespace SEYR.Session
             OLV.MouseUp += OLV_MouseUp;
             SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
-            TabControl.Selecting += TabControl_Selecting;
         }
 
         private void InitializeUI()
@@ -849,31 +847,6 @@ namespace SEYR.Session
                 ActiveFeature.UpdateChroma(colorDialog.Color);
                 BtnChroma.FlatAppearance.BorderColor = ActiveFeature.Chroma;
                 ApplyFeature();
-            }
-        }
-
-        private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            if (TabControl.SelectedTab == tabPageDiagnostics && ActiveFeature != null)
-            {
-                int nullCount = ActiveFeature.ScoreHistory.Where(x => x < 0).Count();
-                FeatureDiagnosticsChart.Titles[0].Text = $"{ActiveFeature.Name} (Null Count: {nullCount})";
-                double[] scores = ActiveFeature.ScoreHistory.Where(x => x >= 0).Select(x => Math.Round(x)).Distinct().ToArray();
-                int[] counts = new int[scores.Length];
-                for (int i = 0; i < scores.Length; i++)
-                    counts[i] = ActiveFeature.ScoreHistory.Count(x => Math.Round(x) == scores[i]);
-                FeatureDiagnosticsChart.Series[0].Points.Clear();
-                for (int i = 0; i < scores.Length; i++)
-                {
-                    DataPoint dataPoint = new DataPoint(scores[i], counts[i]);
-                    //dataPoint.Label = counts[i].ToString();
-                    FeatureDiagnosticsChart.Series[0].Points.Add(dataPoint);
-                }
-            }
-            else
-            {
-                FeatureDiagnosticsChart.Titles[0].Text = "No Feature Selected";
-                FeatureDiagnosticsChart.Series[0].Points.Clear();
             }
         }
 

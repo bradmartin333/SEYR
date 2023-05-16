@@ -29,52 +29,148 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Viewer));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            this.TLP = new System.Windows.Forms.TableLayoutPanel();
             this.PBX = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.BtnShowData = new System.Windows.Forms.Button();
+            this.TLPFeatureData = new System.Windows.Forms.TableLayoutPanel();
+            this.ComboFeatureSelector = new System.Windows.Forms.ComboBox();
+            this.ChartFeatureData = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.TLPFeatureData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartFeatureData)).BeginInit();
             this.SuspendLayout();
+            // 
+            // TLP
+            // 
+            this.TLP.ColumnCount = 2;
+            this.TLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TLP.Controls.Add(this.PBX, 0, 0);
+            this.TLP.Controls.Add(this.InfoLabel, 0, 1);
+            this.TLP.Controls.Add(this.BtnShowData, 1, 1);
+            this.TLP.Controls.Add(this.TLPFeatureData, 0, 2);
+            this.TLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLP.Location = new System.Drawing.Point(0, 0);
+            this.TLP.Name = "TLP";
+            this.TLP.RowCount = 3;
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLP.Size = new System.Drawing.Size(484, 461);
+            this.TLP.TabIndex = 1;
             // 
             // PBX
             // 
             this.PBX.BackColor = System.Drawing.Color.Black;
             this.PBX.BackgroundImage = global::SEYR.Properties.Resources.SEYR;
             this.PBX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.TLP.SetColumnSpan(this.PBX, 2);
             this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PBX.Location = new System.Drawing.Point(3, 3);
             this.PBX.Name = "PBX";
-            this.PBX.Size = new System.Drawing.Size(478, 435);
+            this.PBX.Size = new System.Drawing.Size(478, 214);
             this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBX.TabIndex = 0;
             this.PBX.TabStop = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.PBX, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.InfoLabel, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(484, 461);
-            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
             this.InfoLabel.BackColor = System.Drawing.Color.Silver;
             this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InfoLabel.Location = new System.Drawing.Point(3, 441);
+            this.InfoLabel.Location = new System.Drawing.Point(3, 220);
             this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(478, 20);
+            this.InfoLabel.Size = new System.Drawing.Size(458, 20);
             this.InfoLabel.TabIndex = 1;
             this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BtnShowData
+            // 
+            this.BtnShowData.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnShowData.BackgroundImage")));
+            this.BtnShowData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnShowData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnShowData.FlatAppearance.BorderSize = 0;
+            this.BtnShowData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnShowData.Location = new System.Drawing.Point(464, 220);
+            this.BtnShowData.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnShowData.Name = "BtnShowData";
+            this.BtnShowData.Size = new System.Drawing.Size(20, 20);
+            this.BtnShowData.TabIndex = 2;
+            this.BtnShowData.UseVisualStyleBackColor = true;
+            this.BtnShowData.Click += new System.EventHandler(this.BtnShowData_Click);
+            // 
+            // TLPFeatureData
+            // 
+            this.TLPFeatureData.ColumnCount = 2;
+            this.TLP.SetColumnSpan(this.TLPFeatureData, 2);
+            this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPFeatureData.Controls.Add(this.ComboFeatureSelector, 1, 1);
+            this.TLPFeatureData.Controls.Add(this.ChartFeatureData, 0, 0);
+            this.TLPFeatureData.Controls.Add(this.label1, 0, 1);
+            this.TLPFeatureData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLPFeatureData.Location = new System.Drawing.Point(3, 243);
+            this.TLPFeatureData.Name = "TLPFeatureData";
+            this.TLPFeatureData.RowCount = 2;
+            this.TLPFeatureData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPFeatureData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TLPFeatureData.Size = new System.Drawing.Size(478, 215);
+            this.TLPFeatureData.TabIndex = 3;
+            // 
+            // ComboFeatureSelector
+            // 
+            this.ComboFeatureSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ComboFeatureSelector.FormattingEnabled = true;
+            this.ComboFeatureSelector.Location = new System.Drawing.Point(97, 191);
+            this.ComboFeatureSelector.Name = "ComboFeatureSelector";
+            this.ComboFeatureSelector.Size = new System.Drawing.Size(378, 21);
+            this.ComboFeatureSelector.TabIndex = 0;
+            this.ComboFeatureSelector.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureSelector_SelectedIndexChanged);
+            // 
+            // ChartFeatureData
+            // 
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorTickMark.Enabled = false;
+            chartArea1.AxisX.Title = "Score";
+            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MajorTickMark.Enabled = false;
+            chartArea1.AxisY.Title = "Count in Last 100 Scores";
+            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.Name = "ChartArea1";
+            this.ChartFeatureData.ChartAreas.Add(chartArea1);
+            this.TLPFeatureData.SetColumnSpan(this.ChartFeatureData, 2);
+            this.ChartFeatureData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChartFeatureData.Location = new System.Drawing.Point(3, 3);
+            this.ChartFeatureData.Name = "ChartFeatureData";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series1.Color = System.Drawing.Color.Black;
+            series1.Name = "Series1";
+            this.ChartFeatureData.Series.Add(series1);
+            this.ChartFeatureData.Size = new System.Drawing.Size(472, 182);
+            this.ChartFeatureData.TabIndex = 1;
+            this.ChartFeatureData.Text = "chart1";
+            title1.Name = "ChartTitle";
+            title1.Text = "Null Count: 0";
+            this.ChartFeatureData.Titles.Add(title1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 188);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 27);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Selected Feature";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Viewer
             // 
@@ -82,16 +178,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(484, 461);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.TLP);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Viewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Viewer";
             this.Load += new System.EventHandler(this.Viewer_Load);
+            this.TLP.ResumeLayout(false);
+            this.TLP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.TLPFeatureData.ResumeLayout(false);
+            this.TLPFeatureData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartFeatureData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -99,7 +198,12 @@
         #endregion
 
         private System.Windows.Forms.PictureBox PBX;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel TLP;
         public System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Button BtnShowData;
+        private System.Windows.Forms.TableLayoutPanel TLPFeatureData;
+        private System.Windows.Forms.ComboBox ComboFeatureSelector;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartFeatureData;
+        private System.Windows.Forms.Label label1;
     }
 }
