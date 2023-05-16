@@ -1,4 +1,5 @@
-﻿using SEYR.ImageProcessing;
+﻿using BrightIdeasSoftware;
+using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -269,8 +270,18 @@ namespace SEYR.Session
             PbxTile.MouseUp += PbxTile_MouseUp;
             OLV.ButtonClick += OLV_ButtonClick;
             OLV.DoubleClick += OLV_DoubleClick;
+            OLV.MouseUp += OLV_MouseUp;
             SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
+            OLV.HotItemStyle = new HotItemStyle
+            {
+                Decoration = new RowBorderDecoration
+                {
+                    BorderPen = new Pen(Color.FromArgb(128, Color.DarkBlue), 2),
+                    BoundsPadding = new Size(1, 1),
+                    CornerRounding = 4.0f
+                }
+            };
         }
 
         private void InitializeUI()
@@ -559,6 +570,34 @@ namespace SEYR.Session
             SetupFeatureUI(false);
         }
 
+        private void CopyThresholdToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.Threshold = (float)FeatureSelectorContextMenuStrip.Tag;
+            }
+        }
+
+        private void OLV_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (OLV.SelectedIndices.Count > 1)
+            {
+                ActiveFeature = null;
+                LoadNullFeature();
+                UpdateImages();
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    if (OLV.HotRowIndex < 0) return;
+                    Feature originFeature = (Feature)OLV.GetModelObject(OLV.HotRowIndex);
+                    CopyThresholdToAllSelectedToolStripMenuItem.Text = $"Make all selected feature thresholds {originFeature.Threshold * 100}";
+                    FeatureSelectorContextMenuStrip.Tag = originFeature.Threshold;
+                    FeatureSelectorContextMenuStrip.Show(OLV, e.Location);
+                }
+            }
+        }
+
         private void OLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadingFeature = true;
@@ -612,10 +651,16 @@ namespace SEYR.Session
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || OLV.SelectedObject == null) return;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Deleted");
-            Features.Remove((Feature)OLV.SelectedObject);
-            SetupFeatureUI(true);
+            if ((ActiveFeature != null && OLV.SelectedObject != null) || OLV.SelectedIndices.Count > 1)
+            {
+                for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+                {
+                    Feature removingFeature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                    Channel.DebugStream.Write($"{removingFeature.Name} Deleted");
+                    Features.Remove(removingFeature);
+                }
+                SetupFeatureUI(true);
+            }
         }
 
         private void BtnCopyFeature_Click(object sender, EventArgs e)

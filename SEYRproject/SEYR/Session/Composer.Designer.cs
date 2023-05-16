@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
@@ -124,6 +125,8 @@
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ForceUnloadPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TryReloadPatternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FeatureSelectorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyThresholdToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -159,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
             this.MenuStrip.SuspendLayout();
+            this.FeatureSelectorContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -378,13 +382,13 @@
             this.OLV.FullRowSelect = true;
             this.OLV.HideSelection = false;
             this.OLV.Location = new System.Drawing.Point(3, 3);
-            this.OLV.MultiSelect = false;
             this.OLV.Name = "OLV";
             this.tableLayoutPanel2.SetRowSpan(this.OLV, 5);
             this.OLV.ShowGroups = false;
             this.OLV.Size = new System.Drawing.Size(335, 222);
             this.OLV.TabIndex = 4;
             this.OLV.UseCompatibleStateImageBehavior = false;
+            this.OLV.UseHotItem = true;
             this.OLV.View = System.Windows.Forms.View.Details;
             this.OLV.VirtualMode = true;
             this.OLV.SelectedIndexChanged += new System.EventHandler(this.OLV_SelectedIndexChanged);
@@ -1519,6 +1523,20 @@
             this.TryReloadPatternToolStripMenuItem.Text = "Try Reload Pattern";
             this.TryReloadPatternToolStripMenuItem.Click += new System.EventHandler(this.TryReloadPatternToolStripMenuItem_Click);
             // 
+            // FeatureSelectorContextMenuStrip
+            // 
+            this.FeatureSelectorContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyThresholdToAllSelectedToolStripMenuItem});
+            this.FeatureSelectorContextMenuStrip.Name = "FeatureSelectorContextMenuStrip";
+            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(236, 26);
+            // 
+            // CopyThresholdToAllSelectedToolStripMenuItem
+            // 
+            this.CopyThresholdToAllSelectedToolStripMenuItem.Name = "CopyThresholdToAllSelectedToolStripMenuItem";
+            this.CopyThresholdToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.CopyThresholdToAllSelectedToolStripMenuItem.Text = "Copy Threshold to All Selected";
+            this.CopyThresholdToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdToAllSelectedToolStripMenuItem_Click);
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1571,6 +1589,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
+            this.FeatureSelectorContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1673,5 +1692,7 @@
         private System.Windows.Forms.ToolStripMenuItem ForceUnloadPatternToolStripMenuItem;
         private System.Windows.Forms.Button BtnEntropyBalance;
         private System.Windows.Forms.ToolStripMenuItem TryReloadPatternToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem CopyThresholdToAllSelectedToolStripMenuItem;
     }
 }
