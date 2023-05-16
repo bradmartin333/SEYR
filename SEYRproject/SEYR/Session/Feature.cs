@@ -32,13 +32,16 @@ namespace SEYR.Session
         [XmlElement("SaveImage")]
         public bool SaveImage { get; set; } = false;
 
-        [XmlElement("RedFactor")]
-        public float RedFactor { get; set; } = 1f;
-        [XmlElement("GreenFactor")]
-        public float GreenFactor { get; set; } = 0f;
-        [XmlElement("BlueFactor")]
-        public float BlueFactor { get; set; } = 0f;
-        public Color EntropyBalance => Color.FromArgb((int)(255 * RedFactor), (int)(255 * GreenFactor), (int)(255 * BlueFactor));
+        public static float DefaultRedChroma = 1f;
+        [XmlElement("RedChroma")]
+        public float RedChroma { get; set; } = DefaultRedChroma;
+        public static float DefaultGreenChroma = 0f;
+        [XmlElement("GreenChroma")]
+        public float GreenChroma { get; set; } = DefaultGreenChroma;
+        public static float DefaultBlueChroma = 0f;
+        [XmlElement("BlueChroma")]
+        public float BlueChroma { get; set; } = DefaultBlueChroma;
+        public Color EntropyBalance => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
 
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
@@ -93,6 +96,9 @@ namespace SEYR.Session
                 NullDetection = NullDetection,
                 SaveImage = SaveImage,
                 FlipScore = FlipScore,
+                RedChroma = RedChroma,
+                GreenChroma = GreenChroma,
+                BlueChroma = BlueChroma,
             };
         }
 

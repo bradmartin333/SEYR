@@ -160,7 +160,7 @@ namespace SEYR.ImageProcessing
             using (Graphics g = Graphics.FromImage(bmp))
                 g.DrawImage(bmpTile, new Rectangle(0, 0, cropRect.Width, cropRect.Height), cropRect, GraphicsUnit.Pixel);
 
-            (byte[] vals, byte[] thresholdVals) = GetPixelData(bmp, feature.RedFactor, feature.GreenFactor, feature.BlueFactor, (byte)(feature.Threshold * 255));
+            (byte[] vals, byte[] thresholdVals) = GetPixelData(bmp, feature.RedChroma, feature.GreenChroma, feature.BlueChroma, (byte)(feature.Threshold * 255));
             string compression = feature.SaveImage ? Compress(vals) : "";
             if (vals.Max() == 0)
             {

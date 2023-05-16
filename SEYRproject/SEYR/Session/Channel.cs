@@ -70,13 +70,24 @@ namespace SEYR.Session
         }
 
         /// <summary>
-        /// Override the default value of 2.606 and save the project
+        /// Override the default value of 1.000 and save the project
         /// </summary>
         /// <param name="value"></param>
         public void SetPixelsPerMicron(float value)
         {
             Project.PixelsPerMicron = value;
             SaveProject();
+        }
+
+        /// <summary>
+        /// Override the default Red color for feature Chroma
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDefaultChroma(Color color)
+        {
+            Feature.DefaultRedChroma = color.R / 255f;
+            Feature.DefaultGreenChroma = color.G / 255f;
+            Feature.DefaultBlueChroma = color.B / 255f;
         }
 
         /// <summary>

@@ -624,7 +624,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
-            BtnEntropyBalance.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+            BtnChroma.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
             Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
@@ -796,7 +796,7 @@ namespace SEYR.Session
             ApplyFeature();
         }
 
-        private void BtnEntropyBalance_Click(object sender, EventArgs e)
+        private void BtnChroma_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
             ColorDialog colorDialog = new ColorDialog()
@@ -812,10 +812,10 @@ namespace SEYR.Session
             {
                 CustomColors = colorDialog.CustomColors;
                 Color c = colorDialog.Color;
-                ActiveFeature.RedFactor = c.R / 255f;
-                ActiveFeature.GreenFactor = c.G / 255f;
-                ActiveFeature.BlueFactor = c.B / 255f;
-                BtnEntropyBalance.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
+                ActiveFeature.RedChroma = c.R / 255f;
+                ActiveFeature.GreenChroma = c.G / 255f;
+                ActiveFeature.BlueChroma = c.B / 255f;
+                BtnChroma.FlatAppearance.BorderColor = ActiveFeature.EntropyBalance;
                 ApplyFeature();
             }
         }

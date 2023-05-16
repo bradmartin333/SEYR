@@ -77,7 +77,7 @@
             this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
             this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.BtnInfoThreshold = new System.Windows.Forms.Button();
-            this.BtnEntropyBalance = new System.Windows.Forms.Button();
+            this.BtnChroma = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -516,7 +516,7 @@
             this.tableLayoutPanel3.Controls.Add(this.NumNullFilterPercentage, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.NumThreshold, 4, 2);
             this.tableLayoutPanel3.Controls.Add(this.BtnInfoThreshold, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.BtnEntropyBalance, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.BtnChroma, 2, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -850,22 +850,22 @@
             this.BtnInfoThreshold.UseVisualStyleBackColor = false;
             this.BtnInfoThreshold.Click += new System.EventHandler(this.BtnInfoThreshold_Click);
             // 
-            // BtnEntropyBalance
+            // BtnChroma
             // 
-            this.BtnEntropyBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BtnChroma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnEntropyBalance.AutoSize = true;
-            this.BtnEntropyBalance.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.BtnEntropyBalance.FlatAppearance.BorderSize = 5;
-            this.BtnEntropyBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEntropyBalance.Location = new System.Drawing.Point(192, 40);
-            this.BtnEntropyBalance.Name = "BtnEntropyBalance";
-            this.BtnEntropyBalance.Size = new System.Drawing.Size(63, 32);
-            this.BtnEntropyBalance.TabIndex = 28;
-            this.BtnEntropyBalance.Text = "Chroma";
-            this.BtnEntropyBalance.UseVisualStyleBackColor = true;
-            this.BtnEntropyBalance.Click += new System.EventHandler(this.BtnEntropyBalance_Click);
+            this.BtnChroma.AutoSize = true;
+            this.BtnChroma.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.BtnChroma.FlatAppearance.BorderSize = 5;
+            this.BtnChroma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChroma.Location = new System.Drawing.Point(192, 40);
+            this.BtnChroma.Name = "BtnChroma";
+            this.BtnChroma.Size = new System.Drawing.Size(63, 32);
+            this.BtnChroma.TabIndex = 28;
+            this.BtnChroma.Text = "Chroma";
+            this.BtnChroma.UseVisualStyleBackColor = true;
+            this.BtnChroma.Click += new System.EventHandler(this.BtnChroma_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -1690,7 +1690,7 @@
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
         private System.Windows.Forms.ToolStripMenuItem ForceUnloadPatternToolStripMenuItem;
-        private System.Windows.Forms.Button BtnEntropyBalance;
+        private System.Windows.Forms.Button BtnChroma;
         private System.Windows.Forms.ToolStripMenuItem TryReloadPatternToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem CopyThresholdToAllSelectedToolStripMenuItem;
