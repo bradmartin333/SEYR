@@ -208,7 +208,7 @@ namespace SEYR.Session
             LoadPattern();
         }
 
-        private void LoadPattern()
+        public static void LoadPattern()
         {
             if (File.Exists(PatternPath))
             {
@@ -354,12 +354,6 @@ namespace SEYR.Session
             foreach (Viewer v in Application.OpenForms.OfType<Viewer>())
                 v.Close();
             Viewer = new Viewer();
-        }
-
-        public static void DeleteDisablePattern()
-        {
-            Pattern = null;
-            if (File.Exists(PatternPath)) File.Delete(PatternPath);
         }
 
         #endregion

@@ -43,7 +43,8 @@ namespace SEYRDesktop
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
         {
-            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
+            if (NumFrame.Value < NumFrame.Maximum)
+                Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
         private async void BtnRestartAndRun_Click(object sender, EventArgs e)

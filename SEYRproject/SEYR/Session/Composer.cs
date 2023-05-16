@@ -964,7 +964,9 @@ namespace SEYR.Session
             UpdateImages();
         }
 
-        private void DeleteDisablePatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.DeleteDisablePattern();
+        private void ForceUnloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.Pattern = null;
+
+        private void TryReloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.LoadPattern();
 
         #endregion
     }
