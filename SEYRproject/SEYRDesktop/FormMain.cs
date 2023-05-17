@@ -34,7 +34,7 @@ namespace SEYRDesktop
 
             FileInfo fileInfo = new FileInfo(imagePath);
             string name = fileInfo.Name.Replace(fileInfo.Extension, "");
-            _ = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value + 1}\t1\t1\t{string.Join("\t",name.Split('_'))}\t");
+            _ = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value + 1}\t{string.Join("\t", name.Replace("A", "").Replace("B", "").Replace("C", "").Replace("X", "").Replace("Y", "").Split('_'))}\t");
 
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
