@@ -40,6 +40,8 @@
             this.ComboFeatureSelector = new System.Windows.Forms.ComboBox();
             this.ChartFeatureData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LblFailingNullCount = new System.Windows.Forms.Label();
             this.TLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBX)).BeginInit();
             this.TLPFeatureData.SuspendLayout();
@@ -107,13 +109,17 @@
             // 
             // TLPFeatureData
             // 
-            this.TLPFeatureData.ColumnCount = 2;
+            this.TLPFeatureData.ColumnCount = 4;
             this.TLP.SetColumnSpan(this.TLPFeatureData, 2);
             this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TLPFeatureData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.TLPFeatureData.Controls.Add(this.ComboFeatureSelector, 1, 1);
             this.TLPFeatureData.Controls.Add(this.ChartFeatureData, 0, 0);
             this.TLPFeatureData.Controls.Add(this.label1, 0, 1);
+            this.TLPFeatureData.Controls.Add(this.label2, 2, 1);
+            this.TLPFeatureData.Controls.Add(this.LblFailingNullCount, 3, 1);
             this.TLPFeatureData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLPFeatureData.Location = new System.Drawing.Point(3, 239);
             this.TLPFeatureData.Name = "TLPFeatureData";
@@ -129,7 +135,7 @@
             this.ComboFeatureSelector.FormattingEnabled = true;
             this.ComboFeatureSelector.Location = new System.Drawing.Point(97, 195);
             this.ComboFeatureSelector.Name = "ComboFeatureSelector";
-            this.ComboFeatureSelector.Size = new System.Drawing.Size(378, 21);
+            this.ComboFeatureSelector.Size = new System.Drawing.Size(183, 21);
             this.ComboFeatureSelector.TabIndex = 0;
             this.ComboFeatureSelector.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureSelector_SelectedIndexChanged);
             // 
@@ -139,18 +145,17 @@
             chartArea1.AxisX.MajorTickMark.Enabled = false;
             chartArea1.AxisX.Title = "Score";
             chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
             chartArea1.AxisY.MajorGrid.Enabled = false;
             chartArea1.AxisY.MajorTickMark.Enabled = false;
-            chartArea1.AxisY.Title = "Count in Last 100 Scores";
             chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
             chartArea1.Name = "ChartArea1";
             this.ChartFeatureData.ChartAreas.Add(chartArea1);
-            this.TLPFeatureData.SetColumnSpan(this.ChartFeatureData, 2);
+            this.TLPFeatureData.SetColumnSpan(this.ChartFeatureData, 4);
             this.ChartFeatureData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChartFeatureData.Location = new System.Drawing.Point(3, 3);
             this.ChartFeatureData.Name = "ChartFeatureData";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
             series1.Color = System.Drawing.Color.Black;
             series1.Name = "Series1";
             this.ChartFeatureData.Series.Add(series1);
@@ -158,7 +163,7 @@
             this.ChartFeatureData.TabIndex = 1;
             this.ChartFeatureData.Text = "chart1";
             title1.Name = "ChartTitle";
-            title1.Text = "Null Count: 0";
+            title1.Text = "Count in Last X Points";
             this.ChartFeatureData.Titles.Add(title1);
             // 
             // label1
@@ -171,6 +176,31 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Selected Feature";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(286, 192);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 27);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Failing Null Count";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LblFailingNullCount
+            // 
+            this.LblFailingNullCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.LblFailingNullCount.AutoSize = true;
+            this.LblFailingNullCount.Location = new System.Drawing.Point(381, 192);
+            this.LblFailingNullCount.Name = "LblFailingNullCount";
+            this.LblFailingNullCount.Size = new System.Drawing.Size(13, 27);
+            this.LblFailingNullCount.TabIndex = 4;
+            this.LblFailingNullCount.Text = "0";
+            this.LblFailingNullCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Viewer
             // 
@@ -205,5 +235,7 @@
         private System.Windows.Forms.ComboBox ComboFeatureSelector;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartFeatureData;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblFailingNullCount;
     }
 }

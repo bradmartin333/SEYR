@@ -58,7 +58,7 @@ namespace SEYR.Session
             }
             else
                 LoadProject();
-            Viewer = new Viewer();
+            Viewer = new Viewer(Project.Features);
             InitializePhotosDir();
         }
 
@@ -89,6 +89,12 @@ namespace SEYR.Session
             Feature.DefaultGreenChroma = color.G / 255f;
             Feature.DefaultBlueChroma = color.B / 255f;
         }
+
+        /// <summary>
+        /// Override the default Score History Size of 1000
+        /// </summary>
+        /// <param name="size"></param>
+        public void SetFeatureScoreHistorySize(int size) => Feature.ScoreHistorySize = size;
 
         /// <summary>
         /// Clear the Debug and Report logs
@@ -364,7 +370,7 @@ namespace SEYR.Session
         {
             foreach (Viewer v in Application.OpenForms.OfType<Viewer>())
                 v.Close();
-            Viewer = new Viewer();
+            Viewer = new Viewer(Project.Features);
         }
 
         #endregion

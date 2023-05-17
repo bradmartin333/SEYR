@@ -54,7 +54,8 @@ namespace SEYR.Session
         [XmlElement("MaxScore")]
         public float MaxScore { get => _MaxScore; set => _MaxScore = value; }
 
-        internal List<float> ScoreHistory { get; set; } = new List<float>() { 0f };
+        internal static int ScoreHistorySize = 1000;
+        internal List<float> ScoreHistory { get; set; } = new List<float>();
         internal float LastScore { get => ScoreHistory.Last(); }
         internal bool LastPass { get => Map() - 64 > 0; }
         public string ThresholdString { get => (Threshold * 100f).ToString(); }
@@ -128,7 +129,7 @@ namespace SEYR.Session
                 if (score > _MaxScore) _MaxScore = score;
             }
             ScoreHistory.Add(score);
-            if (ScoreHistory.Count > 100) ScoreHistory.Remove(ScoreHistory.First());
+            if (ScoreHistory.Count > ScoreHistorySize) ScoreHistory.Remove(ScoreHistory.First());
         }
 
         internal void UpdateThreshold(float threshold)

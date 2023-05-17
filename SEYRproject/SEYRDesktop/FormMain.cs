@@ -135,6 +135,7 @@ namespace SEYRDesktop
                 Channel = channel;
                 Channel.SetPixelsPerMicron((float)NumPxPerMicron.Value);
                 Channel.SetDefaultChroma(Color.Red);
+                Channel.SetFeatureScoreHistorySize(10000);
             }
             else
                 return;

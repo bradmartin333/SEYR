@@ -14,9 +14,10 @@ namespace SEYR.ImageProcessing
         private static List<Feature> Features = new List<Feature>();
         private static string SelectedFeatureName = "";
 
-        public Viewer()
+        public Viewer(List<Feature> features)
         {
             InitializeComponent();
+            Features = features;
             LoadPlotFeatures();
             LoadPlot();
             Rectangle screen = Screen.FromControl(this).Bounds;
@@ -133,7 +134,8 @@ namespace SEYR.ImageProcessing
         private void PlotData(Feature feature)
         {
             int nullCount = feature.ScoreHistory.Where(x => x < 0).Count();
-            ChartFeatureData.Titles[0].Text = $"Null Count: {nullCount}";
+            LblFailingNullCount.Text = nullCount.ToString();
+            ChartFeatureData.Titles[0].Text = $"Count in Last {feature.ScoreHistory.Count} Points";
             double[] scores = feature.ScoreHistory.Where(x => x >= 0).Select(x => Math.Round(x)).Distinct().ToArray();
             int[] counts = new int[scores.Length];
             for (int i = 0; i < scores.Length; i++)
@@ -154,8 +156,11 @@ namespace SEYR.ImageProcessing
 
         private void ComboFeatureSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedFeatureName = ComboFeatureSelector.Text;
-            ChartFeatureData.Series[0].Points.Clear();
+            if (ComboFeatureSelector.Text != SelectedFeatureName)
+            {
+                SelectedFeatureName = ComboFeatureSelector.Text;
+                PlotData(Features.Where(x => x.Name == SelectedFeatureName).First());
+            }
         }
     }
 }
