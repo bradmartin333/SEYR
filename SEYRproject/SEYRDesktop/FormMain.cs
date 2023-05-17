@@ -155,11 +155,19 @@ namespace SEYRDesktop
 
         private string OpenFolder()
         {
+            string lastFolder = Properties.Settings.Default.OpenDirRoot;
+            lastFolder = Directory.Exists(lastFolder) ? lastFolder : null;
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
+                if (!string.IsNullOrEmpty(lastFolder))
+                    folderBrowserDialog.SelectedPath = lastFolder;
                 folderBrowserDialog.Description = "Open a directory containing photos";
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.OpenDirRoot = folderBrowserDialog.SelectedPath;
+                    Properties.Settings.Default.Save();
                     return folderBrowserDialog.SelectedPath;
+                }  
             }
             return null;
         }

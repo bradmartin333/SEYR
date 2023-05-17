@@ -59,9 +59,9 @@
             this.TLP.Location = new System.Drawing.Point(0, 0);
             this.TLP.Name = "TLP";
             this.TLP.RowCount = 3;
-            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.TLP.Size = new System.Drawing.Size(484, 461);
             this.TLP.TabIndex = 1;
             // 
@@ -74,7 +74,7 @@
             this.PBX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PBX.Location = new System.Drawing.Point(3, 3);
             this.PBX.Name = "PBX";
-            this.PBX.Size = new System.Drawing.Size(478, 214);
+            this.PBX.Size = new System.Drawing.Size(478, 210);
             this.PBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBX.TabIndex = 0;
             this.PBX.TabStop = false;
@@ -84,7 +84,7 @@
             this.InfoLabel.AutoSize = true;
             this.InfoLabel.BackColor = System.Drawing.Color.Silver;
             this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InfoLabel.Location = new System.Drawing.Point(3, 220);
+            this.InfoLabel.Location = new System.Drawing.Point(3, 216);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(458, 20);
             this.InfoLabel.TabIndex = 1;
@@ -97,7 +97,7 @@
             this.BtnShowData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnShowData.FlatAppearance.BorderSize = 0;
             this.BtnShowData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShowData.Location = new System.Drawing.Point(464, 220);
+            this.BtnShowData.Location = new System.Drawing.Point(464, 216);
             this.BtnShowData.Margin = new System.Windows.Forms.Padding(0);
             this.BtnShowData.Name = "BtnShowData";
             this.BtnShowData.Size = new System.Drawing.Size(20, 20);
@@ -115,19 +115,19 @@
             this.TLPFeatureData.Controls.Add(this.ChartFeatureData, 0, 0);
             this.TLPFeatureData.Controls.Add(this.label1, 0, 1);
             this.TLPFeatureData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPFeatureData.Location = new System.Drawing.Point(3, 243);
+            this.TLPFeatureData.Location = new System.Drawing.Point(3, 239);
             this.TLPFeatureData.Name = "TLPFeatureData";
             this.TLPFeatureData.RowCount = 2;
             this.TLPFeatureData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPFeatureData.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TLPFeatureData.Size = new System.Drawing.Size(478, 215);
+            this.TLPFeatureData.Size = new System.Drawing.Size(478, 219);
             this.TLPFeatureData.TabIndex = 3;
             // 
             // ComboFeatureSelector
             // 
             this.ComboFeatureSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ComboFeatureSelector.FormattingEnabled = true;
-            this.ComboFeatureSelector.Location = new System.Drawing.Point(97, 191);
+            this.ComboFeatureSelector.Location = new System.Drawing.Point(97, 195);
             this.ComboFeatureSelector.Name = "ComboFeatureSelector";
             this.ComboFeatureSelector.Size = new System.Drawing.Size(378, 21);
             this.ComboFeatureSelector.TabIndex = 0;
@@ -154,7 +154,7 @@
             series1.Color = System.Drawing.Color.Black;
             series1.Name = "Series1";
             this.ChartFeatureData.Series.Add(series1);
-            this.ChartFeatureData.Size = new System.Drawing.Size(472, 182);
+            this.ChartFeatureData.Size = new System.Drawing.Size(472, 186);
             this.ChartFeatureData.TabIndex = 1;
             this.ChartFeatureData.Text = "chart1";
             title1.Name = "ChartTitle";
@@ -165,7 +165,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 188);
+            this.label1.Location = new System.Drawing.Point(3, 192);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 27);
             this.label1.TabIndex = 2;

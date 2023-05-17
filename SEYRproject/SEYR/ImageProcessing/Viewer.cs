@@ -119,8 +119,7 @@ namespace SEYR.ImageProcessing
         private void LoadPlot()
         {
             BtnShowData.BackgroundImage = DataShown ? Properties.Resources.caretDown : Properties.Resources.caretUp;
-            TLP.RowStyles[0].Height = DataShown ? 50 : 100;
-            TLP.RowStyles[2].Height = DataShown ? 50 : 0;
+            TLP.RowStyles[2].Height = DataShown ? 225 : 0;
             ComboFeatureSelector.Text = SelectedFeatureName;
         }
 
