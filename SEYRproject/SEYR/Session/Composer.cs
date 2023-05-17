@@ -797,7 +797,7 @@ namespace SEYR.Session
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
             if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.UpdateThreshold(ThresholdTrackBar.Value / 100f);
+            ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
             ShowThreshold = true;
             ApplyFeature();
@@ -843,6 +843,7 @@ namespace SEYR.Session
             ActiveFeature.UpdateChroma(c);
             BtnChroma.BackColor = ActiveFeature.Chroma;
             BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
+            ApplyFeature();
         }
 
         private void BtnChroma_Click(object sender, EventArgs e)
