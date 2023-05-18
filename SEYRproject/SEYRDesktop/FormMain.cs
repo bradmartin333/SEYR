@@ -150,7 +150,11 @@ namespace SEYRDesktop
 
         private void BtnOpenComposer_Click(object sender, EventArgs e)
         {
-            if (NumFrame.Value == 0) return;
+            if (NumFrame.Value == 0)
+            {
+                NumFrame.Value++;
+                Application.DoEvents();
+            }
             Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value - 1]));
         }
 

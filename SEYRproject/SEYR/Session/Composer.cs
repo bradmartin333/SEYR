@@ -641,8 +641,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
-            BtnChroma.BackColor = ActiveFeature.Chroma;
-            BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
+            UpdateBtnChromaColors();
             Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
@@ -828,13 +827,21 @@ namespace SEYR.Session
             };
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
+                ShowThreshold = true;
                 CustomColors = colorDialog.CustomColors;
                 ActiveFeature.UpdateChroma(colorDialog.Color);
-                BtnChroma.BackColor = ActiveFeature.Chroma;
-                BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
+                UpdateBtnChromaColors();
                 ApplyFeature();
             }
         }
+
+        private void UpdateBtnChromaColors()
+        {
+            BtnChroma.BackColor = ColorsAreEqual(ActiveFeature.Chroma, Color.Red) ? Color.Transparent : ActiveFeature.Chroma;
+            BtnChroma.ForeColor = ColorsAreEqual(BtnChroma.BackColor, Color.Transparent) ? Color.Black : ActiveFeature.ChromaContrast;
+        }
+
+        private bool ColorsAreEqual(Color a, Color b) => a.R == b.R && a.G == b.G && a.B == b.B;
 
         #endregion
 
