@@ -341,26 +341,7 @@ namespace SEYR.Session
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 BitmapFunctions.ResizeAndRotate(ref bmp);
                 if (ShowThreshold && ActiveFeature != null)
-                {
-                    Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                    BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-                    int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
-                    byte[] rgbValues = new byte[bytes];
-                    Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
-                    for (int counter = 0; counter < rgbValues.Length; counter += 3)
-                    {
-                        byte b = rgbValues[counter];
-                        byte g = rgbValues[counter + 1];
-                        byte r = rgbValues[counter + 2];
-                        float val = ((ActiveFeature.RedChroma * r) + (ActiveFeature.GreenChroma * g) + (ActiveFeature.BlueChroma * b)) / 255f;
-                        byte grayscaleByte = val > ActiveFeature.Threshold ? byte.MaxValue : byte.MinValue;
-                        rgbValues[counter] = grayscaleByte;
-                        rgbValues[counter + 1] = grayscaleByte;
-                        rgbValues[counter + 2] = grayscaleByte;
-                    }
-                    Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
-                    bmp.UnlockBits(bmpData);
-                }
+                    BitmapFunctions.InspectPixelData(ref bmp, ActiveFeature);
                 PbxGrid.BackgroundImage = bmp;
                 PbxGrid.Image = Channel.IsNewProject ? null : BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
@@ -830,19 +811,6 @@ namespace SEYR.Session
             if (ActiveFeature == null || LoadingFeature) return;
             ActiveFeature.FlipScore = !ActiveFeature.FlipScore;
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
-            ApplyFeature();
-        }
-
-        private void BtnChromaWand_Click(object sender, EventArgs e)
-        {
-            if (ActiveFeature == null || LoadingFeature) return;
-            Bitmap bitmap = (Bitmap)PbxTile.BackgroundImage.Clone();
-            Point center = ActiveFeature.GetGeometry().Center();
-            Color c = bitmap.GetPixel(center.X, center.Y);
-            c = Color.FromArgb(Math.Min(255, c.R + c.B), Math.Min(255, c.G + c.B), 0);
-            ActiveFeature.UpdateChroma(c);
-            BtnChroma.BackColor = ActiveFeature.Chroma;
-            BtnChroma.ForeColor = ActiveFeature.ChromaContrast;
             ApplyFeature();
         }
 

@@ -22,30 +22,31 @@ namespace SEYRDesktop
 
         private async void NumFrame_ValueChanged(object sender, EventArgs e)
         {
+            ProgressBar.Value = (int)NumFrame.Value;
+            if (NumFrame.Value == 0)
+            {
+                Channel.ResetAll();
+                return;
+            }
             if (!BtnRunAll.Enabled || BUSY) return;
             await NextImage();
         }
 
         private async Task NextImage(bool forcePattern = false)
         {
+            if (NumFrame.Value == 0) return;
+
             BUSY = true;
-            string imagePath = IMGS[(int)NumFrame.Value];
+            string imagePath = IMGS[(int)NumFrame.Value - 1];
             Bitmap bmp = new Bitmap(imagePath);
 
             FileInfo fileInfo = new FileInfo(imagePath);
             string name = fileInfo.Name.Replace(fileInfo.Extension, "");
-            _ = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value + 1}\t{string.Join("\t", name.Replace("A", "").Replace("B", "").Replace("C", "").Replace("X", "").Replace("Y", "").Split('_'))}\t");
+            _ = await Channel.NewImage(bmp, forcePattern, $"{NumFrame.Value}\t{string.Join("\t", name.Replace("A", "").Replace("B", "").Replace("C", "").Replace("X", "").Replace("Y", "").Split('_'))}\t");
 
             ProgressBar.Value = (int)NumFrame.Value;
             BUSY = false;
             GC.Collect();
-        }
-
-        private void BtnOpenComposer_Click(object sender, EventArgs e)
-        {
-            if (NumFrame.Value >= IMGS.Length)
-                NumFrame.Value = 0;
-            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value]));
         }
 
         private async void BtnRestartAndRun_Click(object sender, EventArgs e)
@@ -73,40 +74,33 @@ namespace SEYRDesktop
             {
                 Channel.MakeArchive();
                 Channel.SignalComplete();
-                ProgressBar.Value = 0;
+                
             }
             STOP = false;
         }
 
         private async void BtnRunAll_Click(object sender, EventArgs e)
         {
-            try
+            BtnRunAll.Enabled = false;
+            BtnRestartAndRun.Enabled = false;
+            BtnStop.Enabled = true;
+            NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
+            while (!STOP && NumFrame.Value < NumFrame.Maximum)
             {
-                BtnRunAll.Enabled = false;
-                BtnRestartAndRun.Enabled = false;
-                BtnStop.Enabled = true;
-                NumPxPerMicron.Value = (decimal)Channel.PxPerMicron;
-                while (!STOP && NumFrame.Value < NumFrame.Maximum)
-                {
-                    Application.DoEvents();
-                    await NextImage();
-                    NumFrame.Value++;
-                }
-                BtnRunAll.Enabled = true;
-                BtnRestartAndRun.Enabled = true;
-                BtnStop.Enabled = false;
-                if (!STOP)
-                {
-                    Channel.MakeArchive();
-                    Channel.SignalComplete();
-                    ProgressBar.Value = 0;
-                }
-                STOP = false;
+                Application.DoEvents();
+                await NextImage();
+                NumFrame.Value++;
             }
-            catch (Exception ex)
+            BtnRunAll.Enabled = true;
+            BtnRestartAndRun.Enabled = true;
+            BtnStop.Enabled = false;
+            if (!STOP)
             {
-                MessageBox.Show(ex.Message);
+                Channel.MakeArchive();
+                Channel.SignalComplete();
+                ProgressBar.Value = 0;
             }
+            STOP = false;
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
@@ -154,6 +148,12 @@ namespace SEYRDesktop
             ProgressBar.Maximum = IMGS.Length;
         }
 
+        private void BtnOpenComposer_Click(object sender, EventArgs e)
+        {
+            if (NumFrame.Value == 0) return;
+            Channel.OpenComposer(new Bitmap(IMGS[(int)NumFrame.Value - 1]));
+        }
+
         private string OpenFolder()
         {
             string lastFolder = Properties.Settings.Default.OpenDirRoot;
@@ -175,7 +175,7 @@ namespace SEYRDesktop
 
         private static IEnumerable<string> GetSortedPicturesFrom(string searchFolder)
         {
-            string[] filters = new string[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp", "svg" };
+            string[] filters = new string[] { "jpg", "jpeg", "png", "bmp" };
             List<string> filesFound = new List<string>();
             foreach (var filter in filters)
                 filesFound.AddRange(Directory.GetFiles(searchFolder, string.Format("*.{0}", filter), SearchOption.AllDirectories));
@@ -184,12 +184,6 @@ namespace SEYRDesktop
                 if (file.Contains("SEYRpattern")) patFile = file;
             if (!string.IsNullOrEmpty(patFile)) filesFound.Remove(patFile);
             return filesFound;
-        }
-
-        private async void BtnRepeat_Click(object sender, EventArgs e)
-        {
-            await NextImage();
-            Channel.ShowViewer();
         }
 
         private async void BtnForcePattern_Click(object sender, EventArgs e)
