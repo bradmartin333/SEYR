@@ -1,13 +1,10 @@
-﻿using Accord.Imaging;
-using BrightIdeasSoftware;
+﻿using BrightIdeasSoftware;
 using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace SEYR.Session
@@ -178,6 +175,7 @@ namespace SEYR.Session
         private int TabOrderIndex = -1; // Initial override
         private const int TabOrderMidline = 12; // Where tab flows over to the feature panel
         private static int[] CustomColors = null;
+        private static bool UpdatingThresholdUI = false; // Prevents infinite loop when updating threshold UI
 
         public Composer(Bitmap bitmap, Channel channel)
         {
@@ -767,20 +765,24 @@ namespace SEYR.Session
 
         private void ThresholdTrackBar_Scroll(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || LoadingFeature) return;
+            if (ActiveFeature == null || LoadingFeature || UpdatingThresholdUI) return;
+            UpdatingThresholdUI = true;
             ActiveFeature.UpdateThreshold(ThresholdTrackBar.Value / 100f);
             NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
             ShowThreshold = true;
             ApplyFeature();
+            UpdatingThresholdUI = false;
         }
 
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || LoadingFeature) return;
+            if (ActiveFeature == null || LoadingFeature || UpdatingThresholdUI) return;
+            UpdatingThresholdUI = true;
             ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
             ShowThreshold = true;
             ApplyFeature();
+            UpdatingThresholdUI = false;
         }
 
         private void ComboFeatureNullDetection_SelectedIndexChanged(object sender, EventArgs e)
