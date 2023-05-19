@@ -43,7 +43,7 @@ namespace SEYR.Session
         [XmlElement("BlueChroma")]
         public float BlueChroma { get; set; } = DefaultBlueChroma;
         public Color Chroma => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
-        public Color ChromaContrast => Chroma.R * 0.299 + Chroma.G * 0.587 + Chroma.B * 0.114 > 186 ? Color.Black : Color.White;
+        public Color ChromaContrast => (Chroma.R * 0.299) + (Chroma.G * 0.587) + (Chroma.B * 0.114) > 186 ? Color.Black : Color.White;
         public string ChromaString => $"{Chroma.R},{Chroma.G},{Chroma.B}";
 
         private float _MinScore = float.MaxValue;
@@ -135,7 +135,7 @@ namespace SEYR.Session
         internal void UpdateThreshold(float threshold)
         {
             Threshold = threshold;
-            ScoreHistory.Clear();
+            ClearScore();
         }
 
         internal void UpdateChromaFactors(float red, float green, float blue)
@@ -143,7 +143,7 @@ namespace SEYR.Session
             RedChroma = red;
             GreenChroma = green;
             BlueChroma = blue;
-            ScoreHistory.Clear();
+            ClearScore();
         }
 
         internal void UpdateChroma(Color color)
@@ -151,19 +151,33 @@ namespace SEYR.Session
             RedChroma = color.R / 255f;
             GreenChroma = color.G / 255f;
             BlueChroma = color.B / 255f;
-            ScoreHistory.Clear();
+            ClearScore();
         }
 
         internal void UpdateNullDetection(NullDetectionTypes nullDetection)
         {
             NullDetection = nullDetection;
-            ScoreHistory.Clear();
+            ClearScore();
         }
 
         internal void UpdateNullFilterPercentage(float nullFilterPercentage)
         {
             NullFilterPercentage = nullFilterPercentage;
-            ScoreHistory.Clear();
+            ClearScore();
+        }
+
+        internal void UpdateAllExceptPosition(Feature originFeature)
+        {
+            Rectangle = new Rectangle(Rectangle.Location, originFeature.Rectangle.Size);
+            Threshold = originFeature.Threshold;
+            NullFilterPercentage = originFeature.NullFilterPercentage;
+            NullDetection = originFeature.NullDetection;
+            FlipScore = originFeature.FlipScore;
+            SaveImage = originFeature.SaveImage;
+            RedChroma = originFeature.RedChroma;
+            GreenChroma = originFeature.GreenChroma;
+            BlueChroma = originFeature.BlueChroma;
+            ClearScore();
         }
 
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)

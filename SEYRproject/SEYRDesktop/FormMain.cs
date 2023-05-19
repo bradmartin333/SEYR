@@ -74,7 +74,6 @@ namespace SEYRDesktop
             {
                 Channel.MakeArchive();
                 Channel.SignalComplete();
-                
             }
             STOP = false;
         }

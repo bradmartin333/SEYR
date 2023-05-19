@@ -562,6 +562,7 @@ namespace SEYR.Session
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
                 feature.UpdateThreshold(originFeature.Threshold);
             }
+            ApplyCopiedChanges();
         }
 
         private void CopyChromaToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -572,6 +573,7 @@ namespace SEYR.Session
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
                 feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
             }
+            ApplyCopiedChanges();
         }
 
         private void CopyNullDetectionAndFIlterToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -583,9 +585,10 @@ namespace SEYR.Session
                 feature.UpdateNullDetection(originFeature.NullDetection);
                 feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
             }
+            ApplyCopiedChanges();
         }
 
-        private void CopyAllToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyThresholdChromaNullParamsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
@@ -596,6 +599,25 @@ namespace SEYR.Session
                 feature.UpdateNullDetection(originFeature.NullDetection);
                 feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
             }
+            ApplyCopiedChanges();
+        }
+
+        private void CopyEverythingExceptPositionToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateAllExceptPosition(originFeature);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void ApplyCopiedChanges()
+        {
+            OLV.DeselectAll();
+            LoadNullFeature();
+            UpdateImages();
         }
 
         private void OLV_MouseUp(object sender, MouseEventArgs e)
