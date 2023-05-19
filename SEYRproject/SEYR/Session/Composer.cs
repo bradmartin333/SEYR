@@ -554,7 +554,7 @@ namespace SEYR.Session
             SetupFeatureUI(false);
         }
 
-        private void CopyThresholdToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyThresholdToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
@@ -564,7 +564,7 @@ namespace SEYR.Session
             }
         }
 
-        private void CopyChromaToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyChromaToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
@@ -574,7 +574,18 @@ namespace SEYR.Session
             }
         }
 
-        private void CopyBothToAllSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyNullDetectionAndFIlterToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateNullDetection(originFeature.NullDetection);
+                feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
+            }
+        }
+
+        private void CopyAllToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
             for (int i = 0; i < OLV.SelectedIndices.Count; i++)
@@ -582,6 +593,8 @@ namespace SEYR.Session
                 Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
                 feature.UpdateThreshold(originFeature.Threshold);
                 feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
+                feature.UpdateNullDetection(originFeature.NullDetection);
+                feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
             }
         }
 
@@ -599,8 +612,8 @@ namespace SEYR.Session
                     if (OLV.HotRowIndex < 0) return;
                     FeatureSelectorContextMenuStrip.Tag = OLV.HotRowIndex;
                     Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
-                    CopyThresholdToAllSelectedToolStripMenuItem.Text = $"Make all selected feature Thresholds {originFeature.Threshold * 100}";
-                    CopyChromaToAllSelectedToolStripMenuItem.Text = $"Make all selected feature Chromas ({originFeature.ChromaString})";
+                    CopyThresholdToSelectedToolStripMenuItem.Text = $"Make all selected feature Thresholds {originFeature.Threshold * 100}";
+                    CopyChromaToSelectedToolStripMenuItem.Text = $"Make all selected feature Chromas ({originFeature.ChromaString})";
                     FeatureSelectorContextMenuStrip.Show(OLV, e.Location);
                 }
             }

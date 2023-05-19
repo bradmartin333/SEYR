@@ -125,9 +125,10 @@
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PatternControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FeatureSelectorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CopyThresholdToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyChromaToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyBothToAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyThresholdToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyChromaToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyAllToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -1515,32 +1516,40 @@
             // FeatureSelectorContextMenuStrip
             // 
             this.FeatureSelectorContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CopyThresholdToAllSelectedToolStripMenuItem,
-            this.CopyChromaToAllSelectedToolStripMenuItem,
-            this.CopyBothToAllSelectedToolStripMenuItem});
+            this.CopyThresholdToSelectedToolStripMenuItem,
+            this.CopyChromaToSelectedToolStripMenuItem,
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem,
+            this.CopyAllToSelectedToolStripMenuItem});
             this.FeatureSelectorContextMenuStrip.Name = "FeatureSelectorContextMenuStrip";
-            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(236, 70);
+            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(400, 92);
             // 
-            // CopyThresholdToAllSelectedToolStripMenuItem
+            // CopyThresholdToSelectedToolStripMenuItem
             // 
-            this.CopyThresholdToAllSelectedToolStripMenuItem.Name = "CopyThresholdToAllSelectedToolStripMenuItem";
-            this.CopyThresholdToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.CopyThresholdToAllSelectedToolStripMenuItem.Text = "Copy Threshold to All Selected";
-            this.CopyThresholdToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdToAllSelectedToolStripMenuItem_Click);
+            this.CopyThresholdToSelectedToolStripMenuItem.Name = "CopyThresholdToSelectedToolStripMenuItem";
+            this.CopyThresholdToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyThresholdToSelectedToolStripMenuItem.Text = "Copy Threshold to Selected";
+            this.CopyThresholdToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdToSelectedToolStripMenuItem_Click);
             // 
-            // CopyChromaToAllSelectedToolStripMenuItem
+            // CopyChromaToSelectedToolStripMenuItem
             // 
-            this.CopyChromaToAllSelectedToolStripMenuItem.Name = "CopyChromaToAllSelectedToolStripMenuItem";
-            this.CopyChromaToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.CopyChromaToAllSelectedToolStripMenuItem.Text = "Copy Chroma to All Selected";
-            this.CopyChromaToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyChromaToAllSelectedToolStripMenuItem_Click);
+            this.CopyChromaToSelectedToolStripMenuItem.Name = "CopyChromaToSelectedToolStripMenuItem";
+            this.CopyChromaToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyChromaToSelectedToolStripMenuItem.Text = "Copy Chroma to Selected";
+            this.CopyChromaToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyChromaToSelectedToolStripMenuItem_Click);
             // 
-            // CopyBothToAllSelectedToolStripMenuItem
+            // CopyNullDetectionAndFIlterToSelectedToolStripMenuItem
             // 
-            this.CopyBothToAllSelectedToolStripMenuItem.Name = "CopyBothToAllSelectedToolStripMenuItem";
-            this.CopyBothToAllSelectedToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.CopyBothToAllSelectedToolStripMenuItem.Text = "Copy Both to All Selected";
-            this.CopyBothToAllSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyBothToAllSelectedToolStripMenuItem_Click);
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Name = "CopyNullDetectionAndFIlterToSelectedToolStripMenuItem";
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Text = "Copy Null Detection / Filter % to Selected";
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem_Click);
+            // 
+            // CopyAllToSelectedToolStripMenuItem
+            // 
+            this.CopyAllToSelectedToolStripMenuItem.Name = "CopyAllToSelectedToolStripMenuItem";
+            this.CopyAllToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyAllToSelectedToolStripMenuItem.Text = "Copy Threshold, Chroma, Null Detection / Filter % to Selected";
+            this.CopyAllToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyAllToSelectedToolStripMenuItem_Click);
             // 
             // Composer
             // 
@@ -1656,10 +1665,10 @@
         private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
         private System.Windows.Forms.Button BtnDeskewWand;
         private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem CopyThresholdToAllSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyThresholdToSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PatternControlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CopyChromaToAllSelectedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CopyBothToAllSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyChromaToSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyAllToSelectedToolStripMenuItem;
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabPageFeatures;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -1700,5 +1709,6 @@
         private System.Windows.Forms.NumericUpDown NumThreshold;
         private System.Windows.Forms.Button BtnInfoThreshold;
         private System.Windows.Forms.Button BtnChroma;
+        private System.Windows.Forms.ToolStripMenuItem CopyNullDetectionAndFIlterToSelectedToolStripMenuItem;
     }
 }

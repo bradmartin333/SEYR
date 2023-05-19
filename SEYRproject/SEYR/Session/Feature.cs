@@ -154,6 +154,18 @@ namespace SEYR.Session
             ScoreHistory.Clear();
         }
 
+        internal void UpdateNullDetection(NullDetectionTypes nullDetection)
+        {
+            NullDetection = nullDetection;
+            ScoreHistory.Clear();
+        }
+
+        internal void UpdateNullFilterPercentage(float nullFilterPercentage)
+        {
+            NullFilterPercentage = nullFilterPercentage;
+            ScoreHistory.Clear();
+        }
+
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
         {
             if (_MinScore == float.MaxValue || _MaxScore == float.MinValue || _MinScore == _MaxScore) return Color.Black;
