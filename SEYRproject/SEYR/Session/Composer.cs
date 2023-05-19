@@ -874,7 +874,7 @@ namespace SEYR.Session
 
         private void UpdateBtnChromaColors()
         {
-            BtnChroma.BackColor = ColorsAreEqual(ActiveFeature.Chroma, Color.Red) ? Color.Transparent : ActiveFeature.Chroma;
+            BtnChroma.BackColor = ColorsAreEqual(ActiveFeature.Chroma, Color.Red) && ActiveFeature.DefaultChroma ? Color.Transparent : ActiveFeature.Chroma;
             BtnChroma.ForeColor = ColorsAreEqual(BtnChroma.BackColor, Color.Transparent) ? Color.Black : ActiveFeature.ChromaContrast;
         }
 

@@ -33,6 +33,8 @@ namespace SEYR.Session
         [XmlElement("SaveImage")]
         public bool SaveImage { get; set; } = false;
 
+        [XmlElement("DefaultChroma")]
+        public bool DefaultChroma { get; set; } = true;
         public static float DefaultRedChroma = 1f;
         [XmlElement("RedChroma")]
         public float RedChroma { get; set; } = DefaultRedChroma;
@@ -151,6 +153,7 @@ namespace SEYR.Session
             RedChroma = color.R / 255f;
             GreenChroma = color.G / 255f;
             BlueChroma = color.B / 255f;
+            DefaultChroma = false;
             ClearScore();
         }
 
