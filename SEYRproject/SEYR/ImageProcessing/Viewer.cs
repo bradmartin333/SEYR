@@ -17,6 +17,7 @@ namespace SEYR.ImageProcessing
         public Viewer(List<Feature> features)
         {
             InitializeComponent();
+            features.ForEach(x => x.ScoreHistory.Clear());
             Features = features;
             LoadPlotFeatures();
             LoadPlot();
@@ -101,16 +102,18 @@ namespace SEYR.ImageProcessing
         {
             PBX.BackgroundImage = bmp;
             PBX.Image = overlay;
-            if (features != null && DataShown)
+            if (DataShown)
             {
-                if (features != Features)
+                if (features != null && features != Features)
                 {
                     Features = features;
                     LoadPlotFeatures();
                 }
-                if (!string.IsNullOrEmpty(ComboFeatureSelector.Text))
+                if (string.IsNullOrEmpty(ComboFeatureSelector.Text))
+                    GenerateAndDisplayChartPanelImage("No Feature Selected");
+                else if (features != null) // This is used as a flag that we have new data
                 {
-                    Feature[] matches = features.Where(x => x.Name == ComboFeatureSelector.Text).ToArray();
+                    Feature[] matches = Features.Where(x => x.Name == ComboFeatureSelector.Text).ToArray();
                     if (matches.Any()) PlotData(matches.First());
                 }
             }
@@ -122,12 +125,21 @@ namespace SEYR.ImageProcessing
             BtnShowData.BackgroundImage = DataShown ? Properties.Resources.caretDown : Properties.Resources.caretUp;
             TLP.RowStyles[2].Height = DataShown ? 225 : 0;
             ComboFeatureSelector.Text = SelectedFeatureName;
+            if (DataShown) // Display a default image
+            {
+                string message = string.Empty;
+                if (string.IsNullOrEmpty(SelectedFeatureName))
+                    message = "No Feature Selected";
+                else if (ChartFeatureData.Series[0].Points.Count == 0)
+                    message = "No Data Available";
+                GenerateAndDisplayChartPanelImage(message);
+            }
         }
 
         private void LoadPlotFeatures()
         {
             ComboFeatureSelector.Items.Clear();
-            ComboFeatureSelector.Items.AddRange(Features.Select(x => x.Name).ToArray());
+            if (Features != null) ComboFeatureSelector.Items.AddRange(Features.Select(x => x.Name).ToArray());
             ChartFeatureData.Series[0].Points.Clear();
         }
 
@@ -146,6 +158,18 @@ namespace SEYR.ImageProcessing
                 DataPoint dataPoint = new DataPoint(scores[i], counts[i]);
                 ChartFeatureData.Series[0].Points.Add(dataPoint);
             }
+            if (scores.Length == 0) // Check for other display states
+            {
+                if (nullCount == 0) GenerateAndDisplayChartPanelImage("No Data Available");
+                else GenerateAndDisplayChartPanelImage("No Passing Features");
+            }
+            else
+            {
+                double scoreRange = scores.Max() - scores.Min();
+                ChartFeatureData.ChartAreas[0].AxisX.Minimum = scores.Min() - scoreRange * 0.1;
+                ChartFeatureData.ChartAreas[0].AxisX.Maximum = scores.Max() + scoreRange * 0.1;
+                GenerateAndDisplayChartPanelImage();
+            }
         }
 
         private void BtnShowData_Click(object sender, EventArgs e)
@@ -161,6 +185,22 @@ namespace SEYR.ImageProcessing
                 SelectedFeatureName = ComboFeatureSelector.Text;
                 PlotData(Features.Where(x => x.Name == SelectedFeatureName).First());
             }
+        }
+
+        private void GenerateAndDisplayChartPanelImage(string message = null)
+        {
+            Bitmap bmp = new Bitmap(300, 50);
+            if (!string.IsNullOrEmpty(message))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                    g.DrawString(message, new Font("Arial", 15, FontStyle.Bold), Brushes.Black, new RectangleF(0, 0, bmp.Width, bmp.Height), 
+                        new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+                }
+            }
+            PanelChart.BackgroundImage = bmp;
         }
     }
 }
