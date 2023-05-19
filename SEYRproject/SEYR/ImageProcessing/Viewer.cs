@@ -166,8 +166,8 @@ namespace SEYR.ImageProcessing
             else
             {
                 double scoreRange = scores.Max() - scores.Min();
-                ChartFeatureData.ChartAreas[0].AxisX.Minimum = scores.Min() - scoreRange * 0.1;
-                ChartFeatureData.ChartAreas[0].AxisX.Maximum = scores.Max() + scoreRange * 0.1;
+                ChartFeatureData.ChartAreas[0].AxisX.Minimum = scores.Min() - scoreRange * 0.2;
+                ChartFeatureData.ChartAreas[0].AxisX.Maximum = scores.Max() + scoreRange * 0.2;
                 GenerateAndDisplayChartPanelImage();
             }
         }
