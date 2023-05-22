@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.PbxGrid = new System.Windows.Forms.PictureBox();
@@ -76,6 +77,7 @@
             this.NumNullFilterPercentage = new System.Windows.Forms.NumericUpDown();
             this.NumThreshold = new System.Windows.Forms.NumericUpDown();
             this.BtnInfoThreshold = new System.Windows.Forms.Button();
+            this.BtnChroma = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.NumScaling = new System.Windows.Forms.NumericUpDown();
@@ -121,6 +123,14 @@
             this.ImportProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPatternOffsetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetWindowLayoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PatternControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FeatureSelectorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyThresholdToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyChromaToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyThresholdChromaNullParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LblActiveScoreSelector = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -156,6 +166,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).BeginInit();
             this.MenuStrip.SuspendLayout();
+            this.FeatureSelectorContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -331,6 +342,7 @@
             this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.BtnAddImageFeature, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.LblActiveScoreSelector, 1, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -375,13 +387,13 @@
             this.OLV.FullRowSelect = true;
             this.OLV.HideSelection = false;
             this.OLV.Location = new System.Drawing.Point(3, 3);
-            this.OLV.MultiSelect = false;
             this.OLV.Name = "OLV";
             this.tableLayoutPanel2.SetRowSpan(this.OLV, 5);
             this.OLV.ShowGroups = false;
             this.OLV.Size = new System.Drawing.Size(335, 222);
             this.OLV.TabIndex = 4;
             this.OLV.UseCompatibleStateImageBehavior = false;
+            this.OLV.UseHotItem = true;
             this.OLV.View = System.Windows.Forms.View.Details;
             this.OLV.VirtualMode = true;
             this.OLV.SelectedIndexChanged += new System.EventHandler(this.OLV_SelectedIndexChanged);
@@ -485,6 +497,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Controls.Add(this.label20, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.SaveImagePanel, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.label23, 3, 0);
@@ -509,6 +522,7 @@
             this.tableLayoutPanel3.Controls.Add(this.NumNullFilterPercentage, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.NumThreshold, 4, 2);
             this.tableLayoutPanel3.Controls.Add(this.BtnInfoThreshold, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.BtnChroma, 2, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -526,9 +540,9 @@
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(259, 125);
+            this.label20.Location = new System.Drawing.Point(265, 125);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(76, 13);
+            this.label20.Size = new System.Drawing.Size(74, 13);
             this.label20.TabIndex = 24;
             this.label20.Text = "Null Filter %";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -540,7 +554,7 @@
             this.SaveImagePanel.BackColor = System.Drawing.Color.Transparent;
             this.SaveImagePanel.BackgroundImage = global::SEYR.Properties.Resources.toggleOn;
             this.SaveImagePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SaveImagePanel.Location = new System.Drawing.Point(341, 3);
+            this.SaveImagePanel.Location = new System.Drawing.Point(345, 3);
             this.SaveImagePanel.Name = "SaveImagePanel";
             this.SaveImagePanel.Size = new System.Drawing.Size(34, 31);
             this.SaveImagePanel.TabIndex = 23;
@@ -549,9 +563,9 @@
             // 
             this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(259, 12);
+            this.label23.Location = new System.Drawing.Point(265, 12);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(76, 13);
+            this.label23.Size = new System.Drawing.Size(74, 13);
             this.label23.TabIndex = 22;
             this.label23.Text = "Save Image";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -571,9 +585,9 @@
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(259, 49);
+            this.label22.Location = new System.Drawing.Point(265, 49);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(76, 13);
+            this.label22.Size = new System.Drawing.Size(74, 13);
             this.label22.TabIndex = 11;
             this.label22.Text = "Flip Score";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -617,7 +631,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.TxtFeatureName, 2);
             this.TxtFeatureName.Location = new System.Drawing.Point(110, 8);
             this.TxtFeatureName.Name = "TxtFeatureName";
-            this.TxtFeatureName.Size = new System.Drawing.Size(143, 20);
+            this.TxtFeatureName.Size = new System.Drawing.Size(149, 20);
             this.TxtFeatureName.TabIndex = 2;
             this.TxtFeatureName.TextChanged += new System.EventHandler(this.TxtFeatureName_TextChanged);
             // 
@@ -627,7 +641,7 @@
             this.LabelCurrentFeatureScore.AutoSize = true;
             this.LabelCurrentFeatureScore.Location = new System.Drawing.Point(110, 49);
             this.LabelCurrentFeatureScore.Name = "LabelCurrentFeatureScore";
-            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(76, 13);
+            this.LabelCurrentFeatureScore.Size = new System.Drawing.Size(74, 13);
             this.LabelCurrentFeatureScore.TabIndex = 3;
             this.LabelCurrentFeatureScore.Text = "N/A";
             this.LabelCurrentFeatureScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -639,7 +653,7 @@
             this.ComboFeatureNullDetection.FormattingEnabled = true;
             this.ComboFeatureNullDetection.Location = new System.Drawing.Point(110, 121);
             this.ComboFeatureNullDetection.Name = "ComboFeatureNullDetection";
-            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(143, 21);
+            this.ComboFeatureNullDetection.Size = new System.Drawing.Size(149, 21);
             this.ComboFeatureNullDetection.TabIndex = 9;
             this.ComboFeatureNullDetection.SelectedIndexChanged += new System.EventHandler(this.ComboFeatureNullDetection_SelectedIndexChanged);
             // 
@@ -650,7 +664,7 @@
             this.FlipScorePanel.BackColor = System.Drawing.Color.Transparent;
             this.FlipScorePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FlipScorePanel.BackgroundImage")));
             this.FlipScorePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.FlipScorePanel.Location = new System.Drawing.Point(341, 40);
+            this.FlipScorePanel.Location = new System.Drawing.Point(345, 40);
             this.FlipScorePanel.Name = "FlipScorePanel";
             this.FlipScorePanel.Size = new System.Drawing.Size(34, 32);
             this.FlipScorePanel.TabIndex = 12;
@@ -670,9 +684,9 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(192, 163);
+            this.label15.Location = new System.Drawing.Point(190, 163);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.Size = new System.Drawing.Size(69, 13);
             this.label15.TabIndex = 15;
             this.label15.Text = "Y (μm)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -681,9 +695,9 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(192, 202);
+            this.label17.Location = new System.Drawing.Point(190, 202);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.Size = new System.Drawing.Size(69, 13);
             this.label17.TabIndex = 16;
             this.label17.Text = "Height (μm)";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -703,7 +717,7 @@
             0,
             -2147483648});
             this.NumFeatureX.Name = "NumFeatureX";
-            this.NumFeatureX.Size = new System.Drawing.Size(76, 20);
+            this.NumFeatureX.Size = new System.Drawing.Size(74, 20);
             this.NumFeatureX.TabIndex = 17;
             this.NumFeatureX.ValueChanged += new System.EventHandler(this.NumFeatureX_ValueChanged);
             // 
@@ -722,7 +736,7 @@
             0,
             0});
             this.NumFeatureWidth.Name = "NumFeatureWidth";
-            this.NumFeatureWidth.Size = new System.Drawing.Size(76, 20);
+            this.NumFeatureWidth.Size = new System.Drawing.Size(74, 20);
             this.NumFeatureWidth.TabIndex = 18;
             this.NumFeatureWidth.Value = new decimal(new int[] {
             1,
@@ -734,7 +748,7 @@
             // NumFeatureY
             // 
             this.NumFeatureY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureY.Location = new System.Drawing.Point(259, 160);
+            this.NumFeatureY.Location = new System.Drawing.Point(265, 160);
             this.NumFeatureY.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -746,14 +760,14 @@
             0,
             -2147483648});
             this.NumFeatureY.Name = "NumFeatureY";
-            this.NumFeatureY.Size = new System.Drawing.Size(76, 20);
+            this.NumFeatureY.Size = new System.Drawing.Size(74, 20);
             this.NumFeatureY.TabIndex = 19;
             this.NumFeatureY.ValueChanged += new System.EventHandler(this.NumFeatureY_ValueChanged);
             // 
             // NumFeatureHeight
             // 
             this.NumFeatureHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumFeatureHeight.Location = new System.Drawing.Point(259, 198);
+            this.NumFeatureHeight.Location = new System.Drawing.Point(265, 198);
             this.NumFeatureHeight.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -765,7 +779,7 @@
             0,
             0});
             this.NumFeatureHeight.Name = "NumFeatureHeight";
-            this.NumFeatureHeight.Size = new System.Drawing.Size(76, 20);
+            this.NumFeatureHeight.Size = new System.Drawing.Size(74, 20);
             this.NumFeatureHeight.TabIndex = 20;
             this.NumFeatureHeight.Value = new decimal(new int[] {
             1,
@@ -785,10 +799,10 @@
             this.BtnApplyFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnApplyFeature.FlatAppearance.BorderSize = 0;
             this.BtnApplyFeature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApplyFeature.Location = new System.Drawing.Point(341, 154);
+            this.BtnApplyFeature.Location = new System.Drawing.Point(345, 154);
             this.BtnApplyFeature.Name = "BtnApplyFeature";
             this.tableLayoutPanel3.SetRowSpan(this.BtnApplyFeature, 2);
-            this.BtnApplyFeature.Size = new System.Drawing.Size(78, 71);
+            this.BtnApplyFeature.Size = new System.Drawing.Size(74, 71);
             this.BtnApplyFeature.TabIndex = 4;
             this.BtnApplyFeature.UseVisualStyleBackColor = false;
             this.BtnApplyFeature.Click += new System.EventHandler(this.BtnApply_Click);
@@ -797,11 +811,10 @@
             // 
             this.ThresholdTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.ThresholdTrackBar, 3);
-            this.ThresholdTrackBar.LargeChange = 1;
             this.ThresholdTrackBar.Location = new System.Drawing.Point(110, 78);
             this.ThresholdTrackBar.Maximum = 100;
             this.ThresholdTrackBar.Name = "ThresholdTrackBar";
-            this.ThresholdTrackBar.Size = new System.Drawing.Size(225, 32);
+            this.ThresholdTrackBar.Size = new System.Drawing.Size(229, 32);
             this.ThresholdTrackBar.TabIndex = 21;
             this.ThresholdTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ThresholdTrackBar.Scroll += new System.EventHandler(this.ThresholdTrackBar_Scroll);
@@ -809,9 +822,9 @@
             // NumNullFilterPercentage
             // 
             this.NumNullFilterPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumNullFilterPercentage.Location = new System.Drawing.Point(341, 122);
+            this.NumNullFilterPercentage.Location = new System.Drawing.Point(345, 122);
             this.NumNullFilterPercentage.Name = "NumNullFilterPercentage";
-            this.NumNullFilterPercentage.Size = new System.Drawing.Size(78, 20);
+            this.NumNullFilterPercentage.Size = new System.Drawing.Size(74, 20);
             this.NumNullFilterPercentage.TabIndex = 25;
             this.NumNullFilterPercentage.Value = new decimal(new int[] {
             100,
@@ -823,9 +836,9 @@
             // NumThreshold
             // 
             this.NumThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumThreshold.Location = new System.Drawing.Point(341, 84);
+            this.NumThreshold.Location = new System.Drawing.Point(345, 84);
             this.NumThreshold.Name = "NumThreshold";
-            this.NumThreshold.Size = new System.Drawing.Size(78, 20);
+            this.NumThreshold.Size = new System.Drawing.Size(74, 20);
             this.NumThreshold.TabIndex = 26;
             this.NumThreshold.ValueChanged += new System.EventHandler(this.NumThreshold_ValueChanged);
             // 
@@ -841,6 +854,19 @@
             this.BtnInfoThreshold.Text = "Threshold";
             this.BtnInfoThreshold.UseVisualStyleBackColor = false;
             this.BtnInfoThreshold.Click += new System.EventHandler(this.BtnInfoThreshold_Click);
+            // 
+            // BtnChroma
+            // 
+            this.BtnChroma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnChroma.AutoSize = true;
+            this.BtnChroma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChroma.Location = new System.Drawing.Point(190, 43);
+            this.BtnChroma.Name = "BtnChroma";
+            this.BtnChroma.Size = new System.Drawing.Size(69, 25);
+            this.BtnChroma.TabIndex = 28;
+            this.BtnChroma.Text = "Chroma";
+            this.BtnChroma.UseVisualStyleBackColor = true;
+            this.BtnChroma.Click += new System.EventHandler(this.BtnChroma_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -1389,7 +1415,8 @@
             this.MakeSEYRUPToolStripMenuItem,
             this.ImportProjectToolStripMenuItem,
             this.ResetPatternOffsetToolStripMenuItem,
-            this.ResetWindowLayoutsToolStripMenuItem});
+            this.ResetWindowLayoutsToolStripMenuItem,
+            this.PatternControlToolStripMenuItem});
             this.ToolsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
@@ -1482,6 +1509,72 @@
             this.ResetWindowLayoutsToolStripMenuItem.Text = "Reset Window Layouts";
             this.ResetWindowLayoutsToolStripMenuItem.Click += new System.EventHandler(this.ResetWindowLayoutsToolStripMenuItem_Click);
             // 
+            // PatternControlToolStripMenuItem
+            // 
+            this.PatternControlToolStripMenuItem.Name = "PatternControlToolStripMenuItem";
+            this.PatternControlToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.PatternControlToolStripMenuItem.Text = "Pattern Control";
+            this.PatternControlToolStripMenuItem.Click += new System.EventHandler(this.PatternControlToolStripMenuItem_Click);
+            // 
+            // FeatureSelectorContextMenuStrip
+            // 
+            this.FeatureSelectorContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyThresholdToSelectedToolStripMenuItem,
+            this.CopyChromaToSelectedToolStripMenuItem,
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem,
+            this.CopyThresholdChromaNullParamsToolStripMenuItem,
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem});
+            this.FeatureSelectorContextMenuStrip.Name = "FeatureSelectorContextMenuStrip";
+            this.FeatureSelectorContextMenuStrip.Size = new System.Drawing.Size(400, 114);
+            // 
+            // CopyThresholdToSelectedToolStripMenuItem
+            // 
+            this.CopyThresholdToSelectedToolStripMenuItem.Name = "CopyThresholdToSelectedToolStripMenuItem";
+            this.CopyThresholdToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyThresholdToSelectedToolStripMenuItem.Text = "Copy Threshold to Selected";
+            this.CopyThresholdToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdToSelectedToolStripMenuItem_Click);
+            // 
+            // CopyChromaToSelectedToolStripMenuItem
+            // 
+            this.CopyChromaToSelectedToolStripMenuItem.Name = "CopyChromaToSelectedToolStripMenuItem";
+            this.CopyChromaToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyChromaToSelectedToolStripMenuItem.Text = "Copy Chroma to Selected";
+            this.CopyChromaToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyChromaToSelectedToolStripMenuItem_Click);
+            // 
+            // CopyNullDetectionAndFIlterToSelectedToolStripMenuItem
+            // 
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Name = "CopyNullDetectionAndFIlterToSelectedToolStripMenuItem";
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Text = "Copy Null Detection / Filter % to Selected";
+            this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem_Click);
+            // 
+            // CopyThresholdChromaNullParamsToolStripMenuItem
+            // 
+            this.CopyThresholdChromaNullParamsToolStripMenuItem.Name = "CopyThresholdChromaNullParamsToolStripMenuItem";
+            this.CopyThresholdChromaNullParamsToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyThresholdChromaNullParamsToolStripMenuItem.Text = "Copy Threshold, Chroma, Null Detection / Filter % to Selected";
+            this.CopyThresholdChromaNullParamsToolStripMenuItem.Click += new System.EventHandler(this.CopyThresholdChromaNullParamsToolStripMenuItem_Click);
+            // 
+            // CopyEverythingExceptPositionToSelectedToolStripMenuItem
+            // 
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Name = "CopyEverythingExceptPositionToSelectedToolStripMenuItem";
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Text = "Copy Everything Except Position to Selected";
+            this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyEverythingExceptPositionToSelectedToolStripMenuItem_Click);
+            // 
+            // LblActiveScoreSelector
+            // 
+            this.LblActiveScoreSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblActiveScoreSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblActiveScoreSelector.Location = new System.Drawing.Point(344, 180);
+            this.LblActiveScoreSelector.Name = "LblActiveScoreSelector";
+            this.LblActiveScoreSelector.Size = new System.Drawing.Size(75, 48);
+            this.LblActiveScoreSelector.TabIndex = 6;
+            this.LblActiveScoreSelector.Text = "Selected Score\r\nN/A";
+            this.LblActiveScoreSelector.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1534,6 +1627,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumSelectedRow)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
+            this.FeatureSelectorContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1569,31 +1663,12 @@
         private System.Windows.Forms.NumericUpDown NumRows;
         private System.Windows.Forms.NumericUpDown NumScaling;
         private System.Windows.Forms.NumericUpDown NumAngle;
-        private System.Windows.Forms.TabControl TabControl;
-        private System.Windows.Forms.TabPage tabPageFeatures;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button BtnCopyFeature;
-        private System.Windows.Forms.Button BtnDeleteFeature;
-        private System.Windows.Forms.Button BtnAddFeature;
-        private System.Windows.Forms.TabPage tabPageInfo;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox TxtFeatureName;
-        private System.Windows.Forms.Label LabelCurrentFeatureScore;
-        private System.Windows.Forms.Button BtnApplyFeature;
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ConfirmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CancelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ApplyDeskewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClickGridToolStripMenuItem;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
-        private BrightIdeasSoftware.FastObjectListView OLV;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
         private System.Windows.Forms.ToolStripMenuItem ClearLogsToolStripMenuItem;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label21;
@@ -1604,10 +1679,47 @@
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DebugLogToolStripMenuItem;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Panel FlipScorePanel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown NumSelectedColumn;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown NumSelectedRow;
+        private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
+        private System.Windows.Forms.Button BtnDeskewWand;
+        private System.Windows.Forms.ContextMenuStrip FeatureSelectorContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem CopyThresholdToSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PatternControlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyChromaToSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyThresholdChromaNullParamsToolStripMenuItem;
+        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.TabPage tabPageFeatures;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button BtnAddFeature;
+        private BrightIdeasSoftware.FastObjectListView OLV;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private System.Windows.Forms.Button BtnCopyFeature;
+        private System.Windows.Forms.Button BtnDeleteFeature;
+        private System.Windows.Forms.Button BtnAddImageFeature;
+        private System.Windows.Forms.TabPage tabPageInfo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Panel SaveImagePanel;
+        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox TxtFeatureName;
+        private System.Windows.Forms.Label LabelCurrentFeatureScore;
+        private System.Windows.Forms.ComboBox ComboFeatureNullDetection;
+        private System.Windows.Forms.Panel FlipScorePanel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
@@ -1615,23 +1727,14 @@
         private System.Windows.Forms.NumericUpDown NumFeatureWidth;
         private System.Windows.Forms.NumericUpDown NumFeatureY;
         private System.Windows.Forms.NumericUpDown NumFeatureHeight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown NumSelectedColumn;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown NumSelectedRow;
+        private System.Windows.Forms.Button BtnApplyFeature;
         private System.Windows.Forms.TrackBar ThresholdTrackBar;
-        private System.Windows.Forms.Panel SaveImagePanel;
-        private System.Windows.Forms.Label label23;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown NumNullFilterPercentage;
         private System.Windows.Forms.NumericUpDown NumThreshold;
         private System.Windows.Forms.Button BtnInfoThreshold;
-        private System.Windows.Forms.ToolStripMenuItem ResetWindowLayoutsToolStripMenuItem;
-        private System.Windows.Forms.Button BtnAddImageFeature;
-        private System.Windows.Forms.ToolStripMenuItem ImportProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ResetPatternOffsetToolStripMenuItem;
-        private System.Windows.Forms.Button BtnDeskewWand;
+        private System.Windows.Forms.Button BtnChroma;
+        private System.Windows.Forms.ToolStripMenuItem CopyNullDetectionAndFIlterToSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyEverythingExceptPositionToSelectedToolStripMenuItem;
+        private System.Windows.Forms.Label LblActiveScoreSelector;
     }
 }

@@ -58,7 +58,7 @@ namespace SEYR.Session
             }
             else
                 LoadProject();
-            Viewer = new Viewer();
+            Viewer = new Viewer(Project.Features);
             InitializePhotosDir();
         }
 
@@ -70,7 +70,7 @@ namespace SEYR.Session
         }
 
         /// <summary>
-        /// Override the default value of 2.606 and save the project
+        /// Override the default value of 1.000 and save the project
         /// </summary>
         /// <param name="value"></param>
         public void SetPixelsPerMicron(float value)
@@ -78,6 +78,23 @@ namespace SEYR.Session
             Project.PixelsPerMicron = value;
             SaveProject();
         }
+
+        /// <summary>
+        /// Override the default Red color for feature Chroma
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDefaultChroma(Color color)
+        {
+            Feature.DefaultRedChroma = color.R / 255f;
+            Feature.DefaultGreenChroma = color.G / 255f;
+            Feature.DefaultBlueChroma = color.B / 255f;
+        }
+
+        /// <summary>
+        /// Override the default Score History Size of 1000
+        /// </summary>
+        /// <param name="size"></param>
+        public void SetFeatureScoreHistorySize(int size) => Feature.ScoreHistorySize = size;
 
         /// <summary>
         /// Clear the Debug and Report logs
@@ -208,7 +225,7 @@ namespace SEYR.Session
             LoadPattern();
         }
 
-        private void LoadPattern()
+        public static void LoadPattern()
         {
             if (File.Exists(PatternPath))
             {
@@ -353,7 +370,7 @@ namespace SEYR.Session
         {
             foreach (Viewer v in Application.OpenForms.OfType<Viewer>())
                 v.Close();
-            Viewer = new Viewer();
+            Viewer = new Viewer(Project.Features);
         }
 
         #endregion

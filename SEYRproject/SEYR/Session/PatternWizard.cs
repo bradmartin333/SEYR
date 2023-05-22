@@ -38,6 +38,58 @@ namespace SEYR.Session
             NumPatternDeltaMax.Value = Channel.Project.PatternDeltaMax;
 
             CropUtility();
+            FormClosing += PatternWizard_FormClosing;
+        }
+
+        private void PatternWizard_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.PatternWizard_Valid)
+            {
+                if (Properties.Settings.Default.PatternWizard_Maximized)
+                {
+                    Location = Properties.Settings.Default.PatternWizard_Location;
+                    WindowState = FormWindowState.Maximized;
+                    Size = Properties.Settings.Default.PatternWizard_Size;
+                }
+                else if (Properties.Settings.Default.PatternWizard_Minimized)
+                {
+                    Location = Properties.Settings.Default.PatternWizard_Location;
+                    WindowState = FormWindowState.Minimized;
+                    Size = Properties.Settings.Default.PatternWizard_Size;
+                }
+                else
+                {
+                    Location = Properties.Settings.Default.PatternWizard_Location;
+                    Size = Properties.Settings.Default.PatternWizard_Size;
+                }
+            }
+            Properties.Settings.Default.PatternWizard_Valid = true;
+        }
+
+        private void PatternWizard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                Properties.Settings.Default.PatternWizard_Location = RestoreBounds.Location;
+                Properties.Settings.Default.PatternWizard_Size = RestoreBounds.Size;
+                Properties.Settings.Default.PatternWizard_Maximized = true;
+                Properties.Settings.Default.PatternWizard_Minimized = false;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.PatternWizard_Location = Location;
+                Properties.Settings.Default.PatternWizard_Size = Size;
+                Properties.Settings.Default.PatternWizard_Maximized = false;
+                Properties.Settings.Default.PatternWizard_Minimized = false;
+            }
+            else
+            {
+                Properties.Settings.Default.PatternWizard_Location = RestoreBounds.Location;
+                Properties.Settings.Default.PatternWizard_Size = RestoreBounds.Size;
+                Properties.Settings.Default.PatternWizard_Maximized = false;
+                Properties.Settings.Default.PatternWizard_Minimized = true;
+            }
+            Properties.Settings.Default.Save();
         }
 
         #region Crop

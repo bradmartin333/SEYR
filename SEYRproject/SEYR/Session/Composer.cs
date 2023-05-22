@@ -1,8 +1,9 @@
-﻿using SEYR.ImageProcessing;
+﻿using BrightIdeasSoftware;
+using SEYR.ImageProcessing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -122,9 +123,9 @@ namespace SEYR.Session
             }
         }
 
-        public string PatternIntervalString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PatternIntervalString { get => Channel.Project.PatternIntervalString; set => throw new NotImplementedException(); }
 
-        public int PatternIntervalValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int PatternIntervalValue { get => Channel.Project.PatternIntervalValue; set => throw new NotImplementedException(); }
 
         public int PatternDeltaMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -168,22 +169,30 @@ namespace SEYR.Session
         private readonly Bitmap InputImage;
         private readonly Channel HostChannel; // Really ugly, but easiest way to import project.seyr
         private bool ClickGrid = false;
-        private float ForceThreshold = -1f;
         private bool ShowThreshold = false;
         private bool LoadingFeature = true;
         private Control[] TabOrder;
         private int TabOrderIndex = -1; // Initial override
         private const int TabOrderMidline = 12; // Where tab flows over to the feature panel
+        private static int[] CustomColors = null;
+        private static bool UpdatingThresholdUI = false; // Prevents infinite loop when updating threshold UI
 
         public Composer(Bitmap bitmap, Channel channel)
         {
             InitializeComponent();
+            if (CustomColors == null)
+            {
+                CustomColors = new int[16];
+                for (int i = 0; i < 16; i++)
+                     CustomColors[i] = BitConverter.ToInt32(new byte[] { 255, 255, 255, 0x00 }, 0);
+            }
             InputImage = bitmap;
             HostChannel = channel;
             InitializeHandlers();
             InitializeUI();
             InitializeTabOrder();
             SetupFeatureUI(true);
+            LoadPatternControlState();
             UpdateImages();
             if (!Channel.IsNewProject) PbxTile.Image = null;
             BtnAddImageFeature.Visible = !Channel.Project.HasImageFeature();
@@ -262,6 +271,7 @@ namespace SEYR.Session
             PbxTile.MouseUp += PbxTile_MouseUp;
             OLV.ButtonClick += OLV_ButtonClick;
             OLV.DoubleClick += OLV_DoubleClick;
+            OLV.MouseUp += OLV_MouseUp;
             SaveImagePanel.MouseUp += SaveImagePanel_MouseUp;
             FlipScorePanel.MouseUp += FlipScorePanel_MouseUp;
         }
@@ -328,13 +338,8 @@ namespace SEYR.Session
             {
                 Bitmap bmp = (Bitmap)InputImage.Clone();
                 BitmapFunctions.ResizeAndRotate(ref bmp);
-                if (ShowThreshold)
-                {
-                    ImageAttributes imageAttr = new ImageAttributes();
-                    imageAttr.SetThreshold(ForceThreshold > -1 ? ForceThreshold : ActiveFeature.Threshold);
-                    using (Graphics g = Graphics.FromImage(bmp))
-                        g.DrawImage(bmp, new Rectangle(Point.Empty, bmp.Size), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, imageAttr);
-                }
+                if (ShowThreshold && ActiveFeature != null)
+                    BitmapFunctions.InspectPixelData(ref bmp, ActiveFeature);
                 PbxGrid.BackgroundImage = bmp;
                 PbxGrid.Image = Channel.IsNewProject ? null : BitmapFunctions.DrawGrid(bmp, TileRow, TileColumn);
             }
@@ -359,13 +364,12 @@ namespace SEYR.Session
             }
         }
 
-        private void OLV_ButtonClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
+        private void OLV_ButtonClick(object sender, CellClickEventArgs e)
         {
             Feature feature = (Feature)e.Model;
             if (ActiveFeature == null) ActiveFeature = feature;
             OLV.SelectedObject = feature;
             Channel.DebugStream.Write($"Threshold button clicked for {feature.Name} and has value {feature.Threshold}");
-            ForceThreshold = feature.Threshold;
             ShowThreshold = true;
             ApplyFeature();
         }
@@ -376,14 +380,12 @@ namespace SEYR.Session
             if (ShowThreshold)
             {
                 Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} to turn off preview");
-                ForceThreshold = -1;
                 ShowThreshold = false;
                 ApplyFeature();
             }
             else
             {
                 Channel.DebugStream.Write($"Threshold button clicked for {ActiveFeature.Name} and has value {ActiveFeature.Threshold}");
-                ForceThreshold = ActiveFeature.Threshold;
                 ShowThreshold = true;
                 ApplyFeature();
             }
@@ -552,6 +554,100 @@ namespace SEYR.Session
             SetupFeatureUI(false);
         }
 
+        private void CopyThresholdToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateThreshold(originFeature.Threshold);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void CopyChromaToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void CopyNullDetectionAndFIlterToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateNullDetection(originFeature.NullDetection);
+                feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void CopyThresholdChromaNullParamsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateThreshold(originFeature.Threshold);
+                feature.UpdateChromaFactors(originFeature.RedChroma, originFeature.GreenChroma, originFeature.BlueChroma);
+                feature.UpdateNullDetection(originFeature.NullDetection);
+                feature.UpdateNullFilterPercentage(originFeature.NullFilterPercentage);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void CopyEverythingExceptPositionToSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+            for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+            {
+                Feature feature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                feature.UpdateAllExceptPosition(originFeature);
+            }
+            ApplyCopiedChanges();
+        }
+
+        private void ApplyCopiedChanges()
+        {
+            OLV.DeselectAll();
+            LoadNullFeature();
+            UpdateImages();
+        }
+
+        private void OLV_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (OLV.SelectedIndices.Count > 1)
+            {
+                ShowThreshold = false;
+                ActiveFeature = null;
+                LoadNullFeature();
+                UpdateImages();
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    if (OLV.HotRowIndex < 0) return;
+                    FeatureSelectorContextMenuStrip.Tag = OLV.HotRowIndex;
+                    Feature originFeature = (Feature)OLV.GetModelObject((int)FeatureSelectorContextMenuStrip.Tag);
+                    CopyThresholdToSelectedToolStripMenuItem.Text = $"Make all selected feature Thresholds {originFeature.Threshold * 100}";
+                    CopyChromaToSelectedToolStripMenuItem.Text = $"Make all selected feature Chromas ({originFeature.ChromaString})";
+                    FeatureSelectorContextMenuStrip.Show(OLV, e.Location);
+                }
+            }
+            else if (OLV.SelectedIndices.Count == 0)
+            {
+                ShowThreshold = false;
+                ActiveFeature = null;
+                LoadNullFeature();
+                UpdateImages();
+            }
+        }
+
         private void OLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadingFeature = true;
@@ -578,9 +674,12 @@ namespace SEYR.Session
             Channel.DebugStream.Write("Loaded Save Image   ", false);
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             Channel.DebugStream.Write("Loaded Flip Score   ", false);
+            UpdateBtnChromaColors();
+            Channel.DebugStream.Write("Loaded Entropy Balance   ", false);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
             UpdateImages();
+            LblActiveScoreSelector.Text = $"Selected Score\n{ActiveFeature.LastScore}";
         }
 
         private void LoadNullFeature()
@@ -597,22 +696,31 @@ namespace SEYR.Session
             ComboFeatureNullDetection.SelectedIndex = 0;
             FlipScorePanel.BackgroundImage = Properties.Resources.toggleOff;
             LabelCurrentFeatureScore.Text = "N/A";
+            BtnChroma.BackColor = Color.Transparent;
+            BtnChroma.ForeColor = Color.Black;
             Channel.DebugStream.Write("Null feature loaded");
             LoadingFeature = false;
+            LblActiveScoreSelector.Text = $"Selected Score\nN/A";
         }
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || OLV.SelectedObject == null) return;
-            Channel.DebugStream.Write($"{ActiveFeature.Name} Deleted");
-            Features.Remove((Feature)OLV.SelectedObject);
-            SetupFeatureUI(true);
+            if ((ActiveFeature != null && OLV.SelectedObject != null) || OLV.SelectedIndices.Count > 1)
+            {
+                for (int i = 0; i < OLV.SelectedIndices.Count; i++)
+                {
+                    Feature removingFeature = (Feature)OLV.GetModelObject(OLV.SelectedIndices[i]);
+                    Channel.DebugStream.Write($"{removingFeature.Name} Deleted");
+                    Features.Remove(removingFeature);
+                }
+                SetupFeatureUI(true);
+            }
         }
 
         private void BtnCopyFeature_Click(object sender, EventArgs e)
         {
             if (ActiveFeature == null) return;
-            Feature feature = ActiveFeature.Clone();
+            Feature feature = ActiveFeature.Clone(Features);
             Channel.DebugStream.Write($"{ActiveFeature.Name} Copied To {feature.Name}");
             AddFeature(feature);
         }
@@ -694,22 +802,24 @@ namespace SEYR.Session
 
         private void ThresholdTrackBar_Scroll(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || LoadingFeature) return;
-            ActiveFeature.Threshold = ThresholdTrackBar.Value / 100f;
+            if (ActiveFeature == null || LoadingFeature || UpdatingThresholdUI) return;
+            UpdatingThresholdUI = true;
+            ActiveFeature.UpdateThreshold(ThresholdTrackBar.Value / 100f);
             NumThreshold.Value = (decimal)(ActiveFeature.Threshold * 100f);
-            ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
+            UpdatingThresholdUI = false;
         }
 
         private void NumThreshold_ValueChanged(object sender, EventArgs e)
         {
-            if (ActiveFeature == null || LoadingFeature) return;
+            if (ActiveFeature == null || LoadingFeature || UpdatingThresholdUI) return;
+            UpdatingThresholdUI = true;
             ActiveFeature.Threshold = (float)NumThreshold.Value / 100f;
             ThresholdTrackBar.Value = (int)(ActiveFeature.Threshold * 100f);
-            ForceThreshold = -1f;
             ShowThreshold = true;
             ApplyFeature();
+            UpdatingThresholdUI = false;
         }
 
         private void ComboFeatureNullDetection_SelectedIndexChanged(object sender, EventArgs e)
@@ -741,6 +851,36 @@ namespace SEYR.Session
             FlipScorePanel.BackgroundImage = ActiveFeature.FlipScore ? Properties.Resources.toggleOn : Properties.Resources.toggleOff;
             ApplyFeature();
         }
+
+        private void BtnChroma_Click(object sender, EventArgs e)
+        {
+            if (ActiveFeature == null || LoadingFeature) return;
+            ColorDialog colorDialog = new ColorDialog()
+            {
+                AllowFullOpen = true,
+                AnyColor = true,
+                SolidColorOnly = true,
+                FullOpen = true,
+                Color = ActiveFeature.Chroma,
+                CustomColors = CustomColors,
+            };
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                ShowThreshold = true;
+                CustomColors = colorDialog.CustomColors;
+                ActiveFeature.UpdateChroma(colorDialog.Color);
+                UpdateBtnChromaColors();
+                ApplyFeature();
+            }
+        }
+
+        private void UpdateBtnChromaColors()
+        {
+            BtnChroma.BackColor = ColorsAreEqual(ActiveFeature.Chroma, Color.Red) && ActiveFeature.DefaultChroma ? Color.Transparent : ActiveFeature.Chroma;
+            BtnChroma.ForeColor = ColorsAreEqual(BtnChroma.BackColor, Color.Transparent) ? Color.Black : ActiveFeature.ChromaContrast;
+        }
+
+        private bool ColorsAreEqual(Color a, Color b) => a.R == b.R && a.G == b.G && a.B == b.B;
 
         #endregion
 
@@ -855,6 +995,7 @@ namespace SEYR.Session
                     if (w.ShowDialog() != DialogResult.Retry) break;
                 }
             }
+            LoadPatternControlState();
         }
 
         private void ClearLogsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -929,6 +1070,49 @@ namespace SEYR.Session
         {
             BitmapFunctions.ResetOffset();
             UpdateImages();
+        }
+
+        private void ForceUnloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.Pattern = null;
+
+        private void TryReloadPatternToolStripMenuItem_Click(object sender, EventArgs e) => Channel.LoadPattern();
+
+        private void LoadPatternControlState()
+        {
+            bool patternExists = File.Exists(Channel.PatternPath);
+            bool enabled = PatternIntervalString != null && PatternIntervalValue != 0 && Channel.Pattern != null;
+            if (!patternExists)
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Unavailable";
+                PatternControlToolStripMenuItem.Checked = false;
+                PatternControlToolStripMenuItem.Enabled = false;
+            }
+            else if (enabled)
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Enabled";
+                PatternControlToolStripMenuItem.Checked = true;
+                PatternControlToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                PatternControlToolStripMenuItem.Text = "Pattern Control Disabled";
+                PatternControlToolStripMenuItem.Checked = false;
+                PatternControlToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void PatternControlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PatternControlToolStripMenuItem.Checked)
+            {
+                Channel.Pattern = null;
+                PatternControlToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                Channel.LoadPattern();
+                PatternControlToolStripMenuItem.Checked = true;
+            }
+            LoadPatternControlState();
         }
 
         #endregion

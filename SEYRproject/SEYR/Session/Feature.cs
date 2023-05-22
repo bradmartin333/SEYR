@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace SEYR.Session
@@ -32,6 +33,21 @@ namespace SEYR.Session
         [XmlElement("SaveImage")]
         public bool SaveImage { get; set; } = false;
 
+        [XmlElement("DefaultChroma")]
+        public bool DefaultChroma { get; set; } = true;
+        public static float DefaultRedChroma = 1f;
+        [XmlElement("RedChroma")]
+        public float RedChroma { get; set; } = DefaultRedChroma;
+        public static float DefaultGreenChroma = 0f;
+        [XmlElement("GreenChroma")]
+        public float GreenChroma { get; set; } = DefaultGreenChroma;
+        public static float DefaultBlueChroma = 0f;
+        [XmlElement("BlueChroma")]
+        public float BlueChroma { get; set; } = DefaultBlueChroma;
+        public Color Chroma => Color.FromArgb((int)(255 * RedChroma), (int)(255 * GreenChroma), (int)(255 * BlueChroma));
+        public Color ChromaContrast => (Chroma.R * 0.299) + (Chroma.G * 0.587) + (Chroma.B * 0.114) > 186 ? Color.Black : Color.White;
+        public string ChromaString => $"{Chroma.R},{Chroma.G},{Chroma.B}";
+
         private float _MinScore = float.MaxValue;
         [XmlElement("MinScore")]
         public float MinScore { get => _MinScore; set => _MinScore = value; }
@@ -40,8 +56,9 @@ namespace SEYR.Session
         [XmlElement("MaxScore")]
         public float MaxScore { get => _MaxScore; set => _MaxScore = value; }
 
-        private float _LastScore = 0f;
-        internal float LastScore { get => _LastScore; set => _LastScore = value; }
+        internal static int ScoreHistorySize = 1000;
+        internal List<float> ScoreHistory { get; set; } = new List<float>();
+        internal float LastScore { get => ScoreHistory.Last(); }
         internal bool LastPass { get => Map() - 64 > 0; }
         public string ThresholdString { get => (Threshold * 100f).ToString(); }
 
@@ -65,16 +82,29 @@ namespace SEYR.Session
             return new Rectangle(rect.X, rect.Y, rect.Width + (rect.Width * 3 % 4), rect.Height);
         }
 
-        public Feature Clone()
+        public Feature Clone(List<Feature> features)
         {
+            int i = 2;
+            string newName = $"{Name}_{i}";
+            while (true)
+            {
+                if (features.Find(f => f.Name == newName) == null)
+                    break;
+                newName = $"{Name}_{++i}";
+            }
+
             return new Feature()
             {
-                Name = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(),
+                Name = newName,
                 Rectangle = new Rectangle(Rectangle.X + 5, Rectangle.Y + 5, Rectangle.Width, Rectangle.Height),
                 Threshold = Threshold,
+                NullFilterPercentage = NullFilterPercentage,
                 NullDetection = NullDetection,
                 SaveImage = SaveImage,
                 FlipScore = FlipScore,
+                RedChroma = RedChroma,
+                GreenChroma = GreenChroma,
+                BlueChroma = BlueChroma,
             };
         }
 
@@ -90,7 +120,7 @@ namespace SEYR.Session
         {
             _MinScore = float.MaxValue;
             _MaxScore = float.MinValue;
-            _LastScore = 0f;
+            ScoreHistory.Clear();
         }
 
         internal void UpdateScore(float score)
@@ -100,7 +130,57 @@ namespace SEYR.Session
                 if (score < _MinScore) _MinScore = score;
                 if (score > _MaxScore) _MaxScore = score;
             }
-            _LastScore = score;
+            ScoreHistory.Add(score);
+            if (ScoreHistory.Count > ScoreHistorySize) ScoreHistory.Remove(ScoreHistory.First());
+        }
+
+        internal void UpdateThreshold(float threshold)
+        {
+            Threshold = threshold;
+            ClearScore();
+        }
+
+        internal void UpdateChromaFactors(float red, float green, float blue)
+        {
+            RedChroma = red;
+            GreenChroma = green;
+            BlueChroma = blue;
+            ClearScore();
+        }
+
+        internal void UpdateChroma(Color color)
+        {
+            RedChroma = color.R / 255f;
+            GreenChroma = color.G / 255f;
+            BlueChroma = color.B / 255f;
+            DefaultChroma = false;
+            ClearScore();
+        }
+
+        internal void UpdateNullDetection(NullDetectionTypes nullDetection)
+        {
+            NullDetection = nullDetection;
+            ClearScore();
+        }
+
+        internal void UpdateNullFilterPercentage(float nullFilterPercentage)
+        {
+            NullFilterPercentage = nullFilterPercentage;
+            ClearScore();
+        }
+
+        internal void UpdateAllExceptPosition(Feature originFeature)
+        {
+            Rectangle = new Rectangle(Rectangle.Location, originFeature.Rectangle.Size);
+            Threshold = originFeature.Threshold;
+            NullFilterPercentage = originFeature.NullFilterPercentage;
+            NullDetection = originFeature.NullDetection;
+            FlipScore = originFeature.FlipScore;
+            SaveImage = originFeature.SaveImage;
+            RedChroma = originFeature.RedChroma;
+            GreenChroma = originFeature.GreenChroma;
+            BlueChroma = originFeature.BlueChroma;
+            ClearScore();
         }
 
         internal Color ColorFromScore(double value = 1, double saturation = 1, byte opacity = 255)
@@ -136,7 +216,7 @@ namespace SEYR.Session
             double fromHigh = _MaxScore;
             double toLow = FlipScore ? 128 : 0;
             double toHigh = FlipScore ? 0 : 128;
-            return (double)((_LastScore - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
+            return (double)((ScoreHistory.Last() - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
         }
     }
 }

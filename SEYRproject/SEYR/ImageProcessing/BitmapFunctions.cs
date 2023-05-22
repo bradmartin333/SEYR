@@ -104,7 +104,7 @@ namespace SEYR.ImageProcessing
                 }
             }
 
-            Channel.Viewer.UpdateImage(bmp);
+            Channel.Viewer.UpdateImage(bmp, features: Channel.Project.Features);
             await Channel.DataStream.WriteAsync(outputData, false);
             return (bmp, nullFailTotal / Channel.Project.GetNumTotalFeatures());
         }
@@ -160,31 +160,26 @@ namespace SEYR.ImageProcessing
             using (Graphics g = Graphics.FromImage(bmp))
                 g.DrawImage(bmpTile, new Rectangle(0, 0, cropRect.Width, cropRect.Height), cropRect, GraphicsUnit.Pixel);
 
-            (byte[] rVals, byte[] rtVals) = GetPixelData(bmp, (byte)(feature.Threshold * 255));
-            string compression = feature.SaveImage ? Compress(rVals) : "";
-            if (rVals.Max() == 0)
+            (byte[] vals, int empty, int filled, float score) = GetPixelData(bmp, feature);
+            string compression = feature.SaveImage ? Compress(vals) : "";
+            if (vals.Max() == 0)
             {
                 Channel.DebugStream.Write($"NULL IMG {imageInfo}");
                 return (-10f, compression);
             }
-                
-            int blackVals = rtVals.Where(x => x == 0).Count();
-            int whiteVals = rtVals.Where(x => x == 1).Count();
-            int filterVal = (int)(feature.NullFilterPercentage * (bmp.Width * bmp.Height));
-            float entropy = CalculateShannonEntropy(rVals, cropRect.Size);
-            float score = entropy > 0 ? (float)Math.Round(entropy + (whiteVals / 2), 3) : 0;
 
-            if (blackVals < filterVal || whiteVals < filterVal)
+            int filterVal = (int)(feature.NullFilterPercentage * (bmp.Width * bmp.Height));
+            if (filled < filterVal || empty < filterVal)
             {
                 switch (feature.NullDetection)
                 {
                     case Feature.NullDetectionTypes.None:
                         return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Empty:
-                        if (whiteVals < filterVal) return (0f, compression);
+                        if (empty < filterVal) return (0f, compression);
                         else return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Filled:
-                        if (blackVals < filterVal) return (0f, compression);
+                        if (filled < filterVal) return (0f, compression);
                         else return (-10f, compression);
                     case Feature.NullDetectionTypes.Include_Both:
                         return (0f, compression);
@@ -204,26 +199,54 @@ namespace SEYR.ImageProcessing
             return Convert.ToBase64String(output.ToArray());
         }
 
-        private static (byte[], byte[]) GetPixelData(Bitmap bmp, float threshold)
+        internal static void InspectPixelData(ref Bitmap bmp, Feature f) => GetPixelData(bmp, f, true);
+
+        private static (byte[], int, int, float) GetPixelData(Bitmap bmp, Feature f, bool inspect = false)
         {
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
 
-            List<byte> rVals = new List<byte>();
-            List<byte> rtVals = new List<byte>();
-            for (int counter = 2; counter < rgbValues.Length; counter += 3)
+            float t = f.Threshold * 255;
+            List<byte> rvals = new List<byte>();
+            List<byte> gvals = new List<byte>();
+            List<byte> bvals = new List<byte>();
+            int empty = 0;
+            int filled = 0;
+
+            for (int counter = 0; counter < rgbValues.Length; counter += 3)
             {
-                byte r = rgbValues[counter];
-                byte rt = (byte)(r > threshold ? 1 : 0);
-                rVals.Add(r);
-                rtVals.Add(rt);
+                byte r = (byte)(f.RedChroma * rgbValues[counter + 2]);
+                byte g = (byte)(f.GreenChroma * rgbValues[counter + 1]);
+                byte b = (byte)(f.BlueChroma * rgbValues[counter]);
+                bool rt = r > t;
+                bool gt = g > t;
+                bool bt = b > t;
+                if (inspect)
+                {
+                    rgbValues[counter + 2] = rt ? byte.MaxValue : byte.MinValue;
+                    rgbValues[counter + 1] = gt ? byte.MaxValue : byte.MinValue;
+                    rgbValues[counter] = bt ? byte.MaxValue : byte.MinValue;
+                }
+                rvals.Add(r);
+                gvals.Add(g);
+                bvals.Add(b);
+                if (!rt & !gt & !bt) filled++;
+                else empty++;
             }
 
+            if (inspect) Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
             bmp.UnlockBits(bmpData);
-            return (rVals.ToArray(), rtVals.ToArray());
+
+            float re = CalculateShannonEntropy(rvals.ToArray(), bmp.Size);
+            float ge = CalculateShannonEntropy(gvals.ToArray(), bmp.Size);
+            float be = CalculateShannonEntropy(bvals.ToArray(), bmp.Size);
+            float score = (float)Math.Sqrt(re * re + ge * ge + be * be);
+            score = score > 0 ? (float)Math.Round(score + (empty / 2), 3) : 0;
+
+            return (rvals.ToArray(), empty, filled, score);
         }
 
         private static float CalculateShannonEntropy(byte[] data, Size size)

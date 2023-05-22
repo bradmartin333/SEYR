@@ -321,6 +321,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 450);
             this.Name = "PatternWizard";
             this.Text = "Pattern Wizard";
+            this.Load += new System.EventHandler(this.PatternWizard_Load);
             this.TLP.ResumeLayout(false);
             this.TLP.PerformLayout();
             this.FlowDelta.ResumeLayout(false);
