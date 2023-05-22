@@ -204,7 +204,7 @@ namespace SEYR.ImageProcessing
         private static (byte[], int, int, float) GetPixelData(Bitmap bmp, Feature f, bool inspect = false)
         {
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             int bytes = Math.Abs(bmpData.Width * 3) * bmp.Height;
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
@@ -218,17 +218,17 @@ namespace SEYR.ImageProcessing
 
             for (int counter = 0; counter < rgbValues.Length; counter += 3)
             {
-                byte r = (byte)(f.RedChroma * rgbValues[counter]);
+                byte r = (byte)(f.RedChroma * rgbValues[counter + 2]);
                 byte g = (byte)(f.GreenChroma * rgbValues[counter + 1]);
-                byte b = (byte)(f.BlueChroma * rgbValues[counter + 2]);
+                byte b = (byte)(f.BlueChroma * rgbValues[counter]);
                 bool rt = r > t;
                 bool gt = g > t;
                 bool bt = b > t;
                 if (inspect)
                 {
-                    rgbValues[counter] = rt ? byte.MaxValue : byte.MinValue;
+                    rgbValues[counter + 2] = rt ? byte.MaxValue : byte.MinValue;
                     rgbValues[counter + 1] = gt ? byte.MaxValue : byte.MinValue;
-                    rgbValues[counter + 2] = bt ? byte.MaxValue : byte.MinValue;
+                    rgbValues[counter] = bt ? byte.MaxValue : byte.MinValue;
                 }
                 rvals.Add(r);
                 gvals.Add(g);
