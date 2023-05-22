@@ -130,6 +130,7 @@
             this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyThresholdChromaNullParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LblActiveScoreSelector = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -341,6 +342,7 @@
             this.tableLayoutPanel2.Controls.Add(this.BtnCopyFeature, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.BtnDeleteFeature, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.BtnAddImageFeature, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.LblActiveScoreSelector, 1, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -1560,6 +1562,19 @@
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Text = "Copy Everything Except Position to Selected";
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyEverythingExceptPositionToSelectedToolStripMenuItem_Click);
             // 
+            // LblActiveScoreSelector
+            // 
+            this.LblActiveScoreSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblActiveScoreSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblActiveScoreSelector.Location = new System.Drawing.Point(344, 180);
+            this.LblActiveScoreSelector.Name = "LblActiveScoreSelector";
+            this.LblActiveScoreSelector.Size = new System.Drawing.Size(75, 48);
+            this.LblActiveScoreSelector.TabIndex = 6;
+            this.LblActiveScoreSelector.Text = "Selected Score\r\nN/A";
+            this.LblActiveScoreSelector.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1720,5 +1735,6 @@
         private System.Windows.Forms.Button BtnChroma;
         private System.Windows.Forms.ToolStripMenuItem CopyNullDetectionAndFIlterToSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyEverythingExceptPositionToSelectedToolStripMenuItem;
+        private System.Windows.Forms.Label LblActiveScoreSelector;
     }
 }

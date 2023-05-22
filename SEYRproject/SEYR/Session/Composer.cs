@@ -679,6 +679,7 @@ namespace SEYR.Session
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
             UpdateImages();
+            LblActiveScoreSelector.Text = $"Selected Score\n{ActiveFeature.LastScore}";
         }
 
         private void LoadNullFeature()
@@ -699,6 +700,7 @@ namespace SEYR.Session
             BtnChroma.ForeColor = Color.Black;
             Channel.DebugStream.Write("Null feature loaded");
             LoadingFeature = false;
+            LblActiveScoreSelector.Text = $"Selected Score\nN/A";
         }
 
         private void BtnDeleteFeature_Click(object sender, EventArgs e)
