@@ -139,7 +139,11 @@ namespace SEYR.ImageProcessing
         private void LoadPlotFeatures()
         {
             ComboFeatureSelector.Items.Clear();
-            if (Features != null) ComboFeatureSelector.Items.AddRange(Features.Select(x => x.Name).ToArray());
+            if (Features != null)
+            {
+                ComboFeatureSelector.Items.AddRange(Features.Select(x => x.Name).ToArray());
+                ComboFeatureSelector.SelectedIndex = 0;
+            }
             ChartFeatureData.Series[0].Points.Clear();
         }
 
