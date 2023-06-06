@@ -330,6 +330,8 @@ namespace SEYR.Session
             if (LoadingFeature) return;
             UpdateGrid();
             UpdateTile();
+            if (ActiveFeature != null)
+                LblActiveScoreSelector.Text = $"Selected Score\n{ActiveFeature.LastScore}";
         }
 
         private void UpdateGrid()
@@ -679,7 +681,6 @@ namespace SEYR.Session
             Channel.DebugStream.Write($"{ActiveFeature.Name} Loaded");
             LoadingFeature = false;
             UpdateImages();
-            LblActiveScoreSelector.Text = $"Selected Score\n{ActiveFeature.LastScore}";
         }
 
         private void LoadNullFeature()
