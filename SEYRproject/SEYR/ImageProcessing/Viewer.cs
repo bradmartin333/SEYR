@@ -142,7 +142,8 @@ namespace SEYR.ImageProcessing
             if (Features != null)
             {
                 ComboFeatureSelector.Items.AddRange(Features.Select(x => x.Name).ToArray());
-                ComboFeatureSelector.SelectedIndex = 0;
+                if (ComboFeatureSelector.Items.Count > 0)
+                    ComboFeatureSelector.SelectedIndex = 0;
             }
             ChartFeatureData.Series[0].Points.Clear();
         }

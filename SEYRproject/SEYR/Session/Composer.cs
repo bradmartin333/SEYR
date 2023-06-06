@@ -278,7 +278,7 @@ namespace SEYR.Session
 
         private void InitializeUI()
         {
-            NumScaling.Value = (decimal)Scaling;
+            NumScaling.Value = (decimal)Math.Round(Scaling, 1);
             NumAngle.Value = (decimal)Angle;
             NumOriginX.Value = OriginX;
             NumOriginY.Value = OriginY;

@@ -51,6 +51,7 @@
             this.BtnCopyFeature = new System.Windows.Forms.Button();
             this.BtnDeleteFeature = new System.Windows.Forms.Button();
             this.BtnAddImageFeature = new System.Windows.Forms.Button();
+            this.LblActiveScoreSelector = new System.Windows.Forms.Label();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
@@ -130,7 +131,6 @@
             this.CopyNullDetectionAndFIlterToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyThresholdChromaNullParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LblActiveScoreSelector = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxTile)).BeginInit();
@@ -476,6 +476,19 @@
             this.BtnAddImageFeature.UseVisualStyleBackColor = false;
             this.BtnAddImageFeature.Visible = false;
             this.BtnAddImageFeature.Click += new System.EventHandler(this.BtnAddImageFeature_Click);
+            // 
+            // LblActiveScoreSelector
+            // 
+            this.LblActiveScoreSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblActiveScoreSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblActiveScoreSelector.Location = new System.Drawing.Point(344, 180);
+            this.LblActiveScoreSelector.Name = "LblActiveScoreSelector";
+            this.LblActiveScoreSelector.Size = new System.Drawing.Size(75, 48);
+            this.LblActiveScoreSelector.TabIndex = 6;
+            this.LblActiveScoreSelector.Text = "Selected Score\r\nN/A";
+            this.LblActiveScoreSelector.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageInfo
             // 
@@ -899,7 +912,7 @@
             // NumScaling
             // 
             this.NumScaling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumScaling.DecimalPlaces = 2;
+            this.NumScaling.DecimalPlaces = 1;
             this.NumScaling.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumScaling.Increment = new decimal(new int[] {
             1,
@@ -916,7 +929,7 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumScaling.Name = "NumScaling";
             this.NumScaling.Size = new System.Drawing.Size(70, 22);
             this.NumScaling.TabIndex = 4;
@@ -925,7 +938,7 @@
             1,
             0,
             0,
-            131072});
+            65536});
             this.NumScaling.ValueChanged += new System.EventHandler(this.NumScaling_ValueChanged);
             // 
             // label1
@@ -1561,19 +1574,6 @@
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Size = new System.Drawing.Size(399, 22);
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Text = "Copy Everything Except Position to Selected";
             this.CopyEverythingExceptPositionToSelectedToolStripMenuItem.Click += new System.EventHandler(this.CopyEverythingExceptPositionToSelectedToolStripMenuItem_Click);
-            // 
-            // LblActiveScoreSelector
-            // 
-            this.LblActiveScoreSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblActiveScoreSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblActiveScoreSelector.Location = new System.Drawing.Point(344, 180);
-            this.LblActiveScoreSelector.Name = "LblActiveScoreSelector";
-            this.LblActiveScoreSelector.Size = new System.Drawing.Size(75, 48);
-            this.LblActiveScoreSelector.TabIndex = 6;
-            this.LblActiveScoreSelector.Text = "Selected Score\r\nN/A";
-            this.LblActiveScoreSelector.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Composer
             // 

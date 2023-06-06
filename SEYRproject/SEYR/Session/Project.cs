@@ -15,9 +15,9 @@ namespace SEYR.Session
         [XmlElement("PixelsPerMicron")]
         public float PixelsPerMicron { get; set; } = 1.000f;
         [XmlElement("ScaledPixelsPerMicron")]
-        public float ScaledPixelsPerMicron { get; set; } = 0.250f;
+        public float ScaledPixelsPerMicron { get; set; } = 0.2f;
         [XmlElement("Scaling")]
-        public float Scaling { get; set; } = 0.25f;
+        public float Scaling { get; set; } = 0.2f;
         [XmlElement("Angle")]
         public float Angle { get; set; } = 0;
         [XmlElement("OrginX")]
