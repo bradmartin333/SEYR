@@ -2,8 +2,6 @@
 # AOI for present / not-present analysis
 # **[User Guide](https://github.com/bradmartin333/SEYR/wiki/User-Guide)**
 
-![SEYRscoring](https://github.com/bradmartin333/SEYR/assets/19335151/65a1a226-c621-409e-aff9-279ff83f4ec2)
-
 ### How to integrate SEYR into an existing .NET Framework project
 Create an instance of a SEYR channel
 
